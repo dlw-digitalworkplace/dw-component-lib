@@ -2,6 +2,8 @@
 	"name": "@dlw-digitalworkplace/dw-react-lib",
 	"private": true,
 	"scripts": {
+		"beachball:publish": "beachball publish",
+		"bump": "beachball bump",
 		"build": "lage build",
 		"change": "beachball change",
 		"checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file.\"",

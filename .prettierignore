@@ -1,0 +1,15 @@
+# generated or imported files
+package-deps.json
+CHANGELOG.*
+*.scss.ts
+
+# folders of generated files
+change
+coverage
+dist
+etc
+lib
+lib-amd
+lib-commonjs
+lib-esm
+node_modules
