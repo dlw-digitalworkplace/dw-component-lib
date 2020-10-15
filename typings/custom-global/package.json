@@ -1,0 +1,11 @@
+{
+	"name": "custom-global",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Internal custom global types",
+	"main": "",
+	"types": "index.d.ts",
+	"dependencies": {
+		"@types/webpack-env": "^1.15.1"
+	}
+}

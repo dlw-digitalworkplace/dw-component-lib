@@ -1,0 +1,29 @@
+{
+	"name": "@dlw-digitalworkplace/dw-react-lib",
+	"private": true,
+	"scripts": {
+		"build": "lage build",
+		"change": "beachball change",
+		"checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file.\"",
+		"clean": "lage clean",
+		"start": "node scripts/start.js"
+	},
+	"devDependencies": {
+		"beachball": "^1.37.0",
+		"lage": "^0.19.8",
+		"lint-staged": "^10.4.0",
+		"typescript": "^4.0.3"
+	},
+	"lint-staged": {
+		"*.{ts,tsx,js,jsx,json,css,scss,html,htm,md,yml}": [
+			"prettier --write"
+		]
+	},
+	"workspaces": {
+		"packages": [
+			"apps/*",
+			"packages/*",
+			"scripts"
+		]
+	}
+}

@@ -1,0 +1,70 @@
+{
+	"editor.detectIndentation": false,
+	"editor.formatOnSave": true,
+	"editor.insertSpaces": false,
+	"editor.renderWhitespace": "trailing",
+	"editor.rulers": [120],
+	"editor.tabSize": 2,
+
+	"files.associations": {
+		"**/tslint.*.json": "jsonc",
+		"**/tslint.json": "jsonc"
+	},
+	"files.exclude": {
+		"**/*.scss.ts": true,
+		"**/.DS_Store": true,
+		"**/.git": true,
+		"**/coverage": true
+	},
+	"files.insertFinalNewline": true,
+	"files.trimTrailingWhitespace": true,
+	"files.watcherExclude": {
+		"**/*.scss.ts": true,
+		"**/*.tsbuildinfo": true,
+		"**/.git": true,
+		"**/coverage": true,
+		"**/dist": true,
+		"**/lib": true,
+		"**/lib-amd": true,
+		"**/lib-commonjs": true,
+		"**/node_modules": true,
+		"**/temp": true
+	},
+
+	"search.exclude": {
+		"**/*.scss.ts": true,
+		"**/*.tsbuildinfo": true,
+		"**/dist": true,
+		"**/lib": true,
+		"**/lib-amd": true,
+		"**/lib-commonjs": true,
+		"**/node_modules": true,
+		"common/temp": true
+	},
+
+	"tslint.exclude": "**/*.scss.ts",
+
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": false,
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+	"typescript.preferences.quoteStyle": "double",
+	"typescript.tsdk": "./node_modules/typescript/lib",
+
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[yaml]": {
+		"editor.insertSpaces": true
+	}
+}
