@@ -20,6 +20,7 @@ export const TreeViewBase: React.FC<ITreeViewProps> = React.forwardRef<HTMLUList
 			defaultSelected,
 			selected: selectedProp,
 			onNodeSelect,
+			onNodeToggle,
 			className,
 			styles
 		} = props;
@@ -37,28 +38,18 @@ export const TreeViewBase: React.FC<ITreeViewProps> = React.forwardRef<HTMLUList
 			[selected]
 		);
 
-		const handleNodeSelection = (event: React.ChangeEvent<HTMLElement>, nodeId: string, checked?: boolean): void => {
-			let newSelected: string | undefined;
-
-			if (checked === undefined) {
-				newSelected = nodeId;
-			} else {
-				newSelected = checked ? nodeId : undefined;
+		const selectNode = (event: React.ChangeEvent<HTMLElement>, nodeId: string): boolean => {
+			if (!nodeId) {
+				return false;
 			}
+
+			const newSelected = nodeId;
 
 			if (onNodeSelect) {
 				onNodeSelect(event, newSelected);
 			}
 
 			setSelected(newSelected);
-		};
-
-		const selectNode = (event: React.ChangeEvent<HTMLElement>, nodeId: string): boolean => {
-			if (!nodeId) {
-				return false;
-			}
-
-			handleNodeSelection(event, nodeId);
 
 			return true;
 		};
@@ -69,6 +60,10 @@ export const TreeViewBase: React.FC<ITreeViewProps> = React.forwardRef<HTMLUList
 				newExpanded = expanded.filter((id) => id !== nodeId);
 			} else {
 				newExpanded = [nodeId, ...(expanded || [])];
+			}
+
+			if (onNodeToggle) {
+				onNodeToggle(event, newExpanded);
 			}
 
 			setExpanded(newExpanded);

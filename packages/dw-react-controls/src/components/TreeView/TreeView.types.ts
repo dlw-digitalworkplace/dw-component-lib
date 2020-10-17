@@ -36,9 +36,17 @@ export interface ITreeViewProps {
 	 * Callback fired when a tree item is selected/deselected.
 	 *
 	 * @param {object} event The event source of the callback.
-	 * @param {string} nodeIds The id of the selected node.
+	 * @param {string} nodeId The id of the selected node.
 	 */
 	onNodeSelect?(event: React.ChangeEvent<{}>, nodeId?: string): void;
+
+	/**
+	 * Callback fired when a tree item is expanded/collapsed.
+	 *
+	 * @param {object} event The event source of the callback.
+	 * @param {string[]} nodeIds The id of the expanded node.
+	 */
+	onNodeToggle?(event: React.ChangeEvent<{}>, nodeIds?: string[]): void;
 }
 
 export interface ITreeViewStyleProps {
