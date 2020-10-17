@@ -8,7 +8,9 @@
 		"change": "beachball change",
 		"checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file.\"",
 		"clean": "lage clean",
-		"start": "node scripts/start.js"
+		"start": "node scripts/start.js",
+		"start-test": "lage start-test",
+		"test": "lage test --verbose"
 	},
 	"devDependencies": {
 		"beachball": "^1.37.0",
