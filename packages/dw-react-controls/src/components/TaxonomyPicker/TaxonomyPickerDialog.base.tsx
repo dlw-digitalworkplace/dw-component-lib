@@ -16,6 +16,7 @@ import {
 } from "./TaxonomyPickerDialog.types";
 
 const getClassNames = classNamesFunction<ITaxonomyPickerDialogStyleProps, ITaxonomyPickerDialogStyles>();
+const rootNodeKey = "__ROOTNODE__";
 
 export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (props) => {
 	const {
@@ -124,15 +125,26 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 		closeDialog();
 	};
 
-	const renderTreeContent = (): JSX.Element => {
+	const renderTreeView = (): JSX.Element | null => {
+		if (!showRootNode && termTreeItems?.length === 0) {
+			return null;
+		}
+
 		const nodeTree = termTreeItems?.map((term) => renderTreeNode(term));
 
-		return showRootNode ? (
-			<TreeItem nodeId={"0"} label={rootNodeLabel || ""} disabled={true} iconName={"DocumentSet"}>
-				{nodeTree}
-			</TreeItem>
-		) : (
-			<>{nodeTree}</>
+		return (
+			<TreeView
+				onNodeSelect={handleTreeSelection}
+				defaultExpanded={[showRootNode ? rootNodeKey : termTreeItems![0].key]}
+			>
+				{showRootNode ? (
+					<TreeItem nodeId={rootNodeKey} label={rootNodeLabel || ""} disabled={true} iconName={"DocumentSet"}>
+						{nodeTree}
+					</TreeItem>
+				) : (
+					<>{nodeTree}</>
+				)}
+			</TreeView>
 		);
 	};
 
@@ -166,9 +178,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 			modalProps={{ ...modalProps, className: classNames.dialog, topOffsetFixed: true }}
 			dialogContentProps={{ ...dialogContentProps, className: classNames.content }}
 		>
-			<div className={classNames.treeContainer}>
-				<TreeView onNodeSelect={handleTreeSelection}>{renderTreeContent()}</TreeView>
-			</div>
+			<div className={classNames.treeContainer}>{renderTreeView()}</div>
 			<div className={classNames.inputsContainer}>
 				<DefaultButton className={classNames.addButton} onClick={handleAddButtonClick} disabled={!selectedTreeNode}>
 					{itemLimit === 1 && selectedItems.length !== 0 ? labels.replaceButton : labels.addButton}
