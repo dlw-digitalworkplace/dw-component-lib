@@ -1,7 +1,11 @@
 const { task, series, parallel, condition, option, argv, addResolvePath, resolveCwd } = require("just-scripts");
 
+const path = require("path");
+const fs = require("fs");
+
 const { clean } = require("./tasks/clean");
 const { copy } = require("./tasks/copy");
+const { jest: jestTask, jestWatch } = require("./tasks/jest");
 const { postprocessTask } = require("./tasks/postprocess");
 const { postprocessAmdTask } = require("./tasks/postprocess-amd");
 const { postprocessCommonjsTask } = require("./tasks/postprocess-commonjs");
@@ -26,9 +30,16 @@ module.exports = () => {
 
 	task("clean", clean);
 	task("copy", copy);
+	task("jest", jestTask);
+	task("jest-watch", jestWatch);
 	task("sass", sass);
 
 	task("storybook:start", startStorybookTask());
+
+	task(
+		"test",
+		condition("jest", () => fs.existsSync(path.join(process.cwd(), "jest.config.js")))
+	);
 
 	task("ts:postprocess", postprocessTask());
 	task("ts:postprocess:amd", postprocessAmdTask);
