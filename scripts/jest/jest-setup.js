@@ -4,20 +4,15 @@
 const consoleWarn = console.warn;
 const consoleError = console.error;
 
-console.error = customError.bind(null, "error");
-console.warn = customError.bind(null, "warn");
+console.error = customError.bind(null);
 
-function customError(type, ...args) {
-	if (type === "warn") {
-		consoleWarn(...args);
-	} else {
-		consoleError(...args);
-	}
+function customError(...args) {
+	consoleError(...args);
 
 	if (args.length === 1 && typeof args[0] === "object" && args[0].stack) {
 		// If the "message" was an exception, re-throw it to get the full stack trace
 		throw args[0];
 	} else {
-		throw new Error(`[console.${type}] ${args.join(" ")}`);
+		throw new Error(`[console.error] ${args.join(" ")}`);
 	}
 }
