@@ -69,8 +69,6 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 		const flattened = CollectionUtils.flatten(termTreeItems);
 
 		setFlattenedTermTreeItems(flattened);
-
-		console.log(flattened);
 	}, [termTreeItems]);
 
 	const classNames = getClassNames(styles, { className: modalClassName, contentClassName, theme: theme! });
@@ -126,7 +124,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 	};
 
 	const renderTreeView = (): JSX.Element | null => {
-		if (!showRootNode && termTreeItems?.length === 0) {
+		if (!showRootNode && !termTreeItems?.length) {
 			return null;
 		}
 

@@ -44,16 +44,17 @@ module.exports = {
 		merge(
 			{
 				moduleNameMapper: {
+					"office-ui-fabric-react/lib/(.*)$": "office-ui-fabric-react/lib-commonjs/$1",
 					"ts-jest": resolve.sync("ts-jest"),
 					"\\.(scss)$": path.resolve(__dirname, "jest-style-mock.js"),
 					KeyCodes: path.resolve(__dirname, "jest-mock.js"),
 					...jestAliases()
 				},
-				// transform: {
-				// 	// ".(ts|tsx)": resolve.sync("ts-jest/dist"),
-				// 	"^.+\\.(ts|tsx)$": resolve.sync("ts-jest/dist")
-				// },
-				// transformIgnorePatterns: ["/node_modules/", "/lib-commonjs/", "\\.js$"],
+				transform: {
+					// ".(ts|tsx)": resolve.sync("ts-jest/dist"),
+					"^.+\\.(ts|tsx)$": resolve.sync("ts-jest/dist")
+				},
+				transformIgnorePatterns: ["/node_modules/", "/lib-commonjs/", "\\.js$"],
 				reporters: [path.resolve(__dirname, "./jest-reporter.js")],
 				testRegex: "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$",
 				moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json"],
