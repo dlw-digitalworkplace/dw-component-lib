@@ -41,9 +41,9 @@ git checkout master
 git pull
 
 # update package versions
-yarn beachball:publish
-
-# OR: update package versions without publishing to NPM
-# for more options check https://microsoft.github.io/beachball/cli/options.html
-yarn beachball:publish --no-publish
+yarn release
 ```
+
+OR:
+
+Run the ["Release" GitHub action](https://github.com/dlw-digitalworkplace/dw-react-lib/actions?query=workflow%3ARelease)
