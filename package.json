@@ -6,7 +6,7 @@
 		"bump": "beachball bump",
 		"build": "lage build",
 		"change": "beachball change",
-		"checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file.\"",
+		"checkchange": "beachball check",
 		"clean": "lage clean",
 		"start": "node scripts/start.js",
 		"start-test": "lage start-test",

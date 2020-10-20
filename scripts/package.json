@@ -1,7 +1,11 @@
 {
 	"name": "@dw-react-lib/build",
 	"version": "1.0.0",
+	"private": true,
 	"main": "index.js",
+	"bin": {
+		"just-scripts": "./just-scripts.js"
+	},
 	"author": "Nick Sevens",
 	"license": "MIT",
 	"devDependencies": {
