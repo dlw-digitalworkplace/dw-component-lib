@@ -18,6 +18,7 @@
 		"@babel/preset-env": "7.12.1",
 		"@babel/preset-react": "^7.12.1",
 		"@babel/preset-typescript": "^7.12.1",
+		"@dw-react-lib/build": "^1.0.0",
 		"@dw-react-lib/tslint-rules": "^1.0.0",
 		"@storybook/addon-docs": "^6.0.22",
 		"@storybook/addons": "^6.0.22",
