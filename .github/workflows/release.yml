@@ -23,4 +23,6 @@ jobs:
       - run: |
           git config --global user.email "nick.sevens@delaware.pro"
           git config --global user.name "Nick Sevens"
-      - run: yarn release -y
+      - run: yarn release -y -r "https://npm.pkg.github.com/" -n $NPM_AUTHTOKEN
+        env:
+          NPM_AUTHTOKEN: ${{secrets.GITHUB_TOKEN}}
