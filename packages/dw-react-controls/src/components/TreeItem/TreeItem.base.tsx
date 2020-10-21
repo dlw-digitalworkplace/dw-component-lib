@@ -4,15 +4,29 @@
  */
 
 import { Icon } from "office-ui-fabric-react/lib/Icon";
-import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
+import { classNamesFunction, IRenderFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
 import TreeViewContext from "../TreeView/TreeView.context";
+import { TreeItemContent } from "./sections/TreeItemContent";
+import { ITreeItemContentProps } from "./sections/TreeItemContent.types";
 import { ITreeItemProps, ITreeItemStyleProps, ITreeItemStyles } from "./TreeItem.types";
 
 const getClassNames = classNamesFunction<ITreeItemStyleProps, ITreeItemStyles>();
 
 export const TreeItemBase: React.FC<ITreeItemProps> = React.forwardRef<HTMLLIElement, ITreeItemProps>((props, ref) => {
-	const { children, nodeId, label, disabled, iconName, onClick, onInvoke, styles, className, theme } = props;
+	const {
+		children,
+		nodeId,
+		label,
+		disabled,
+		iconName,
+		onClick,
+		onInvoke,
+		onRenderItemContents,
+		styles,
+		className,
+		theme
+	} = props;
 	const { isExpanded, isSelected, selectNode, toggleExpansion } = React.useContext(TreeViewContext);
 
 	const isExpandable = Array.isArray(children) ? !!children.length : !!children;
@@ -49,6 +63,23 @@ export const TreeItemBase: React.FC<ITreeItemProps> = React.forwardRef<HTMLLIEle
 
 	const classNames = getClassNames(styles, { className, disabled, expanded, selected, theme: theme! });
 
+	const renderItemContents: IRenderFunction<ITreeItemContentProps> = (props: ITreeItemContentProps) => {
+		return <TreeItemContent {...props} />;
+	};
+
+	const composeRenderFunction = (
+		outer: IRenderFunction<ITreeItemContentProps>,
+		inner: IRenderFunction<ITreeItemContentProps>
+	): IRenderFunction<ITreeItemContentProps> => {
+		return (outerProps?: ITreeItemContentProps, defaultRender?: IRenderFunction<ITreeItemContentProps>) => {
+			return outer(outerProps, defaultRender ? defaultRender : inner);
+		};
+	};
+
+	const finalOnRenderItemContents = onRenderItemContents
+		? composeRenderFunction(onRenderItemContents, renderItemContents)
+		: renderItemContents;
+
 	return (
 		<li
 			ref={ref}
@@ -69,17 +100,7 @@ export const TreeItemBase: React.FC<ITreeItemProps> = React.forwardRef<HTMLLIEle
 					)}
 				</div>
 
-				<div className={classNames.itemWrapper}>
-					{iconName && (
-						<div className={classNames.iconWrapper}>
-							<Icon className={classNames.icon} iconName={iconName} />
-						</div>
-					)}
-
-					<div className={classNames.labelWrapper}>
-						<div className={classNames.label}>{label}</div>
-					</div>
-				</div>
+				{finalOnRenderItemContents({ label, iconName })}
 			</div>
 
 			{expanded && children && (

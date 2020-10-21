@@ -1,6 +1,8 @@
 import { fireEvent, queryByAttribute, render } from "@testing-library/react";
+import { IRenderFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
 import { TreeView } from "../TreeView";
+import { ITreeItemContentProps } from "./sections/TreeItemContent.types";
 import { TreeItem } from "./TreeItem";
 
 describe("<TreeItem />", () => {
@@ -13,6 +15,26 @@ describe("<TreeItem />", () => {
 			);
 
 			expect(getByText(/test/i)).toBeTruthy();
+		});
+
+		it("should render custom itemContent when specified", () => {
+			const onRenderItemContents: IRenderFunction<ITreeItemContentProps> = (props, defaultRender) => {
+				return (
+					<div>
+						<span>TestHeader</span>
+						{defaultRender && defaultRender(props)}
+					</div>
+				);
+			};
+
+			const { getByText } = render(
+				<TreeView>
+					<TreeItem nodeId="test" label="TestLabel" onRenderItemContents={onRenderItemContents} />
+				</TreeView>
+			);
+
+			expect(getByText(/TestHeader/i)).toBeTruthy();
+			expect(getByText(/TestLabel/i)).toBeTruthy();
 		});
 	});
 
