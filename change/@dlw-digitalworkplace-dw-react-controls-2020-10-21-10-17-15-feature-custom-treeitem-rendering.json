@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Allow custom rendering for TreeItem content",
+  "packageName": "@dlw-digitalworkplace/dw-react-controls",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch",
+  "date": "2020-10-21T08:17:15.668Z"
+}

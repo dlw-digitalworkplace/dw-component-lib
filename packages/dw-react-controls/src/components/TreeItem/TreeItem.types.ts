@@ -1,5 +1,6 @@
 import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
-import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
+import { IRenderFunction, IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
+import { ITreeItemContentProps } from "./sections/TreeItemContent.types";
 
 export interface ITreeItemProps {
 	/**
@@ -23,12 +24,12 @@ export interface ITreeItemProps {
 	iconName?: string;
 
 	/**
-	 * Optional class for the root TaxonomyPicker element
+	 * Optional class for the root TreeItem element
 	 */
 	className?: string;
 
 	/**
-	 * Call to apply custom styling on the TaxonomyPicker element
+	 * Call to apply custom styling on the TreeItem element
 	 */
 	styles?: IStyleFunctionOrObject<ITreeItemStyleProps, ITreeItemStyles>;
 
@@ -46,6 +47,11 @@ export interface ITreeItemProps {
 	 * Optional callback when the tree node has been invoked
 	 */
 	onInvoke?(event: React.MouseEvent<HTMLElement>): void;
+
+	/**
+	 * When specified it will override the default rendering of the TreeItemContent section
+	 */
+	onRenderItemContents?: IRenderFunction<ITreeItemContentProps>;
 }
 
 export interface ITreeItemStyleProps {

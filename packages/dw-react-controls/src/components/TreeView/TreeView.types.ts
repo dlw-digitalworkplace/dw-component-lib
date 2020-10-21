@@ -23,12 +23,12 @@ export interface ITreeViewProps {
 	selected?: string;
 
 	/**
-	 * Optional class for the root TaxonomyPicker element
+	 * Optional class for the root TreeView element
 	 */
 	className?: string;
 
 	/**
-	 * Call to apply custom styling on the TaxonomyPicker element
+	 * Call to apply custom styling on the TreeView element
 	 */
 	styles?: IStyleFunctionOrObject<ITreeViewStyleProps, ITreeViewStyles>;
 

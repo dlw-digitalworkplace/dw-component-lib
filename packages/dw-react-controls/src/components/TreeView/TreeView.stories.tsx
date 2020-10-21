@@ -1,4 +1,5 @@
 import { storiesOf } from "@storybook/react";
+import { Icon } from "office-ui-fabric-react/lib/Icon";
 import * as React from "react";
 import { TreeItem } from "../TreeItem";
 import { TreeView } from "./TreeView";
@@ -35,16 +36,38 @@ const treeData = [
 	}
 ];
 
-const TreeItemFromData = (data: any) => {
-	return (
-		<TreeItem key={data.id} nodeId={data.id.toString()} label={data.text}>
-			{data.children && data.children.map((c: any) => TreeItemFromData(c))}
-		</TreeItem>
-	);
-};
-
 storiesOf("TreeView", module)
 	.addParameters({ component: TreeView })
 	.add("Basic", () => {
+		const TreeItemFromData = (data: any) => {
+			return (
+				<TreeItem key={data.id} nodeId={data.id.toString()} label={data.text} iconName="Tag">
+					{data.children && data.children.map((c: any) => TreeItemFromData(c))}
+				</TreeItem>
+			);
+		};
+
+		return <TreeView>{treeData.map((d) => TreeItemFromData(d))}</TreeView>;
+	})
+	.add("Custom rendering", () => {
+		const TreeItemFromData = (data: any) => {
+			return (
+				<TreeItem
+					key={data.id}
+					nodeId={data.id.toString()}
+					label={data.text}
+					iconName="Tag"
+					onRenderItemContents={(props, defaultRender) => (
+						<div style={{ display: "flex", alignItems: "center" }}>
+							<Icon iconName="MoreVertical" style={{ fontSize: "1.25rem" }} />
+							{defaultRender && defaultRender(props)}
+						</div>
+					)}
+				>
+					{data.children && data.children.map((c: any) => TreeItemFromData(c))}
+				</TreeItem>
+			);
+		};
+
 		return <TreeView>{treeData.map((d) => TreeItemFromData(d))}</TreeView>;
 	});
