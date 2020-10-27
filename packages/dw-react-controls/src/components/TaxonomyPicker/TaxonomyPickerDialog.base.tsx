@@ -136,7 +136,19 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 				defaultExpanded={[showRootNode ? rootNodeKey : termTreeItems![0].key]}
 			>
 				{showRootNode ? (
-					<TreeItem nodeId={rootNodeKey} label={rootNodeLabel || ""} disabled={true} iconName={"DocumentSet"}>
+					<TreeItem
+						nodeId={rootNodeKey}
+						label={rootNodeLabel || ""}
+						disabled={true}
+						iconName={"DocumentSet"}
+						onRenderItemContents={(props, defaultRender) => {
+							return (
+								<div>
+									{defaultRender!(props)} <span>ADD</span>
+								</div>
+							);
+						}}
+					>
 						{nodeTree}
 					</TreeItem>
 				) : (
@@ -163,6 +175,13 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 				disabled={term.disabled}
 				iconName={term.disabled ? "TagSolid" : "Tag"}
 				onInvoke={handleNodeInvoke}
+				onRenderItemContents={(props, defaultRender) => {
+					return (
+						<div>
+							{defaultRender!(props)} <span>ADD</span>
+						</div>
+					);
+				}}
 			>
 				{term.children?.map((child) => renderTreeNode(child))}
 			</TreeItem>
