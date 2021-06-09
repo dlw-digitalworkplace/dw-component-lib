@@ -9,19 +9,26 @@ const GlobalClassNames = {
 };
 
 export const getStyles = (props: ITreeItemContentStyleProps): ITreeItemContentStyles => {
-	const { className, theme } = props;
+	const { selected, className, theme } = props;
 	const classNames = GlobalClassNames;
 
 	return {
 		itemWrapper: [
+			className,
 			classNames.itemWrapper,
 			{
 				display: "flex",
 				alignItems: "center",
 				boxSizing: "border-box"
 			},
-			className
+			selected && {
+				backgroundColor: theme.palette.themeLight,
+				// borderRadius: "3px"
+				border: `1px solid ${theme.palette.themePrimary}`,
+				marginLeft: "-1px"
+			}
 		],
+
 		iconWrapper: [
 			classNames.iconWrapper,
 			{

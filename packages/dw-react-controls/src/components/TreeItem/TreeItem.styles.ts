@@ -17,7 +17,7 @@ const GlobalClassNames = {
 const expandIconWidth = "22px";
 
 export const getStyles = (props: ITreeItemStyleProps): ITreeItemStyles => {
-	const { className, disabled, selected, theme } = props;
+	const { className, disabled, selected } = props;
 	const classNames = GlobalClassNames;
 
 	return {
@@ -66,37 +66,6 @@ export const getStyles = (props: ITreeItemStyleProps): ITreeItemStyles => {
 				}
 			}
 		],
-
-		itemWrapper: [
-			classNames.itemWrapper,
-			{
-				display: "flex",
-				alignItems: "center",
-				boxSizing: "border-box"
-			},
-			selected && {
-				backgroundColor: theme.palette.themeLight,
-				// borderRadius: "3px"
-				border: `1px solid ${theme.palette.themePrimary}`,
-				marginLeft: "-1px"
-			}
-		],
-
-		iconWrapper: [
-			classNames.iconWrapper,
-			{
-				padding: theme.spacing.s2
-			}
-		],
-		icon: [classNames.icon],
-
-		labelWrapper: [
-			classNames.labelWrapper,
-			{
-				padding: theme.spacing.s2
-			}
-		],
-		label: [classNames.label],
 
 		childNodes: [classNames.childNodes, { paddingLeft: expandIconWidth }, AnimationClassNames.fadeIn100]
 	};

@@ -8,6 +8,21 @@ export interface ITreeItemContentProps {
 	label: string;
 
 	/**
+	 * Controls whether the tree item can be selected
+	 */
+	disabled?: boolean;
+
+	/**
+	 * Controls whether the tree item is expanded
+	 */
+	expanded?: boolean;
+
+	/**
+	 * Controls whether the tree item is selected
+	 */
+	selected?: boolean;
+
+	/**
 	 * Specifies the icon name to show with the term label
 	 */
 	iconName?: string;
@@ -30,6 +45,9 @@ export interface ITreeItemContentProps {
 
 export interface ITreeItemContentStyleProps {
 	className?: string;
+	disabled?: boolean;
+	expanded?: boolean;
+	selected?: boolean;
 	theme: ITheme;
 }
 

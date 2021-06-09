@@ -100,7 +100,7 @@ export const TreeItemBase: React.FC<ITreeItemProps> = React.forwardRef<HTMLLIEle
 					)}
 				</div>
 
-				{finalOnRenderItemContents({ label, iconName })}
+				{finalOnRenderItemContents({ disabled, selected, expanded, label, iconName })}
 			</div>
 
 			{expanded && children && (

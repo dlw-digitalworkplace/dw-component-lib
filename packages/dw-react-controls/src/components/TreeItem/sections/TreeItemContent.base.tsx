@@ -9,9 +9,9 @@ export const TreeItemContentBase: React.FC<ITreeItemContentProps> = React.forwar
 	HTMLLIElement,
 	ITreeItemContentProps
 >((props, ref) => {
-	const { iconName, label, styles, className, theme } = props;
+	const { disabled, expanded, selected, iconName, label, styles, className, theme } = props;
 
-	const classNames = getClassNames(styles, { className, theme: theme! });
+	const classNames = getClassNames(styles, { className, selected, expanded, disabled, theme: theme! });
 
 	return (
 		<div className={classNames.itemWrapper}>
