@@ -56,9 +56,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 	const [flattenedTermTreeItems, setFlattenedTermTreeItems] = React.useState<ITerm[] | undefined>(undefined);
 	const [selectedTreeNode, setSelectedTreeNode] = React.useState<ITerm | undefined>(undefined);
 	const [termCreatingParentId, setTermCreatingParentId] = React.useState<string | undefined>(undefined);
-	const [expandedNodes, setExpandedNodes] = React.useState<string[]>([
-		showRootNode ? rootNodeKey : termTreeItems![0].key
-	]);
+	const [expandedNodes, setExpandedNodes] = React.useState<string[]>([]);
 	const [selectedTreeItem, setSelectedTreeItem] = React.useState<string | null>(null);
 	const treeItemActions = React.useRef<ITreeItemAction[]>([]);
 
@@ -81,6 +79,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 			const terms = await provider.getTermTree();
 
 			setTermTreeItems(terms);
+			setExpandedNodes(showRootNode ? [rootNodeKey] : terms && terms.length > 0 ? [terms[0].key] : []);
 		})();
 	}, [provider]);
 
