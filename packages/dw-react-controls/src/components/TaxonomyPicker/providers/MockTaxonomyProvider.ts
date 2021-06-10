@@ -2,7 +2,7 @@ import { ITerm } from "../../../models/ITerm";
 import { ITaxonomyProvider } from "./ITaxonomyProvider";
 
 export class MockTaxonomyProvider implements ITaxonomyProvider {
-	public getTerms(): ITerm[] | PromiseLike<ITerm[]> {
+	public getTerms(): ITerm[] | Promise<ITerm[]> {
 		return [
 			{ key: "bf0b202c-1dde-4088-ae7a-2163189f3d6c", name: "My term A" },
 			{ key: "bfa97857-b8af-4cbd-b363-86a05ec669b3", name: "My term B" },
@@ -13,7 +13,7 @@ export class MockTaxonomyProvider implements ITaxonomyProvider {
 		];
 	}
 
-	public getTermTree(): ITerm[] | PromiseLike<ITerm[]> {
+	public getTermTree(): ITerm[] | Promise<ITerm[]> {
 		return [
 			{
 				key: "bf0b202c-1dde-4088-ae7a-2163189f3d6c",
@@ -34,5 +34,20 @@ export class MockTaxonomyProvider implements ITaxonomyProvider {
 				children: [{ key: "95a73605-0793-4843-99ae-20c23aae6fff", name: "The best term in the world" }]
 			}
 		];
+	}
+
+	public async createTerm(parentId: string, newValue: string): Promise<ITerm> {
+		var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+			var r = (Math.random() * 16) | 0,
+				v = c == "x" ? r : (r & 0x3) | 0x8;
+			return v.toString(16);
+		});
+
+		await new Promise((resolve) => setTimeout(resolve, 750));
+
+		return {
+			key: uuid,
+			name: newValue
+		};
 	}
 }

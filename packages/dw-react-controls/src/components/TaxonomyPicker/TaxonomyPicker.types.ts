@@ -6,6 +6,8 @@ import { ITaxonomyProvider } from "./providers";
 import { ITaxonomyPickerDialogProps } from "./TaxonomyPickerDialog.types";
 
 export interface ITaxonomyPickerProps {
+	allowAddingTerms?: boolean;
+
 	provider: ITaxonomyProvider;
 
 	itemLimit?: number;

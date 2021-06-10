@@ -2,7 +2,7 @@ import { IconButton } from "office-ui-fabric-react/lib/Button";
 import { Label } from "office-ui-fabric-react/lib/Label";
 import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
-import { ITermValue } from "../../models";
+import { ITermCreationResult, ITermValue } from "../../models";
 import { ITerm } from "../../models/ITerm";
 import { TermPicker } from "../TermPicker";
 import { ITaxonomyPickerProps, ITaxonomyPickerStyleProps, ITaxonomyPickerStyles } from "./TaxonomyPicker.types";
@@ -11,6 +11,7 @@ import { TaxonomyPickerDialog } from "./TaxonomyPickerDialog";
 const getClassNames = classNamesFunction<ITaxonomyPickerStyleProps, ITaxonomyPickerStyles>();
 
 export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
+	allowAddingTerms,
 	className,
 	disabled,
 	itemLimit,
@@ -45,6 +46,22 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 
 	const handleDialogDismiss = (): void => {
 		setDialogIsOpen(false);
+	};
+
+	const handleCreateNewTerm = async (parentNodeId: string, newValue: string): Promise<void | ITermCreationResult> => {
+		try {
+			const newTerm = await provider.createTerm(parentNodeId, newValue);
+
+			return {
+				success: true,
+				newTerm
+			};
+		} catch (err) {
+			return {
+				success: false,
+				error: err.message
+			};
+		}
 	};
 
 	const onResolveSuggestions = async (filter: string, currentSelection?: ITerm[]): Promise<ITerm[]> => {
@@ -85,9 +102,11 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 				<TaxonomyPickerDialog
 					{...dialogProps}
 					provider={provider}
+					allowAddingTerms={allowAddingTerms}
 					defaultSelectedItems={selectedItems}
 					hidden={!dialogIsOpen}
 					itemLimit={itemLimit}
+					onCreateNewTerm={handleCreateNewTerm}
 					onConfirm={handleDialogConfirm}
 					onDismiss={handleDialogDismiss}
 					pickerProps={{ onResolveSuggestions: onResolveSuggestions }}

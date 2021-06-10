@@ -3,6 +3,8 @@
  * Source code at https://github.com/mui-org/material-ui/blob/master/packages/material-ui-lab/src/TreeItem/TreeItem.js
  */
 
+import { IconButton } from "office-ui-fabric-react/lib/Button";
+import { ContextualMenu, IContextualMenuItem } from "office-ui-fabric-react/lib/ContextualMenu";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { classNamesFunction, IRenderFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
@@ -20,6 +22,7 @@ export const TreeItemBase: React.FC<ITreeItemProps> = React.forwardRef<HTMLLIEle
 		label,
 		disabled,
 		iconName,
+		actions,
 		onClick,
 		onInvoke,
 		onRenderItemContents,
@@ -28,6 +31,9 @@ export const TreeItemBase: React.FC<ITreeItemProps> = React.forwardRef<HTMLLIEle
 		theme
 	} = props;
 	const { isExpanded, isSelected, selectNode, toggleExpansion } = React.useContext(TreeViewContext);
+
+	const contextMenuIconRef = React.useRef<HTMLDivElement>(null);
+	const [showContextMenu, setShowContextMenu] = React.useState(false);
 
 	const isExpandable = Array.isArray(children) ? !!children.length : !!children;
 	const expanded = isExpanded(nodeId);
@@ -60,6 +66,20 @@ export const TreeItemBase: React.FC<ITreeItemProps> = React.forwardRef<HTMLLIEle
 			onInvoke(event);
 		}
 	};
+
+	const handleContextMenuButtonClick = (event: React.MouseEvent<HTMLDivElement>): void => {
+		setShowContextMenu(true);
+	};
+
+	const handleHideContextMenu = (event: React.MouseEvent<HTMLElement>): void => {
+		setShowContextMenu(false);
+	};
+
+	const contextMenuActions: IContextualMenuItem[] =
+		actions?.map((action) => ({
+			...action,
+			onClick: () => (typeof action.onClick === "function" ? action.onClick(nodeId) : false)
+		})) || [];
 
 	const classNames = getClassNames(styles, { className, disabled, expanded, selected, theme: theme! });
 
@@ -101,6 +121,24 @@ export const TreeItemBase: React.FC<ITreeItemProps> = React.forwardRef<HTMLLIEle
 				</div>
 
 				{finalOnRenderItemContents({ disabled, selected, expanded, label, iconName })}
+
+				{actions && actions.length > 0 && (
+					<div ref={contextMenuIconRef} className={classNames.contextMenuIconWrapper}>
+						<IconButton
+							className={classNames.contextMenuIcon}
+							onClick={handleContextMenuButtonClick}
+							iconProps={{ iconName: "More" }}
+						/>
+					</div>
+				)}
+
+				{showContextMenu && (
+					<ContextualMenu
+						items={contextMenuActions}
+						onDismiss={handleHideContextMenu}
+						target={contextMenuIconRef.current}
+					/>
+				)}
 			</div>
 
 			{expanded && children && (

@@ -1,0 +1,48 @@
+import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
+import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
+import { ITermCreationResult } from "../../../models";
+
+export interface ITermAdderLabels {
+	fieldRequiredMessage?: string;
+}
+
+export interface ITermAdderProps {
+	labels?: ITermAdderLabels;
+
+	/**
+	 * Callback for when the save button is clicked
+	 */
+	onSubmit?(value?: string): void | PromiseLike<void | ITermCreationResult>;
+
+	/**
+	 * Callback for when the cancel button is clicked
+	 */
+	onCancel?(): void;
+
+	/**
+	 * Optional class for the root TreeItem element
+	 */
+	className?: string;
+
+	/**
+	 * Call to apply custom styling on the TreeItem element
+	 */
+	styles?: IStyleFunctionOrObject<ITermAdderStyleProps, ITermAdderStyles>;
+
+	/**
+	 * The current theme applied to the control
+	 */
+	theme?: ITheme;
+}
+
+export interface ITermAdderStyleProps {
+	className?: string;
+	theme: ITheme;
+}
+
+export interface ITermAdderStyles {
+	termAdder?: IStyle;
+	textField?: IStyle;
+	button?: IStyle;
+	spinner?: IStyle;
+}

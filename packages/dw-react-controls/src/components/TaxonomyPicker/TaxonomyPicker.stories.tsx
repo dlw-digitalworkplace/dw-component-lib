@@ -20,12 +20,15 @@ storiesOf("TaxonomyPicker", module)
 					selectedItems={selectedItems}
 					onChange={setSelectedItems}
 					itemLimit={1}
+					allowAddingTerms={true}
 					dialogProps={{
 						title: "Browse terms",
-						subText:
-							"Browse for terms in the term tree to find the item you are looking for. Don't forget to Add it to the picker!",
 						showRootNode: true,
-						rootNodeLabel: "My terms"
+						rootNodeLabel: "My terms",
+						dialogContentProps: {
+							subText:
+								"Browse for terms in the term tree to find the item you are looking for. Don't forget to Add it to the picker!"
+						}
 					}}
 				/>
 
