@@ -27,6 +27,19 @@ describe("<TaxonomyPickerDialog />", () => {
 			expect(await screen.findByText(/Add/i)).toBeTruthy();
 		});
 
+		it("should render without crashing when allowing adding of terms", async () => {
+			render(
+				<TaxonomyPickerDialog
+					provider={mockTaxonomyProvider}
+					hidden={false}
+					pickerProps={{ onResolveSuggestions: onResolveSuggestions }}
+					allowAddingTerms={true}
+				/>
+			);
+
+			expect(await screen.findByText(/Add/i)).toBeTruthy();
+		});
+
 		it("should be able to render custom labels", async () => {
 			render(
 				<TaxonomyPickerDialog
