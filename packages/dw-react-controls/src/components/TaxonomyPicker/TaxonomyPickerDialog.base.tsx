@@ -150,12 +150,15 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 	const handleStartCreateNewTermAction = (nodeId: string): void => {
 		setTermCreatingParentId(nodeId);
 
-		if (expandedNodes.indexOf(nodeId) === -1) {
-			const newExpanded = expandedNodes || [];
-			newExpanded.push(nodeId);
+		setExpandedNodes((current) => {
+			const newExpanded = [...current];
 
-			setExpandedNodes(newExpanded);
-		}
+			if (current.indexOf(nodeId) === -1) {
+				newExpanded.push(nodeId);
+			}
+
+			return newExpanded;
+		});
 	};
 
 	const handleNodeToggle = (ev: React.ChangeEvent, nodeIds?: string[]): void => {

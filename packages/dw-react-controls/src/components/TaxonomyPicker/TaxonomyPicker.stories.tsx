@@ -19,7 +19,7 @@ storiesOf("TaxonomyPicker", module)
 					required={true}
 					selectedItems={selectedItems}
 					onChange={setSelectedItems}
-					itemLimit={1}
+					itemLimit={3}
 					allowAddingTerms={true}
 					dialogProps={{
 						title: "Browse terms",
