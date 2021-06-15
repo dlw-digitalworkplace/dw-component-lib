@@ -8,9 +8,14 @@ import { TermItemSuggestion } from "./TermItemSuggestion";
 import { ITermPickerProps } from "./TermPicker.types";
 
 export class TermPickerBase extends BasePicker<ITermValue, ITermPickerProps> {
-	public static defaultProps = {
+	public static defaultProps: Partial<ITermPickerProps> = {
 		onRenderItem: (props: IPickerItemProps<ITermValue>) => <TermItem {...props}>{props.item.name}</TermItem>,
-		onRenderSuggestionsItem: (props: ITermValue) => <TermItemSuggestion {...props}>{props.name}</TermItemSuggestion>
+		onRenderSuggestionsItem: (props: ITermValue) => <TermItemSuggestion term={props} />,
+		pickerSuggestionsProps: {
+			loadingText: "Searching...",
+			noResultsFoundText: "No results found.",
+			suggestionsHeaderText: "Suggested terms"
+		}
 	};
 
 	constructor(props: ITermPickerProps) {

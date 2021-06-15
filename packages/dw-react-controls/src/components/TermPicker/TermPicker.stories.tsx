@@ -18,7 +18,7 @@ storiesOf("TermPicker", module)
 		): ITermValue[] | PromiseLike<ITermValue[]> => {
 			return items
 				.filter((it) => it.name.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) !== -1)
-				.filter((it) => selectedItems?.filter((si) => si.key === it.key).length === 0);
+				.filter((it) => !selectedItems?.some((si) => si.key === it.key));
 		};
 
 		return <TermPicker onResolveSuggestions={onResolveSuggestions} />;

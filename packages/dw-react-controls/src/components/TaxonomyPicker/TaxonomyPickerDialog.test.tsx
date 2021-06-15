@@ -10,7 +10,7 @@ const onResolveSuggestions = async (filter: string, currentSelection?: ITerm[]):
 
 	return availableItems
 		.filter((it) => it.name.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) !== -1)
-		.filter((it) => currentSelection?.filter((si) => si.key === it.key).length === 0);
+		.filter((it) => !currentSelection?.some((si) => si.key === it.key));
 };
 
 describe("<TaxonomyPickerDialog />", () => {

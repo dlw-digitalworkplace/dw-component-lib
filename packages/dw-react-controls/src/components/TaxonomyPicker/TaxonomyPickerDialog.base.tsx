@@ -2,6 +2,7 @@ import { ActionButton, DefaultButton, PrimaryButton } from "office-ui-fabric-rea
 import { DialogFooter } from "office-ui-fabric-react/lib/Dialog";
 import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
+import * as rfdc from "rfdc";
 import { ITerm, ITermCreationResult, ITermValue } from "../../models";
 import { CollectionUtils } from "../../utils/collectionUtils";
 import { TermPicker } from "../TermPicker";
@@ -76,7 +77,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 
 	React.useEffect(() => {
 		(async () => {
-			const terms = await provider.getTermTree();
+			const terms = rfdc()(await provider.getTermTree());
 
 			setTermTreeItems(terms);
 			setExpandedNodes(showRootNode ? [rootNodeKey] : terms && terms.length > 0 ? [terms[0].key] : []);
@@ -172,53 +173,36 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 
 		let result: void | ITermCreationResult = { success: true };
 		if (onCreateNewTerm) {
-			result = await onCreateNewTerm(termCreatingParentId, newValue);
+			result = await onCreateNewTerm(newValue, termCreatingParentId !== rootNodeKey ? termCreatingParentId : undefined);
 		}
 
 		if (typeof result === "object" && result.success) {
 			// add term
 			if (result.newTerm) {
-				const parentTerm = findTermInTree(termTreeItems || [], termCreatingParentId);
+				const parentTerm = CollectionUtils.findInTree(termTreeItems || [], (it) => it.key === termCreatingParentId);
 
 				if (termCreatingParentId === rootNodeKey) {
 					setTermTreeItems([result.newTerm, ...(termTreeItems || [])]);
-				} else if (!parentTerm) {
-					// do nothing
-				} else {
+				} else if (!!parentTerm) {
 					if (!parentTerm.children) {
 						if (result.newTerm) {
 							parentTerm.children = [result.newTerm];
 						}
 					} else {
-						parentTerm.children.unshift(result.newTerm);
+						parentTerm.children = [result.newTerm, ...parentTerm.children];
 					}
 
 					setTermTreeItems([...termTreeItems!]);
-					setSelectedTreeItem(result.newTerm.key);
-					setSelectedTreeNode(result.newTerm);
 				}
+
+				setSelectedTreeItem(result.newTerm.key);
+				setSelectedTreeNode(result.newTerm);
 			}
 
 			setTermCreatingParentId(undefined);
 		}
 
 		return result;
-	};
-
-	const findTermInTree = (terms: ITerm[], nodeId: string): ITerm | undefined => {
-		for (let index = 0; index < terms.length; index++) {
-			const term = terms[index];
-
-			if (term.key === nodeId) {
-				return term;
-			} else if (!!term.children && term.children.length > 0) {
-				const match = findTermInTree(term.children, nodeId);
-
-				if (match) {
-					return match;
-				}
-			}
-		}
 	};
 
 	const renderTreeView = (): JSX.Element | null => {

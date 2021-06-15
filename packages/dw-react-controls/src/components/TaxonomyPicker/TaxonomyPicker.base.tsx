@@ -1,3 +1,4 @@
+import { ValidationState } from "office-ui-fabric-react";
 import { IconButton } from "office-ui-fabric-react/lib/Button";
 import { Label } from "office-ui-fabric-react/lib/Label";
 import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
@@ -48,9 +49,9 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 		setDialogIsOpen(false);
 	};
 
-	const handleCreateNewTerm = async (parentNodeId: string, newValue: string): Promise<void | ITermCreationResult> => {
+	const handleCreateNewTerm = async (newValue: string, parentNodeId?: string): Promise<void | ITermCreationResult> => {
 		try {
-			const newTerm = await provider.createTerm(parentNodeId, newValue);
+			const newTerm = await provider.createTerm(newValue, parentNodeId);
 
 			return {
 				success: true,
@@ -59,7 +60,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 		} catch (err) {
 			return {
 				success: false,
-				error: err.message
+				error: typeof err === "object" && Object.keys(err).some((k) => k === "message") ? err.message : err.toString()
 			};
 		}
 	};
@@ -67,9 +68,26 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	const onResolveSuggestions = async (filter: string, currentSelection?: ITerm[]): Promise<ITerm[]> => {
 		const availableItems = await provider.getTerms();
 
-		return availableItems
-			.filter((it) => it.name.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) !== -1)
-			.filter((it) => currentSelection?.filter((si) => si.key === it.key).length === 0);
+		const suggestions = availableItems
+			.filter((it) => it.name.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) !== -1) // filter on search text
+			.filter((it) => !currentSelection?.some((si) => si.key === it.key)); // filter out selected items
+
+		return suggestions;
+	};
+
+	const onValidateInput = (input: string): ValidationState => {
+		if (!!provider.termValidationRegex) {
+			return provider.termValidationRegex.test(input) ? ValidationState.valid : ValidationState.invalid;
+		}
+
+		return ValidationState.valid;
+	};
+
+	const onCreateGenericItem = (value: string): ITermValue => {
+		return {
+			key: value,
+			name: value
+		};
 	};
 
 	return (
@@ -83,10 +101,12 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 			<div className={classNames.inputWrapper}>
 				<TermPicker
 					className={classNames.input}
+					createGenericItem={onCreateGenericItem}
 					disabled={disabled}
 					itemLimit={itemLimit}
 					onChange={handleSelectionChange}
 					onResolveSuggestions={onResolveSuggestions}
+					onValidateInput={onValidateInput}
 					selectedItems={selectedItems}
 				/>
 				<IconButton

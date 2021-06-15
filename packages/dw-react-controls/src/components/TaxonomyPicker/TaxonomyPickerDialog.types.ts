@@ -44,7 +44,7 @@ interface ITaxonomyPickerDialogPropsBase {
 
 	onConfirm?(terms?: ITermValue[]): void;
 
-	onCreateNewTerm?(parentNodeId: string, newValue: string): PromiseLike<void | ITermCreationResult>;
+	onCreateNewTerm?(newValue: string, parentId?: string): PromiseLike<void | ITermCreationResult>;
 }
 
 export type ITaxonomyPickerDialogProps = ITaxonomyPickerDialogPropsBase & IDialogProps;

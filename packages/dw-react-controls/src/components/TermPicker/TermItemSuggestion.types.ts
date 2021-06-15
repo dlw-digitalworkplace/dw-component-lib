@@ -1,7 +1,10 @@
 import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
 import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
+import { ITermValue } from "../../models";
 
 export interface ITermItemSuggestionProps extends React.AllHTMLAttributes<HTMLElement> {
+	term?: ITermValue;
+
 	/**
 	 * Optional class for the root TaxonomyPicker element
 	 */
@@ -22,8 +25,5 @@ export type ITermItemSuggestionStyleProps = Required<Pick<ITermItemSuggestionPro
 	Pick<ITermItemSuggestionProps, "className"> & {};
 
 export interface ITermItemSuggestionStyles {
-	/**
-	 * Refers to the text element of the TermItemSuggestion
-	 */
-	suggestionTextOverflow?: IStyle;
+	root?: IStyle;
 }
