@@ -17,7 +17,7 @@ const GlobalClassNames = {
 const expandIconWidth = "22px";
 
 export const getStyles = (props: ITreeItemStyleProps): ITreeItemStyles => {
-	const { className, disabled, selected } = props;
+	const { className, disabled, expanded, selected } = props;
 	const classNames = GlobalClassNames;
 
 	return {
@@ -31,6 +31,7 @@ export const getStyles = (props: ITreeItemStyleProps): ITreeItemStyles => {
 				userSelect: "none"
 			},
 			disabled && "is-disabled",
+			expanded && "is-expanded",
 			selected && "is-selected",
 			className
 		],
