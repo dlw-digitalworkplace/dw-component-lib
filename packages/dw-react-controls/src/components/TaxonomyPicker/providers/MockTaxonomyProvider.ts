@@ -42,29 +42,36 @@ export class MockTaxonomyProvider implements ITaxonomyProvider {
 		});
 
 		return await new Promise((resolve, reject) => {
-			const parent: ITerm | undefined = !!parentId
-				? CollectionUtils.findInTree(this._termTree, (it) => it.key === parentId)
-				: undefined;
-
-			if (
-				(!parent && this._termTree.some((it) => it.name.toLocaleLowerCase() === newValue.toLocaleLowerCase())) ||
-				parent?.children?.some((it) => it.name.toLocaleLowerCase() === newValue.toLocaleLowerCase())
-			) {
-				reject("An error occured.");
-			} else {
-				const newTerm: ITerm = {
-					key: uuid,
-					name: newValue
-				};
-
-				if (!parentId || !parent) {
-					this._termTree.unshift(newTerm);
-				} else if (!!parent) {
-					parent.children?.unshift(newTerm);
+			setTimeout(() => {
+				if (newValue === "test") {
+					reject(`Failed to add term '${newValue}'.`);
+					return;
 				}
 
-				resolve(newTerm);
-			}
+				const parent: ITerm | undefined = !!parentId
+					? CollectionUtils.findInTree(this._termTree, (it) => it.key === parentId)
+					: undefined;
+
+				if (
+					(!parent && this._termTree.some((it) => it.name.toLocaleLowerCase() === newValue.toLocaleLowerCase())) ||
+					parent?.children?.some((it) => it.name.toLocaleLowerCase() === newValue.toLocaleLowerCase())
+				) {
+					reject("An error occured.");
+				} else {
+					const newTerm: ITerm = {
+						key: uuid,
+						name: newValue
+					};
+
+					if (!parentId || !parent) {
+						this._termTree.unshift(newTerm);
+					} else if (!!parent) {
+						parent.children?.unshift(newTerm);
+					}
+
+					resolve(newTerm);
+				}
+			}, 750);
 		});
 	}
 }

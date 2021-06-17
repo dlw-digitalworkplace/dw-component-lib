@@ -205,6 +205,10 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 		return result;
 	};
 
+	const handleCancelTermCreation = (): void => {
+		setTermCreatingParentId(undefined);
+	};
+
 	const renderTreeView = (): JSX.Element | null => {
 		if (!showRootNode && !termTreeItems?.length) {
 			return null;
@@ -269,7 +273,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 				<TermAdder
 					key={`${termCreatingParentId}_${term.key}`}
 					onSubmit={handleCreateNewTerm}
-					onCancel={() => setTermCreatingParentId(undefined)}
+					onCancel={handleCancelTermCreation}
 					labels={labels.termAdderLabels}
 				/>
 			);

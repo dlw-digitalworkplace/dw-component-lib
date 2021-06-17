@@ -5,11 +5,13 @@ import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
 import { ITermCreationResult, ITermValue } from "../../models";
 import { ITerm } from "../../models/ITerm";
+import { useStateIfMounted } from "../../utils";
 import { TermPicker } from "../TermPicker";
 import { ITaxonomyPickerProps, ITaxonomyPickerStyleProps, ITaxonomyPickerStyles } from "./TaxonomyPicker.types";
 import { TaxonomyPickerDialog } from "./TaxonomyPickerDialog";
 
 const getClassNames = classNamesFunction<ITaxonomyPickerStyleProps, ITaxonomyPickerStyles>();
+const tempItemKey = "__TEMP__ITEM__";
 
 export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	allowAddingTerms,
@@ -22,35 +24,54 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	provider,
 	selectedItems,
 	onChange,
+	onGetErrorMessage,
+	onGetSuccessMessage,
 	required,
-	styles
+	styles,
+	theme
 }) => {
 	const [dialogIsOpen, setDialogIsOpen] = React.useState(false);
+	const [errorMessage, setErrorMessage] = useStateIfMounted<string | JSX.Element>(undefined);
+	const [successMessage, setSuccessMessage] = useStateIfMounted<string | JSX.Element>(undefined);
+	const [isCreatingTerm, setIsCreatingTerm] = useStateIfMounted(false);
 
-	const classNames = getClassNames(styles, { className });
+	const successMessageTimeout = React.useRef<NodeJS.Timeout | undefined>(undefined);
+
+	const classNames = getClassNames(styles, { className, theme: theme! });
 
 	const handleSelectionChange = (items?: ITermValue[]): void => {
+		// remove temporary item from result set, since it's only added as a mandatory retun object
+		const actualItems = (items || []).filter((it) => it.key !== tempItemKey);
+
 		if (onChange) {
-			onChange(items || []);
+			onChange(actualItems);
 		}
 	};
 
 	const handlePopupButtonClick = (): void => {
+		// open the dialog
 		setDialogIsOpen(true);
 	};
 
 	const handleDialogConfirm = (items?: ITermValue[]): void => {
+		// change the applied selection
 		handleSelectionChange(items);
 
+		// close the dialog
 		setDialogIsOpen(false);
 	};
 
 	const handleDialogDismiss = (): void => {
+		// close the dialog
 		setDialogIsOpen(false);
 	};
 
-	const handleCreateNewTerm = async (newValue: string, parentNodeId?: string): Promise<void | ITermCreationResult> => {
+	const handleCreateTermInDialog = async (
+		newValue: string,
+		parentNodeId?: string
+	): Promise<void | ITermCreationResult> => {
 		try {
+			// create the term
 			const newTerm = await provider.createTerm(newValue, parentNodeId);
 
 			return {
@@ -65,9 +86,20 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 		}
 	};
 
-	const onResolveSuggestions = async (filter: string, currentSelection?: ITerm[]): Promise<ITerm[]> => {
+	const onResolveSuggestions = (filter: string, currentSelection?: ITerm[]): Promise<ITerm[]> => {
+		// clear current status messages
+		setErrorMessage(undefined);
+		clearSuccessMessage();
+
+		// resolve suggestions
+		return doResolveSuggestions(filter, currentSelection);
+	};
+
+	const doResolveSuggestions = async (filter: string, currentSelection?: ITerm[]): Promise<ITerm[]> => {
+		// retrieve the available terms
 		const availableItems = await provider.getTerms();
 
+		// resolve the suggestions
 		const suggestions = availableItems
 			.filter((it) => it.name.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) !== -1) // filter on search text
 			.filter((it) => !currentSelection?.some((si) => si.key === it.key)); // filter out selected items
@@ -76,7 +108,17 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	};
 
 	const onValidateInput = (input: string): ValidationState => {
+		// clear any active error message
+		setErrorMessage(undefined);
+
+		// check if adding terms is allowed
+		if (!allowAddingTerms) {
+			return ValidationState.invalid;
+		}
+
+		// check if a validation regex is available
 		if (!!provider.termValidationRegex) {
+			// match the input agains the validation regex
 			return provider.termValidationRegex.test(input) ? ValidationState.valid : ValidationState.invalid;
 		}
 
@@ -84,10 +126,104 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	};
 
 	const onCreateGenericItem = (value: string): ITermValue => {
-		return {
-			key: value,
-			name: value
-		};
+		// create the term
+		const createAction = provider.createTerm(value);
+
+		// check the type which is returned
+		if (!!(createAction as Promise<ITerm>).then) {
+			// set creation state
+			setIsCreatingTerm(true);
+
+			// clear any previous confirmation message
+			clearSuccessMessage();
+
+			(createAction as Promise<ITerm>).then(
+				(res) => {
+					// add new term to the current item set
+					const newItems: ITermValue[] = [
+						...selectedItems,
+						{
+							key: res.key,
+							name: res.name,
+							path: res.path
+						}
+					];
+
+					// change the current selection
+					handleSelectionChange(newItems);
+
+					// reset creation state
+					setIsCreatingTerm(false);
+
+					// communicate creation result
+					showCreationSuccessMessage("The term has been created successfully.", value);
+				},
+				(err) => {
+					// parse the error message from the result
+					const error =
+						typeof err === "object" && Object.keys(err).some((k) => k === "message") ? err.message : err.toString();
+
+					// set the error message
+					showErrorMessage(error);
+
+					// reset creation state
+					setIsCreatingTerm(false);
+				}
+			);
+
+			// return a dummy item
+			return {
+				key: tempItemKey,
+				name: value
+			};
+		} else {
+			const newTerm = createAction as ITerm;
+
+			return {
+				key: newTerm.key,
+				name: newTerm.name,
+				path: newTerm.path
+			};
+		}
+	};
+
+	const showErrorMessage = (error: string): void => {
+		let finalError: string | JSX.Element = error;
+
+		// override the error message when callback is specified
+		if (onGetErrorMessage) {
+			finalError = onGetErrorMessage(error);
+		}
+
+		// set the error message
+		setErrorMessage(finalError);
+	};
+
+	const showCreationSuccessMessage = (message: string, newValue: string): void => {
+		let finalMessage: string | JSX.Element = message;
+
+		// override the success message when callback is specified
+		if (onGetSuccessMessage) {
+			finalMessage = onGetSuccessMessage(finalMessage, newValue);
+		}
+
+		// set the success message
+		setSuccessMessage(finalMessage);
+
+		// start a timeout to clear the success message
+		successMessageTimeout.current = setTimeout(() => {
+			clearSuccessMessage();
+		}, 5000);
+	};
+
+	const clearSuccessMessage = () => {
+		// clear the timeout if present
+		if (!!successMessageTimeout.current) {
+			clearTimeout(successMessageTimeout.current);
+		}
+
+		// clear the success message
+		setSuccessMessage(undefined);
 	};
 
 	return (
@@ -102,7 +238,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 				<TermPicker
 					className={classNames.input}
 					createGenericItem={onCreateGenericItem}
-					disabled={disabled}
+					disabled={disabled || isCreatingTerm}
 					itemLimit={itemLimit}
 					onChange={handleSelectionChange}
 					onResolveSuggestions={onResolveSuggestions}
@@ -118,6 +254,28 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 				/>
 			</div>
 
+			{successMessage &&
+				(typeof successMessage === "string" ? (
+					<p className={classNames.successMessage}>
+						<span data-automation-id="success-message">{successMessage}</span>
+					</p>
+				) : (
+					<div className={classNames.successMessage} data-automation-id="success-message">
+						{successMessage}
+					</div>
+				))}
+
+			{errorMessage &&
+				(typeof errorMessage === "string" ? (
+					<p className={classNames.errorMessage}>
+						<span data-automation-id="error-message">{errorMessage}</span>
+					</p>
+				) : (
+					<div className={classNames.errorMessage} data-automation-id="error-message">
+						{errorMessage}
+					</div>
+				))}
+
 			{dialogIsOpen && (
 				<TaxonomyPickerDialog
 					{...dialogProps}
@@ -126,10 +284,10 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 					defaultSelectedItems={selectedItems}
 					hidden={!dialogIsOpen}
 					itemLimit={itemLimit}
-					onCreateNewTerm={handleCreateNewTerm}
+					onCreateNewTerm={handleCreateTermInDialog}
 					onConfirm={handleDialogConfirm}
 					onDismiss={handleDialogDismiss}
-					pickerProps={{ onResolveSuggestions: onResolveSuggestions }}
+					pickerProps={{ onResolveSuggestions: doResolveSuggestions }}
 				/>
 			)}
 		</div>

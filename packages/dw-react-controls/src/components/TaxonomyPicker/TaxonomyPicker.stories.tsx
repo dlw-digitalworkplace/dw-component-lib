@@ -1,15 +1,32 @@
 import { storiesOf } from "@storybook/react";
 import * as React from "react";
 import { ITermValue } from "../../models";
+import { useStateIfMounted } from "../../utils";
 import { MockTaxonomyProvider } from "./providers";
 import { TaxonomyPicker } from "./TaxonomyPicker";
 
 storiesOf("TaxonomyPicker", module)
 	.addParameters({ component: TaxonomyPicker })
 	.add("Basic", () => {
-		const [selectedItems, setSelectedItems] = React.useState<ITermValue[]>([]);
+		const [selectedItems, setSelectedItems] = useStateIfMounted<ITermValue[]>([]);
 
 		const taxonomyProvider = new MockTaxonomyProvider();
+
+		const getErrorMessage = React.useCallback((error: string) => {
+			return (
+				<>
+					<b>Error:&nbsp;</b> {error}
+				</>
+			);
+		}, []);
+
+		const getSuccessMessage = React.useCallback((message: string, newValue: string) => {
+			return (
+				<>
+					<b>Success:&nbsp;</b> {message} (term: {newValue})
+				</>
+			);
+		}, []);
 
 		return (
 			<div>
@@ -17,7 +34,7 @@ storiesOf("TaxonomyPicker", module)
 					label={"Choose a value"}
 					provider={taxonomyProvider}
 					required={true}
-					selectedItems={selectedItems}
+					selectedItems={selectedItems || []}
 					onChange={setSelectedItems}
 					itemLimit={3}
 					allowAddingTerms={true}
@@ -30,6 +47,8 @@ storiesOf("TaxonomyPicker", module)
 								"Browse for terms in the term tree to find the item you are looking for. Don't forget to Add it to the picker!"
 						}
 					}}
+					onGetErrorMessage={getErrorMessage}
+					onGetSuccessMessage={getSuccessMessage}
 				/>
 
 				<div style={{ marginTop: "8px" }}>
