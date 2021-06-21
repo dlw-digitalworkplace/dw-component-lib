@@ -5,7 +5,12 @@ export const useControlled: <T>(
 	defaultProp: T,
 	name: string,
 	state?: string
-) => [T, (newValue: T) => void] = <T>(controlled: T, defaultProp: T, name: string, state: string = "value") => {
+) => [T, (newValue: React.SetStateAction<T>) => void] = <T>(
+	controlled: T,
+	defaultProp: T,
+	name: string,
+	state: string = "value"
+) => {
 	const { current: isControlled } = React.useRef(controlled !== undefined);
 	const [valueState, setValue] = React.useState(defaultProp);
 	const value = isControlled ? controlled : valueState;
@@ -41,7 +46,7 @@ export const useControlled: <T>(
 		}, [JSON.stringify(defaultProp)]);
 	}
 
-	const setValueIfUncontrolled = React.useCallback((newValue: T) => {
+	const setValueIfUncontrolled = React.useCallback((newValue: React.SetStateAction<T>) => {
 		if (!isControlled) {
 			setValue(newValue);
 		}
