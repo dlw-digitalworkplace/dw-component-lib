@@ -1,7 +1,7 @@
+import { useStateIfMounted } from "@dlw-digitalworkplace/dw-react-utils";
 import { storiesOf } from "@storybook/react";
 import * as React from "react";
 import { ITermValue } from "../../models";
-import { useStateIfMounted } from "../../utils";
 import { MockTaxonomyProvider } from "./providers";
 import { TaxonomyPicker } from "./TaxonomyPicker";
 

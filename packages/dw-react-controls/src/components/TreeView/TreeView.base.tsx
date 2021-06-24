@@ -3,9 +3,9 @@
  * Source code at https://github.com/mui-org/material-ui/blob/master/packages/material-ui-lab/src/TreeView/TreeView.js
  */
 
+import { useControlled } from "@dlw-digitalworkplace/dw-react-utils";
 import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
-import { useControlled } from "../../utils/useControlled";
 import TreeViewContext from "./TreeView.context";
 import { ITreeViewProps, ITreeViewStyleProps, ITreeViewStyles } from "./TreeView.types";
 

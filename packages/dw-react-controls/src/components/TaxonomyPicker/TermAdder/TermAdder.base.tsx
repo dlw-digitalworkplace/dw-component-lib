@@ -1,7 +1,7 @@
+import { useStateIfMounted } from "@dlw-digitalworkplace/dw-react-utils";
 import { IconButton, Spinner, SpinnerSize, TextField } from "office-ui-fabric-react";
 import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
-import { useStateIfMounted } from "../../../utils/useStateIfMounted";
 import { ITermAdderLabels, ITermAdderProps, ITermAdderStyleProps, ITermAdderStyles } from "./TermAdder.types";
 
 const getClassNames = classNamesFunction<ITermAdderStyleProps, ITermAdderStyles>();

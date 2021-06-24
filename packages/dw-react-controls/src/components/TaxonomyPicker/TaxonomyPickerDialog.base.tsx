@@ -1,10 +1,10 @@
+import { findInTree, flatten } from "@dlw-digitalworkplace/dw-react-utils";
 import { ActionButton, DefaultButton, PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { DialogFooter } from "office-ui-fabric-react/lib/Dialog";
 import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
 import * as rfdc from "rfdc";
 import { ITerm, ITermCreationResult, ITermValue } from "../../models";
-import { CollectionUtils } from "../../utils/collectionUtils";
 import { TermPicker } from "../TermPicker";
 import { ITreeItemAction, TreeItem } from "../TreeItem";
 import { TreeView } from "../TreeView";
@@ -90,7 +90,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 			return;
 		}
 
-		const flattened = CollectionUtils.flatten(termTreeItems);
+		const flattened = flatten(termTreeItems);
 
 		setFlattenedTermTreeItems(flattened);
 	}, [termTreeItems]);
@@ -179,7 +179,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 		if (typeof result === "object" && result.success) {
 			// add term
 			if (result.newTerm) {
-				const parentTerm = CollectionUtils.findInTree(termTreeItems || [], (it) => it.key === termCreatingParentId);
+				const parentTerm = findInTree(termTreeItems || [], (it) => it.key === termCreatingParentId);
 
 				if (termCreatingParentId === rootNodeKey) {
 					setTermTreeItems([result.newTerm, ...(termTreeItems || [])]);
