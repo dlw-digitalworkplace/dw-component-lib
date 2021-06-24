@@ -1,0 +1,8 @@
+{
+  "type": "major",
+  "comment": "Separated utils and custom hooks to own package",
+  "packageName": "@dlw-digitalworkplace/dw-react-controls",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch",
+  "date": "2021-06-24T21:22:32.067Z"
+}
