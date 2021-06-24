@@ -1,21 +1,27 @@
 import { IDialogProps } from "office-ui-fabric-react/lib/Dialog";
 import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
 import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
-import { ITermValue } from "../../models";
+import { ITermCreationResult, ITermValue } from "../../models";
 import { ITermPickerProps } from "../TermPicker";
 import { ITaxonomyProvider } from "./providers";
+import { ITermAdderLabels } from "./TermAdder";
 
 export interface ITaxonomyPickerDialogLabels {
 	okButton?: string;
 	cancelButton?: string;
 	addButton?: string;
 	replaceButton?: string;
+	addNewTermAction?: string;
+	termAdderLabels?: ITermAdderLabels;
 }
 
 interface ITaxonomyPickerDialogPropsBase {
+	allowAddingTerms?: boolean;
+
 	provider: ITaxonomyProvider;
 
 	showRootNode?: boolean;
+
 	rootNodeLabel?: string;
 
 	defaultSelectedItems?: ITermValue[];
@@ -37,6 +43,8 @@ interface ITaxonomyPickerDialogPropsBase {
 	theme?: ITheme;
 
 	onConfirm?(terms?: ITermValue[]): void;
+
+	onCreateNewTerm?(newValue: string, parentId?: string): PromiseLike<void | ITermCreationResult>;
 }
 
 export type ITaxonomyPickerDialogProps = ITaxonomyPickerDialogPropsBase & IDialogProps;

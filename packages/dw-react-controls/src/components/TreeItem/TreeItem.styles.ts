@@ -4,6 +4,8 @@ import { ITreeItemStyleProps, ITreeItemStyles } from "./TreeItem.types";
 const GlobalClassNames = {
 	treeItem: "dw-TreeItem",
 	treeNode: "dw-TreeNode",
+	contextMenuIconWrapper: "dw-TreeItemContextMenuIconWrapper",
+	contextMenuIcon: "dw-TreeItemContextMenuIcon",
 	expandIconWrapper: "dw-TreeExpandIconWrapper",
 	expandIcon: "dw-TreeExpandIcon",
 	childNodes: "dw-TreeNodeChildren",
@@ -49,6 +51,15 @@ export const getStyles = (props: ITreeItemStyleProps): ITreeItemStyles => {
 				}
 			}
 		],
+
+		contextMenuIconWrapper: [
+			classNames.contextMenuIconWrapper,
+			{
+				marginLeft: selected ? "3px" : "4px"
+			}
+		],
+
+		contextMenuIcon: [classNames.contextMenuIcon],
 
 		expandIconWrapper: [
 			classNames.expandIconWrapper,

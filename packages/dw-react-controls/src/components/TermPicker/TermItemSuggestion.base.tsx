@@ -8,10 +8,19 @@ import {
 
 const getClassNames = classNamesFunction<ITermItemSuggestionStyleProps, ITermItemSuggestionStyles>();
 
-export const TermItemSuggestionBase: React.FC<ITermItemSuggestionProps> = ({ children, styles, theme }) => {
+export const TermItemSuggestionBase: React.FC<ITermItemSuggestionProps> = ({ term, styles, theme }) => {
 	const classNames = getClassNames(styles, {
 		theme: theme!
 	});
 
-	return <div className={classNames.suggestionTextOverflow}> {children} </div>;
+	return (
+		<div className={classNames.root}>
+			<div>{term?.name}</div>
+			{term?.path && (
+				<div>
+					<small>{term?.path}</small>
+				</div>
+			)}
+		</div>
+	);
 };

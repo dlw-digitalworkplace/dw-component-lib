@@ -10,7 +10,7 @@ const onResolveSuggestions = async (filter: string, currentSelection?: ITerm[]):
 
 	return availableItems
 		.filter((it) => it.name.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) !== -1)
-		.filter((it) => currentSelection?.filter((si) => si.key === it.key).length === 0);
+		.filter((it) => !currentSelection?.some((si) => si.key === it.key));
 };
 
 describe("<TaxonomyPickerDialog />", () => {
@@ -21,6 +21,19 @@ describe("<TaxonomyPickerDialog />", () => {
 					provider={mockTaxonomyProvider}
 					hidden={false}
 					pickerProps={{ onResolveSuggestions: onResolveSuggestions }}
+				/>
+			);
+
+			expect(await screen.findByText(/Add/i)).toBeTruthy();
+		});
+
+		it("should render without crashing when allowing adding of terms", async () => {
+			render(
+				<TaxonomyPickerDialog
+					provider={mockTaxonomyProvider}
+					hidden={false}
+					pickerProps={{ onResolveSuggestions: onResolveSuggestions }}
+					allowAddingTerms={true}
 				/>
 			);
 

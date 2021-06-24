@@ -2,10 +2,11 @@ import { ActionButton, DefaultButton, PrimaryButton } from "office-ui-fabric-rea
 import { DialogFooter } from "office-ui-fabric-react/lib/Dialog";
 import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
-import { ITerm, ITermValue } from "../../models";
+import * as rfdc from "rfdc";
+import { ITerm, ITermCreationResult, ITermValue } from "../../models";
 import { CollectionUtils } from "../../utils/collectionUtils";
 import { TermPicker } from "../TermPicker";
-import { TreeItem } from "../TreeItem";
+import { ITreeItemAction, TreeItem } from "../TreeItem";
 import { TreeView } from "../TreeView";
 import { WideDialog } from "../WideDialog";
 import {
@@ -14,13 +15,16 @@ import {
 	ITaxonomyPickerDialogStyleProps,
 	ITaxonomyPickerDialogStyles
 } from "./TaxonomyPickerDialog.types";
+import { TermAdder } from "./TermAdder";
 
 const getClassNames = classNamesFunction<ITaxonomyPickerDialogStyleProps, ITaxonomyPickerDialogStyles>();
 const rootNodeKey = "__ROOTNODE__";
+const newNodeKey = "__NEW__";
 
 export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (props) => {
 	const {
 		labels: labelsProp,
+		allowAddingTerms,
 		itemLimit,
 		showRootNode,
 		rootNodeLabel,
@@ -28,6 +32,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 		modalProps,
 		dialogContentProps,
 		defaultSelectedItems,
+		onCreateNewTerm,
 		onConfirm,
 		onDismiss,
 		provider,
@@ -51,12 +56,31 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 	const [termTreeItems, setTermTreeItems] = React.useState<ITerm[] | undefined>(undefined);
 	const [flattenedTermTreeItems, setFlattenedTermTreeItems] = React.useState<ITerm[] | undefined>(undefined);
 	const [selectedTreeNode, setSelectedTreeNode] = React.useState<ITerm | undefined>(undefined);
+	const [termCreatingParentId, setTermCreatingParentId] = React.useState<string | undefined>(undefined);
+	const [expandedNodes, setExpandedNodes] = React.useState<string[]>([]);
+	const [selectedTreeItem, setSelectedTreeItem] = React.useState<string | null>(null);
+	const treeItemActions = React.useRef<ITreeItemAction[]>([]);
+
+	React.useEffect(() => {
+		const newTreeItemActions: ITreeItemAction[] = [];
+
+		if (allowAddingTerms) {
+			newTreeItemActions.push({
+				key: "createNewTerm",
+				text: labels.addNewTermAction || "Add new term...",
+				onClick: (nodeId: string) => handleStartCreateNewTermAction(nodeId)
+			});
+		}
+
+		treeItemActions.current = newTreeItemActions;
+	}, [allowAddingTerms]);
 
 	React.useEffect(() => {
 		(async () => {
-			const terms = await provider.getTermTree();
+			const terms = rfdc()(await provider.getTermTree());
 
 			setTermTreeItems(terms);
+			setExpandedNodes(showRootNode ? [rootNodeKey] : terms && terms.length > 0 ? [terms[0].key] : []);
 		})();
 	}, [provider]);
 
@@ -104,6 +128,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 	const handleTreeSelection = (event: React.MouseEvent<HTMLButtonElement>, nodeId?: string): void => {
 		const treeItem = !!nodeId ? flattenedTermTreeItems?.filter((it) => it.key === nodeId)[0] : undefined;
 
+		setSelectedTreeItem(!!nodeId ? nodeId : null);
 		setSelectedTreeNode(treeItem);
 	};
 
@@ -123,20 +148,97 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 		closeDialog();
 	};
 
+	const handleStartCreateNewTermAction = (nodeId: string): void => {
+		setTermCreatingParentId(nodeId);
+
+		setExpandedNodes((current) => {
+			const newExpanded = [...current];
+
+			if (current.indexOf(nodeId) === -1) {
+				newExpanded.push(nodeId);
+			}
+
+			return newExpanded;
+		});
+	};
+
+	const handleNodeToggle = (ev: React.ChangeEvent, nodeIds?: string[]): void => {
+		setExpandedNodes(nodeIds || []);
+	};
+
+	const handleCreateNewTerm = async (newValue: string): Promise<void | ITermCreationResult> => {
+		if (!termCreatingParentId) {
+			throw new Error("Can't add a new term if the parent node is unknown.");
+		}
+
+		let result: void | ITermCreationResult = { success: true };
+		if (onCreateNewTerm) {
+			result = await onCreateNewTerm(newValue, termCreatingParentId !== rootNodeKey ? termCreatingParentId : undefined);
+		}
+
+		if (typeof result === "object" && result.success) {
+			// add term
+			if (result.newTerm) {
+				const parentTerm = CollectionUtils.findInTree(termTreeItems || [], (it) => it.key === termCreatingParentId);
+
+				if (termCreatingParentId === rootNodeKey) {
+					setTermTreeItems([result.newTerm, ...(termTreeItems || [])]);
+				} else if (!!parentTerm) {
+					if (!parentTerm.children) {
+						if (result.newTerm) {
+							parentTerm.children = [result.newTerm];
+						}
+					} else {
+						parentTerm.children = [result.newTerm, ...parentTerm.children];
+					}
+
+					setTermTreeItems([...termTreeItems!]);
+				}
+
+				setSelectedTreeItem(result.newTerm.key);
+				setSelectedTreeNode(result.newTerm);
+			}
+
+			setTermCreatingParentId(undefined);
+		}
+
+		return result;
+	};
+
+	const handleCancelTermCreation = (): void => {
+		setTermCreatingParentId(undefined);
+	};
+
 	const renderTreeView = (): JSX.Element | null => {
 		if (!showRootNode && !termTreeItems?.length) {
 			return null;
 		}
 
-		const nodeTree = termTreeItems?.map((term) => renderTreeNode(term));
+		const nodeTree = termTreeItems?.map((term) => renderTreeNode(term)) || [];
+		if (termCreatingParentId === rootNodeKey) {
+			nodeTree.unshift(
+				renderTreeNode({
+					key: newNodeKey,
+					name: ""
+				} as ITerm)
+			);
+		}
 
 		return (
 			<TreeView
+				expanded={expandedNodes}
+				selected={selectedTreeItem}
 				onNodeSelect={handleTreeSelection}
-				defaultExpanded={[showRootNode ? rootNodeKey : termTreeItems![0].key]}
+				onNodeToggle={handleNodeToggle}
 			>
 				{showRootNode ? (
-					<TreeItem nodeId={rootNodeKey} label={rootNodeLabel || ""} disabled={true} iconName={"DocumentSet"}>
+					<TreeItem
+						nodeId={rootNodeKey}
+						label={rootNodeLabel || ""}
+						disabled={true}
+						iconName={"DocumentSet"}
+						actions={treeItemActions.current}
+					>
 						{nodeTree}
 					</TreeItem>
 				) : (
@@ -155,6 +257,28 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 			}
 		};
 
+		const children = term.children?.map((child) => renderTreeNode(child)) || [];
+
+		if (termCreatingParentId === term.key) {
+			children.unshift(
+				renderTreeNode({
+					key: newNodeKey,
+					name: ""
+				} as ITerm)
+			);
+		}
+
+		if (term.key === newNodeKey) {
+			return (
+				<TermAdder
+					key={`${termCreatingParentId}_${term.key}`}
+					onSubmit={handleCreateNewTerm}
+					onCancel={handleCancelTermCreation}
+					labels={labels.termAdderLabels}
+				/>
+			);
+		}
+
 		return (
 			<TreeItem
 				key={term.key}
@@ -163,8 +287,9 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 				disabled={term.disabled}
 				iconName={term.disabled ? "TagSolid" : "Tag"}
 				onInvoke={handleNodeInvoke}
+				actions={treeItemActions.current}
 			>
-				{term.children?.map((child) => renderTreeNode(child))}
+				{children}
 			</TreeItem>
 		);
 	};

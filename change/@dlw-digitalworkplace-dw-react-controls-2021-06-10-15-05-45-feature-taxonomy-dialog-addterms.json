@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Allow adding of terms in the TaxonomyPicker Dialog",
+  "packageName": "@dlw-digitalworkplace/dw-react-controls",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch",
+  "date": "2021-06-10T13:05:45.341Z"
+}

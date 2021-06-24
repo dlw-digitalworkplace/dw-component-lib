@@ -2,7 +2,7 @@ import { getGlobalClassNames } from "office-ui-fabric-react/lib/Styling";
 import { ITermItemSuggestionStyleProps, ITermItemSuggestionStyles } from "./TermItemSuggestion.types";
 
 const GlobalClassNames = {
-	suggestionTextOverflow: "ms-TermItem-TextOverflow"
+	root: "dw-TermSuggestion"
 };
 
 export function getStyles(props: ITermItemSuggestionStyleProps): ITermItemSuggestionStyles {
@@ -11,14 +11,19 @@ export function getStyles(props: ITermItemSuggestionStyleProps): ITermItemSugges
 	const classNames = getGlobalClassNames(GlobalClassNames, theme);
 
 	return {
-		suggestionTextOverflow: [
-			classNames.suggestionTextOverflow,
+		root: [
+			classNames.root,
 			{
-				overflow: "hidden",
-				textOverflow: "ellipsis",
 				maxWidth: "60vw",
 				padding: "6px 12px 7px",
-				whiteSpace: "nowrap"
+				textAlign: "left",
+				selectors: {
+					"> div": {
+						overflow: "hidden",
+						textOverflow: "ellipsis",
+						whiteSpace: "nowrap"
+					}
+				}
 			},
 			className
 		]

@@ -14,6 +14,11 @@ export interface ITreeItemProps {
 	label: string;
 
 	/**
+	 * Actions which are available on the tree item
+	 */
+	actions?: ITreeItemAction[];
+
+	/**
 	 * Controls whether the tree item can be selected
 	 */
 	disabled?: boolean;
@@ -65,6 +70,8 @@ export interface ITreeItemStyleProps {
 export interface ITreeItemStyles {
 	treeItem?: IStyle;
 	treeNode?: IStyle;
+	contextMenuIconWrapper?: IStyle;
+	contextMenuIcon?: IStyle;
 	expandIconWrapper?: IStyle;
 	expandIcon?: IStyle;
 	itemWrapper?: IStyle;
@@ -73,4 +80,10 @@ export interface ITreeItemStyles {
 	labelWrapper?: IStyle;
 	label?: IStyle;
 	childNodes?: IStyle;
+}
+
+export interface ITreeItemAction {
+	key: string;
+	text: string;
+	onClick?(nodeId: string): void;
 }

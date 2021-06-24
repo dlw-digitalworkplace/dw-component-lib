@@ -20,7 +20,7 @@ export interface ITreeViewProps {
 	/**
 	 * Selected node id (controlled)
 	 */
-	selected?: string;
+	selected?: string | null;
 
 	/**
 	 * Optional class for the root TreeView element
