@@ -1,5 +1,5 @@
 {
-  "type": "major",
+  "type": "minor",
   "comment": "Separated utils and custom hooks to own package",
   "packageName": "@dlw-digitalworkplace/dw-react-controls",
   "email": "nick.sevens@delaware.pro",
