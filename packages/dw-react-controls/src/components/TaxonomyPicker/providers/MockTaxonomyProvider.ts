@@ -1,5 +1,5 @@
+import { findInTree, flatten } from "@dlw-digitalworkplace/dw-react-utils";
 import { ITerm } from "../../../models/ITerm";
-import { CollectionUtils } from "../../../utils";
 import { ITaxonomyProvider } from "./ITaxonomyProvider";
 
 export class MockTaxonomyProvider implements ITaxonomyProvider {
@@ -27,7 +27,7 @@ export class MockTaxonomyProvider implements ITaxonomyProvider {
 	];
 
 	public getTerms(): ITerm[] | Promise<ITerm[]> {
-		return new Promise((resolve) => setTimeout(() => resolve(CollectionUtils.flatten(this._termTree)), 500));
+		return new Promise((resolve) => setTimeout(() => resolve(flatten(this._termTree)), 500));
 	}
 
 	public getTermTree(): ITerm[] | Promise<ITerm[]> {
@@ -49,7 +49,7 @@ export class MockTaxonomyProvider implements ITaxonomyProvider {
 				}
 
 				const parent: ITerm | undefined = !!parentId
-					? CollectionUtils.findInTree(this._termTree, (it) => it.key === parentId)
+					? findInTree(this._termTree, (it) => it.key === parentId)
 					: undefined;
 
 				if (
