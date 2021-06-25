@@ -102,7 +102,7 @@ describe("<TreeItem />", () => {
 		it("should not call onClick when expand icon is clicked", () => {
 			const handleClick = jest.fn();
 
-			const component = render(
+			const { container } = render(
 				<TreeView>
 					<TreeItem nodeId="one" label="one" onClick={handleClick}>
 						<TreeItem nodeId="two" label="two" />
@@ -110,7 +110,7 @@ describe("<TreeItem />", () => {
 				</TreeView>
 			);
 
-			const expandIcon = queryByAttribute("data-icon-name", component.baseElement, /ChevronRightSmall/i);
+			const expandIcon = queryByAttribute("data-icon-name", container, /ChevronRightSmall/i);
 			fireEvent.click(expandIcon!);
 
 			expect(handleClick).not.toBeCalled();
@@ -119,36 +119,34 @@ describe("<TreeItem />", () => {
 
 	describe("Expansion", () => {
 		it("should expand a node with children", () => {
-			const component = render(
+			const { container, getAllByRole } = render(
 				<TreeView>
 					<TreeItem nodeId="one" label="one" data-testid="one">
 						<TreeItem nodeId="two" label="two" data-testid="two" />
 					</TreeItem>
 				</TreeView>
 			);
-			const { getAllByRole } = component;
 
 			expect(getAllByRole(/treeitem/i).length).toBe(1);
 
-			const expandIcon = queryByAttribute("data-icon-name", component.baseElement, /ChevronRightSmall/i);
+			const expandIcon = queryByAttribute("data-icon-name", container, /ChevronRightSmall/i);
 			fireEvent.click(expandIcon!);
 
 			expect(getAllByRole(/treeitem/i).length).toBe(2);
 		});
 
 		it("should collapse a node with children", () => {
-			const component = render(
+			const { container, getAllByRole } = render(
 				<TreeView defaultExpanded={["one"]}>
 					<TreeItem nodeId="one" label="one" data-testid="one">
 						<TreeItem nodeId="two" label="two" data-testid="two" />
 					</TreeItem>
 				</TreeView>
 			);
-			const { getAllByRole } = component;
 
 			expect(getAllByRole(/treeitem/i).length).toBe(2);
 
-			const expandIcon = queryByAttribute("data-icon-name", component.baseElement, /ChevronDownSmall/i);
+			const expandIcon = queryByAttribute("data-icon-name", container, /ChevronDownSmall/i);
 			fireEvent.click(expandIcon!);
 
 			expect(getAllByRole(/treeitem/i).length).toBe(1);

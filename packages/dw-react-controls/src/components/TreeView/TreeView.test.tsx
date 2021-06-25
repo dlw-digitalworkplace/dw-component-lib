@@ -44,7 +44,7 @@ describe("<TreeView />", () => {
 				expanded = nodeIds;
 			};
 
-			const component = render(
+			const { container } = render(
 				<TreeView expanded={expanded} onNodeToggle={onNodeToggle}>
 					<TreeItem nodeId="one" label="one" data-testid="one">
 						<TreeItem nodeId="two" label="two" data-testid="two" />
@@ -54,7 +54,7 @@ describe("<TreeView />", () => {
 
 			expect(expanded.length).toBe(0);
 
-			const expandIcon = queryByAttribute("data-icon-name", component.baseElement, /ChevronRightSmall/i);
+			const expandIcon = queryByAttribute("data-icon-name", container, /ChevronRightSmall/i);
 			fireEvent.click(expandIcon!);
 
 			expect(expanded.length).toBe(1);
