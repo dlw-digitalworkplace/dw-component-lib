@@ -1,16 +1,21 @@
 import * as React from "react";
 
-export const useControlled: <T>(
-	controlled: T,
-	defaultProp: T,
-	name: string,
-	state?: string
-) => [T, (newValue: React.SetStateAction<T>) => void] = <T>(
+/**
+ * @public
+ *
+ * Allows simplified usage of controlled and uncontrolled state in a component.
+ *
+ * @param controlled - Holds the component value when it's controlled.
+ * @param defaultProp - The default value when uncontrolled.
+ * @param name - The component name displayed in warnings.
+ * @param state - The name of the state variable displayed in warnings.
+ */
+export function useControlled<T>(
 	controlled: T,
 	defaultProp: T,
 	name: string,
 	state: string = "value"
-) => {
+): [T, (newValue: React.SetStateAction<T>) => void] {
 	const { current: isControlled } = React.useRef(controlled !== undefined);
 	const [valueState, setValue] = React.useState(defaultProp);
 	const value = isControlled ? controlled : valueState;
@@ -53,4 +58,4 @@ export const useControlled: <T>(
 	}, []);
 
 	return [value, setValueIfUncontrolled];
-};
+}

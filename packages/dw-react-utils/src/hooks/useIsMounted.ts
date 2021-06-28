@@ -1,6 +1,11 @@
 import * as React from "react";
 
-export const useIsMounted: () => React.MutableRefObject<boolean> = () => {
+/**
+ * @public
+ *
+ * Keeps a reference to the mounted state of the current component.
+ */
+export function useIsMounted(): React.MutableRefObject<boolean> {
 	const isMounted = React.useRef(false);
 
 	React.useEffect(() => {
@@ -12,4 +17,4 @@ export const useIsMounted: () => React.MutableRefObject<boolean> = () => {
 	}, []);
 
 	return isMounted;
-};
+}
