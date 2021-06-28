@@ -18,6 +18,7 @@
 	"devDependencies": {
 		"@dw-react-lib/build": "^1.0.0",
 		"@dw-react-lib/tslint-rules": "^1.0.0",
+		"@testing-library/react-hooks": "^7.0.0",
 		"@types/node": "^14.11.8",
 		"@types/react": "^16.9.51",
 		"react": "^16.13.1",
