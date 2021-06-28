@@ -1,9 +1,17 @@
 import * as React from "react";
 import { useIsMounted } from "./useIsMounted";
 
-export const useStateIfMounted: <T>(initialState?: T) => [T | undefined, (newValue?: T) => void] = <T>(
+/**
+ * @public
+ *
+ * Returns a stateful value, and a function to update it.
+ * Unlike the default React's useState function, this will only update state when the component is mounted.
+ *
+ * @param initialState - The initial value of the state.
+ */
+export function useStateIfMounted<T>(
 	initialState?: T
-) => {
+): [T | undefined, (newValue: React.SetStateAction<T | undefined>) => void] {
 	const isComponentMounted = useIsMounted();
 	const [state, setState] = React.useState(initialState);
 
@@ -14,4 +22,4 @@ export const useStateIfMounted: <T>(initialState?: T) => [T | undefined, (newVal
 	};
 
 	return [state, newSetState];
-};
+}

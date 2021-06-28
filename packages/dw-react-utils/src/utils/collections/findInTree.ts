@@ -1,4 +1,12 @@
-export const findInTree = <T extends { children?: T[] }>(arr: T[], predicate: (value: T) => boolean): T | undefined => {
+/**
+ * @public
+ *
+ * Finds an object in a array of objects with children.
+ *
+ * @param arr - The source array to search in.
+ * @param predicate - The predicate to match the object to.
+ */
+export function findInTree<T extends { children?: T[] }>(arr: T[], predicate: (value: T) => boolean): T | undefined {
 	for (let index = 0; index < arr.length; index++) {
 		const term = arr[index];
 
@@ -12,4 +20,4 @@ export const findInTree = <T extends { children?: T[] }>(arr: T[], predicate: (v
 			}
 		}
 	}
-};
+}

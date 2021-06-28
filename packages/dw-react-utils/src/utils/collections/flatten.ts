@@ -1,4 +1,11 @@
-export const flatten = <T extends { children?: T[] }>(arr: T[]) => {
+/**
+ * @public
+ *
+ * Flattens an array to a single-level array, moving all children to the root.
+ *
+ * @param arr - The source array to flatten.
+ */
+export function flatten<T extends { children?: T[] }>(arr: T[]) {
 	const result: T[] = [];
 
 	arr.forEach((item) => {
@@ -10,4 +17,4 @@ export const flatten = <T extends { children?: T[] }>(arr: T[]) => {
 	});
 
 	return result;
-};
+}
