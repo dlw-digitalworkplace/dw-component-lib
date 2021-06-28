@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Export as functions instead of variables",
+  "packageName": "@dlw-digitalworkplace/dw-react-utils",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch",
+  "date": "2021-06-28T12:03:56.085Z"
+}
