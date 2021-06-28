@@ -2,6 +2,61 @@
   "name": "@dlw-digitalworkplace/dw-react-controls",
   "entries": [
     {
+      "date": "Mon, 28 Jun 2021 06:35:12 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-controls_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Allow custom rendering for TreeItem content",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "c830e0abdab1a0d4ddcdc440cf70b370a7c94e4f",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          },
+          {
+            "comment": "Allow adding of terms in the TaxonomyPicker Dialog",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "c830e0abdab1a0d4ddcdc440cf70b370a7c94e4f",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          },
+          {
+            "comment": "Added expansion state classname to treeitem",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "c830e0abdab1a0d4ddcdc440cf70b370a7c94e4f",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          },
+          {
+            "comment": "Separated utils and custom hooks to own package",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "c830e0abdab1a0d4ddcdc440cf70b370a7c94e4f",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Pass selected and extended props to TreeItemContent rendering",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "c830e0abdab1a0d4ddcdc440cf70b370a7c94e4f",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Cleanup package",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "c830e0abdab1a0d4ddcdc440cf70b370a7c94e4f",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          },
+          {
+            "comment": "Fix package usage",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "c830e0abdab1a0d4ddcdc440cf70b370a7c94e4f",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Oct 2020 06:44:55 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-controls_v0.1.0",
       "version": "0.1.0",

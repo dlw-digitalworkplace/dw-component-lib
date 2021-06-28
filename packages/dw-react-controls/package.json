@@ -1,64 +1,64 @@
 {
-	"name": "@dlw-digitalworkplace/dw-react-controls",
-	"version": "0.1.0",
-	"main": "lib-commonjs/index.js",
-	"module": "lib/index.js",
-	"typings": "lib/index.d.ts",
-	"author": "Nick Sevens",
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/dlw-digitalworkplace/dw-react-lib"
-	},
-	"scripts": {
-		"build": "just-scripts build",
-		"clean": "just-scripts clean",
-		"start": "just-scripts dev:storybook",
-		"start-test": "just-scripts jest-watch",
-		"test": "just-scripts test"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.12.1",
-		"@babel/preset-env": "7.12.1",
-		"@babel/preset-react": "^7.12.1",
-		"@babel/preset-typescript": "^7.12.1",
-		"@dw-react-lib/build": "^1.0.0",
-		"@dw-react-lib/tslint-rules": "^1.0.0",
-		"@storybook/addon-docs": "^6.0.22",
-		"@storybook/addons": "^6.0.22",
-		"@storybook/components": "^6.0.22",
-		"@storybook/core-events": "^6.0.22",
-		"@storybook/react": "^6.0.22",
-		"@testing-library/react": "^11.1.0",
-		"@testing-library/user-event": "^13.1.9",
-		"@types/jest": "^26.0.14",
-		"@types/node": "^14.11.8",
-		"@types/react": "^16.9.51",
-		"@types/react-dom": "^16.9.8",
-		"@types/webpack-env": "^1.15.3",
-		"babel-jest": "^26.5.2",
-		"babel-loader": "^8.1.0",
-		"node-sass": "^4.14.1",
-		"office-ui-fabric-react": "^6.214.1",
-		"react": "^16.13.1",
-		"react-docgen-typescript-loader": "^3.7.2",
-		"react-dom": "^16.13.1",
-		"react-is": "^16.13.1",
-		"regenerator-runtime": "^0.13.7",
-		"storybook-addon-performance": "^0.12.0",
-		"storybook-addon-react-docgen": "^1.2.42",
-		"tslint": "^6.1.3",
-		"typescript": "^3.9.7",
-		"webpack": "^4.44.2"
-	},
-	"dependencies": {
-		"@dlw-digitalworkplace/dw-react-utils": "^0.0.0",
-		"rfdc": "^1.3.0",
-		"ts-node": "^9.0.0"
-	},
-	"peerDependencies": {
-		"office-ui-fabric-react": ">=6.189.2 <7.0.0 || ^7.0.0",
-		"react": ">=16.8.0 <17.0.0",
-		"react-dom": ">=16.8.0 <17.0.0"
-	}
+  "name": "@dlw-digitalworkplace/dw-react-controls",
+  "version": "0.2.0",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "author": "Nick Sevens",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dlw-digitalworkplace/dw-react-lib"
+  },
+  "scripts": {
+    "build": "just-scripts build",
+    "clean": "just-scripts clean",
+    "start": "just-scripts dev:storybook",
+    "start-test": "just-scripts jest-watch",
+    "test": "just-scripts test"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.1",
+    "@babel/preset-env": "7.12.1",
+    "@babel/preset-react": "^7.12.1",
+    "@babel/preset-typescript": "^7.12.1",
+    "@dw-react-lib/build": "^1.0.0",
+    "@dw-react-lib/tslint-rules": "^1.0.0",
+    "@storybook/addon-docs": "^6.0.22",
+    "@storybook/addons": "^6.0.22",
+    "@storybook/components": "^6.0.22",
+    "@storybook/core-events": "^6.0.22",
+    "@storybook/react": "^6.0.22",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^13.1.9",
+    "@types/jest": "^26.0.14",
+    "@types/node": "^14.11.8",
+    "@types/react": "^16.9.51",
+    "@types/react-dom": "^16.9.8",
+    "@types/webpack-env": "^1.15.3",
+    "babel-jest": "^26.5.2",
+    "babel-loader": "^8.1.0",
+    "node-sass": "^4.14.1",
+    "office-ui-fabric-react": "^6.214.1",
+    "react": "^16.13.1",
+    "react-docgen-typescript-loader": "^3.7.2",
+    "react-dom": "^16.13.1",
+    "react-is": "^16.13.1",
+    "regenerator-runtime": "^0.13.7",
+    "storybook-addon-performance": "^0.12.0",
+    "storybook-addon-react-docgen": "^1.2.42",
+    "tslint": "^6.1.3",
+    "typescript": "^3.9.7",
+    "webpack": "^4.44.2"
+  },
+  "dependencies": {
+    "@dlw-digitalworkplace/dw-react-utils": "^0.1.0",
+    "rfdc": "^1.3.0",
+    "ts-node": "^9.0.0"
+  },
+  "peerDependencies": {
+    "office-ui-fabric-react": ">=6.189.2 <7.0.0 || ^7.0.0",
+    "react": ">=16.8.0 <17.0.0",
+    "react-dom": ">=16.8.0 <17.0.0"
+  }
 }

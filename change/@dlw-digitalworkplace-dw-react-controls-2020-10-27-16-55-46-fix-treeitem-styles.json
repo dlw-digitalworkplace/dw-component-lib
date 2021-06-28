@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Pass selected and extended props to TreeItemContent rendering",
-  "packageName": "@dlw-digitalworkplace/dw-react-controls",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "patch",
-  "date": "2020-10-27T15:55:46.052Z"
-}
