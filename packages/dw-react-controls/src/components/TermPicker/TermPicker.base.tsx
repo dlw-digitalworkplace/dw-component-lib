@@ -2,7 +2,7 @@ import { BasePicker } from "office-ui-fabric-react/lib/components/pickers/BasePi
 import { IPickerItemProps } from "office-ui-fabric-react/lib/components/pickers/PickerItem.types";
 import { initializeComponentRef } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
-import { ITermValue } from "../../models/ITermValue";
+import { ITermValue } from "./models";
 import { TermItem } from "./TermItem";
 import { TermItemSuggestion } from "./TermItemSuggestion";
 import { ITermPickerProps } from "./TermPicker.types";

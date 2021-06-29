@@ -4,11 +4,11 @@ import { DialogFooter } from "office-ui-fabric-react/lib/Dialog";
 import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
 import * as rfdc from "rfdc";
-import { ITerm, ITermCreationResult, ITermValue } from "../../models";
-import { TermPicker } from "../TermPicker";
+import { ITermValue, TermPicker } from "../TermPicker";
 import { ITreeItemAction, TreeItem } from "../TreeItem";
 import { TreeView } from "../TreeView";
 import { WideDialog } from "../WideDialog";
+import { ITerm, ITermCreationResult } from "./models";
 import {
 	ITaxonomyPickerDialogLabels,
 	ITaxonomyPickerDialogProps,
