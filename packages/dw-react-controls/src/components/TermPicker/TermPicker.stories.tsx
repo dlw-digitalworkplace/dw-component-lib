@@ -1,6 +1,6 @@
 import { storiesOf } from "@storybook/react";
 import * as React from "react";
-import { ITermValue } from "../../models";
+import { ITermValue } from "./models";
 import { TermPicker } from "./TermPicker";
 
 const items: ITermValue[] = [

@@ -1,4 +1,4 @@
-import { ITermValue } from "./ITermValue";
+import { ITermValue } from "../../TermPicker";
 
 export interface ITerm extends ITermValue {
 	children?: ITerm[];

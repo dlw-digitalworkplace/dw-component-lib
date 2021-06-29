@@ -4,9 +4,8 @@ import { IconButton } from "office-ui-fabric-react/lib/Button";
 import { Label } from "office-ui-fabric-react/lib/Label";
 import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
-import { ITermCreationResult, ITermValue } from "../../models";
-import { ITerm } from "../../models/ITerm";
-import { TermPicker } from "../TermPicker";
+import { ITermValue, TermPicker } from "../TermPicker";
+import { ITerm, ITermCreationResult, ITermFilterOptions } from "./models";
 import { ITaxonomyPickerProps, ITaxonomyPickerStyleProps, ITaxonomyPickerStyles } from "./TaxonomyPicker.types";
 import { TaxonomyPickerDialog } from "./TaxonomyPickerDialog";
 
@@ -15,6 +14,8 @@ const tempItemKey = "__TEMP__ITEM__";
 
 export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	allowAddingTerms,
+	allowDeprecatedTerms,
+	allowDisabledTerms,
 	className,
 	disabled,
 	itemLimit,
@@ -96,13 +97,18 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	};
 
 	const doResolveSuggestions = async (filter: string, currentSelection?: ITerm[]): Promise<ITerm[]> => {
-		// retrieve the available terms
-		const availableItems = await provider.getTerms();
+		if (!filter || filter.length === 0) {
+			return [];
+		}
 
-		// resolve the suggestions
-		const suggestions = availableItems
-			.filter((it) => it.name.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) !== -1) // filter on search text
-			.filter((it) => !currentSelection?.some((si) => si.key === it.key)); // filter out selected items
+		const findOptions: Partial<ITermFilterOptions> = {
+			keysToIgnore: currentSelection?.map((it) => it.key),
+			trimDeprecated: !allowDeprecatedTerms,
+			trimUnavailable: !allowDisabledTerms
+		};
+
+		// retrieve the available terms
+		const suggestions = await provider.findTerms(filter, findOptions);
 
 		return suggestions;
 	};

@@ -1,6 +1,6 @@
 import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
 import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
-import { ITermCreationResult } from "../../../models";
+import { ITermCreationResult } from "../models";
 
 export interface ITermAdderLabels {
 	fieldRequiredMessage?: string;
@@ -8,16 +8,6 @@ export interface ITermAdderLabels {
 
 export interface ITermAdderProps {
 	labels?: ITermAdderLabels;
-
-	/**
-	 * Callback for when the save button is clicked
-	 */
-	onSubmit?(value?: string): void | PromiseLike<void | ITermCreationResult>;
-
-	/**
-	 * Callback for when the cancel button is clicked
-	 */
-	onCancel?(): void;
 
 	/**
 	 * Optional class for the root TreeItem element
@@ -33,6 +23,16 @@ export interface ITermAdderProps {
 	 * The current theme applied to the control
 	 */
 	theme?: ITheme;
+
+	/**
+	 * Callback for when the save button is clicked
+	 */
+	onSubmit?(value?: string): void | PromiseLike<void | ITermCreationResult>;
+
+	/**
+	 * Callback for when the cancel button is clicked
+	 */
+	onCancel?(): void;
 }
 
 export interface ITermAdderStyleProps {

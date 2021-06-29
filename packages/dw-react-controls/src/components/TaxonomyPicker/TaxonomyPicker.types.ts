@@ -1,12 +1,16 @@
 import { ILabelProps } from "office-ui-fabric-react/lib/Label";
 import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
 import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
-import { ITermValue } from "../../models";
-import { ITaxonomyProvider } from "./providers";
+import { ITermValue } from "../TermPicker";
+import { ITaxonomyProvider } from "./models";
 import { ITaxonomyPickerDialogProps } from "./TaxonomyPickerDialog.types";
 
 export interface ITaxonomyPickerProps {
 	allowAddingTerms?: boolean;
+
+	allowDeprecatedTerms?: boolean;
+
+	allowDisabledTerms?: boolean;
 
 	provider: ITaxonomyProvider;
 

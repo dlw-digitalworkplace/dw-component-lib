@@ -1,9 +1,8 @@
 import { IDialogProps } from "office-ui-fabric-react/lib/Dialog";
 import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
 import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
-import { ITermCreationResult, ITermValue } from "../../models";
-import { ITermPickerProps } from "../TermPicker";
-import { ITaxonomyProvider } from "./providers";
+import { ITermPickerProps, ITermValue } from "../TermPicker";
+import { ITaxonomyProvider, ITermCreationResult } from "./models";
 import { ITermAdderLabels } from "./TermAdder";
 
 export interface ITaxonomyPickerDialogLabels {

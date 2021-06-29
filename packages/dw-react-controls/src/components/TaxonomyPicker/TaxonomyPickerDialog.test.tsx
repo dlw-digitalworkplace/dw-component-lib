@@ -1,12 +1,16 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import * as React from "react";
-import { ITerm } from "../../models";
-import { MockTaxonomyProvider } from "./providers";
+import { ITerm, ITermFilterOptions } from "./models";
+import { MockTaxonomyProvider } from "./providers/MockTaxonomyProvider";
 import { TaxonomyPickerDialog } from "./TaxonomyPickerDialog";
 
 const mockTaxonomyProvider = new MockTaxonomyProvider();
 const onResolveSuggestions = async (filter: string, currentSelection?: ITerm[]): Promise<ITerm[]> => {
-	const availableItems = await mockTaxonomyProvider.getTerms();
+	const termFilterOptions: Partial<ITermFilterOptions> = {
+		keysToIgnore: currentSelection?.map((it) => it.key)
+	};
+
+	const availableItems = await mockTaxonomyProvider.findTerms(filter, termFilterOptions);
 
 	return availableItems
 		.filter((it) => it.name.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) !== -1)

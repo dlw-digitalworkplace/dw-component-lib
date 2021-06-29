@@ -1,6 +1,6 @@
 import { findInTree, flatten } from "@dlw-digitalworkplace/dw-react-utils";
-import { ITerm } from "../../../models/ITerm";
-import { ITaxonomyProvider } from "./ITaxonomyProvider";
+import * as deepmerge from "deepmerge";
+import { ITaxonomyProvider, ITerm, ITermFilterOptions } from "../models";
 
 export class MockTaxonomyProvider implements ITaxonomyProvider {
 	public termValidationRegex = /^[^;"<>|\t\n\r]{1,255}$/gi;
@@ -26,8 +26,22 @@ export class MockTaxonomyProvider implements ITaxonomyProvider {
 		}
 	];
 
-	public getTerms(): ITerm[] | Promise<ITerm[]> {
-		return new Promise((resolve) => setTimeout(() => resolve(flatten(this._termTree)), 500));
+	public findTerms(search?: string | RegExp, options: Partial<ITermFilterOptions> = {}): ITerm[] | Promise<ITerm[]> {
+		const defaultOptions: ITermFilterOptions = {
+			defaultLabelOnly: false,
+			keysToIgnore: [],
+			maxItems: 500,
+			trimDeprecated: true,
+			trimUnavailable: true
+		};
+
+		options = deepmerge(defaultOptions, options);
+
+		let terms = flatten(this._termTree);
+		terms = terms.filter((it) => (!search || it.name.match(search)) && options.keysToIgnore?.indexOf(it.key) === -1);
+		terms.slice(0, options.maxItems);
+
+		return new Promise((resolve) => setTimeout(() => resolve(terms), 500));
 	}
 
 	public getTermTree(): ITerm[] | Promise<ITerm[]> {
