@@ -1,5 +1,4 @@
 /** Jest test setup file. */
-
 const { initializeIcons } = require("@uifabric/icons");
 
 // Initialize icons.
