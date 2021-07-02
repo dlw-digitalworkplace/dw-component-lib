@@ -22,9 +22,6 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 	constructor(siteUrl: string, private termSetIdOrName: string, private lcid: number = 1033) {
 		this.spContext = new SP.ClientContext(siteUrl);
 
-		this._getDefaultLanguageLabel = this._getDefaultLanguageLabel.bind(this);
-		this._getDefaultTermLabel = this._getDefaultTermLabel.bind(this);
-		this._spTermToTerm = this._spTermToTerm.bind(this);
 		this._termSorter = this._termSorter.bind(this);
 	}
 
@@ -160,7 +157,26 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 			throw new ProviderNotInitializedError();
 		}
 
-		throw new Error("Method not implemented.");
+		// load the parent term if needed
+		const parentTerm = !!parentId && this.termSet.getTerm(new SP.Guid(parentId));
+
+		// create the new term
+		const newTermId = SP.Guid.newGuid();
+		const newTerm = !parentTerm
+			? this.termSet.createTerm(newValue, this.lcid, newTermId)
+			: parentTerm.createTerm(newValue, this.lcid, newTermId);
+
+		this.spContext.load(newTerm);
+		this.spContext.load(newTerm, "Labels", "Parent", "Parent.Id", "CustomSortOrder");
+
+		await this.executeQueryAsync();
+
+		if (this.cachedTerms) {
+			this.cachedTerms.push(newTerm);
+			this.cachedTerms = this.cachedTerms.sort(this._termSorter);
+		}
+
+		return this._spTermToTerm(newTerm);
 	}
 
 	protected executeQueryAsync(): Promise<void> {
@@ -198,8 +214,7 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 	}
 
 	private _spTermToTerm(input: SP.Taxonomy.Term): ITerm {
-		const allLabels = input.get_labels().get_data();
-		const termLabel = this._getDefaultTermLabel(allLabels);
+		const termLabel = this._getDefaultTermLabel(input) || input.get_name();
 
 		// add the term to the result set
 		const termOutput: ITerm = {
@@ -221,7 +236,8 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 	 * @param allLabels - All available labels
 	 * @param lcid - The language of the label
 	 */
-	private _getDefaultLanguageLabel(allLabels: SP.Taxonomy.Label[], lcid: number): SP.Taxonomy.Label {
+	private _getDefaultLanguageLabel(term: SP.Taxonomy.Term, lcid: number): SP.Taxonomy.Label {
+		const allLabels = term.get_labels().get_data();
 		const defaultLabel = allLabels.filter((it) => it.get_language() === lcid && it.get_isDefaultForLanguage())[0];
 
 		return defaultLabel;
@@ -232,11 +248,11 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 	 *
 	 * @param allLabels - All available labels
 	 */
-	private _getDefaultTermLabel(allLabels: SP.Taxonomy.Label[]): string {
-		const termLabelByLcid = this._getDefaultLanguageLabel(allLabels, this.lcid);
-		const termLabelEN = this._getDefaultLanguageLabel(allLabels, 1033);
+	private _getDefaultTermLabel(term: SP.Taxonomy.Term): string {
+		const termLabelByLcid = this._getDefaultLanguageLabel(term, this.lcid);
+		const termLabelEN = this._getDefaultLanguageLabel(term, 1033);
 
-		return !!termLabelByLcid ? termLabelByLcid.get_value() : termLabelEN.get_value();
+		return !!termLabelByLcid ? termLabelByLcid.get_value() : !!termLabelEN ? termLabelEN.get_value() : term.get_name();
 	}
 
 	/**
@@ -254,8 +270,8 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 			return sortOrderA > 0 && sortOrderB > 0 ? sortOrderA - sortOrderB : sortOrderA > 0 ? -1 : 1;
 		}
 
-		const labelA = this._getDefaultTermLabel(a.get_labels().get_data());
-		const labelB = this._getDefaultTermLabel(b.get_labels().get_data());
+		const labelA = this._getDefaultTermLabel(a);
+		const labelB = this._getDefaultTermLabel(b);
 
 		return labelA === labelB ? 0 : labelA < labelB ? -1 : 1;
 	}
