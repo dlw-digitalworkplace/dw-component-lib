@@ -10,7 +10,7 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 
 	const { siteUrl } = React.useContext(WebPartContext);
 	const [selectedItems, setSelectedItems] = React.useState<ITermValue[]>([]);
-	const provider = React.useRef<ITaxonomyProvider>();
+	const [provider, setProvider] = React.useState<ITaxonomyProvider>();
 
 	React.useEffect(() => {
 		(async () => {
@@ -26,16 +26,17 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 
 			console.log("Provider created and initialized.");
 
-			provider.current = spTaxonomyProvider;
+			setProvider(spTaxonomyProvider);
 		})();
 	}, [preCacheTerms, siteUrl, termSetIdOrName]);
 
 	return (
 		<div className={styles.demoTaxonomyPicker}>
 			<TaxonomyPicker
+				allowAddingTerms={true}
 				disabled={!provider}
 				onChange={setSelectedItems}
-				provider={provider.current}
+				provider={provider}
 				selectedItems={selectedItems}
 				dialogProps={{
 					dialogContentProps: {
