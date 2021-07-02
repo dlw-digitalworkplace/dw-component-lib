@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Added regex escape function",
+  "packageName": "@dlw-digitalworkplace/dw-react-utils",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch",
+  "date": "2021-07-02T10:17:21.016Z"
+}

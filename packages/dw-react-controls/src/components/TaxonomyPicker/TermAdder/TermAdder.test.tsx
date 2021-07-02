@@ -38,7 +38,7 @@ describe("<TermAdder />", () => {
 
 			const inputValue = "Test value";
 
-			userEvent.type(input, inputValue);
+			userEvent.paste(input, inputValue);
 			fireEvent.submit(form);
 
 			waitFor(

@@ -1,0 +1,7 @@
+node_modules
+src/**/*
+temp
+just.config.ts
+tsconfig.json
+tsconfig.tsbuildinfo
+tslint.json
