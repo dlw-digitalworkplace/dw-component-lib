@@ -21,6 +21,7 @@ export default class DemoTaxonomyPickerWebPart extends BaseClientSideWebPart<IDe
 		ReactDom.render(
 			<WebPartContext.Provider value={webPartContext}>
 				<DemoTaxonomyPicker
+					allowAddingTerms={this.properties.allowAddingTerms}
 					preCacheTerms={this.properties.preCacheTerms}
 					termSetIdOrName={this.properties.termSetIdOrName}
 				/>
@@ -46,10 +47,13 @@ export default class DemoTaxonomyPickerWebPart extends BaseClientSideWebPart<IDe
 							groupName: strings.BasicGroupName,
 							groupFields: [
 								PropertyPaneTextField("termSetIdOrName", {
-									label: strings.termSetIdOrNameFieldLabel
+									label: strings.TermSetIdOrNameFieldLabel
+								}),
+								PropertyPaneToggle("allowAddingTerms", {
+									label: strings.AllowAddingTermsFieldLabel
 								}),
 								PropertyPaneToggle("preCacheTerms", {
-									label: strings.preCacheTermsFieldLabel
+									label: strings.PreCacheTermsFieldLabel
 								})
 							]
 						}

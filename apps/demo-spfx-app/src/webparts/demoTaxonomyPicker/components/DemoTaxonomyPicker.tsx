@@ -6,11 +6,12 @@ import styles from "./DemoTaxonomyPicker.module.scss";
 import { IDemoTaxonomyPickerProps } from "./DemoTaxonomyPicker.types";
 
 export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) => {
-	const { preCacheTerms, termSetIdOrName } = props;
+	const { allowAddingTerms, preCacheTerms, termSetIdOrName } = props;
 
 	const { siteUrl } = React.useContext(WebPartContext);
 	const [selectedItems, setSelectedItems] = React.useState<ITermValue[]>([]);
 	const [provider, setProvider] = React.useState<ITaxonomyProvider>();
+	const [providerAllowsAddingTerms, setProviderAllowsAddingTerms] = React.useState(false);
 
 	React.useEffect(() => {
 		(async () => {
@@ -24,6 +25,8 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 			const spTaxonomyProvider = new SharePointTaxonomyProvider(siteUrl, termSetIdOrName);
 			await spTaxonomyProvider.initialize(preCacheTerms);
 
+			setProviderAllowsAddingTerms(spTaxonomyProvider.allowAddingTerms);
+
 			console.log("Provider created and initialized.");
 
 			setProvider(spTaxonomyProvider);
@@ -33,7 +36,7 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 	return (
 		<div className={styles.demoTaxonomyPicker}>
 			<TaxonomyPicker
-				allowAddingTerms={true}
+				allowAddingTerms={allowAddingTerms && providerAllowsAddingTerms}
 				disabled={!provider}
 				onChange={setSelectedItems}
 				provider={provider}

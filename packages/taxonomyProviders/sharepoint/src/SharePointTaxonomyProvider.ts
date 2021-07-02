@@ -1,6 +1,7 @@
 import { ITaxonomyProvider, ITerm, ITermFilterOptions } from "@dlw-digitalworkplace/dw-react-controls";
 import * as deepmerge from "deepmerge";
 import { escapeRegExp } from "../../../dw-react-utils/lib";
+import { InvalidOperationError } from "./InvalidOperationError";
 import { ProviderNotInitializedError } from "./ProviderNotInitializedError";
 
 /**
@@ -23,6 +24,17 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 		this.spContext = new SP.ClientContext(siteUrl);
 
 		this._termSorter = this._termSorter.bind(this);
+	}
+
+	/**
+	 * Verifies if the current termset allows term creation.
+	 */
+	public get allowAddingTerms() {
+		if (!this.isInitialized) {
+			throw new ProviderNotInitializedError();
+		}
+
+		return this.termSet.get_isOpenForTermCreation();
 	}
 
 	/**
@@ -155,6 +167,10 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 	public async createTerm(newValue: string, parentId?: string): Promise<ITerm> {
 		if (!this.isInitialized) {
 			throw new ProviderNotInitializedError();
+		}
+
+		if (!this.allowAddingTerms) {
+			throw new InvalidOperationError("The term set does not allow adding terms.");
 		}
 
 		// load the parent term if needed

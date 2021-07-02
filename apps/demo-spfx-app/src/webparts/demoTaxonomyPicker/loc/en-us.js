@@ -1,7 +1,8 @@
 define([], function () {
 	return {
+		AllowAddingTermsFieldLabel: "Allow adding terms?",
 		BasicGroupName: "General settings",
-		preCacheTermsFieldLabel: "Pre-cache terms?",
-		termSetIdOrNameFieldLabel: "Termset name or id"
+		PreCacheTermsFieldLabel: "Pre-cache terms?",
+		TermSetIdOrNameFieldLabel: "Termset name or id"
 	};
 });

@@ -1,7 +1,8 @@
 declare interface IDemoTaxonomyPickerWebPartStrings {
+	AllowAddingTermsFieldLabel: string;
 	BasicGroupName: string;
-	preCacheTermsFieldLabel: string;
-	termSetIdOrNameFieldLabel: string;
+	PreCacheTermsFieldLabel: string;
+	TermSetIdOrNameFieldLabel: string;
 }
 
 declare module "DemoTaxonomyPickerWebPartStrings" {
