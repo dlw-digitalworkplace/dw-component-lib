@@ -59,7 +59,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 	const [termCreatingParentId, setTermCreatingParentId] = React.useState<string | undefined>(undefined);
 	const [expandedNodes, setExpandedNodes] = React.useState<string[]>([]);
 	const [selectedTreeItem, setSelectedTreeItem] = React.useState<string | null>(null);
-	const treeItemActions = React.useRef<ITreeItemAction[]>([]);
+	const [treeItemActions, setTreeItemActions] = React.useState<ITreeItemAction[]>([]);
 
 	React.useEffect(() => {
 		const newTreeItemActions: ITreeItemAction[] = [];
@@ -72,7 +72,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 			});
 		}
 
-		treeItemActions.current = newTreeItemActions;
+		setTreeItemActions(newTreeItemActions);
 	}, [allowAddingTerms]);
 
 	React.useEffect(() => {
@@ -237,7 +237,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 						label={rootNodeLabel || ""}
 						disabled={true}
 						iconName={"DocumentSet"}
-						actions={treeItemActions.current}
+						actions={treeItemActions}
 					>
 						{nodeTree}
 					</TreeItem>
@@ -287,7 +287,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 				disabled={term.disabled}
 				iconName={term.disabled ? "TagSolid" : "Tag"}
 				onInvoke={handleNodeInvoke}
-				actions={treeItemActions.current}
+				actions={treeItemActions}
 			>
 				{children}
 			</TreeItem>
