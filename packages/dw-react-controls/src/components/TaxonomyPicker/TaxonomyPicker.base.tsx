@@ -1,6 +1,6 @@
 import { useStateIfMounted } from "@dlw-digitalworkplace/dw-react-utils";
-import { ValidationState } from "office-ui-fabric-react";
 import { IconButton } from "office-ui-fabric-react/lib/Button";
+import { ValidationState } from "office-ui-fabric-react/lib/components/pickers/BasePicker.types";
 import { Label } from "office-ui-fabric-react/lib/Label";
 import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
