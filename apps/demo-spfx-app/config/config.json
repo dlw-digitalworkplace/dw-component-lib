@@ -1,0 +1,18 @@
+{
+	"$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+	"version": "2.0",
+	"bundles": {
+		"demo-taxonomypicker-web-part": {
+			"components": [
+				{
+					"entrypoint": "./lib/webparts/demoTaxonomyPicker/DemoTaxonomyPickerWebPart.js",
+					"manifest": "./src/webparts/demoTaxonomyPicker/DemoTaxonomyPickerWebPart.manifest.json"
+				}
+			]
+		}
+	},
+	"externals": {},
+	"localizedResources": {
+		"DemoTaxonomyPickerWebPartStrings": "lib/webparts/demoTaxonomyPicker/loc/{locale}.js"
+	}
+}

@@ -27,6 +27,7 @@
 		"packages": [
 			"apps/*",
 			"packages/*",
+			"packages/taxonomyProviders/*",
 			"scripts"
 		]
 	}
