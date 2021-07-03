@@ -1,5 +1,5 @@
-import { RefreshCache } from "../refreshCache";
-import { MockStorage } from "./mockStorage";
+import { RefreshCache } from "../RefreshCache";
+import { MockStorage } from "./MockStorage";
 
 describe("refreshCache", () => {
 	describe("get", () => {
