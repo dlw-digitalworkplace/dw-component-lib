@@ -1,7 +1,9 @@
 import { ICacheObject } from "./models";
 
 export class RefreshCache {
-	private DEFAULT_EXPIRATION: number = 24 * 60 * 60 * 1000; // 1 day
+	public readonly DEFAULT_EXPIRATION: number = 24 * 60 * 60 * 1000; // 1 day
+
+	private _runningPromises = new Map<string, PromiseLike<any>>();
 
 	constructor(private storage: Storage) {}
 
@@ -50,8 +52,23 @@ export class RefreshCache {
 
 		if (!cacheData) {
 			// if no data present, calculate the new data and add it to the cache
-			const data = await valueFunc();
+			let updatePromise;
+
+			if (this._runningPromises.has(key)) {
+				// if a promise for this key already exists, use that one
+				updatePromise = this._runningPromises.get(key);
+			} else {
+				// if no promise exists yet for this key, start a new one and save it
+				updatePromise = valueFunc();
+				this._runningPromises.set(key, updatePromise);
+			}
+
+			// wait for the promise to complete and save to the cache
+			const data = await updatePromise;
 			this.set(key, data, timeToLive);
+
+			// remove the completed promise
+			this._runningPromises.delete(key);
 
 			// return the data
 			return data;

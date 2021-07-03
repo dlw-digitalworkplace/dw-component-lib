@@ -216,6 +216,25 @@ describe("refreshCache", () => {
 			expect(callback).toBeCalledTimes(1);
 			expect(callback).toBeCalledWith("Another value");
 		});
+
+		it("should only call a single promise when requesting the same non-existing key twice", async () => {
+			// arrange
+			const valueFunc = jest.fn().mockReturnValue(new Promise((res) => setTimeout(() => res("Test value"), 2500)));
+			const valueFunc2 = jest.fn().mockReturnValue(new Promise((res) => setTimeout(() => res("Another value"), 2500)));
+			const storage = new MockStorage();
+			const cache = new RefreshCache(storage);
+
+			// act
+			await Promise.all([
+				cache.getOrAddAsync("test", () => valueFunc()),
+				cache.getOrAddAsync("test", () => valueFunc()),
+				cache.getOrAddAsync("test", () => valueFunc2())
+			]);
+
+			// assert
+			expect(valueFunc).toBeCalledTimes(1);
+			expect(valueFunc2).toBeCalledTimes(0);
+		});
 	});
 
 	describe("set", () => {
