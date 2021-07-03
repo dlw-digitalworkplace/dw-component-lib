@@ -6,10 +6,10 @@ describe("refreshCache", () => {
 		it("should get an existing item", () => {
 			// arrange
 			const storage = new MockStorage({
-				test: {
+				test: JSON.stringify({
 					data: "Test value",
 					expiresOn: Date.now() + 5 * 60 * 1000
-				}
+				})
 			});
 			const cache = new RefreshCache(storage);
 
@@ -22,9 +22,7 @@ describe("refreshCache", () => {
 
 		it("should return undefined when retrieving a non-existing item", () => {
 			// arrange
-			const storage = new MockStorage({
-				test: { data: "Test value" }
-			});
+			const storage = new MockStorage({ test: JSON.stringify({ data: "Test value" }) });
 			const cache = new RefreshCache(storage);
 
 			// act
@@ -37,10 +35,10 @@ describe("refreshCache", () => {
 		it("should return undefined when retrieving an expired item", () => {
 			// arrange
 			const storage = new MockStorage({
-				test: {
+				test: JSON.stringify({
 					data: "Test value",
 					expiresOn: Date.now() - 5 * 60 * 1000 // now - 5 minutes
-				}
+				})
 			});
 			const cache = new RefreshCache(storage);
 
@@ -55,7 +53,7 @@ describe("refreshCache", () => {
 	describe("getOrAdd", () => {
 		it("should get an existing item", () => {
 			// arrange
-			const storage = new MockStorage({ test: { data: "Test value" } });
+			const storage = new MockStorage({ test: JSON.stringify({ data: "Test value" }) });
 			const cache = new RefreshCache(storage);
 
 			// act
@@ -79,7 +77,7 @@ describe("refreshCache", () => {
 
 		it("should add a new item with specified TTL when item doesn't exist", () => {
 			// arrange
-			const storage = new MockStorage({ test: { data: "Test value" } });
+			const storage = new MockStorage({ test: JSON.stringify({ data: "Test value" }) });
 			const cache = new RefreshCache(storage);
 			const ttl = Date.now() + 5 * 60 * 1000; // now + 5 minutes
 
@@ -101,7 +99,7 @@ describe("refreshCache", () => {
 	describe("getOrAddAsync", () => {
 		it("should get an existing item", async () => {
 			// arrange
-			const storage = new MockStorage({ test: { data: "Test value" } });
+			const storage = new MockStorage({ test: JSON.stringify({ data: "Test value" }) });
 			const cache = new RefreshCache(storage);
 
 			// act
@@ -113,7 +111,7 @@ describe("refreshCache", () => {
 
 		it("should add new value when item doesn't exist", async () => {
 			// arrange
-			const storage = new MockStorage({ test: { data: "Test value" } });
+			const storage = new MockStorage({ test: JSON.stringify({ data: "Test value" }) });
 			const cache = new RefreshCache(storage);
 
 			// act
@@ -128,7 +126,7 @@ describe("refreshCache", () => {
 
 		it("should add a new item with specified TTL when item doesn't exist", async () => {
 			// arrange
-			const storage = new MockStorage({ test: { data: "Test value" } });
+			const storage = new MockStorage({ test: JSON.stringify({ data: "Test value" }) });
 			const cache = new RefreshCache(storage);
 			const ttl = Date.now() + 5 * 60 * 1000; // now + 5 minutes
 
@@ -152,7 +150,7 @@ describe("refreshCache", () => {
 
 		it("should return current item and update cache with new value", async () => {
 			// arrange
-			const storage = new MockStorage({ test: { data: "Test value" } });
+			const storage = new MockStorage({ test: JSON.stringify({ data: "Test value" }) });
 			const cache = new RefreshCache(storage);
 
 			// act
@@ -172,7 +170,7 @@ describe("refreshCache", () => {
 
 		it("should return current item and update cache with new value and specified TTL", async () => {
 			// arrange
-			const storage = new MockStorage({ test: { data: "Test value" } });
+			const storage = new MockStorage({ test: JSON.stringify({ data: "Test value" }) });
 			const cache = new RefreshCache(storage);
 			const ttl = Date.now() + 5 * 60 * 1000; // now + 5 minutes
 
@@ -201,7 +199,7 @@ describe("refreshCache", () => {
 		it("should return current and callback with new value", async () => {
 			// arrange
 			const callback = jest.fn();
-			const storage = new MockStorage({ test: { data: "Test value" } });
+			const storage = new MockStorage({ test: JSON.stringify({ data: "Test value" }) });
 			const cache = new RefreshCache(storage);
 
 			// act
@@ -281,10 +279,10 @@ describe("refreshCache", () => {
 		it("should overwrite an existing item", () => {
 			// arrange
 			const storage = new MockStorage({
-				test: {
+				test: JSON.stringify({
 					data: "Test value",
 					expiresOn: Date.now() + 5 * 60 * 1000
-				}
+				})
 			});
 			const cache = new RefreshCache(storage);
 
@@ -307,10 +305,10 @@ describe("refreshCache", () => {
 			const updatedTtl = new Date(Date.now() + 15 * 60 * 1000);
 
 			const storage = new MockStorage({
-				test: {
+				test: JSON.stringify({
 					data: "Test value",
 					expiresOn: initialTtl
-				}
+				})
 			});
 			const cache = new RefreshCache(storage);
 
@@ -333,8 +331,8 @@ describe("refreshCache", () => {
 		it("should remove a single item", () => {
 			// arrange
 			const storage = new MockStorage({
-				test1: { data: "Test value" },
-				test2: { data: "Another value" }
+				test1: JSON.stringify({ data: "Test value" }),
+				test2: JSON.stringify({ data: "Another value" })
 			});
 			const cache = new RefreshCache(storage);
 
@@ -363,7 +361,7 @@ describe("refreshCache", () => {
 
 		it("should no longer return a removed item", () => {
 			// arrange
-			const storage = new MockStorage({ test: { data: "Test value" } });
+			const storage = new MockStorage({ test: JSON.stringify({ data: "Test value" }) });
 			const cache = new RefreshCache(storage);
 
 			const beforeDelete = cache.get("test");
@@ -383,8 +381,8 @@ describe("refreshCache", () => {
 		it("should remove all items", () => {
 			// arrange
 			const storage = new MockStorage({
-				test1: { data: "Test value" },
-				test2: { data: "Another value" }
+				test1: JSON.stringify({ data: "Test value" }),
+				test2: JSON.stringify({ data: "Another value" })
 			});
 			const cache = new RefreshCache(storage);
 

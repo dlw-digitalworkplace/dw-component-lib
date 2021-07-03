@@ -1,10 +1,10 @@
 export class MemoryStorage implements Storage {
-	protected data = new Map<string, string | null>();
+	protected data = new Map<string, any>();
 
 	constructor(initialData?: { [key: string]: any }) {
 		if (!!initialData) {
 			Object.keys(initialData).forEach((it) => {
-				this.data.set(it, JSON.stringify(initialData[it]));
+				this.data.set(it, initialData[it]);
 			});
 		}
 	}
