@@ -76,6 +76,26 @@ describe("refreshCache", () => {
 			// assert
 			expect(value).toBe("Another value");
 		});
+
+		it("should add a new item with specified TTL when item doesn't exist", () => {
+			// arrange
+			const storage = new MockStorage({ test: { data: "Test value" } });
+			const cache = new RefreshCache(storage);
+			const ttl = Date.now() + 5 * 60 * 1000; // now + 5 minutes
+
+			// act
+			const value = cache.getOrAdd("another", () => "Another value", new Date(ttl));
+
+			// assert
+			expect(value).toBe("Another value");
+
+			const storageData = storage.getData();
+			expect(storageData.has("another")).toBe(true);
+
+			const testItem = JSON.parse(storageData.get("another")!);
+			expect(testItem.data).toBe("Another value");
+			expect(testItem.expiresOn).toBe(ttl);
+		});
 	});
 
 	describe("getOrAddAsync", () => {
@@ -101,6 +121,33 @@ describe("refreshCache", () => {
 
 			// assert
 			expect(value).toBe("Another value");
+
+			const cacheValue = cache.get("another");
+			expect(cacheValue).toBe("Another value");
+		});
+
+		it("should add a new item with specified TTL when item doesn't exist", async () => {
+			// arrange
+			const storage = new MockStorage({ test: { data: "Test value" } });
+			const cache = new RefreshCache(storage);
+			const ttl = Date.now() + 5 * 60 * 1000; // now + 5 minutes
+
+			// act
+			const value = await cache.getOrAddAsync(
+				"another",
+				() => new Promise((res) => res("Another value")),
+				new Date(ttl)
+			);
+
+			// assert
+			expect(value).toBe("Another value");
+
+			const storageData = storage.getData();
+			expect(storageData.has("another")).toBe(true);
+
+			const testItem = JSON.parse(storageData.get("another")!);
+			expect(testItem.data).toBe("Another value");
+			expect(testItem.expiresOn).toBe(ttl);
 		});
 
 		it("should return current item and update cache with new value", async () => {
@@ -121,6 +168,34 @@ describe("refreshCache", () => {
 
 			const updatedValue = cache.get("test");
 			expect(updatedValue).toBe("Another value");
+		});
+
+		it("should return current item and update cache with new value and specified TTL", async () => {
+			// arrange
+			const storage = new MockStorage({ test: { data: "Test value" } });
+			const cache = new RefreshCache(storage);
+			const ttl = Date.now() + 5 * 60 * 1000; // now + 5 minutes
+
+			// act
+			const value = await cache.getOrAddAsync(
+				"test",
+				() => new Promise((res) => res("Another value")),
+				new Date(ttl),
+				true
+			);
+
+			// assert
+			expect(value).toBe("Test value");
+
+			const updatedValue = cache.get("test");
+			expect(updatedValue).toBe("Another value");
+
+			const storageData = storage.getData();
+			expect(storageData.has("test")).toBe(true);
+
+			const testItem = JSON.parse(storageData.get("test")!);
+			expect(testItem.data).toBe("Another value");
+			expect(testItem.expiresOn).toBe(ttl);
 		});
 
 		it("should return current and callback with new value", async () => {

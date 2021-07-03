@@ -10,7 +10,7 @@ export class RefreshCache {
 
 		if (!cacheData) {
 			const data = valueFunc();
-			this.set(key, data);
+			this.set(key, data, timeToLive);
 
 			return data;
 		}
@@ -29,7 +29,7 @@ export class RefreshCache {
 
 		if (!cacheData) {
 			const data = await valueFunc();
-			this.set(key, data);
+			this.set(key, data, timeToLive);
 
 			return data;
 		}
@@ -37,7 +37,7 @@ export class RefreshCache {
 		if (updateCache) {
 			(async () => {
 				const data = await valueFunc();
-				this.set(key, data);
+				this.set(key, data, timeToLive);
 
 				if (!!updateCallback) {
 					updateCallback(data);
