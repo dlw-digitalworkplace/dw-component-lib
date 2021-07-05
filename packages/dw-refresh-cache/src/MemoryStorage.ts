@@ -1,16 +1,18 @@
-export class MemoryStorage implements Storage {
-	protected data = new Map<string, any>();
+class MemoryStorage implements Storage {
+	private static _instance: MemoryStorage;
 
-	constructor(initialData?: { [key: string]: any }) {
-		if (!!initialData) {
-			Object.keys(initialData).forEach((it) => {
-				this.data.set(it, initialData[it]);
-			});
-		}
-	}
+	protected data = new Map<string, any>();
 
 	get length(): number {
 		return this.data.size;
+	}
+
+	get keys(): string[] {
+		const result: string[] = [];
+
+		this.data.forEach((_, key) => result.push(key));
+
+		return result;
 	}
 
 	public clear(): void {
@@ -44,4 +46,16 @@ export class MemoryStorage implements Storage {
 	public setItem(key: string, value: string): void {
 		this.data.set(key, value);
 	}
+
+	private constructor() {}
+
+	static get instance(): MemoryStorage {
+		if (!this._instance) {
+			this._instance = new MemoryStorage();
+		}
+
+		return this._instance;
+	}
 }
+
+export default MemoryStorage.instance;
