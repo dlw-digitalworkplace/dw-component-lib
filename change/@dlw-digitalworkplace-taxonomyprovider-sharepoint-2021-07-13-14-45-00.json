@@ -1,8 +1,8 @@
 {
   "type": "minor",
-  "comment": "Added SharePoint TaxonomyProvider",
+  "comment": "Initial package release",
   "packageName": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
   "email": "nick.sevens@delaware.pro",
   "dependentChangeType": "patch",
-  "date": "2021-07-02T10:18:08.427Z"
+  "date": "2021-07-03T18:11:17.879Z"
 }

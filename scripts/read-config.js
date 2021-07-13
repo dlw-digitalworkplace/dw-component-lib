@@ -1,8 +1,8 @@
 // @ts-check
 
 const fs = require("fs");
-const findConfig = require("./find-config");
 const jju = require("jju");
+const findConfig = require("./find-config");
 
 /**
  * Read and parse the given config file.

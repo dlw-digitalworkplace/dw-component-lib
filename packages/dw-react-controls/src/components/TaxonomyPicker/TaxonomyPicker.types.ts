@@ -22,7 +22,10 @@ export interface ITaxonomyPickerProps {
 
 	labelProps?: Partial<ILabelProps>;
 
-	dialogProps?: Partial<ITaxonomyPickerDialogProps>;
+	dialogProps?: Pick<
+		ITaxonomyPickerDialogProps,
+		"labels" | "showRootNode" | "rootNodeLabel" | "styles" | "className" | "dialogContentProps"
+	>;
 
 	required?: boolean;
 

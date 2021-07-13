@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix potential issue with updating context menu actions",
-  "packageName": "@dlw-digitalworkplace/dw-react-controls",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "patch"
-}

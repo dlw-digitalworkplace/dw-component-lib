@@ -2,8 +2,10 @@
 
 const path = require("path");
 const { tscTask, argv } = require("just-scripts");
+
 const libPath = path.resolve(process.cwd(), "lib");
 const srcPath = path.resolve(process.cwd(), "src");
+
 // Temporary hack: only use tsbuildinfo file for things under packages/dw-react-controls
 const useTsBuildInfo =
 	/[\\/]packages[\\/]dw-react-controls[\\/]/.test(process.cwd()) && path.basename(process.cwd()) !== "perf-test";

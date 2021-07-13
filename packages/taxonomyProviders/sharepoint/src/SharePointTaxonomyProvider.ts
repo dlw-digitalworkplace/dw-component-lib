@@ -15,10 +15,10 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 
 	private spContext: SP.ClientContext;
 
-	private termSet: SP.Taxonomy.TermSet;
+	private termSet?: SP.Taxonomy.TermSet;
 
 	// todo: consider some better (sliding?) caching mechanism
-	private cachedTerms: SP.Taxonomy.Term[];
+	private cachedTerms?: SP.Taxonomy.Term[];
 
 	constructor(siteUrl: string, private termSetIdOrName: string, private lcid: number = 1033) {
 		this.spContext = new SP.ClientContext(siteUrl);
@@ -34,7 +34,7 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 			throw new ProviderNotInitializedError();
 		}
 
-		return this.termSet.get_isOpenForTermCreation();
+		return this.termSet!.get_isOpenForTermCreation();
 	}
 
 	/**
@@ -93,8 +93,8 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 		}
 
 		// iterate all terms until maximum number of items is reached
-		for (let i = 0; i < this.cachedTerms.length && result.length < options.maxItems!; i++) {
-			const term = this.cachedTerms[i];
+		for (let i = 0; i < this.cachedTerms!.length && result.length < options.maxItems!; i++) {
+			const term = this.cachedTerms![i];
 
 			// skip deprecated term if requested
 			if (options.trimDeprecated && term.get_isDeprecated()) {
@@ -139,7 +139,7 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 		}
 
 		// create a dictionary by term id, containing a tuple with parentid and term
-		const termMap = this.cachedTerms.reduce<{ [key: string]: [string | null, ITerm] }>((prev, it) => {
+		const termMap = this.cachedTerms!.reduce<{ [key: string]: [string | null, ITerm] }>((prev, it) => {
 			const parent = it.get_parent();
 			const parentId = parent.get_serverObjectIsNull() ? null : parent.get_id().toString();
 
@@ -174,12 +174,12 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 		}
 
 		// load the parent term if needed
-		const parentTerm = !!parentId && this.termSet.getTerm(new SP.Guid(parentId));
+		const parentTerm = !!parentId && this.termSet!.getTerm(new SP.Guid(parentId));
 
 		// create the new term
 		const newTermId = SP.Guid.newGuid();
 		const newTerm = !parentTerm
-			? this.termSet.createTerm(newValue, this.lcid, newTermId)
+			? this.termSet!.createTerm(newValue, this.lcid, newTermId)
 			: parentTerm.createTerm(newValue, this.lcid, newTermId);
 
 		this.spContext.load(newTerm);
@@ -219,7 +219,7 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 
 	protected async loadAndCacheAllTerms(): Promise<void> {
 		// retrieve all items from the termset
-		const allTerms = this.termSet.getAllTerms();
+		const allTerms = this.termSet!.getAllTerms();
 		this.spContext.load(allTerms);
 		this.spContext.load(allTerms, "Include(Labels, Parent, Parent.Id, CustomSortOrder)");
 

@@ -6,7 +6,7 @@
 		"outDir": "lib",
 		"rootDir": "./src",
 		"typeRoots": ["../../node_modules/@types", "../../typings"],
-		"types": ["jest", "node", "webpack-env", "custom-global"]
+		"types": ["jest", "node", "custom-global"]
 	},
 	"include": ["src"]
 }

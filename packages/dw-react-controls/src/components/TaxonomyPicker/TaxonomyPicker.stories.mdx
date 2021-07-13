@@ -1,0 +1,47 @@
+import { ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs";
+import * as stories from "./TaxonomyPicker.stories";
+import { TaxonomyPicker } from "./TaxonomyPicker";
+import { TaxonomyPickerDialog } from "./TaxonomyPickerDialog";
+import { TermAdder } from "./TermAdder";
+import { TermPicker } from "../TermPicker";
+
+<Meta
+	title="Components/TaxonomyPicker"
+	component={TaxonomyPicker}
+	subcomponents={{ TaxonomyPickerDialog, TermAdder, TermPicker }}
+/>
+
+# TaxonomyPicker
+
+A `TaxonomyPicker` allows you to add Terms, and browse them within a Taxonomy tree.
+
+In order to use the picker, an `ITaxonomyProvider` instance should be passed, which is responsible for providing the
+term information and action methods. If the provider allows creating new terms, it is possible to create one using
+either the picker or the dialog interface.
+
+### Basic usage
+
+<Canvas withToolbar={true}>
+	<Story story={stories.Basic} name="Basic usage" />
+</Canvas>
+
+### Allow adding terms
+
+To add a term you can:
+
+- Type the name of the new term in the `TermPicker`, and press <kbd>Enter</kbd> when no match is found.
+  If a partial match is found, press <kbd>ESC</kbd> first to close the callout.
+
+- Open the `TermPickerDialog` and use the context menu behind the `...` for one of the terms.
+  This will insert a `TermAdder` control which you can use to create the new term.
+
+<Canvas withToolbar={true}>
+	<Story story={stories.AllowAddingTerms} name="Allow adding terms" />
+</Canvas>
+
+When creating a new term using the `TermPicker`, a success or failure message is shown. These messages can be
+overwritten using the `onGetSuccessMessage` and `onGetErrorMessage` callbacks.
+
+## Properties
+
+<ArgsTable components={{ TaxonomyPicker, TaxonomyPickerDialog, TermAdder, TermPicker }} />

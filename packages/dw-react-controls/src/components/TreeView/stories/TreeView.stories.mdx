@@ -1,0 +1,36 @@
+import { ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs";
+import * as stories from "./TreeView.stories";
+import { TreeView } from "../TreeView";
+import { ITreeViewContext } from "../TreeView.context";
+import { TreeItem } from "../../TreeItem";
+
+<Meta title="Components/TreeView" component={TreeView} subcomponents={{ TreeItem }} />
+
+# TreeView
+
+A `TreeView` represents a hierarchical list.
+
+### Basic usage
+
+<Canvas withToolbar={true}>
+	<Story story={stories.Basic} name="Basic usage" />
+</Canvas>
+
+### Advanced usage (uncontrolled)
+
+<Canvas withToolbar={true}>
+	<Story story={stories.AdvancedUncontrolled} name="Advanced usage (uncontrolled)" />
+</Canvas>
+
+### Advanced usage (controlled)
+
+Using the **controlled** version of the component allows you to control the `expanded` and `selected` items
+of the `TreeView`.
+
+<Canvas withToolbar={true}>
+	<Story story={stories.AdvancedControlled} name="Advanced usage (controlled)" />
+</Canvas>
+
+## Properties
+
+<ArgsTable components={{ TreeView, TreeItem }} />

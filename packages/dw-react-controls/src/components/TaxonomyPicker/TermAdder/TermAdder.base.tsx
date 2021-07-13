@@ -47,13 +47,13 @@ export const TermAdderBase: React.FC<ITermAdderProps> = React.forwardRef<HTMLFor
 			}
 		};
 
-		const handleCancel = (ev: React.MouseEvent<HTMLButtonElement>): void => {
+		const handleCancel = (_: React.MouseEvent<HTMLButtonElement>): void => {
 			if (onCancel) {
 				onCancel();
 			}
 		};
 
-		const handleInputChange = (ev: React.FormEvent<HTMLInputElement>, newValue?: string): void => {
+		const handleInputChange = (_: React.FormEvent, newValue?: string): void => {
 			setInputValue(newValue);
 		};
 

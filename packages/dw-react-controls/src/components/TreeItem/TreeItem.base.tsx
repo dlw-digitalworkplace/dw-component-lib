@@ -67,11 +67,11 @@ export const TreeItemBase: React.FC<ITreeItemProps> = React.forwardRef<HTMLLIEle
 		}
 	};
 
-	const handleContextMenuButtonClick = (event: React.MouseEvent<HTMLDivElement>): void => {
+	const handleContextMenuButtonClick = (_: React.MouseEvent<HTMLDivElement>): void => {
 		setShowContextMenu(true);
 	};
 
-	const handleHideContextMenu = (event: React.MouseEvent<HTMLElement>): void => {
+	const handleHideContextMenu = (_?: React.MouseEvent | React.KeyboardEvent): void => {
 		setShowContextMenu(false);
 	};
 
@@ -83,8 +83,8 @@ export const TreeItemBase: React.FC<ITreeItemProps> = React.forwardRef<HTMLLIEle
 
 	const classNames = getClassNames(styles, { className, disabled, expanded, selected, theme: theme! });
 
-	const renderItemContents: IRenderFunction<ITreeItemContentProps> = (props: ITreeItemContentProps) => {
-		return <TreeItemContent {...props} />;
+	const renderItemContents: IRenderFunction<ITreeItemContentProps> = (props: ITreeItemContentProps | undefined) => {
+		return props ? <TreeItemContent {...props} /> : null;
 	};
 
 	const composeRenderFunction = (

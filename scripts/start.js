@@ -3,19 +3,20 @@
 const { spawnSync } = require("child_process");
 const prompts = require("prompts");
 const getAllPackageInfo = require("./monorepo/getAllPackageInfo");
+
 const allPackages = getAllPackageInfo();
 const extraArgs = process.argv.slice(2);
 
-const defaults = ["@dlw-digitalworkplace/dw-react-controls"];
+const defaults = [];
 
 const projectsWithStartCommand = Object.entries(allPackages)
 	.reduce((acc, [pkg, info]) => {
 		if (info.packageJson.scripts && info.packageJson.scripts.start) {
-			acc.push({ title: pkg, value: { pkg, command: "start" } });
+			acc.push({ title: pkg, value: { pkg, isWorkspace: true, command: "start" } });
 		}
 
 		if (info.packageJson.scripts && info.packageJson.scripts["start:profile"]) {
-			acc.push({ title: `${pkg} (profile)`, value: { pkg, command: "start:profile" } });
+			acc.push({ title: `${pkg} (profile)`, value: { pkg, isWorkspace: true, command: "start:profile" } });
 		}
 
 		return acc;
@@ -32,15 +33,25 @@ const suggest = (input, choices) => Promise.resolve(choices.filter((i) => i.titl
 
 		message: "Which project to start (select or type partial name)?",
 		suggest,
-		choices: [...defaults.map((p) => ({ title: p, value: { pkg: p, command: "start" } })), ...projectsWithStartCommand]
+		choices: [
+			{
+				title: "@dlw-digitalworkplace/dw-react-lib",
+				value: {
+					pkg: "@dlw-digitalworkplace/dw-react-lib",
+					isWorkspace: false,
+					command: "storybook"
+				}
+			},
+			...defaults.map((p) => ({ title: p, value: { pkg: p, isWorkspace: true, command: "start" } })),
+			...projectsWithStartCommand
+		]
 	});
 
-	spawnSync(
-		"yarn",
-		["workspace", response.project.pkg, response.project.command, ...(extraArgs.length > 0 ? [extraArgs] : [])],
-		{
-			shell: true,
-			stdio: "inherit"
-		}
-	);
+	const spawnArgs = response.project.isWorkspace ? ["workspace", response.project.pkg] : [];
+	spawnArgs.push(...[response.project.command, ...(extraArgs.length > 0 ? [extraArgs] : [])]);
+
+	spawnSync("yarn", spawnArgs, {
+		shell: true,
+		stdio: "inherit"
+	});
 })();

@@ -2,7 +2,8 @@ module.exports = {
 	pipeline: {
 		build: ["^build"],
 		clean: [],
+		lint: [],
 		test: ["build"],
-		lint: []
+		start: ["build"]
 	}
 };

@@ -15,7 +15,7 @@ export function useStateIfMounted<T>(
 	const isComponentMounted = useIsMounted();
 	const [state, setState] = React.useState(initialState);
 
-	const newSetState = (value: T | undefined) => {
+	const newSetState = (value: React.SetStateAction<T | undefined>) => {
 		if (isComponentMounted.current) {
 			setState(value);
 		}

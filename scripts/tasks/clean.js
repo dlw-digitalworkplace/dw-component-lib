@@ -3,8 +3,8 @@
 const path = require("path");
 const { cleanTask } = require("just-scripts");
 
-exports.clean = cleanTask(
-	[
+exports.clean = cleanTask({
+	paths: [
 		"coverage",
 		"dist",
 		"lib",
@@ -15,4 +15,4 @@ exports.clean = cleanTask(
 		"temp",
 		"tsconfig.tsbuildinfo"
 	].map((p) => path.join(process.cwd(), p))
-);
+});

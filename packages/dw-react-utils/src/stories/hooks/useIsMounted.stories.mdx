@@ -1,0 +1,36 @@
+<Meta title="Utils/hooks/useIsMounted" />
+
+# useIsMounted
+
+The `useIsMounted` hook provides easy access to the `mounted` state of a component.
+
+When the component is currently mounted, accessing the hook's value will return `true`.
+After unmounting, the hook's value will return `false`.
+
+## Usage
+
+```tsx
+const isMounted = useIsMounted();
+
+// access value
+const val = isMounted.current;
+```
+
+## Example
+
+```tsx
+const MyComponent = () => {
+	const [state, setState] = React.useState(0);
+	const isMounted = useIsMounted();
+
+	React.useEffect(() => {
+		setTimeout(() => {
+			if (isMounted.current) {
+				setState(1); // this would throw an error when unmounted.
+			}
+		}, 5000);
+	});
+
+	return <div>State is: {state}</div>;
+};
+```

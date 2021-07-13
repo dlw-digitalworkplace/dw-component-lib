@@ -1,0 +1,28 @@
+<Meta title="Utils/hooks/useStateIfMounted" />
+
+# useStateIfMounted
+
+The `useStateIfMounted` hook returns a stateful value, and a function to update it.
+Unlike the default React's useState function, this will only update state when the component is mounted.
+
+## Usage
+
+```tsx
+const [state, setState] = useStateIfMounted();
+```
+
+## Example
+
+```tsx
+const MyComponent = () => {
+	const [state, setState] = useStateIfMounted(0);
+
+	React.useEffect(() => {
+		setTimeout(() => {
+			setState(1); // this will only update if unmounted.
+		}, 5000);
+	});
+
+	return <div>State is: {state}</div>;
+};
+```

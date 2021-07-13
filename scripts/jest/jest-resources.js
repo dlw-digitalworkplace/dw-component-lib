@@ -2,7 +2,7 @@
 
 const fs = require("fs-extra");
 const path = require("path");
-const merge = require("../tasks/merge");
+const merge = require("../merge");
 const resolve = require("resolve");
 const { findRepoDeps } = require("../monorepo/index");
 const findConfig = require("../find-config");
@@ -43,27 +43,6 @@ module.exports = {
 	createConfig: (customConfig) =>
 		merge(
 			{
-				moduleNameMapper: {
-					"office-ui-fabric-react/lib/(.*)$": "office-ui-fabric-react/lib-commonjs/$1",
-					"ts-jest": resolve.sync("ts-jest"),
-					"\\.(scss)$": path.resolve(__dirname, "jest-style-mock.js"),
-					KeyCodes: path.resolve(__dirname, "jest-mock.js"),
-					...jestAliases()
-				},
-				transform: {
-					// ".(ts|tsx)": resolve.sync("ts-jest/dist"),
-					"^.+\\.(ts|tsx)$": resolve.sync("ts-jest/dist")
-				},
-				transformIgnorePatterns: ["/node_modules/", "/lib-commonjs/", "\\.js$"],
-				reporters: [path.resolve(__dirname, "./jest-reporter.js")],
-				testRegex: "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$",
-				moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json"],
-				setupFiles: [path.resolve(__dirname, "jest-setup.js")],
-				moduleDirectories: [
-					"node_modules",
-					path.resolve(packageRoot, "node_modules"),
-					path.resolve(__dirname, "../node_modules")
-				],
 				globals: {
 					"ts-jest": {
 						tsConfig: path.resolve(packageRoot, "tsconfig.json"),
@@ -71,7 +50,29 @@ module.exports = {
 						diagnostics: false
 					}
 				},
+				moduleDirectories: [
+					"node_modules",
+					path.resolve(packageRoot, "node_modules"),
+					path.resolve(__dirname, "../node_modules")
+				],
+				moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json"],
+				moduleNameMapper: {
+					"office-ui-fabric-react/lib/(.*)$": "office-ui-fabric-react/lib-commonjs/$1",
+					"ts-jest": resolve.sync("ts-jest"),
+					"\\.(scss)$": path.resolve(__dirname, "jest-style-mock.js"),
+					KeyCodes: path.resolve(__dirname, "jest-mock.js"),
+					...jestAliases()
+				},
+				reporters: [path.resolve(__dirname, "./jest-reporter.js")],
+				setupFiles: [path.resolve(__dirname, "jest-setup.js")],
+				testEnvironment: "jsdom",
+				testRegex: "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$",
 				testURL: "http://localhost",
+				transform: {
+					// ".(ts|tsx)": resolve.sync("ts-jest/dist"),
+					"^.+\\.(ts|tsx)$": resolve.sync("ts-jest/dist")
+				},
+				transformIgnorePatterns: ["/node_modules/", "/lib-commonjs/", "\\.js$"],
 				watchPlugins: ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"]
 			},
 			customConfig

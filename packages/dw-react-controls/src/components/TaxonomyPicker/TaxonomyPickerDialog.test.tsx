@@ -51,14 +51,14 @@ describe("<TaxonomyPickerDialog />", () => {
 					hidden={false}
 					pickerProps={{ onResolveSuggestions: onResolveSuggestions }}
 					labels={{
-						addButton: "TestAdd",
+						addButton: "TestAdded",
 						cancelButton: "TestCancel",
 						okButton: "TestOk"
 					}}
 				/>
 			);
 
-			expect(await screen.findByText(/TestAdd/i)).toBeTruthy();
+			expect(await screen.findByText(/TestAdded/i)).toBeTruthy();
 			expect(await screen.findByText(/TestCancel/i)).toBeTruthy();
 			expect(await screen.findByText(/TestOk/i)).toBeTruthy();
 		});

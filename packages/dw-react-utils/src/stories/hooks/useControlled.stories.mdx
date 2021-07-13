@@ -1,0 +1,51 @@
+<Meta title="Utils/hooks/useControlled" />
+
+# useControlled
+
+The `useControlled` hook provides automatic binding of controlled or uncontrolled state in a component.
+
+It allows the component's consumer to choose between using the controlled or uncontrolled prop,
+without needing to worry about updating the correct state in the component yourself.
+
+> 💡 Switching between `controlled` and `uncontrolled` after initialization outputs a `console.warn` message
+> when not running in production mode.
+
+## Usage
+
+```tsx
+const [value, myValue] = useControlled(valueProp, defaultValue, "MyComponent");
+```
+
+## Example
+
+With a simple `Input` component:
+
+```tsx
+const Input = React.forwardRef({ value: valueProp, defaultValue, onChange }, ref) => {
+	const [value, setValue] = useControlled(valueProp, defaultValue, "Input");
+
+	const onChangeInput = (ev) => {
+		if (onChange) {
+			onChange(ev);
+		}
+
+		setValue(ev); // this will only directly change the `value` if the component is uncontrolled!
+	};
+
+	return <input ref={ref} type="text" value={value} onChange={onChangeInput} />;
+};
+```
+
+Providing a value to this component, can be done either `controlled` or `uncontrolled`.
+
+### Controlled
+
+```tsx
+<Input value={value} onChange={onChangeInput} />
+```
+
+### Uncontrolled
+
+```tsx
+<Input ref={...} defaultValue={"Initial value"} />
+```
