@@ -33,6 +33,7 @@ jobs:
             -r "https://npm.pkg.github.com/" \
             -n $NPM_AUTHTOKEN \
             -t ${{github.event.inputs.canaryName}} \
-            --canaryName ${{github.event.inputs.canaryName}}
+            --canaryName ${{github.event.inputs.canaryName}} \
+            --no-git-tags
         env:
           NPM_AUTHTOKEN: ${{secrets.GITHUB_TOKEN}}

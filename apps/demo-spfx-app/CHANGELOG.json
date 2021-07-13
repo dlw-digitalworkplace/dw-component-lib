@@ -1,0 +1,20 @@
+{
+  "name": "@dw-react-apps/demo-spfx-app",
+  "entries": [
+    {
+      "date": "Tue, 13 Jul 2021 15:03:34 GMT",
+      "tag": "@dw-react-apps/demo-spfx-app_v1.0.0",
+      "version": "1.0.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @dw-react-apps/demo-spfx-app to v1.0.0",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "97b32884c580a3b02e41701771819c1631e7a7cf",
+            "package": "@dw-react-apps/demo-spfx-app"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "@dlw-digitalworkplace/dw-refresh-cache",
+  "entries": [
+    {
+      "date": "Tue, 13 Jul 2021 15:03:34 GMT",
+      "tag": "@dlw-digitalworkplace/dw-refresh-cache_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "major": [
+          {
+            "comment": "Initial package release",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "97b32884c580a3b02e41701771819c1631e7a7cf",
+            "package": "@dlw-digitalworkplace/dw-refresh-cache"
+          }
+        ]
+      }
+    }
+  ]
+}
