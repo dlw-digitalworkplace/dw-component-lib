@@ -29,6 +29,7 @@ jobs:
             -r "https://npm.pkg.github.com/" \
             -n $NPM_AUTHTOKEN \
             --canaryName $CI_REF_NAME_SLUG \
-            --no-git-tags
+            --no-git-tags \
+            -t exper
         env:
           NPM_AUTHTOKEN: ${{secrets.GITHUB_TOKEN}}
