@@ -2,11 +2,6 @@ name: Release-Canary
 
 on:
   workflow_dispatch:
-    inputs:
-      canaryName:
-        description: "Version suffix"
-        default: "dev"
-        required: true
 
 jobs:
   build:
@@ -18,6 +13,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: FranzDiebold/github-env-vars-action@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -32,8 +28,7 @@ jobs:
           yarn release:canary -y \
             -r "https://npm.pkg.github.com/" \
             -n $NPM_AUTHTOKEN \
-            -t ${{github.event.inputs.canaryName}} \
-            --canaryName ${{github.event.inputs.canaryName}} \
+            --canaryName $CI_REF_NAME_SLUG \
             --no-git-tags
         env:
           NPM_AUTHTOKEN: ${{secrets.GITHUB_TOKEN}}
