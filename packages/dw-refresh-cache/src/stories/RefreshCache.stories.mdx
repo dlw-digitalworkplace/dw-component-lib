@@ -1,0 +1,184 @@
+<Meta title="Refresh Cache/Refresh Cache" />
+
+# Refresh Cache
+
+The `RefreshCache` class is a caching library which allows you to ask for cached data and automatically fetch and
+notify when receiving new data in the background.
+
+> 💡 You can use different types of storage. The package includes a `MemoryStorage` storage provider,
+> or you can use the browser's default `localStorage` or `sessionStorage`.
+> For advanced scenario's you can provide your own `Storage` implementation as well.
+
+## Installation
+
+```shell
+yarn add @dlw-digitalworkplace/dw-refresh-cache
+```
+
+## Usage
+
+```tsx
+import { MemoryStorage, RefreshCache } from "@dlw-digitalworkplace/dw-refresh-cache";
+
+const cache = new RefreshCache(MemoryStorage);
+
+// basic
+cache.set("some-cachekey", value);
+
+// advanced
+const myValue = await cache.getOrAddAsync(
+	"some-other-cachekey",
+	async () => await getSomeAsyncValue(),
+	RefreshCache.DEFAULT_EXPIRATION,
+	true,
+	(data) => {
+		doUpdateAfterRefresh(data);
+	}
+);
+```
+
+> 💡 You can specify an optional TTL for the cached data. If no value is specified, the default of 24hrs will be set.
+> The TTL value can be set to a `Date` or timespan (as number).
+
+## Documentation
+
+The `RefreshCache`'s methods are described here:
+
+### `Constructor`
+
+Creates a new `RefreshCache` object using the given `Storage`.
+
+| Parameter                          | Type      | Description                                                                                 |
+| ---------------------------------- | --------- | ------------------------------------------------------------------------------------------- |
+| storage<span class="req">\*</span> | `Storage` | The storage provider to use. Can be `MemoryStorage`, or `localStorage` or `sessionStorage`. |
+
+### `getOrAdd<T>(key, valueFunc, timeToLive?): T`
+
+Retrieves an item from the cache, or adds it using the `valueFunc` result.
+
+| Parameter                            | Type               | Description                                                                             |
+| ------------------------------------ | ------------------ | --------------------------------------------------------------------------------------- |
+| key<span class="req">\*</span>       | `string`           | Key of the cache entry.                                                                 |
+| valueFunc<span class="req">\*</span> | `() => T`          | Function to retrieve the value when no valid cache entry exists.                        |
+| timeToLive                           | `number` \| `Date` | TTL for the cache entry. If a number is passed, the value is added to the current date. |
+
+### `getOrAddAsync<T>(key, valueFunc, timeToLive?, updateCache?, updateCallback?): Promise<T>`
+
+Retrieves an item from the cache, or adds it using the `valueFunc` result.
+
+| Parameter                            | Type                | Description                                                                             |
+| ------------------------------------ | ------------------- | --------------------------------------------------------------------------------------- |
+| key<span class="req">\*</span>       | `string`            | Key of the cache entry.                                                                 |
+| valueFunc<span class="req">\*</span> | `() => Promise<T>`  | Function to retrieve the value when no valid cache entry exists.                        |
+| timeToLive                           | `number` \| `Date`  | TTL for the cache entry. If a number is passed, the value is added to the current date. |
+| updateCache                          | `boolean`           | Set to `true` to execute the `valueFunc` event when a valid cache entry exists.         |
+| updateCallback                       | `(data: T) => void` | Callback to call after the value update has been completed.                             |
+
+### `get<T>(key): T | undefined`
+
+Retrieves an item from the cache.
+
+| Parameter                      | Type     | Description             |
+| ------------------------------ | -------- | ----------------------- |
+| key<span class="req">\*</span> | `string` | Key of the cache entry. |
+
+### `set<T>(key, value, timeToLive?): void`
+
+Adds or updates an item in the cache.
+
+| Parameter                        | Type               | Description                                                                             |
+| -------------------------------- | ------------------ | --------------------------------------------------------------------------------------- |
+| key<span class="req">\*</span>   | `string`           | Key of the cache entry.                                                                 |
+| value<span class="req">\*</span> | `T`                | Value to set in the cache entry.                                                        |
+| timeToLive                       | `number` \| `Date` | TTL for the cache entry. If a number is passed, the value is added to the current date. |
+
+### `delete(key): void`
+
+Removes a single entry from the cache.
+
+| Parameter                      | Type     | Description             |
+| ------------------------------ | -------- | ----------------------- |
+| key<span class="req">\*</span> | `string` | Key of the cache entry. |
+
+### `clear(): void`
+
+Removes all entries from the cache.
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| (none)    |      |             |
+
+## Examples
+
+### Add and retrieve data from the cache.
+
+This method explicitly sets a value in the cache, and retrieves it afterwards.
+
+```tsx
+import { MemoryStorage, RefreshCache } from "@dlw-digitalworkplace/dw-refresh-cache";
+
+const cache = new RefreshCache(MemoryStorage);
+
+const value: IMyData = { obj: "MyData" };
+cache.set<IMyData>("some-cachekey", value);
+
+...
+
+const valueFromCache = cache.get("some-cachekey");
+```
+
+### Retrieve or add data from the cache
+
+Using the `getOrAdd` function, you can retrieve data from the cache, or provide it if the cache value doesn't exist yet.
+
+```tsx
+import { MemoryStorage, RefreshCache } from "@dlw-digitalworkplace/dw-refresh-cache";
+
+const cache = new RefreshCache(MemoryStorage);
+
+const valueFromCache = cache.getOrAdd<IMyData>("some-cachekey", () => {
+	return { obj: "MyData" };
+});
+```
+
+### Retrieve or add data asynchronously
+
+Using the `getOrAddAsync` function, you can retrieve data from the cache, or set the value to an asynchronously
+retrieved value if the cache value doesn't exist yet.
+
+```tsx
+import { MemoryStorage, RefreshCache } from "@dlw-digitalworkplace/dw-refresh-cache";
+
+const cache = new RefreshCache(MemoryStorage);
+
+const valueFromCache = await cache.getOrAddAsync<IMyData>("some-cachekey", async () => {
+	const myData = await somePromiseReturningFunction();
+
+	return myData;
+});
+```
+
+If you want, you can retrieve the cached data immediately and **update the cache** in the background anyway.
+This ensures the next time you will access the cached item, it will return the updated value.
+
+Additionally, you can provide a **callback function** which notifies you when the asynchronous function has been executed,
+providing you with the updated value without explicitly needing to retrieve it from the cache.
+
+```tsx
+import { MemoryStorage, RefreshCache } from "@dlw-digitalworkplace/dw-refresh-cache";
+
+const cache = new RefreshCache(MemoryStorage);
+
+const valueFromCache = await cache.getOrAddAsync<IMyData>(
+	"some-cachekey",
+	async () => {
+		const myData: IMyData = await somePromiseReturningFunction();
+
+		return myData;
+	},
+	true,
+	(newData: IMyData) => {
+		console.info("Retrieved new data.", newData);
+	}
+);
+```
