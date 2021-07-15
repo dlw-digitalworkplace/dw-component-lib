@@ -8,7 +8,7 @@
       "comments": {
         "patch": [
           {
-            "comment": "Bump @dw-react-apps/demo-spfx-app to v1.0.0",
+            "comment": "Initial package release",
             "author": "nick.sevens@delaware.pro",
             "commit": "97b32884c580a3b02e41701771819c1631e7a7cf",
             "package": "@dw-react-apps/demo-spfx-app"

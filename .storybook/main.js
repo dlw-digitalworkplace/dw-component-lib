@@ -1,24 +1,5 @@
-const path = require("path");
-const fs = require("fs");
-
-const { getAllPackageInfo } = require("../scripts/monorepo");
-
-function getStories() {
-	const packageInfo = getAllPackageInfo();
-	const packagePaths = [];
-	Object.keys(packageInfo).forEach((it) => {
-		const dirPath = path.resolve(__dirname, "..", packageInfo[it].packagePath, "src");
-		if (fs.existsSync(dirPath)) {
-			const pathToAdd = path.resolve(dirPath, "**/*.stories.@(js|jsx|ts|tsx|mdx)");
-			packagePaths.push(pathToAdd.replace(/\\/g, "/"));
-		}
-	});
-
-	return packagePaths;
-}
-
 module.exports = {
-	stories: getStories(),
+	stories: ["../**/*.stories.@(js|jsx|ts|tsx|mdx)"],
 
 	addons: [
 		"@storybook/addon-links",
@@ -27,16 +8,9 @@ module.exports = {
 			options: {
 				docs: {
 					sourceLoaderOptions: {
-						injectStoryParameters: false
+						injectStoryParameters: false,
+						transcludeMarkdown: true
 					}
-				}
-			}
-		},
-		{
-			name: "@storybook/addon-storysource",
-			options: {
-				loaderOptions: {
-					injectStoryParameters: false
 				}
 			}
 		}

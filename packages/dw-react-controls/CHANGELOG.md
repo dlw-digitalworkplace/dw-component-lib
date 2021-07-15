@@ -10,4 +10,4 @@ Tue, 13 Jul 2021 15:03:34 GMT
 
 ### Major changes
 
-- Bump @dlw-digitalworkplace/dw-react-controls to v0.1.0 (nick.sevens@delaware.pro)
+- Initial package release (nick.sevens@delaware.pro)

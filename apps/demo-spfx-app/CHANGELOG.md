@@ -10,4 +10,4 @@ Tue, 13 Jul 2021 15:03:34 GMT
 
 ### Patches
 
-- Bump @dw-react-apps/demo-spfx-app to v1.0.0 (nick.sevens@delaware.pro)
+- Initial package release (nick.sevens@delaware.pro)
