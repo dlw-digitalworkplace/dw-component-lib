@@ -35,9 +35,9 @@ const suggest = (input, choices) => Promise.resolve(choices.filter((i) => i.titl
 		suggest,
 		choices: [
 			{
-				title: "@dlw-digitalworkplace/dw-react-lib",
+				title: "@dlw-digitalworkplace/dw-component-lib",
 				value: {
-					pkg: "@dlw-digitalworkplace/dw-react-lib",
+					pkg: "@dlw-digitalworkplace/dw-component-lib",
 					isWorkspace: false,
 					command: "storybook"
 				}

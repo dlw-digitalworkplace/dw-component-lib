@@ -1,5 +1,5 @@
 {
-	"name": "@dlw-digitalworkplace/dw-react-lib",
+	"name": "@dlw-digitalworkplace/dw-component-lib",
 	"private": true,
 	"scripts": {
 		"build": "lage build",

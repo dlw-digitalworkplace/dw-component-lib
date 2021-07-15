@@ -20,7 +20,7 @@ function getAllPackageInfo() {
 	// Get mapping from package name to package path
 	// (rollup helper happens to be good for getting basic package name/path pairs)
 	const packagePaths = lernaAlias.rollup({ sourceDirectory: false });
-	delete packagePaths["@dw-react-lib/noop"]; // not a real package
+	delete packagePaths["@dw-component-lib/noop"]; // not a real package
 
 	packageInfo = {};
 	cwdForPackageInfo = process.cwd();

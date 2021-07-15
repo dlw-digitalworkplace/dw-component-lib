@@ -1,4 +1,4 @@
-const { createConfig } = require("@dw-react-lib/build/jest/jest-resources");
+const { createConfig } = require("@dw-component-lib/build/jest/jest-resources");
 const path = require("path");
 
 const config = createConfig({

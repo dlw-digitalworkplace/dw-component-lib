@@ -1,3 +1,3 @@
-const { preset } = require("@dw-react-lib/build");
+const { preset } = require("@dw-component-lib/build");
 
 preset();

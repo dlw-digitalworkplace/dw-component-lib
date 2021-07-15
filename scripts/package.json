@@ -1,5 +1,5 @@
 {
-	"name": "@dw-react-lib/build",
+	"name": "@dw-component-lib/build",
 	"version": "1.0.0",
 	"private": true,
 	"main": "index.js",

@@ -46,4 +46,4 @@ yarn release
 
 OR:
 
-Run the ["Release" GitHub action](https://github.com/dlw-digitalworkplace/dw-react-lib/actions?query=workflow%3ARelease)
+Run the ["Release" GitHub action](https://github.com/dlw-digitalworkplace/dw-component-lib/actions?query=workflow%3ARelease)
