@@ -8,7 +8,9 @@ export const storiesOrder = {
 		introduction: null
 	},
 	components: null,
-	"refresh cache": null,
+	"refresh cache": {
+		"refresh cache": null
+	},
 	taxonomyproviders: null,
 	utils: null,
 	changelog: null

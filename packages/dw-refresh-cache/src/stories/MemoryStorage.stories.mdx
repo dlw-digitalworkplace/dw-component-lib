@@ -1,0 +1,29 @@
+<Meta title="Refresh Cache/Memory Storage" />
+
+# Memory Storage
+
+The `MemoryStorage` class provides an in-memory Storage, which implements the same API as `localStorage` and
+`sessionStorage`. You can use it to have a static storage variable in your page/application.
+
+`MemoryStorage` returns a **singleton** instance.
+
+> 💡 While `localStorage` and `sessionStorage` persist their data in the browser, ensuring availability when navigating
+> away or refreshing the page, this is not the case with `MemoryStorage`. Keep this in mind when trying to use this for
+> true long-term caching scenario's.
+
+## Usage
+
+```tsx
+import { MemoryStorage } from "@dlw-digitalworkplace/dw-refresh-cache";
+
+// set
+MemoryStorage.setItem("some-key", value);
+
+// get
+const value = MemoryStorage.getItem("some-key");
+```
+
+## Documentation
+
+`MemoryStorage` implements the `Storage` interface. See the
+[documentation](https://developer.mozilla.org/en-US/docs/Web/API/Storage) for more information.
