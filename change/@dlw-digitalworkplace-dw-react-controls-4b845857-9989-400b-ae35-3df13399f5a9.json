@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Update theming support and add default validation when too many items are selected",
+  "packageName": "@dlw-digitalworkplace/dw-react-controls",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "none"
+}
