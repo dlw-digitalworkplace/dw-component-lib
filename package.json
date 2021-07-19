@@ -23,7 +23,7 @@
 		"@storybook/addon-storysource": "^6.3.4",
 		"@storybook/react": "^6.3.4",
 		"babel-loader": "^8.2.2",
-		"beachball": "^2.6.2",
+		"beachball": "^2.6.3",
 		"lage": "^0.30.0",
 		"lint-staged": "^11.0.0",
 		"office-ui-fabric-react": "^6.214.1",
