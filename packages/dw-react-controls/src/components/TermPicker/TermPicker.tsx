@@ -7,6 +7,7 @@ import { getStyles } from "./TermPicker.styles";
 import { ITermPickerProps } from "./TermPicker.types";
 
 export const TermPicker = ({
+	isInvalid: isInvalidProp,
 	onBlur: onBlurProp,
 	onEmptyInputFocus: onInputFocusProp,
 	onFocus: onFocusProp,
@@ -39,7 +40,13 @@ export const TermPicker = ({
 		setIsFocused(false);
 	};
 
-	const styles = getStyles({ ...props, isFocused, isInvalid, theme, styles: customStyles });
+	const styles = getStyles({
+		...props,
+		isFocused,
+		isInvalid: isInvalidProp === undefined ? isInvalid : isInvalidProp,
+		theme,
+		styles: customStyles
+	});
 
 	return <TermPickerBase {...props} onEmptyInputFocus={onInputFocus} onBlur={onBlur} styles={styles} />;
 };

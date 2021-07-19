@@ -43,6 +43,8 @@ export interface ITaxonomyPickerProps {
 
 	theme?: ITheme;
 
+	errorMessage?: string | JSX.Element;
+
 	onChange(items: ITermValue[]): void;
 
 	/**
@@ -60,6 +62,8 @@ export interface ITaxonomyPickerProps {
 	 * @param message The current message that is being returned.
 	 */
 	onReceiveTermCreationSuccessMessage?(newValue: string, message: string): string | JSX.Element;
+
+	onGetErrorMessage?(selectedItems: ITermValue[]): string | JSX.Element | PromiseLike<string | JSX.Element> | undefined;
 }
 
 export interface ITaxonomyPickerStyleProps {

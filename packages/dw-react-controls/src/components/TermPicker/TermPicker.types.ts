@@ -9,17 +9,22 @@ import { ITermValue } from "./models";
 
 export interface ITermPickerProps extends IBasePickerProps<ITermValue> {
 	/**
-	 * Optional class for the root TaxonomyPicker element
+	 * Specifies if the picker is in an invalid state.
+	 */
+	isInvalid?: boolean;
+
+	/**
+	 * Optional class for the root TaxonomyPicker element.
 	 */
 	className?: string;
 
 	/**
-	 * Call to apply custom styling on the TaxonomyPicker element
+	 * Call to apply custom styling on the TaxonomyPicker element.
 	 */
 	styles?: IStyleFunctionOrObject<ITermPickerStyleProps, ITermPickerStyles>;
 
 	/**
-	 * The current theme applied to the control
+	 * The current theme applied to the control.
 	 */
 	theme?: ITheme;
 }
