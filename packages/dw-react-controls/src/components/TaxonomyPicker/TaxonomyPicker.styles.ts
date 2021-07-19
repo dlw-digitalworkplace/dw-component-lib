@@ -2,7 +2,8 @@ import { AnimationClassNames } from "office-ui-fabric-react/lib/Styling";
 import { ITaxonomyPickerStyleProps, ITaxonomyPickerStyles } from "./TaxonomyPicker.types";
 
 const GlobalClassNames = {
-	taxonomyPicker: "dw-TaxonomyPicker",
+	root: "dw-TaxonomyPicker",
+	picker: "dw-TaxonomyPicker-picker",
 	inputWrapper: "dw-TaxonomyPicker-container",
 	errorMessage: "dw-TaxonomyPicker-errorMessage",
 	successMessage: "dw-TaxonomyPicker-successMessage"
@@ -14,7 +15,7 @@ export const getStyles = (props: ITaxonomyPickerStyleProps): ITaxonomyPickerStyl
 	const classNames = GlobalClassNames;
 
 	return {
-		taxonomyPicker: [classNames.taxonomyPicker, className],
+		root: [classNames.root, className],
 		inputWrapper: [
 			classNames.inputWrapper,
 			{
@@ -23,6 +24,7 @@ export const getStyles = (props: ITaxonomyPickerStyleProps): ITaxonomyPickerStyl
 			}
 		],
 		input: [
+			classNames.picker,
 			{
 				flexGrow: 1
 			}
@@ -40,7 +42,7 @@ export const getStyles = (props: ITaxonomyPickerStyleProps): ITaxonomyPickerStyl
 			}
 		],
 		successMessage: [
-			classNames.errorMessage,
+			classNames.successMessage,
 			AnimationClassNames.slideDownIn20,
 			fonts.small,
 			{

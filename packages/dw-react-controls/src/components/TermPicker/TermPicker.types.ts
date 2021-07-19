@@ -24,6 +24,10 @@ export interface ITermPickerProps extends IBasePickerProps<ITermValue> {
 	theme?: ITheme;
 }
 
-export interface ITermPickerStyleProps extends IBasePickerStyleProps {}
+export interface ITermPickerStyleProps extends IBasePickerStyleProps {
+	isInvalid?: boolean;
+
+	styles?: IStyleFunctionOrObject<ITermPickerStyleProps, ITermPickerStyles>;
+}
 
 export interface ITermPickerStyles extends IBasePickerStyles {}

@@ -46,19 +46,20 @@ export interface ITaxonomyPickerProps {
 	onChange(items: ITermValue[]): void;
 
 	/**
-	 * When specified, allows to override the error message that is being set.
+	 * When specified, allows to override the error message that is being set when creating a new term fails.
 	 * This allows you to display a different message - or none at all - when an error is returned.
+	 * @param newValue The name of the term that was being added.
 	 * @param err The current error that is being thrown.
 	 */
-	onGetErrorMessage?(err: string): string | JSX.Element;
+	onReceiveTermCreationFailedMessage?(newValue: string, err: string): string | JSX.Element;
 
 	/**
-	 * When specified, allows to override the success message that is being set.
+	 * When specified, allows to override the success message that is being set when successfully creating a new term.
 	 * This allows you to display a different message - or none at all - when a new term has been created.
-	 * @param message The current message that is being returned.
 	 * @param newValue The name of the term that has been added.
+	 * @param message The current message that is being returned.
 	 */
-	onGetSuccessMessage?(message: string, newValue: string): string | JSX.Element;
+	onReceiveTermCreationSuccessMessage?(newValue: string, message: string): string | JSX.Element;
 }
 
 export interface ITaxonomyPickerStyleProps {
@@ -67,7 +68,7 @@ export interface ITaxonomyPickerStyleProps {
 }
 
 export interface ITaxonomyPickerStyles {
-	taxonomyPicker?: IStyle;
+	root?: IStyle;
 	inputWrapper?: IStyle;
 	input?: IStyle;
 	errorMessage?: IStyle;

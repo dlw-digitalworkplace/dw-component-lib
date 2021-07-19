@@ -25,18 +25,20 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	provider,
 	selectedItems,
 	onChange,
-	onGetErrorMessage,
-	onGetSuccessMessage,
+	onReceiveTermCreationFailedMessage,
+	onReceiveTermCreationSuccessMessage,
 	required,
 	styles,
 	theme
 }) => {
 	const [dialogIsOpen, setDialogIsOpen] = React.useState(false);
-	const [errorMessage, setErrorMessage] = useStateIfMounted<string | JSX.Element>(undefined);
-	const [successMessage, setSuccessMessage] = useStateIfMounted<string | JSX.Element>(undefined);
+	const [creationResultMessage, setCreationResultMessage] = useStateIfMounted<{
+		isSuccess: boolean;
+		message: string | JSX.Element;
+	}>(undefined);
 	const [isCreatingTerm, setIsCreatingTerm] = useStateIfMounted(false);
 
-	const successMessageTimeout = React.useRef<NodeJS.Timeout | undefined>(undefined);
+	const creationResultMessageTimeout = React.useRef<NodeJS.Timeout | undefined>(undefined);
 
 	const classNames = getClassNames(styles, { className, theme: theme! });
 
@@ -89,8 +91,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 
 	const onResolveSuggestions = (filter: string, currentSelection?: ITerm[]): Promise<ITerm[]> => {
 		// clear current status messages
-		setErrorMessage(undefined);
-		clearSuccessMessage();
+		clearCreationResultMessage();
 
 		// resolve suggestions
 		return doResolveSuggestions(filter, currentSelection);
@@ -115,7 +116,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 
 	const onValidateInput = (input: string): ValidationState => {
 		// clear any active error message
-		setErrorMessage(undefined);
+		clearCreationResultMessage();
 
 		// check if adding terms is allowed
 		if (!allowAddingTerms) {
@@ -141,7 +142,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 			setIsCreatingTerm(true);
 
 			// clear any previous confirmation message
-			clearSuccessMessage();
+			clearCreationResultMessage();
 
 			(createAction as Promise<ITerm>).then(
 				(res) => {
@@ -162,7 +163,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 					setIsCreatingTerm(false);
 
 					// communicate creation result
-					showCreationSuccessMessage("The term has been created successfully.", value);
+					showCreationSuccessMessage(value, "The term has been created successfully.");
 				},
 				(err) => {
 					// parse the error message from the result
@@ -170,7 +171,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 						typeof err === "object" && Object.keys(err).some((k) => k === "message") ? err.message : err.toString();
 
 					// set the error message
-					showErrorMessage(error);
+					showCreationFailedMessage(value, error);
 
 					// reset creation state
 					setIsCreatingTerm(false);
@@ -193,47 +194,70 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 		}
 	};
 
-	const showErrorMessage = (error: string): void => {
+	const showCreationFailedMessage = (newValue: string, error: string): void => {
 		let finalError: string | JSX.Element = error;
 
 		// override the error message when callback is specified
-		if (onGetErrorMessage) {
-			finalError = onGetErrorMessage(error);
+		if (onReceiveTermCreationFailedMessage) {
+			finalError = onReceiveTermCreationFailedMessage(newValue, error);
+		}
+
+		// clear the message timeout if it exists
+		if (creationResultMessageTimeout.current) {
+			clearTimeout(creationResultMessageTimeout.current);
 		}
 
 		// set the error message
-		setErrorMessage(finalError);
+		setCreationResultMessage({ isSuccess: false, message: finalError });
 	};
 
-	const showCreationSuccessMessage = (message: string, newValue: string): void => {
+	const showCreationSuccessMessage = (newValue: string, message: string): void => {
 		let finalMessage: string | JSX.Element = message;
 
 		// override the success message when callback is specified
-		if (onGetSuccessMessage) {
-			finalMessage = onGetSuccessMessage(finalMessage, newValue);
+		if (onReceiveTermCreationSuccessMessage) {
+			finalMessage = onReceiveTermCreationSuccessMessage(newValue, finalMessage);
 		}
 
 		// set the success message
-		setSuccessMessage(finalMessage);
+		setCreationResultMessage({ isSuccess: true, message: finalMessage });
 
 		// start a timeout to clear the success message
-		successMessageTimeout.current = setTimeout(() => {
-			clearSuccessMessage();
+		creationResultMessageTimeout.current = setTimeout(() => {
+			clearCreationResultMessage();
 		}, 5000);
 	};
 
-	const clearSuccessMessage = () => {
+	const clearCreationResultMessage = () => {
 		// clear the timeout if present
-		if (!!successMessageTimeout.current) {
-			clearTimeout(successMessageTimeout.current);
+		if (!!creationResultMessageTimeout.current) {
+			clearTimeout(creationResultMessageTimeout.current);
 		}
 
 		// clear the success message
-		setSuccessMessage(undefined);
+		setCreationResultMessage(undefined);
 	};
 
+	const renderMessage = React.useCallback(
+		(message: string | JSX.Element, isSuccess: boolean) => {
+			return typeof message === "string" ? (
+				<p className={isSuccess ? classNames.successMessage : classNames.errorMessage}>
+					<span data-automation-id={isSuccess ? "success-message" : "error-message"}>{message}</span>
+				</p>
+			) : (
+				<div
+					className={isSuccess ? classNames.successMessage : classNames.errorMessage}
+					data-automation-id={isSuccess ? "success-message" : "error-message"}
+				>
+					{message}
+				</div>
+			);
+		},
+		[classNames.successMessage, classNames.errorMessage]
+	);
+
 	return (
-		<div className={classNames.taxonomyPicker}>
+		<div className={classNames.root}>
 			{label && (
 				<Label required={required} {...labelProps}>
 					{label}
@@ -260,27 +284,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 				/>
 			</div>
 
-			{successMessage &&
-				(typeof successMessage === "string" ? (
-					<p className={classNames.successMessage}>
-						<span data-automation-id="success-message">{successMessage}</span>
-					</p>
-				) : (
-					<div className={classNames.successMessage} data-automation-id="success-message">
-						{successMessage}
-					</div>
-				))}
-
-			{errorMessage &&
-				(typeof errorMessage === "string" ? (
-					<p className={classNames.errorMessage}>
-						<span data-automation-id="error-message">{errorMessage}</span>
-					</p>
-				) : (
-					<div className={classNames.errorMessage} data-automation-id="error-message">
-						{errorMessage}
-					</div>
-				))}
+			{creationResultMessage && renderMessage(creationResultMessage.message, creationResultMessage.isSuccess)}
 
 			{dialogIsOpen && (
 				<TaxonomyPickerDialog
