@@ -1,0 +1,37 @@
+import { Meta } from "@storybook/addon-docs";
+
+<Meta title="Utils/utils/collections/findInTree" />
+
+# findInTree
+
+The `findInTree` function searches an object tree by it's given predicate. If no item is found, `undefined` is returned.
+
+## Documentation
+
+### `findInTree<T extends { children?: T[] }>(arr: T[], predicate: (value: T) => boolean): T | undefined`
+
+Searches in the source array and returns the first object matching the predicate.
+
+| Parameter | Type                    | Description                           |
+| --------- | ----------------------- | ------------------------------------- |
+| arr       | `T[]`                   | The source array to search in.        |
+| predicte  | `(value: T) => boolean` | The predicate to match the object to. |
+
+## Usage
+
+```tsx
+const match = findInTree(source, (it) => it.name === "Some item");
+```
+
+## Example
+
+```tsx
+import { findInTree } from "@dlw-digitalworkplace/dw-react-utils";
+
+const source = [
+	{ id: 1, name: "Item A" },
+	{ id: 2, name: "Item B", children: [{ id: B1, name: "Item B1" }] }
+];
+
+const result = findInTree(source, (it) => it.id === "B1"); // returns { id: B1, name: "Item B1" }
+```

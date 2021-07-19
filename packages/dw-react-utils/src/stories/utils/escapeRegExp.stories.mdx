@@ -1,0 +1,33 @@
+import { Meta } from "@storybook/addon-docs";
+
+<Meta title="Utils/utils/escapeRegExp" />
+
+# escapeRegExp
+
+The `escapeRegExp` function returns an escaped regular expression, allowing you to pass in an unformatted string and
+use the output to create a valid `RegExp` object.
+
+## Documentation
+
+### `escapeRegExp(input: string): string`
+
+| Parameter | Type     | Description            |
+| --------- | -------- | ---------------------- |
+| input     | `string` | Input value to escape. |
+
+## Usage
+
+```tsx
+const output = escapeRegExp(input);
+```
+
+## Example
+
+Example usage when creating a new `RegExp`:
+
+```tsx
+import { escapeRegExp } from "@dlw-digitalworkplace/dw-react-utils";
+
+const search = "Some \\ invalid { regex } string";
+const regex = new RegExp(escapeRegExp(search), "i");
+```
