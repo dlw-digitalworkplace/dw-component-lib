@@ -1,0 +1,36 @@
+import { Meta } from "@storybook/addon-docs";
+
+<Meta title="Utils/utils/collections/flatten" />
+
+# flatten
+
+The `flatten` function takes a hierarchical array, and flattens it into a single level.
+
+## Documentation
+
+### `flatten<T extends { children?: T[] }>(arr: T[])`
+
+Flattens an array to a single-level array, moving all children to the root.
+
+| Parameter | Type  | Description                  |
+| --------- | ----- | ---------------------------- |
+| arr       | `T[]` | The source array to flatten. |
+
+## Usage
+
+```tsx
+const result = flatten(source);
+```
+
+## Example
+
+```tsx
+import { flatten } from "@dlw-digitalworkplace/dw-react-utils";
+
+const source = [
+	{ id: 1, name: "Item A" },
+	{ id: 2, name: "Item B", children: [{ id: B1, name: "Item B1" }] }
+];
+
+const result = flatten(source); // result.length === 3
+```
