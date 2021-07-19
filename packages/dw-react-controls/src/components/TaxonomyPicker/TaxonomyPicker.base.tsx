@@ -18,6 +18,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	allowDisabledTerms,
 	className,
 	disabled,
+	errorMessage: errorMessageProp,
 	itemLimit,
 	label,
 	labelProps,
@@ -25,6 +26,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	provider,
 	selectedItems,
 	onChange,
+	onGetErrorMessage,
 	onReceiveTermCreationFailedMessage,
 	onReceiveTermCreationSuccessMessage,
 	required,
@@ -37,8 +39,28 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 		message: string | JSX.Element;
 	}>(undefined);
 	const [isCreatingTerm, setIsCreatingTerm] = useStateIfMounted(false);
+	const [_errorMessage, setErrorMessage] = React.useState<string | JSX.Element>();
+	const lastValidation = React.useRef(0);
 
 	const creationResultMessageTimeout = React.useRef<NodeJS.Timeout | undefined>(undefined);
+
+	React.useEffect(() => {
+		const result = onGetErrorMessage && onGetErrorMessage(selectedItems);
+
+		if (result !== undefined) {
+			if (typeof result === "string" || !("then" in result)) {
+				setErrorMessage(result);
+			} else {
+				const currentValidationNumber = ++lastValidation.current;
+
+				result.then((errMsg: string | JSX.Element) => {
+					if (currentValidationNumber === lastValidation.current) {
+						setErrorMessage(errMsg);
+					}
+				});
+			}
+		}
+	}, [onGetErrorMessage, selectedItems]);
 
 	const classNames = getClassNames(styles, { className, theme: theme! });
 
@@ -256,6 +278,8 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 		[classNames.successMessage, classNames.errorMessage]
 	);
 
+	const errorMessage = React.useMemo(() => _errorMessage || errorMessageProp, [_errorMessage, errorMessageProp]);
+
 	return (
 		<div className={classNames.root}>
 			{label && (
@@ -269,6 +293,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 					className={classNames.input}
 					createGenericItem={onCreateGenericItem}
 					disabled={disabled || isCreatingTerm}
+					isInvalid={!!errorMessage ? true : undefined}
 					itemLimit={itemLimit}
 					onChange={handleSelectionChange}
 					onResolveSuggestions={onResolveSuggestions}
@@ -283,6 +308,8 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 					onClick={handlePopupButtonClick}
 				/>
 			</div>
+
+			{errorMessage && renderMessage(errorMessage, false)}
 
 			{creationResultMessage && renderMessage(creationResultMessage.message, creationResultMessage.isSuccess)}
 
