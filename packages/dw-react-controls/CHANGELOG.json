@@ -2,6 +2,27 @@
   "name": "@dlw-digitalworkplace/dw-react-controls",
   "entries": [
     {
+      "date": "Mon, 19 Jul 2021 13:45:55 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-controls_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "[TaxonomyPicker] Add configurable errorMessage to control",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "46d29c75894bec1549bc46b6f46b4fcd3be03cae",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          },
+          {
+            "comment": "[TaxonomyPicker] Update theming support and add default validation when too many items are selected",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "a94eeab631c2f5fd3f768624a7641388caa7b6ea",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 15 Jul 2021 11:51:25 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-controls_v0.1.1",
       "version": "0.1.1",

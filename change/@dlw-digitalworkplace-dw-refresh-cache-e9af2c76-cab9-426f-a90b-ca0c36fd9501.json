@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Add tslib to package dependencies",
-  "packageName": "@dlw-digitalworkplace/dw-refresh-cache",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "none"
-}

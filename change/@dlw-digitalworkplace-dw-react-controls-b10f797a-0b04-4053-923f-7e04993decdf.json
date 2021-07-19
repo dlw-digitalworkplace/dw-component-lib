@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add configurable errorMessage to control",
-  "packageName": "@dlw-digitalworkplace/dw-react-controls",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "none"
-}

@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-react-utils",
   "entries": [
     {
+      "date": "Mon, 19 Jul 2021 13:45:55 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-utils_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add tslib to package dependencies",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "46d29c75894bec1549bc46b6f46b4fcd3be03cae",
+            "package": "@dlw-digitalworkplace/dw-react-utils"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 13 Jul 2021 15:03:34 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-utils_v0.1.0",
       "version": "0.1.0",
