@@ -1,6 +1,6 @@
 import { ILabelProps } from "office-ui-fabric-react/lib/Label";
 import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
-import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
+import { IRenderFunction, IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
 import { ITermValue } from "../TermPicker";
 import { ITaxonomyProvider } from "./models";
 import { ITaxonomyPickerDialogProps } from "./TaxonomyPickerDialog.types";
@@ -45,6 +45,8 @@ export interface ITaxonomyPickerProps {
 
 	errorMessage?: string | JSX.Element;
 
+	onRenderOpenDialogButton?: IRenderFunction<ITaxonomyPickerDialogButtonProps>;
+
 	onChange(items: ITermValue[]): void;
 
 	/**
@@ -77,4 +79,9 @@ export interface ITaxonomyPickerStyles {
 	input?: IStyle;
 	errorMessage?: IStyle;
 	successMessage?: IStyle;
+}
+
+export interface ITaxonomyPickerDialogButtonProps {
+	disabled: boolean;
+	onButtonClick: React.MouseEventHandler<HTMLAnchorElement | HTMLButtonElement | HTMLDivElement>;
 }

@@ -2,11 +2,17 @@ import { useStateIfMounted } from "@dlw-digitalworkplace/dw-react-utils";
 import { IconButton } from "office-ui-fabric-react/lib/Button";
 import { ValidationState } from "office-ui-fabric-react/lib/components/pickers/BasePicker.types";
 import { Label } from "office-ui-fabric-react/lib/Label";
-import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
+import { classNamesFunction, IRenderFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
+import { composeRenderFunction } from "../../utilities";
 import { ITermValue, TermPicker } from "../TermPicker";
 import { ITerm, ITermCreationResult, ITermFilterOptions } from "./models";
-import { ITaxonomyPickerProps, ITaxonomyPickerStyleProps, ITaxonomyPickerStyles } from "./TaxonomyPicker.types";
+import {
+	ITaxonomyPickerDialogButtonProps,
+	ITaxonomyPickerProps,
+	ITaxonomyPickerStyleProps,
+	ITaxonomyPickerStyles
+} from "./TaxonomyPicker.types";
 import { TaxonomyPickerDialog } from "./TaxonomyPickerDialog";
 
 const getClassNames = classNamesFunction<ITaxonomyPickerStyleProps, ITaxonomyPickerStyles>();
@@ -29,6 +35,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	onGetErrorMessage,
 	onReceiveTermCreationFailedMessage,
 	onReceiveTermCreationSuccessMessage,
+	onRenderOpenDialogButton,
 	required,
 	styles,
 	theme
@@ -280,6 +287,24 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 
 	const errorMessage = React.useMemo(() => _errorMessage || errorMessageProp, [_errorMessage, errorMessageProp]);
 
+	const renderOpenDialogButton: IRenderFunction<ITaxonomyPickerDialogButtonProps> = (
+		props?: ITaxonomyPickerDialogButtonProps
+	) => {
+		return props ? (
+			<IconButton
+				disabled={props.disabled}
+				iconProps={{
+					iconName: "TagUnknown12"
+				}}
+				onClick={props.onButtonClick}
+			/>
+		) : null;
+	};
+
+	const finalOnRenderOpenDialogButton = onRenderOpenDialogButton
+		? composeRenderFunction(onRenderOpenDialogButton, renderOpenDialogButton)
+		: renderOpenDialogButton;
+
 	return (
 		<div className={classNames.root}>
 			{label && (
@@ -300,13 +325,10 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 					onValidateInput={onValidateInput}
 					selectedItems={selectedItems}
 				/>
-				<IconButton
-					disabled={disabled}
-					iconProps={{
-						iconName: "TagUnknown12"
-					}}
-					onClick={handlePopupButtonClick}
-				/>
+				{finalOnRenderOpenDialogButton({
+					disabled: !!disabled,
+					onButtonClick: handlePopupButtonClick
+				})}
 			</div>
 
 			{errorMessage && renderMessage(errorMessage, false)}

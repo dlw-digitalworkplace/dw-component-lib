@@ -44,6 +44,11 @@ export interface ITreeItemProps {
 	theme?: ITheme;
 
 	/**
+	 * When specified it will override the default rendering of the TreeItemContent section
+	 */
+	onRenderItemContents?: IRenderFunction<ITreeItemContentProps>;
+
+	/**
 	 * Optional callback when the tree node has been clicked
 	 */
 	onClick?(event: React.MouseEvent<HTMLElement>): void;
@@ -52,11 +57,6 @@ export interface ITreeItemProps {
 	 * Optional callback when the tree node has been invoked
 	 */
 	onInvoke?(event: React.MouseEvent<HTMLElement>): void;
-
-	/**
-	 * When specified it will override the default rendering of the TreeItemContent section
-	 */
-	onRenderItemContents?: IRenderFunction<ITreeItemContentProps>;
 }
 
 export interface ITreeItemStyleProps {
