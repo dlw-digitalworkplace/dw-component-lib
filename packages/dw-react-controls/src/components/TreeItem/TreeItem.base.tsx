@@ -8,6 +8,7 @@ import { ContextualMenu, IContextualMenuItem } from "office-ui-fabric-react/lib/
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { classNamesFunction, IRenderFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
+import { composeRenderFunction } from "../../utilities";
 import TreeViewContext from "../TreeView/TreeView.context";
 import { TreeItemContent } from "./sections/TreeItemContent";
 import { ITreeItemContentProps } from "./sections/TreeItemContent.types";
@@ -83,17 +84,10 @@ export const TreeItemBase: React.FC<ITreeItemProps> = React.forwardRef<HTMLLIEle
 
 	const classNames = getClassNames(styles, { className, disabled, expanded, selected, theme: theme! });
 
-	const renderItemContents: IRenderFunction<ITreeItemContentProps> = (props: ITreeItemContentProps | undefined) => {
-		return props ? <TreeItemContent {...props} /> : null;
-	};
-
-	const composeRenderFunction = (
-		outer: IRenderFunction<ITreeItemContentProps>,
-		inner: IRenderFunction<ITreeItemContentProps>
-	): IRenderFunction<ITreeItemContentProps> => {
-		return (outerProps?: ITreeItemContentProps, defaultRender?: IRenderFunction<ITreeItemContentProps>) => {
-			return outer(outerProps, defaultRender ? defaultRender : inner);
-		};
+	const renderItemContents: IRenderFunction<ITreeItemContentProps> = (
+		contentProps: ITreeItemContentProps | undefined
+	) => {
+		return contentProps ? <TreeItemContent {...contentProps} /> : null;
 	};
 
 	const finalOnRenderItemContents = onRenderItemContents
