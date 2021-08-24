@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "SharePointTaxonomyProvider: Don't return already selected items when retrieving data",
+  "packageName": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch"
+}

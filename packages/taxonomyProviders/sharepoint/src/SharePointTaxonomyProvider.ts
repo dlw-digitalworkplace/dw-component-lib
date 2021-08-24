@@ -96,6 +96,11 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 		for (let i = 0; i < this.cachedTerms!.length && result.length < options.maxItems!; i++) {
 			const term = this.cachedTerms![i];
 
+			// skip item if in ignore list
+			if (options.keysToIgnore && options.keysToIgnore.indexOf(term.get_id().toString()) !== -1) {
+				continue;
+			}
+
 			// skip deprecated term if requested
 			if (options.trimDeprecated && term.get_isDeprecated()) {
 				continue;
