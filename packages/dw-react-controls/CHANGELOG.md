@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-controls
 
-This log was last generated on Mon, 19 Jul 2021 13:45:55 GMT and should not be manually modified.
+This log was last generated on Tue, 24 Aug 2021 05:39:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Tue, 24 Aug 2021 05:39:46 GMT
+
+### Minor changes
+
+- TaxonomyPicker: allow overriding default openDialog button (nick.sevens@delaware.pro)
 
 ## 0.2.0
 

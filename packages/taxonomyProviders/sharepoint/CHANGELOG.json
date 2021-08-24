@@ -2,6 +2,27 @@
   "name": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
   "entries": [
     {
+      "date": "Tue, 24 Aug 2021 05:39:46 GMT",
+      "tag": "@dlw-digitalworkplace/taxonomyprovider-sharepoint_v0.1.2",
+      "version": "0.1.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "SharePointTaxonomyProvider: Don't return already selected items when retrieving data",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "ea568ffe8abc131260e3ea2d4dde0e1b765cec13",
+            "package": "@dlw-digitalworkplace/taxonomyprovider-sharepoint"
+          },
+          {
+            "comment": "Bump @dlw-digitalworkplace/taxonomyprovider-sharepoint to v0.1.2",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "ea568ffe8abc131260e3ea2d4dde0e1b765cec13",
+            "package": "@dlw-digitalworkplace/taxonomyprovider-sharepoint"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 19 Jul 2021 13:45:55 GMT",
       "tag": "@dlw-digitalworkplace/taxonomyprovider-sharepoint_v0.1.1",
       "version": "0.1.1",

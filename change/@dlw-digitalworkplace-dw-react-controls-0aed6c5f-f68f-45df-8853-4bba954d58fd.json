@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "TaxonomyPicker: allow overriding default openDialog button",
-  "packageName": "@dlw-digitalworkplace/dw-react-controls",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "none"
-}

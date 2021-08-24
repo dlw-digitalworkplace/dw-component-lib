@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-react-controls",
   "entries": [
     {
+      "date": "Tue, 24 Aug 2021 05:39:46 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-controls_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "TaxonomyPicker: allow overriding default openDialog button",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "ea568ffe8abc131260e3ea2d4dde0e1b765cec13",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 19 Jul 2021 13:45:55 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-controls_v0.2.0",
       "version": "0.2.0",
