@@ -32,7 +32,13 @@ export const Basic: Story<ITaxonomyPickerProps> = ({ onChange, ...args }) => {
 	const [selected, setSelected] = React.useState<ITermValue[]>([]);
 
 	return (
-		<TaxonomyPicker {...args} provider={new MockTaxonomyProvider()} selectedItems={selected} onChange={setSelected} />
+		<TaxonomyPicker
+			{...args}
+			provider={new MockTaxonomyProvider()}
+			selectedItems={selected}
+			onChange={setSelected}
+			onRenderOpenDialogButton={undefined}
+		/>
 	);
 };
 Basic.argTypes = { ...defaultArgTypes };
