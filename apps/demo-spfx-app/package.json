@@ -6,8 +6,7 @@
 	"scripts": {
 		"build": "gulp bundle",
 		"clean": "gulp clean",
-		"start": "gulp serve",
-		"test": "gulp test"
+		"start": "gulp serve"
 	},
 	"dependencies": {
 		"@dlw-digitalworkplace/dw-react-controls": "0.3.0",

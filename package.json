@@ -42,6 +42,10 @@
 			"packages/*",
 			"packages/taxonomyProviders/*",
 			"scripts"
+		],
+		"nohoist": [
+			"**/@uifabric/**",
+			"**/office-ui-fabric-react"
 		]
 	}
 }
