@@ -1,0 +1,20 @@
+{
+  "name": "@dlw-digitalworkplace/dw-spfx-controls",
+  "entries": [
+    {
+      "date": "Tue, 31 Aug 2021 13:25:28 GMT",
+      "tag": "@dlw-digitalworkplace/dw-spfx-controls_v1.0.0",
+      "version": "1.0.0",
+      "comments": {
+        "major": [
+          {
+            "comment": "Add WebPartTitle control",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "9b5d2518bf4a626eae608118c2e0fc251ad479cf",
+            "package": "@dlw-digitalworkplace/dw-spfx-controls"
+          }
+        ]
+      }
+    }
+  ]
+}
