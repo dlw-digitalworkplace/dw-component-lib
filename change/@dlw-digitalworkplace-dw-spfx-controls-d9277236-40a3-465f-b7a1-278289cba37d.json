@@ -1,0 +1,7 @@
+{
+  "type": "major",
+  "comment": "Add WebPartTitle control",
+  "packageName": "@dlw-digitalworkplace/dw-spfx-controls",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch"
+}
