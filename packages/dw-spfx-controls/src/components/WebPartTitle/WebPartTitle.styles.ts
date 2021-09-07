@@ -19,8 +19,6 @@ export const getStyles = (props: IWebPartTitleStyleProps): IWebPartTitleStyles =
 				flexDirection: "row",
 				justifyContent: "flex-end",
 				marginBottom: "18px",
-				marginLeft: theme.rtl && theme.spacing.l2,
-				marginRight: !theme.rtl && theme.spacing.l2,
 				marginTop: 0,
 				whiteSpace: "pre-wrap"
 			},
@@ -31,6 +29,7 @@ export const getStyles = (props: IWebPartTitleStyleProps): IWebPartTitleStyles =
 			classNames.title,
 			{
 				...theme.fonts.xLarge,
+				marginRight: theme.spacing.l2,
 				flexGrow: 1
 			}
 		],
