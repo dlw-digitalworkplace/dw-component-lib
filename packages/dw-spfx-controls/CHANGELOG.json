@@ -8,7 +8,7 @@
       "comments": {
         "minor": [
           {
-            "comment": "Add more info link to webpart title",
+            "comment": "[WebPartTitle] Add more info link to webpart title",
             "author": "nick.sevens@delaware.pro",
             "commit": "9fce8153a1cce28510f677c1e83e4a9a57102ae8",
             "package": "@dlw-digitalworkplace/dw-spfx-controls"
