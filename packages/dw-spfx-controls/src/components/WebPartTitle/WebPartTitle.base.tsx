@@ -8,7 +8,7 @@ import { IWebPartTitleProps, IWebPartTitleStyleProps, IWebPartTitleStyles } from
 const getClassNames = classNamesFunction<IWebPartTitleStyleProps, IWebPartTitleStyles>();
 
 export const WebPartTitleBase: React.FC<IWebPartTitleProps> = (props) => {
-	const { className, displayMode, hidden, onUpdate, placeholder, styles, theme, title } = props;
+	const { className, displayMode, hidden, onRenderMoreInfoLink, onUpdate, placeholder, styles, theme, title } = props;
 
 	const classNames = getClassNames(styles, { className, theme: theme });
 
@@ -19,36 +19,36 @@ export const WebPartTitleBase: React.FC<IWebPartTitleProps> = (props) => {
 		onUpdate(ev.target.value);
 	};
 
-	if (displayMode === DisplayMode.Edit) {
-		// if in edit mode
-		return (
-			<div className={classNames.root}>
-				<TextareaAutosize
-					aria-label={strings.WebPartTitleLabel}
-					className={classNames.textarea}
-					data-testid="input"
-					defaultValue={title}
-					placeholder={placeholder || strings.WebPartTitlePlaceholder}
-					onChange={handleChange}
-				/>
-			</div>
-		);
+	const isHidden = displayMode === DisplayMode.Read && (hidden || (!title && !onRenderMoreInfoLink));
+
+	if (isHidden) {
+		return null;
 	}
 
-	if (displayMode === DisplayMode.Read) {
-		// if in display mode
-		if (!title || hidden) {
-			return null;
-		}
+	return (
+		<div className={classNames.root}>
+			{(displayMode === DisplayMode.Edit || !!title) && (
+				<div className={classNames.title}>
+					{displayMode === DisplayMode.Edit ? (
+						<TextareaAutosize
+							aria-label={strings.WebPartTitleLabel}
+							className={classNames.textarea}
+							data-testid="input"
+							defaultValue={title}
+							placeholder={placeholder || strings.WebPartTitlePlaceholder}
+							onChange={handleChange}
+						/>
+					) : (
+						!!title && (
+							<span role="heading" aria-level={2} data-testid="title">
+								{title}
+							</span>
+						)
+					)}
+				</div>
+			)}
 
-		return (
-			<div className={classNames.root}>
-				<span role="heading" aria-level={2} data-testid="title">
-					{title}
-				</span>
-			</div>
-		);
-	}
-
-	return null;
+			{!!onRenderMoreInfoLink && <div className={classNames.moreInfoLink}>{onRenderMoreInfoLink()}</div>}
+		</div>
+	);
 };

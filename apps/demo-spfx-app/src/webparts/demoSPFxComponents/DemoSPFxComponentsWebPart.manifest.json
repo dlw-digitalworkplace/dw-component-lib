@@ -23,7 +23,7 @@
 			"description": { "default": "Demo webpart showing the SPFx components." },
 			"officeFabricIconFontName": "Page",
 			"properties": {
-				"description": "DemoTaxonomyPicker"
+				"showMoreInfoLink": true
 			}
 		}
 	]

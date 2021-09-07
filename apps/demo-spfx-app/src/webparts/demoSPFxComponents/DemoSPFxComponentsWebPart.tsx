@@ -34,6 +34,7 @@ export default class DemoSPFxComponentsWebPart extends BaseClientSideWebPart<IDe
 				hidden={this.properties.hideTitle}
 				title={this.properties.title}
 				theme={createTheme(this._themeVariant)}
+				onRenderMoreInfoLink={this.properties.showMoreInfoLink && (() => <a href={""}>All items</a>)}
 				onUpdate={this._updateWebPartTitle}
 			/>,
 			this.domElement
@@ -62,6 +63,9 @@ export default class DemoSPFxComponentsWebPart extends BaseClientSideWebPart<IDe
 							groupFields: [
 								PropertyPaneToggle("hideTitle", {
 									label: strings.HideTitlePropertyLabel
+								}),
+								PropertyPaneToggle("showMoreInfoLink", {
+									label: strings.ShowMoreInfoLinkPropertyLabel
 								})
 							]
 						}
