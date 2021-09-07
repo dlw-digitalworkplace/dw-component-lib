@@ -9,16 +9,18 @@ export interface IWebPartTitleProps {
 	title: string;
 
 	/**
-	 * Optional class for the root TreeView element
+	 * Optional class for the root WebPartTitle element
 	 */
 	className?: string;
 
 	/**
-	 * Call to apply custom styling on the TreeView element
+	 * Call to apply custom styling on the WebPartTitle element
 	 */
 	styles?: IStyleFunctionOrObject<IWebPartTitleStyleProps, IWebPartTitleStyles>;
 
 	theme?: ITheme;
+
+	onRenderMoreInfoLink?(): JSX.Element;
 
 	onUpdate(value: string): void;
 }
@@ -31,5 +33,7 @@ export interface IWebPartTitleStyleProps {
 
 export interface IWebPartTitleStyles {
 	root?: IStyle;
+	title?: IStyle;
 	textarea?: IStyle;
+	moreInfoLink?: IStyle;
 }
