@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@dlw-digitalworkplace/dw-react-controls": "0.3.0",
-    "@dlw-digitalworkplace/dw-spfx-controls": "1.0.0",
+    "@dlw-digitalworkplace/dw-spfx-controls": "1.1.0",
     "@dlw-digitalworkplace/taxonomyprovider-sharepoint": "0.1.2",
     "@dw-component-lib/tslint-rules": "^1.0.0",
     "@microsoft/sp-core-library": "1.12.1",
