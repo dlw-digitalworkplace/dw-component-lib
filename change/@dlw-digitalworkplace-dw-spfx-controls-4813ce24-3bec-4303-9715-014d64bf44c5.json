@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "[WebPartTitle] Fix margin issue with more info link",
-  "packageName": "@dlw-digitalworkplace/dw-spfx-controls",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "patch"
-}

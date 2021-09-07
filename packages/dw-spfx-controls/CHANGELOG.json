@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-spfx-controls",
   "entries": [
     {
+      "date": "Tue, 07 Sep 2021 07:29:07 GMT",
+      "tag": "@dlw-digitalworkplace/dw-spfx-controls_v1.1.1",
+      "version": "1.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "[WebPartTitle] Fix margin issue with more info link",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "a1848436a390a69bb593e38e8ca8875bb3d29c8f",
+            "package": "@dlw-digitalworkplace/dw-spfx-controls"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 07 Sep 2021 06:51:34 GMT",
       "tag": "@dlw-digitalworkplace/dw-spfx-controls_v1.1.0",
       "version": "1.1.0",

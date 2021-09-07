@@ -2,6 +2,21 @@
   "name": "@dw-react-apps/demo-spfx-app",
   "entries": [
     {
+      "date": "Tue, 07 Sep 2021 07:29:07 GMT",
+      "tag": "@dw-react-apps/demo-spfx-app_v1.0.0",
+      "version": "1.0.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @dw-react-apps/demo-spfx-app to v1.0.0",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "a1848436a390a69bb593e38e8ca8875bb3d29c8f",
+            "package": "@dw-react-apps/demo-spfx-app"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 07 Sep 2021 06:51:34 GMT",
       "tag": "@dw-react-apps/demo-spfx-app_v1.0.0",
       "version": "1.0.0",

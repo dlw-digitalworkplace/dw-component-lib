@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-spfx-controls
 
-This log was last generated on Tue, 07 Sep 2021 06:51:34 GMT and should not be manually modified.
+This log was last generated on Tue, 07 Sep 2021 07:29:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.1
+
+Tue, 07 Sep 2021 07:29:07 GMT
+
+### Patches
+
+- [WebPartTitle] Fix margin issue with more info link (nick.sevens@delaware.pro)
 
 ## 1.1.0
 
