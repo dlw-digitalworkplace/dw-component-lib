@@ -10,7 +10,7 @@ Tue, 07 Sep 2021 06:51:34 GMT
 
 ### Minor changes
 
-- Add more info link to webpart title (nick.sevens@delaware.pro)
+- [WebPartTitle] Add more info link to webpart title (nick.sevens@delaware.pro)
 
 ## 1.0.0
 
