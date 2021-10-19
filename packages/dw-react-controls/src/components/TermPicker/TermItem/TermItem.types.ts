@@ -1,7 +1,7 @@
 import { IPickerItemProps } from "office-ui-fabric-react/lib/components/pickers/PickerItem.types";
 import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
 import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
-import { ITermValue } from "./models";
+import { ITermValue } from "../models";
 
 export interface ITermItemProps extends IPickerItemProps<ITermValue> {
 	/**

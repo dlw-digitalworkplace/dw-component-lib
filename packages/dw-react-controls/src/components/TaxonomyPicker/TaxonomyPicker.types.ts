@@ -3,7 +3,7 @@ import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
 import { IRenderFunction, IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
 import { ITermValue } from "../TermPicker";
 import { ITaxonomyProvider } from "./models";
-import { ITaxonomyPickerDialogProps } from "./TaxonomyPickerDialog.types";
+import { ITaxonomyPickerDialogProps } from "./TaxonomyPickerDialog";
 
 export interface ITaxonomyPickerProps {
 	allowAddingTerms?: boolean;
