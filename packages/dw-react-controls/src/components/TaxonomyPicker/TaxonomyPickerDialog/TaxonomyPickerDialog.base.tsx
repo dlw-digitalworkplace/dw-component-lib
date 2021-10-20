@@ -4,18 +4,18 @@ import { DialogFooter } from "office-ui-fabric-react/lib/Dialog";
 import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
 import * as rfdc from "rfdc";
-import { ITermValue, TermPicker } from "../TermPicker";
-import { ITreeItemAction, TreeItem } from "../TreeItem";
-import { TreeView } from "../TreeView";
-import { WideDialog } from "../WideDialog";
-import { ITerm, ITermCreationResult } from "./models";
+import { ITermValue, TermPicker } from "../../TermPicker";
+import { ITreeItemAction, TreeItem } from "../../TreeItem";
+import { TreeView } from "../../TreeView";
+import { WideDialog } from "../../WideDialog";
+import { ITerm, ITermCreationResult } from "../models";
+import { TermAdder } from "../TermAdder";
 import {
 	ITaxonomyPickerDialogLabels,
 	ITaxonomyPickerDialogProps,
 	ITaxonomyPickerDialogStyleProps,
 	ITaxonomyPickerDialogStyles
 } from "./TaxonomyPickerDialog.types";
-import { TermAdder } from "./TermAdder";
 
 const getClassNames = classNamesFunction<ITaxonomyPickerDialogStyleProps, ITaxonomyPickerDialogStyles>();
 const rootNodeKey = "__ROOTNODE__";

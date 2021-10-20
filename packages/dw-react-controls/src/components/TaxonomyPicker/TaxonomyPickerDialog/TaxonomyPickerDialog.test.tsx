@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import * as React from "react";
-import { ITerm, ITermFilterOptions } from "./models";
-import { MockTaxonomyProvider } from "./providers/MockTaxonomyProvider";
+import { ITerm, ITermFilterOptions } from "../models";
+import { MockTaxonomyProvider } from "../providers/MockTaxonomyProvider";
 import { TaxonomyPickerDialog } from "./TaxonomyPickerDialog";
 
 const mockTaxonomyProvider = new MockTaxonomyProvider();
