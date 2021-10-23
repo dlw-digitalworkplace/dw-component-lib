@@ -1,6 +1,6 @@
 {
   "type": "none",
-  "comment": "Refactor subcomponent directory structure",
+  "comment": "TaxonomyPicker: Refactor subcomponent directory structure",
   "packageName": "@dlw-digitalworkplace/dw-react-controls",
   "email": "nick.sevens@delaware.pro",
   "dependentChangeType": "none"

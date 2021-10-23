@@ -1,6 +1,6 @@
 import { ITaxonomyProvider, ITerm, ITermFilterOptions } from "@dlw-digitalworkplace/dw-react-controls";
+import { escapeRegExp } from "@dlw-digitalworkplace/dw-react-utils";
 import * as deepmerge from "deepmerge";
-import { escapeRegExp } from "../../../dw-react-utils/lib";
 import { InvalidOperationError } from "./InvalidOperationError";
 import { ProviderNotInitializedError } from "./ProviderNotInitializedError";
 
