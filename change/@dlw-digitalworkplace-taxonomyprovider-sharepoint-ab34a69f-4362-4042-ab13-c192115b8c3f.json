@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "TaxonomyProvider-SharePoint: Fix wrong import statement",
-  "packageName": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "patch"
-}

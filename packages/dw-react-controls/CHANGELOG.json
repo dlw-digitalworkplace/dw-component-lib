@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-react-controls",
   "entries": [
     {
+      "date": "Sat, 23 Oct 2021 17:24:48 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-controls_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "TaxonomyPicker: Refactor subcomponent directory structure",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "4b6fe856b625540421709dd1ab4d0fa1986e3e48",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 24 Aug 2021 05:39:46 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-controls_v0.3.0",
       "version": "0.3.0",

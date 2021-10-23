@@ -1,8 +1,17 @@
 # Change Log - @dlw-digitalworkplace/taxonomyprovider-sharepoint
 
-This log was last generated on Tue, 24 Aug 2021 05:39:46 GMT and should not be manually modified.
+This log was last generated on Sat, 23 Oct 2021 17:24:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.3
+
+Sat, 23 Oct 2021 17:24:48 GMT
+
+### Patches
+
+- TaxonomyProvider-SharePoint: Fix wrong import statement (nick.sevens@delaware.pro)
+- Bump @dlw-digitalworkplace/taxonomyprovider-sharepoint to v0.1.3 (nick.sevens@delaware.pro)
 
 ## 0.1.2
 

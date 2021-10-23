@@ -2,6 +2,27 @@
   "name": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
   "entries": [
     {
+      "date": "Sat, 23 Oct 2021 17:24:48 GMT",
+      "tag": "@dlw-digitalworkplace/taxonomyprovider-sharepoint_v0.1.3",
+      "version": "0.1.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "TaxonomyProvider-SharePoint: Fix wrong import statement",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "4b6fe856b625540421709dd1ab4d0fa1986e3e48",
+            "package": "@dlw-digitalworkplace/taxonomyprovider-sharepoint"
+          },
+          {
+            "comment": "Bump @dlw-digitalworkplace/taxonomyprovider-sharepoint to v0.1.3",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "4b6fe856b625540421709dd1ab4d0fa1986e3e48",
+            "package": "@dlw-digitalworkplace/taxonomyprovider-sharepoint"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 24 Aug 2021 05:39:46 GMT",
       "tag": "@dlw-digitalworkplace/taxonomyprovider-sharepoint_v0.1.2",
       "version": "0.1.2",
