@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-controls
 
-This log was last generated on Tue, 24 Aug 2021 05:39:46 GMT and should not be manually modified.
+This log was last generated on Fri, 05 Nov 2021 09:32:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.1
+
+Fri, 05 Nov 2021 09:32:19 GMT
+
+### Patches
+
+- TermPicker: Fix issue with picker showing current items as suggestions (nick.sevens@delaware.pro)
 
 ## 0.3.0
 

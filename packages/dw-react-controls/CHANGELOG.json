@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-react-controls",
   "entries": [
     {
+      "date": "Fri, 05 Nov 2021 09:32:19 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-controls_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "TermPicker: Fix issue with picker showing current items as suggestions",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "6754570a387d72d13c611255f829ad18a798c543",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 23 Oct 2021 17:24:48 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-controls_v0.3.0",
       "version": "0.3.0",
