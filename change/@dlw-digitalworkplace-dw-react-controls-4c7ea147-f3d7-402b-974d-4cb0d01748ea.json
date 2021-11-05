@@ -1,7 +1,7 @@
 {
   "type": "patch",
-  "comment": "Fix issue with picker showing current items as suggestions",
+  "comment": "TermPicker: Fix issue with picker showing current items as suggestions",
   "packageName": "@dlw-digitalworkplace/dw-react-controls",
   "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "patch"
+  "dependentChangeType": "none"
 }
