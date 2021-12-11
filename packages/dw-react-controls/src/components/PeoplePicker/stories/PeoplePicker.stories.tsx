@@ -12,6 +12,8 @@ export const Basic: Story<IPeoplePickerProps> = ({ ...args }) => {
 
 	return (
 		<PeoplePicker
+			label="Basic Picker"
+			itemLimit={5}
 			provider={new MockPeoplePickerProvider()}
 			selectedItems={selectedItems}
 			onChange={setSelectedItems}

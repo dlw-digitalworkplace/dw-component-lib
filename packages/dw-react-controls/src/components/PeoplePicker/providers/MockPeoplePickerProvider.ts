@@ -14,9 +14,12 @@ export class MockPeoplePickerProvider implements IPeoplePickerProvider {
 	}
 
 	public findUserOrGroup(
-		search?: string,
-		options?: IPeoplePickerFilterOptions
+		search: string,
+		options: IPeoplePickerFilterOptions
 	): (IUser | IGroup)[] | Promise<(IUser | IGroup)[]> {
-		return this._mockData;
+		return this._mockData.filter(d => (
+			d.displayName.toLowerCase().indexOf(search.toLowerCase()) > -1 &&
+			!options.idsToIgnore.some(i => i === d.id)
+		));
 	}
 }

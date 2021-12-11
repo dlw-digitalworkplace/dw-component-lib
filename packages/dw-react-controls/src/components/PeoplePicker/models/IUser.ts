@@ -1,3 +1,4 @@
+// TODO: Add option to set presence
 export interface IUser {
 	/**
 	 * Required field to uniquely identify the user

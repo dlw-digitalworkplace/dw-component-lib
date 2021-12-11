@@ -6,6 +6,10 @@ import { ObjectType } from "./ObjectType";
  */
 export interface IPeoplePickerFilterOptions {
 	/**
+	 * List of ids to ignore when searching.
+	 */
+	idsToIgnore: string[];
+	/**
 	 * Indicate which objects to search for (users, groups or both)
 	 */
 	searchFor: ObjectType;

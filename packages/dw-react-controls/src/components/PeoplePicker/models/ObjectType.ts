@@ -5,13 +5,13 @@ export enum ObjectType {
 	/**
 	 * Search for users and groups
 	 */
-	UsersAndGroups,
+	UsersAndGroups = "UsersAndGroups",
 	/**
 	 * Search for users only
 	 */
-	UsersOnly,
+	UsersOnly = "Users",
 	/**
 	 * Search of groups only
 	 */
-	GroupsOnly
+	GroupsOnly = "Groups"
 }

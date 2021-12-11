@@ -1,27 +1,73 @@
+import { Label } from "office-ui-fabric-react";
+import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
-import { IPeoplePickerProps } from "./PeoplePicker.types";
-import { NormalPeoplePicker } from "office-ui-fabric-react/lib/Pickers";
-import { IUser } from "./models/IUser";
-import { IGroup } from "./models/IGroup";
-import { IPersonaProps } from "office-ui-fabric-react";
+import { IGroup, IUser } from "./models";
+import { IPeoplePickerFilterOptions } from "./models/IPeoplePickerFilterOptions";
+import { ObjectType } from "./models/ObjectType";
+import { IPeoplePickerProps, IPeoplePickerStyleProps, IPeoplePickerStyles } from "./PeoplePicker.types";
+import { UserOrGroupPicker } from "./UserOrGroupPicker/UserOrGroupPicker";
 
-export const PeoplePickerBase: React.FC<IPeoplePickerProps> = (props: IPeoplePickerProps) => {
-	const { provider, selectedItems, onChange } = props;
+const getClassNames = classNamesFunction<IPeoplePickerStyleProps, IPeoplePickerStyles>();
 
-	const mapToPersona = (items: (IUser | IGroup)[]): IPersonaProps[] => {
-		return items.map(i => ({ id: i.id, text: i.displayName }));
-	};
+export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
+	provider,
+	selectedItems,
+	itemLimit,
+	label,
+	disabled,
+	required,
+	labelProps,
+	errorMessage,
+	styles,
+	className,
+	theme,
+	searchFor,
+	groupTypes,
+	onChange
+}: IPeoplePickerProps) => {
+	// Get classnames
+	const classNames = getClassNames(styles, { className, theme: theme! });
 
-	const onResolveSuggestions = async (filter: string): Promise<IPersonaProps[]> => {
-		return mapToPersona(await provider.findUserOrGroup(filter));
-	};
+	// Resolve suggestions
+	const onResolveSuggestions = async (
+		filter: string,
+		currentSelection: (IUser | IGroup)[]
+	): Promise<(IUser | IGroup)[]> => {
+
+		if (!filter || filter.length === 0) {
+			return [];
+		}
+
+		const filterOptions: IPeoplePickerFilterOptions = {
+			idsToIgnore: currentSelection.map(i => i.id),
+			searchFor: searchFor ?? ObjectType.UsersOnly,
+			groupTypes: groupTypes
+		};
+		return await provider.findUserOrGroup(filter, filterOptions);
+	}
 
 	return (
-		<NormalPeoplePicker
-			{...props}
-			selectedItems={mapToPersona(selectedItems)}
-			onResolveSuggestions={onResolveSuggestions}
-			onChange={onChange}
-		/>
+		<div className={classNames.root}>
+			{!!label && (
+				<Label required={required} {...labelProps}>
+					{label}
+				</Label>
+			)}
+			<div className={classNames.inputWrapper}>
+				<UserOrGroupPicker
+					className={classNames.input}
+					selectedItems={selectedItems}
+					onResolveSuggestions={onResolveSuggestions}
+					onChange={onChange}
+					disabled={disabled}
+					itemLimit={itemLimit}
+
+				/>
+			</div>
+			{!!errorMessage && (
+				<div className={classNames.errorMessage}>{errorMessage}</div>
+			)}
+		</div>
 	);
 };
+

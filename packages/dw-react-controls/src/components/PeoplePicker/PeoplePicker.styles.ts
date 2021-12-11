@@ -5,8 +5,7 @@ const GlobalClassNames = {
 	root: "dw-PeoplePicker",
 	picker: "dw-PeoplePicker-picker",
 	inputWrapper: "dw-PeoplePicker-container",
-	errorMessage: "dw-PeoplePicker-errorMessage",
-	successMessage: "dw-PeoplePicker-successMessage"
+	errorMessage: "dw-PeoplePicker-errorMessage"
 };
 
 export const getStyles = (props: IPeoplePickerStyleProps): IPeoplePickerStyles => {
@@ -35,18 +34,6 @@ export const getStyles = (props: IPeoplePickerStyleProps): IPeoplePickerStyles =
 			fonts.small,
 			{
 				color: semanticColors.errorText,
-				margin: 0,
-				paddingTop: 5,
-				display: "flex",
-				alignItems: "center"
-			}
-		],
-		successMessage: [
-			classNames.successMessage,
-			AnimationClassNames.slideDownIn20,
-			fonts.small,
-			{
-				color: semanticColors.successText,
 				margin: 0,
 				paddingTop: 5,
 				display: "flex",
