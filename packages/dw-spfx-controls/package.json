@@ -1,48 +1,59 @@
 {
-  "name": "@dlw-digitalworkplace/dw-spfx-controls",
-  "version": "1.1.1",
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
-  "author": "Nick Sevens",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/dlw-digitalworkplace/dw-component-lib"
-  },
-  "scripts": {
-    "build": "gulp build",
-    "clean": "gulp clean",
-    "start-test": "just-scripts jest-watch",
-    "test": "just-scripts test"
-  },
-  "dependencies": {
-    "@microsoft/sp-core-library": "1.12.1",
-    "@microsoft/sp-lodash-subset": "1.12.1",
-    "@microsoft/sp-office-ui-fabric-core": "1.12.1",
-    "@microsoft/sp-property-pane": "1.12.1",
-    "@microsoft/sp-webpart-base": "1.12.1",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^12.0.0",
-    "@testing-library/user-event": "^13.1.9",
-    "@types/jest": "^26.0.24",
-    "office-ui-fabric-react": "7.156.0",
-    "react": "16.9.0",
-    "react-dom": "16.9.0",
-    "react-textarea-autosize": "^8.3.3"
-  },
-  "devDependencies": {
-    "@dw-component-lib/build": "^1.0.0",
-    "@dw-component-lib/tslint-rules": "^1.0.0",
-    "@microsoft/rush-stack-compiler-3.9": "0.4.47",
-    "@microsoft/sp-build-web": "1.12.1",
-    "@microsoft/sp-module-interfaces": "1.12.1",
-    "@microsoft/sp-tslint-rules": "1.12.1",
-    "@microsoft/sp-webpart-workbench": "1.12.1",
-    "@types/react": "16.9.36",
-    "@types/react-dom": "16.9.8",
-    "@types/webpack-env": "1.13.1",
-    "ajv": "~5.2.2",
-    "gulp": "~4.0.2",
-    "identity-obj-proxy": "^3.0.0"
-  }
+	"name": "@dlw-digitalworkplace/dw-spfx-controls",
+	"version": "1.1.1",
+	"main": "lib/index.js",
+	"typings": "lib/index.d.ts",
+	"author": "Nick Sevens",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dlw-digitalworkplace/dw-component-lib"
+	},
+	"scripts": {
+		"build": "gulp build",
+		"clean": "gulp clean",
+		"start-test": "just-scripts jest-watch",
+		"test": "just-scripts test"
+	},
+	"dependencies": {
+		"react-textarea-autosize": "^8.3.3"
+	},
+	"devDependencies": {
+		"@dw-component-lib/build": "^1.0.0",
+		"@dw-component-lib/tslint-rules": "^1.0.0",
+		"@microsoft/rush-stack-compiler-3.9": "0.4.47",
+		"@microsoft/sp-build-web": "1.12.1",
+		"@microsoft/sp-core-library": "1.12.1",
+		"@microsoft/sp-lodash-subset": "1.12.1",
+		"@microsoft/sp-module-interfaces": "1.12.1",
+		"@microsoft/sp-office-ui-fabric-core": "1.12.1",
+		"@microsoft/sp-property-pane": "1.12.1",
+		"@microsoft/sp-tslint-rules": "1.12.1",
+		"@microsoft/sp-webpart-base": "1.12.1",
+		"@microsoft/sp-webpart-workbench": "1.12.1",
+		"@testing-library/jest-dom": "^5.14.1",
+		"@testing-library/react": "^12.0.0",
+		"@testing-library/user-event": "^13.1.9",
+		"@types/jest": "^26.0.24",
+		"@types/react-dom": "16.9.8",
+		"@types/react": "16.9.36",
+		"@types/webpack-env": "1.13.1",
+		"ajv": "~5.2.2",
+		"gulp": "~4.0.2",
+		"identity-obj-proxy": "^3.0.0",
+		"office-ui-fabric-react": "7.156.0",
+		"react": "16.9.0",
+		"react-dom": "16.9.0",
+		"ts-node": "^9.0.0"
+	},
+	"peerDependencies": {
+		"@microsoft/sp-core-library": ">=1.12.1 <2.0.0",
+		"@microsoft/sp-lodash-subset": ">=1.12.1 <2.0.0",
+		"@microsoft/sp-office-ui-fabric-core": ">=1.12.1 <2.0.0",
+		"@microsoft/sp-property-pane": ">=1.12.1 <2.0.0",
+		"@microsoft/sp-webpart-base": ">=1.12.1 <2.0.0",
+		"office-ui-fabric-react": ">=6.189.2 <7.0.0 || ^7.0.0",
+		"react": ">=16.8.0",
+		"react-dom": ">=16.8.0"
+	}
 }

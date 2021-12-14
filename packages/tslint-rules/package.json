@@ -6,7 +6,7 @@
 	"main": "tslint.json",
 	"author": "Nick Sevens",
 	"license": "MIT",
-	"dependencies": {
+	"devDependencies": {
 		"tslint-config-prettier": "^1.18.0",
 		"tslint-microsoft-contrib": "^6.2.0",
 		"tslint-react": "^5.0.0"
