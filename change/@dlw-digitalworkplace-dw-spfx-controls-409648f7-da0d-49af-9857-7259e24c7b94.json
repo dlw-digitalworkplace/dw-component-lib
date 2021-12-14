@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "optimize dependencies",
-  "packageName": "@dlw-digitalworkplace/dw-spfx-controls",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "patch"
-}

@@ -2,6 +2,27 @@
   "name": "@dlw-digitalworkplace/dw-react-controls",
   "entries": [
     {
+      "date": "Tue, 14 Dec 2021 18:38:01 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-controls_v0.3.2",
+      "version": "0.3.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "optimize dependencies",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "00c41977c39b48987bfb7c40b167d41de7853da2",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          },
+          {
+            "comment": "Bump @dlw-digitalworkplace/dw-react-controls to v0.3.2",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "00c41977c39b48987bfb7c40b167d41de7853da2",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 05 Nov 2021 09:32:19 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-controls_v0.3.1",
       "version": "0.3.1",

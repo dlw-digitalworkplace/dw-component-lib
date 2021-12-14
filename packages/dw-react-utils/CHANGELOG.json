@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-react-utils",
   "entries": [
     {
+      "date": "Tue, 14 Dec 2021 18:38:01 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-utils_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "optimize dependencies",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "00c41977c39b48987bfb7c40b167d41de7853da2",
+            "package": "@dlw-digitalworkplace/dw-react-utils"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 19 Jul 2021 13:45:55 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-utils_v0.1.0",
       "version": "0.1.0",

@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-spfx-controls
 
-This log was last generated on Tue, 07 Sep 2021 07:29:07 GMT and should not be manually modified.
+This log was last generated on Tue, 14 Dec 2021 18:38:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.2
+
+Tue, 14 Dec 2021 18:38:01 GMT
+
+### Patches
+
+- optimize dependencies (nick.sevens@delaware.pro)
 
 ## 1.1.1
 
