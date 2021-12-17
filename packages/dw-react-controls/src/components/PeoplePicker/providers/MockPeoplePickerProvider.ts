@@ -1,3 +1,4 @@
+import { ObjectType } from "..";
 import { IGroup } from "../models/IGroup";
 import { IPeoplePickerFilterOptions } from "../models/IPeoplePickerFilterOptions";
 import { IPeoplePickerProvider } from "../models/IPeoplePickerProvider";
@@ -6,11 +7,12 @@ import { MockGroups } from "./MockGroups";
 import { MockUsers } from "./MockUsers";
 export class MockPeoplePickerProvider implements IPeoplePickerProvider {
 
-	private _mockData: (IUser | IGroup)[];
+	private _mockUsers: IUser[];
+	private _mockGroups: IGroup[];
 
 	constructor() {
-		this._mockData = new Array<IUser | IGroup>();
-		this._mockData.push(...MockGroups, ...MockUsers);
+		this._mockUsers = MockUsers;
+		this._mockGroups = MockGroups;
 	}
 
 	public findUserOrGroup(
@@ -18,10 +20,28 @@ export class MockPeoplePickerProvider implements IPeoplePickerProvider {
 		options: IPeoplePickerFilterOptions
 	): (IUser | IGroup)[] | Promise<(IUser | IGroup)[]> {
 
-		const data = this._mockData.filter(d => (
-			d.displayName.toLowerCase().indexOf(search.toLowerCase()) > -1 &&
-			!options.idsToIgnore.some(i => i === d.id)
-		));
-		return new Promise(resolve => setTimeout(() => resolve(data), 500))
+		let filteredUsers: IUser[] = [];
+		let filteredGroups: IGroup[] = [];
+
+		// Filter Users
+		if (options.searchFor === ObjectType.UsersOnly || options.searchFor === ObjectType.UsersAndGroups) {
+			filteredUsers = this._mockUsers.filter(d => (
+				d.displayName.toLowerCase().indexOf(search.toLowerCase()) > -1 &&
+				!options.idsToIgnore.some(i => i === d.id)
+			));
+		}
+
+		// Filter Groups
+		if (options.searchFor === ObjectType.GroupsOnly || options.searchFor === ObjectType.UsersAndGroups) {
+			filteredGroups = this._mockGroups.filter(d => (
+				d.displayName.toLowerCase().indexOf(search.toLowerCase()) > -1 &&
+				(options.groupTypes ? options.groupTypes.some(gt => gt === d.groupType) : true) &&
+				!options.idsToIgnore.some(i => i === d.id)
+			));
+		}
+
+		// Return all
+		const allData = [...filteredUsers, ...filteredGroups];
+		return new Promise(resolve => setTimeout(() => resolve(allData), 500));
 	}
 }

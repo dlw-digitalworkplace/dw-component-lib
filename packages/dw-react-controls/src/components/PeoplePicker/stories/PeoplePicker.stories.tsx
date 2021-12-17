@@ -80,7 +80,6 @@ export const CustomSuggestionRender: Story<IPeoplePickerProps> = ({ onChange, ..
 	return (
 		<PeoplePicker
 			{...args}
-			searchFor={ObjectType.UsersOnly}
 			provider={new MockPeoplePickerProvider()}
 			selectedItems={selectedItems}
 			onChange={setSelectedItems}
