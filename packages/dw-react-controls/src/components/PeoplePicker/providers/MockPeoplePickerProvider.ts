@@ -1,4 +1,4 @@
-import { ObjectType } from "..";
+import { SearchType } from "..";
 import { IGroup } from "../models/IGroup";
 import { IPeoplePickerFilterOptions } from "../models/IPeoplePickerFilterOptions";
 import { IPeoplePickerProvider } from "../models/IPeoplePickerProvider";
@@ -24,7 +24,7 @@ export class MockPeoplePickerProvider implements IPeoplePickerProvider {
 		let filteredGroups: IGroup[] = [];
 
 		// Filter Users
-		if (options.searchFor === ObjectType.UsersOnly || options.searchFor === ObjectType.UsersAndGroups) {
+		if (options.searchFor === SearchType.UsersOnly || options.searchFor === SearchType.UsersAndGroups) {
 			filteredUsers = this._mockUsers.filter(d => (
 				d.displayName.toLowerCase().indexOf(search.toLowerCase()) > -1 &&
 				!options.idsToIgnore.some(i => i === d.id)
@@ -32,7 +32,7 @@ export class MockPeoplePickerProvider implements IPeoplePickerProvider {
 		}
 
 		// Filter Groups
-		if (options.searchFor === ObjectType.GroupsOnly || options.searchFor === ObjectType.UsersAndGroups) {
+		if (options.searchFor === SearchType.GroupsOnly || options.searchFor === SearchType.UsersAndGroups) {
 			filteredGroups = this._mockGroups.filter(d => (
 				d.displayName.toLowerCase().indexOf(search.toLowerCase()) > -1 &&
 				(options.groupTypes ? options.groupTypes.some(gt => gt === d.groupType) : true) &&
