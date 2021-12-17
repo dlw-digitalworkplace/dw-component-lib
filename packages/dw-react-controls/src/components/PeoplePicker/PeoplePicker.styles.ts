@@ -9,8 +9,8 @@ const GlobalClassNames = {
 };
 
 export const getStyles = (props: IPeoplePickerStyleProps): IPeoplePickerStyles => {
-	const { className, theme } = props;
-	const { fonts, semanticColors } = theme;
+	const { className } = props;
+
 	const classNames = GlobalClassNames;
 
 	return {
@@ -31,9 +31,8 @@ export const getStyles = (props: IPeoplePickerStyleProps): IPeoplePickerStyles =
 		errorMessage: [
 			classNames.errorMessage,
 			AnimationClassNames.slideDownIn20,
-			fonts.small,
 			{
-				color: semanticColors.errorText,
+
 				margin: 0,
 				paddingTop: 5,
 				display: "flex",

@@ -7,10 +7,38 @@ import * as stories from "./PeoplePicker.stories";
 	component={PeoplePicker}
 />
 
+# PeoplePicker
+
+The `PeoplePicker` controls allows you to select users and groups.
+This control is basically a rework of the [Fluient UI](https://developer.microsoft.com/en-us/fluentui#/controls/web/peoplepicker) people picker without the dependency on the Persona object.
+The advantage of this is that you don't have to map user objects to 'PrimaryText' or 'SecondaryText' values.
+Only the basic properties of a user or group are required (id, displayName, userPrincipalName, groupType).
+The control supports the basic picker functionalities like required, disabled, suggestions, ...
+
+In order to use the picker you need to feed the control with a `IPeoplePickerProvider` to fetch your data.
+This means that the people picker control itself is unaware of where the data is coming from.
+
 ### Basic usage
 
 <Canvas withToolbar={true}>
 	<Story story={stories.Basic} name="Basic usage" />
+</Canvas>
+
+### Custom suggetions rendering
+
+By default the following properties are shown in the suggestion dropdown:
+ - User: displayName, userPrincipalName
+ - Group: displayName, description
+
+However, it is possible to override the rendering of the suggestions by using the `onRenderSuggestion` method.
+This method takes the item to render (user or group) as a parameter and should return an Element.
+
+The example below overrides the rendering of:
+ - User: The id and imageUrl are passed to the provided PeoplePickerItemSuggestion component
+ - Group: Fully custom element is rendered with the group type and display name
+
+<Canvas withToolbar={true}>
+	<Story story={stories.CustomSuggestionRender} name="Custom suggestion render" />
 </Canvas>
 
 ## Properties

@@ -1,4 +1,3 @@
-import { IUser } from "../models/IUser";
 const baseProductionCdnUrl = "https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/";
 
 const TestImages = {
@@ -6,7 +5,7 @@ const TestImages = {
 	personaMale: baseProductionCdnUrl + "persona-male.png",
 };
 
-export const MockUsers: IUser[] = [
+export const MockUsers: any[] = [
 	{
 		businessPhones: [],
 		displayName: "Conf Room Adams",

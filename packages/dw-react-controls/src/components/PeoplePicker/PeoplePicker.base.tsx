@@ -23,7 +23,8 @@ export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
 	theme,
 	searchFor,
 	groupTypes,
-	onChange
+	onChange,
+	onRenderSuggestion
 }: IPeoplePickerProps) => {
 	// Get classnames
 	const classNames = getClassNames(styles, { className, theme: theme! });
@@ -46,6 +47,23 @@ export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
 		return await provider.findUserOrGroup(filter, filterOptions);
 	}
 
+	// Error message
+	const renderErrorMessage = React.useCallback(
+		(message: string | JSX.Element) => {
+			return typeof message === "string" ? (
+				<p className={classNames.errorMessage}>
+					<span data-automation-id={"error-message"}>{message}</span>
+				</p>
+			) : (
+				<div className={classNames.errorMessage} data-automation-id={"error-message"}
+				>
+					{message}
+				</div>
+			);
+		},
+		[classNames.errorMessage]
+	);
+
 	return (
 		<div className={classNames.root}>
 			{!!label && (
@@ -61,12 +79,10 @@ export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
 					onChange={onChange}
 					disabled={disabled}
 					itemLimit={itemLimit}
-
+					onRenderSuggestion={onRenderSuggestion}
 				/>
 			</div>
-			{!!errorMessage && (
-				<div className={classNames.errorMessage}>{errorMessage}</div>
-			)}
+			{!!errorMessage && renderErrorMessage(errorMessage)}
 		</div>
 	);
 };

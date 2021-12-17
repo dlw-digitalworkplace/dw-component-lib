@@ -17,9 +17,11 @@ export class MockPeoplePickerProvider implements IPeoplePickerProvider {
 		search: string,
 		options: IPeoplePickerFilterOptions
 	): (IUser | IGroup)[] | Promise<(IUser | IGroup)[]> {
-		return this._mockData.filter(d => (
+
+		const data = this._mockData.filter(d => (
 			d.displayName.toLowerCase().indexOf(search.toLowerCase()) > -1 &&
 			!options.idsToIgnore.some(i => i === d.id)
 		));
+		return new Promise(resolve => setTimeout(() => resolve(data), 500))
 	}
 }

@@ -22,6 +22,11 @@ export interface IUserOrGroupPickerProps extends IBasePickerProps<IGroup | IUser
 	 * The current theme applied to the control.
 	 */
 	theme?: ITheme;
+
+	/**
+	 * An optional function to override the rendering of the suggestion items
+	 */
+	onRenderSuggestion?(item: (IUser | IGroup)): JSX.Element;
 }
 
 export interface IUserOrGroupPickerStyleProps extends IBasePickerStyleProps {

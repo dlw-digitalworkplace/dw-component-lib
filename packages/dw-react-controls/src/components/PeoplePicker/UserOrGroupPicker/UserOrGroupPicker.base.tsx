@@ -1,21 +1,37 @@
 import * as React from "react";
 import { BasePicker } from "office-ui-fabric-react/lib/components/pickers/BasePicker";
-import { initializeComponentRef } from "office-ui-fabric-react/lib/Utilities";
 import { IGroup, IUser } from "../models";
 import { IPickerItemProps } from "office-ui-fabric-react/lib/Pickers";
 import { IUserOrGroupPickerProps } from "./UserOrGroupPicker.types";
-import { PeoplePickerItemSuggestion } from "./PeoplePickerItemSuggestion/PeoplePeoplePickerItemSuggestion";
+import { PeoplePickerItemSuggestion } from "./PeoplePickerItemSuggestion/PeoplePickerItemSuggestion";
 import { PeoplePickerItem } from "./PeoplePickerItem/PeoplePickerItem";
 
-export class UserOrGroupPickerBase extends BasePicker<IUser | IGroup, IUserOrGroupPickerProps> {
+export const UserOrGroupPickerBase: React.FC<IUserOrGroupPickerProps> = (props: IUserOrGroupPickerProps) => {
 
-	public static defaultProps: Partial<IUserOrGroupPickerProps> = {
-		onRenderItem: (props: IPickerItemProps<IUser | IGroup>) => <PeoplePickerItem {...props} />,
-		onRenderSuggestionsItem: (item: IUser | IGroup) => <PeoplePickerItemSuggestion item={item} />
+	const onRenderItem = (pickerProps: IPickerItemProps<IUser | IGroup>) => {
+		return <PeoplePickerItem {...pickerProps} />
 	};
 
-	constructor(props: IUserOrGroupPickerProps) {
-		super(props);
-		initializeComponentRef(this);
-	};
+	const onRenderSuggestionItem = (item: IUser | IGroup) => {
+		if (!!props.onRenderSuggestion) {
+			return props.onRenderSuggestion(item);
+		}
+		return <PeoplePickerItemSuggestion
+			title={item.displayName}
+			label={"userPrincipalName" in item ? item.userPrincipalName : item.description}
+		/>
+	}
+
+	return (
+		<BasePicker
+			{...props}
+			onRenderItem={onRenderItem}
+			onRenderSuggestionsItem={onRenderSuggestionItem}
+			pickerSuggestionsProps={{
+				loadingText: "Searching...",
+				noResultsFoundText: "No results found.",
+				suggestionsHeaderText: "Suggestions"
+			}}
+		/>
+	)
 }

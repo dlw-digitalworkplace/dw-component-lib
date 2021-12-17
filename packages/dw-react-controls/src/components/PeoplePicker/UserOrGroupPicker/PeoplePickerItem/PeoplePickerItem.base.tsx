@@ -13,7 +13,6 @@ export const PeoplePickerItemBase: React.FC<IPeoplePickerItemProps> = ({
 	removeButtonAriaLabel,
 	styles,
 	theme,
-	title,
 	item,
 }) => {
 	const classNames = getClassNames(styles, { className, theme: theme! });

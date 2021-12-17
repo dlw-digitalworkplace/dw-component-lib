@@ -1,12 +1,21 @@
 import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
 import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
-import { IUser, IGroup } from "../../models";
 
 export interface IPeoplePickerItemSuggestionProps extends React.AllHTMLAttributes<HTMLElement> {
 	/**
-	 * The object containing the group or user data
+	 * Required string to show in the title of the suggestion items
 	 */
-	item: IUser | IGroup;
+	title: string;
+
+	/**
+	 * Required string to show in the label of the suggestion items
+	 */
+	label: string;
+
+	/**
+	 * Optional image url
+	 */
+	 imageUrl?: string;
 
 	/**
 	 * Optional class for the root picker suggestion element

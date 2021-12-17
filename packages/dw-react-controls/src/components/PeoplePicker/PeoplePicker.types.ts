@@ -79,6 +79,13 @@ export interface IPeoplePickerProps {
 	 * @param items List of the selected users and groups
 	 */
 	onChange(items: (IUser | IGroup)[]): void;
+
+	/**
+	 * An optional function to override the rendering of the suggestion items
+	 * @param item The user or group to render
+	 * @returns An element to render
+	 */
+	 onRenderSuggestion?(item: (IUser | IGroup)): JSX.Element;
 }
 
 export interface IPeoplePickerStyleProps {

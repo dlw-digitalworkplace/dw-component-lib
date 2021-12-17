@@ -1,7 +1,6 @@
 import { GroupType } from "../models/GroupType";
-import { IGroup } from "../models/IGroup";
 
-export const MockGroups: IGroup[] = [
+export const MockGroups: any[] = [
 	{
 		groupType: GroupType.M365,
 		id: "02bd9fd6-8f93-4758-87c3-1fb73740a315",
