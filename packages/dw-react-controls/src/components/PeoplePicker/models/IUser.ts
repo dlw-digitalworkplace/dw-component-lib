@@ -7,7 +7,7 @@ export interface IUser {
 	/**
 	 * Required field containing the display name of the user
 	 */
-	 displayName: string;
+	displayName: string;
 
 	/**
 	 * Required field containing a unique UPN

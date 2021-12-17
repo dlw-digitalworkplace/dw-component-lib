@@ -1,3 +1,3 @@
 export * from "./IGroup";
-export * from "./ObjectType";
+export * from "./SearchType";
 export * from "./IUser";

@@ -5,7 +5,7 @@ import { PeoplePickerItemSuggestion } from "..";
 import { GroupType } from "../models/GroupType";
 import { IGroup } from "../models/IGroup";
 import { IUser } from "../models/IUser";
-import { ObjectType } from "../models/ObjectType";
+import { SearchType } from "../models/SearchType";
 import { PeoplePicker } from "../PeoplePicker";
 import { IPeoplePickerProps } from "../PeoplePicker.types";
 import { MockPeoplePickerProvider } from "../providers/MockPeoplePickerProvider";
@@ -23,7 +23,7 @@ const defaultArgs: Partial<IPeoplePickerProps> = {
 	disabled: false,
 	required: false,
 	errorMessage: undefined,
-	searchFor: ObjectType.UsersAndGroups
+	searchFor: SearchType.UsersAndGroups
 };
 
 export const Basic: Story<IPeoplePickerProps> = ({ onChange, ...args }) => {

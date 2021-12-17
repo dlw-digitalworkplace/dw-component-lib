@@ -5,11 +5,8 @@ import { GroupType } from "./models/GroupType";
 import { IGroup } from "./models/IGroup";
 import { IPeoplePickerProvider } from "./models/IPeoplePickerProvider";
 import { IUser } from "./models/IUser";
-import { ObjectType } from "./models/ObjectType";
+import { SearchType } from "./models/SearchType";
 
-// TODO: Add option custimize what user/group data is shown in the suggestions (email, job title, ...)
-// TODO: Add option to override the Persona size
-// TODO: Add option to set the suggestion props
 export interface IPeoplePickerProps {
 	/**
 	 * The people picker provider that should handle the data layer functionalities
@@ -54,7 +51,7 @@ export interface IPeoplePickerProps {
 	/**
 	 * Optional parameter to indicate what types of data will be visible (user, groups, both)
 	 */
-	searchFor?: ObjectType;
+	searchFor?: SearchType;
 
 	/**
 	 * In case of groups, indicate which group types (AAD, M365, SPO)
@@ -85,7 +82,7 @@ export interface IPeoplePickerProps {
 	 * @param item The user or group to render
 	 * @returns An element to render
 	 */
-	 onRenderSuggestion?(item: (IUser | IGroup)): JSX.Element;
+	onRenderSuggestion?(item: (IUser | IGroup)): JSX.Element;
 }
 
 export interface IPeoplePickerStyleProps {

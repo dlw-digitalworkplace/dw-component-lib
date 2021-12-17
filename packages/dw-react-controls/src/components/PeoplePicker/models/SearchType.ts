@@ -1,7 +1,7 @@
 /**
  * Possible object options to search for in the people picker
  */
-export enum ObjectType {
+export enum SearchType {
 	/**
 	 * Search for users and groups
 	 */

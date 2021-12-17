@@ -15,7 +15,7 @@ export function getStyles(props: IPeoplePickerItemSuggestionStyleProps): IPeople
 			classNames.root,
 			{
 				maxWidth: "60vw",
-				padding: "6px 12px 6px",
+				padding: "3px 6px 3px",
 				textAlign: "left",
 				selectors: {
 					"> div": {

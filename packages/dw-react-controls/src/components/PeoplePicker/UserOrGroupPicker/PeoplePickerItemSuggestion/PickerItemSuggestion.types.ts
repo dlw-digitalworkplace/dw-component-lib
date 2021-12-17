@@ -15,7 +15,7 @@ export interface IPeoplePickerItemSuggestionProps extends React.AllHTMLAttribute
 	/**
 	 * Optional image url
 	 */
-	 imageUrl?: string;
+	imageUrl?: string;
 
 	/**
 	 * Optional class for the root picker suggestion element

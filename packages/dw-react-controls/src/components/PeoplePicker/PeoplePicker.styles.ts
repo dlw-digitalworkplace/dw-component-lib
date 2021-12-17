@@ -32,7 +32,6 @@ export const getStyles = (props: IPeoplePickerStyleProps): IPeoplePickerStyles =
 			classNames.errorMessage,
 			AnimationClassNames.slideDownIn20,
 			{
-
 				margin: 0,
 				paddingTop: 5,
 				display: "flex",

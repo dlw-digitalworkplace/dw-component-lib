@@ -30,8 +30,6 @@ export interface IUserOrGroupPickerProps extends IBasePickerProps<IGroup | IUser
 }
 
 export interface IUserOrGroupPickerStyleProps extends IBasePickerStyleProps {
-	isInvalid?: boolean;
-
 	styles?: IStyleFunctionOrObject<IUserOrGroupPickerStyleProps, IUserOrGroupPickerStyles>;
 }
 

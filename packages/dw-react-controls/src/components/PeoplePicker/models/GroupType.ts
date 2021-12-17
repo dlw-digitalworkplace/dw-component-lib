@@ -6,7 +6,7 @@ export enum GroupType {
 	/**
 	 * Azure Active Directory Group
 	 */
-	AAD	= "AAD",
+	AAD = "AAD",
 	/**
 	 * Microsoft 365 Group
 	 */
