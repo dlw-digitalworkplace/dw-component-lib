@@ -10,9 +10,9 @@ import { useWindowEvent } from "..";
  * @param element The HTML element you want to target
  * @param direction The direction of the drag. Default is both directions
  * @param onDragEnd Callback that is fired when the drag movement stops
- * @returns isDragging: Boolean indicating if the dragging is ongoing
- * @returns positionX: The current X position of the drag
- * @returns positionY: The current Y position of the drag
+ * @returns isDragging - Boolean indicating if the dragging is ongoing
+ * @returns positionX - The current X position of the drag
+ * @returns positionY - The current Y position of the drag
  */
 export const useDrag = (
   element: HTMLElement | undefined,

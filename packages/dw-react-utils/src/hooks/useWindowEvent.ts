@@ -9,7 +9,6 @@ import * as React from "react";
  * @param type The type of window event
  * @param callback The callback function to execute when the event is triggered
  */
-
 export const useWindowEvent = (type: keyof WindowEventMap, callback: (ev: Event) => void): void => {
   React.useEffect(() => {
     window.addEventListener(type, callback);
