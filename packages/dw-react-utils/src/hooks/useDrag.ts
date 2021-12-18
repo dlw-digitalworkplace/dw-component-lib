@@ -17,11 +17,11 @@ import { useWindowEvent } from "..";
 export const useDrag = (
   element: HTMLElement | undefined,
   direction?: "vertical" | "horizontal",
-	onDragEnd?:(positionX: number, positionY: number) => void
+  onDragEnd?:(positionX: number, positionY: number) => void
 ): {
-	isDragging: boolean,
-	positionX: number,
-	positionY: number
+  isDragging: boolean,
+  positionX: number,
+  positionY: number
 } => {
   const startXPosition = React.useRef<number>(0);
   const startYPosition = React.useRef<number>(0);
