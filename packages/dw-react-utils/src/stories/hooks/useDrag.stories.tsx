@@ -20,12 +20,12 @@ const dragItemStyles: React.CSSProperties = {
 
 export const Basic: Story = () => {
 	const dragRef = React.useRef() as React.MutableRefObject<HTMLDivElement>;
-  const [dragElement, setDragElement] = React.useState<HTMLElement>();
+	const [dragElement, setDragElement] = React.useState<HTMLElement>();
 	const { isDragging, positionX, positionY } = useDrag(dragElement);
 
 	React.useEffect(() => {
-    setDragElement(dragRef.current);
-  }, []);
+		setDragElement(dragRef.current);
+	}, []);
 
 	return (
 		<div>
@@ -42,12 +42,12 @@ export const Basic: Story = () => {
 
 export const Horizontal: Story = () => {
 	const dragRef = React.useRef() as React.MutableRefObject<HTMLDivElement>;
-  const [dragElement, setDragElement] = React.useState<HTMLElement>();
+	const [dragElement, setDragElement] = React.useState<HTMLElement>();
 	const { isDragging, positionX, positionY } = useDrag(dragElement, "horizontal");
 
 	React.useEffect(() => {
-    setDragElement(dragRef.current);
-  }, []);
+		setDragElement(dragRef.current);
+	}, []);
 
 	return (
 		<div>
@@ -67,12 +67,12 @@ export const EndCallback: Story = () => {
 		alert(`Ended drag on: (${posX},${posY})`);
 	}
 	const dragRef = React.useRef() as React.MutableRefObject<HTMLDivElement>;
-  const [dragElement, setDragElement] = React.useState<HTMLElement>();
+	const [dragElement, setDragElement] = React.useState<HTMLElement>();
 	const { isDragging, positionX, positionY } = useDrag(dragElement, undefined, onDragEnd);
 
 	React.useEffect(() => {
-    setDragElement(dragRef.current);
-  }, []);
+		setDragElement(dragRef.current);
+	}, []);
 
 	return (
 		<div>
