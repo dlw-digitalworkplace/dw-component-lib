@@ -66,6 +66,7 @@ export const EndCallback: Story = () => {
 	const onDragEnd = (posX: number, posY: number): void => {
 		alert(`Ended drag on: (${posX},${posY})`);
 	}
+
 	const dragRef = React.useRef() as React.MutableRefObject<HTMLDivElement>;
 	const [dragElement, setDragElement] = React.useState<HTMLElement>();
 	const { isDragging, positionX, positionY } = useDrag(dragElement, undefined, onDragEnd);
