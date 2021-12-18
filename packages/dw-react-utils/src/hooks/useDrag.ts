@@ -49,7 +49,7 @@ export const useDrag = (
   useWindowEvent("mouseup", () => {
     if (isDragging) {
       setIsDragging(false);
-			onDragEnd && onDragEnd(positionX, positionY);
+      onDragEnd && onDragEnd(positionX, positionY);
     }
   });
 
