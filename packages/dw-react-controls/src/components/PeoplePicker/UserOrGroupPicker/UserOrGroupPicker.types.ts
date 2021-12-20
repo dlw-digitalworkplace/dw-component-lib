@@ -9,6 +9,11 @@ import { IGroup, IUser } from "../models";
 
 export interface IUserOrGroupPickerProps extends IBasePickerProps<IGroup | IUser> {
 	/**
+	 * Specifies if the picker is in an invalid state.
+	 */
+	isInvalid?: boolean;
+
+	/**
 	 * Optional class for the root UserOrGroupPicker element.
 	 */
 	className?: string;
@@ -26,11 +31,13 @@ export interface IUserOrGroupPickerProps extends IBasePickerProps<IGroup | IUser
 	/**
 	 * An optional function to override the rendering of the suggestion items
 	 */
-	onRenderSuggestion?(item: (IUser | IGroup)): JSX.Element;
+	onRenderSuggestion?(item: IUser | IGroup): JSX.Element;
 }
 
 export interface IUserOrGroupPickerStyleProps extends IBasePickerStyleProps {
+	isInvalid?: boolean;
+
 	styles?: IStyleFunctionOrObject<IUserOrGroupPickerStyleProps, IUserOrGroupPickerStyles>;
 }
 
-export interface IUserOrGroupPickerStyles extends IBasePickerStyles { }
+export interface IUserOrGroupPickerStyles extends IBasePickerStyles {}
