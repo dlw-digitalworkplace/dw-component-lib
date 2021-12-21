@@ -13,17 +13,12 @@ export const PeoplePickerItemBase: React.FC<IPeoplePickerItemProps> = ({
 	removeButtonAriaLabel,
 	styles,
 	theme,
-	item,
+	item
 }) => {
 	const classNames = getClassNames(styles, { className, theme: theme! });
 
 	return (
-		<div
-			className={classNames.PeoplePickerItem}
-			role={"listitem"}
-			key={index}
-			data-selection-index={index}
-		>
+		<div className={classNames.root} role={"listitem"} key={index} data-selection-index={index}>
 			<Persona text={item.displayName} size={PersonaSize.size24} />
 
 			<IconButton

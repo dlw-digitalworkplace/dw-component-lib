@@ -2,7 +2,7 @@ import { getFocusStyle, getGlobalClassNames } from "office-ui-fabric-react/lib/S
 import { IPeoplePickerItemStyleProps, IPeoplePickerItemStyles } from "./PeoplePickerItem.types";
 
 const GlobalClassNames = {
-	PeoplePickerItem: "ms-PeoplePickerItem",
+	root: "ms-PeoplePickerItem",
 	text: "ms-PeoplePickerItem-text",
 	close: "ms-PeoplePickerItem-close",
 	isSelected: "is-selected"
@@ -18,8 +18,8 @@ export function getStyles(props: IPeoplePickerItemStyleProps): IPeoplePickerItem
 	const classNames = getGlobalClassNames(GlobalClassNames, theme);
 
 	return {
-		PeoplePickerItem: [
-			classNames.PeoplePickerItem,
+		root: [
+			classNames.root,
 			fonts.medium,
 			getFocusStyle(theme),
 			{

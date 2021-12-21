@@ -4,7 +4,6 @@ import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
 import { IUser, IGroup } from "../../models";
 
 export interface IPeoplePickerItemProps extends IPickerItemProps<IUser | IGroup> {
-
 	/**
 	 * Optional class for the root picker item element
 	 */
@@ -27,7 +26,7 @@ export interface IPeoplePickerItemStyleProps {
 }
 
 export interface IPeoplePickerItemStyles {
-	PeoplePickerItem: IStyle;
+	root: IStyle;
 	text: IStyle;
 	close: IStyle;
 }
