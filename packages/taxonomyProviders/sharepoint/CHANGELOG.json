@@ -2,6 +2,29 @@
   "name": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
   "entries": [
     {
+      "date": "Wed, 22 Dec 2021 14:53:06 GMT",
+      "tag": "@dlw-digitalworkplace/taxonomyprovider-sharepoint_v0.1.5",
+      "version": "0.1.5",
+      "comments": {
+        "none": [
+          {
+            "comment": "Documentation updates",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "d755ee896b270277ffd768665641c439aad54fcd",
+            "package": "@dlw-digitalworkplace/taxonomyprovider-sharepoint"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @dlw-digitalworkplace/taxonomyprovider-sharepoint to v0.1.5",
+            "author": "robin.agten@delaware.pro",
+            "commit": "d755ee896b270277ffd768665641c439aad54fcd",
+            "package": "@dlw-digitalworkplace/taxonomyprovider-sharepoint"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Dec 2021 18:38:01 GMT",
       "tag": "@dlw-digitalworkplace/taxonomyprovider-sharepoint_v0.1.4",
       "version": "0.1.4",

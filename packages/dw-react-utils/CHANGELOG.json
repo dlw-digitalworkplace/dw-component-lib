@@ -2,6 +2,29 @@
   "name": "@dlw-digitalworkplace/dw-react-utils",
   "entries": [
     {
+      "date": "Wed, 22 Dec 2021 14:53:06 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-utils_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Documentation updates",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "d755ee896b270277ffd768665641c439aad54fcd",
+            "package": "@dlw-digitalworkplace/dw-react-utils"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Add useWindowEvent and useDrag hook",
+            "author": "robin.agten@delaware.pro",
+            "commit": "d755ee896b270277ffd768665641c439aad54fcd",
+            "package": "@dlw-digitalworkplace/dw-react-utils"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Dec 2021 18:38:01 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-utils_v0.1.1",
       "version": "0.1.1",

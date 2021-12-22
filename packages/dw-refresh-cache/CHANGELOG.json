@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-refresh-cache",
   "entries": [
     {
+      "date": "Wed, 22 Dec 2021 14:53:06 GMT",
+      "tag": "@dlw-digitalworkplace/dw-refresh-cache_v0.1.2",
+      "version": "0.1.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "Documentation updates",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "d755ee896b270277ffd768665641c439aad54fcd",
+            "package": "@dlw-digitalworkplace/dw-refresh-cache"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Dec 2021 18:38:01 GMT",
       "tag": "@dlw-digitalworkplace/dw-refresh-cache_v0.1.2",
       "version": "0.1.2",
