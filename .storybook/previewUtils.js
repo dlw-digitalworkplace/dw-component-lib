@@ -7,12 +7,20 @@ export const storiesOrder = {
 	"getting started": {
 		introduction: null
 	},
-	components: null,
+	components: {
+		introduction: null
+	},
+	"spfx controls": {
+		introduction: null
+	},
 	"refresh cache": {
+		introduction: null,
 		"refresh cache": null
 	},
 	taxonomyproviders: null,
-	utils: null,
+	utils: {
+		introduction: null
+	},
 	changelog: null
 };
 

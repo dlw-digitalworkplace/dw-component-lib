@@ -1,0 +1,54 @@
+import { ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs";
+import SampleImage from "./assets/WebPartTitle-sample.gif";
+
+<Meta title="SPFx controls/WebPartTitle" />
+
+# WebPartTitle
+
+A `WebPartTitle` allows you to easily add an editable title to your webpart.
+
+When being rendered in display mode, it will simply show the current title. But, when the page is in edit mode, it will allow you to edit the title directly on the page.
+
+The `WebPartTitle` component mimics the out of the box UI of SharePoint, so that a seamless experience is provided.
+
+## Basic usage
+
+```tsx
+<WebPartTitle displayMode={this.displayMode} title={this.properties.title} onUpdate={this.updateWebPartTitle} />
+```
+
+## Example
+
+<img src={SampleImage} alt="WebPartTitle example" />
+
+## Documentation
+
+### `WebPartTitle`
+
+| Property                               | Type                                                                   | Description                                               |
+| -------------------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------------- |
+| displayMode<span class="req">\*</span> | `DisplayMode`                                                          | The current display mode for the webpart.                 |
+| hidden                                 | `boolean`                                                              | Set to `true` to hide the title.                          |
+| placeholder                            | `string`                                                               | Placeholder to be shown when editing the title.           |
+| title<span class="req">\*</span>       | `string`                                                               | The title to be shown.                                    |
+| className                              | `string`                                                               | Optional class for the root WebPartTitle element.         |
+| styles                                 | `IStyleFunctionOrObject<IWebPartTitleStyleProps, IWebPartTitleStyles>` | Call to apply custom styling on the WebPartTitle element. |
+| theme                                  | `ITheme`                                                               | Current theme to be applied.                              |
+| onRenderMoreInfoLink                   | `() => JSX.Element`                                                    | Method to render a more info link.                        |
+| onUpdate                               | `(value: string) => JSX.Element`                                       | Callback when the title is updated.                       |
+
+### `IWebPartTitleStyleProps`
+
+| Property  | Type     | Description                                   |
+| --------- | -------- | --------------------------------------------- |
+| className | `string` | Class name to be applied on the root element. |
+| theme     | `ITheme` | Current theme to be applied.                  |
+
+### `IWebPartTitleStyles`
+
+| Property     | Type     | Description                                                                       |
+| ------------ | -------- | --------------------------------------------------------------------------------- |
+| root         | `IStyle` | Styles applied to the root element of the `WebPartTitle`.                         |
+| title        | `IStyle` | Styles applied to the wrapper around either the displayed title or the edit area. |
+| textarea     | `IStyle` | Styles applied to the textarea when editing the title.                            |
+| moreInfoLink | `IStyle` | Styles applied to the wrapper around the rendered more info link.                 |
