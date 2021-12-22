@@ -43,7 +43,35 @@ export const Basic: Story<IPeoplePickerProps> = ({ onChange, ...args }) => {
 	);
 }
 Basic.storyName = "Basic usage"
-Basic.argTypes = { ...defaultArgTypes };
+Basic.argTypes = {
+	...defaultArgTypes,
+	searchFor: {
+		options: [1, 2, 3],
+		control: {
+			type: "radio",
+			labels: {
+					1: "Users",
+					2: "Groups",
+					3: "Users and groups"
+			}
+		}
+	},
+	groupTypes: {
+		options: [1, 2, 3, 4, 5, 6, 7],
+		control: {
+			type: "radio",
+			labels: {
+					1: "AAD",
+					2: "M365",
+					3: "AAD or M365",
+					4: "SPO",
+					5: "AAD or SPO",
+					6: "M365 or SPO",
+					7: "All"
+			}
+		}
+	}
+};
 Basic.args = { ...defaultArgs };
 Basic.parameters = { docs: { source: { type: "code" } } };
 
