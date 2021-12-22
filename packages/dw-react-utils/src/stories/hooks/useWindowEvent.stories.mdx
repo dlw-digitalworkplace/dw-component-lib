@@ -1,0 +1,28 @@
+import { Meta } from "@storybook/addon-docs";
+
+<Meta title="Utils/hooks/useWindowEvent" />
+
+# useWindowEvent
+
+The `useWindowEvent` hook provides an easy way to register events on the window object.
+The event will correctly be register and most importantly unregistered as well.
+
+As input the type of event and the callback is expected
+
+## Usage
+
+```tsx
+useWindowEvent("mousemove", (e: Event) => console.log((e as MouseEvent).pageX));
+```
+
+## Example
+
+```tsx
+const MyComponent = () => {
+	const [moveX, setMoveX] = React.useState(0);
+
+	useWindowEvent("mousemove", (e: Event) => setMoveX((e as MouseEvent).pageX));
+
+	return <div>Mouse Move X Position: {moveX}</div>;
+};
+```

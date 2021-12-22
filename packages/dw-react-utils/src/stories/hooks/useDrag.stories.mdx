@@ -1,0 +1,48 @@
+import { ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs";
+import * as stories from "./useDrag.stories";
+import { useDrag } from "../../hooks"
+
+<Meta title="Utils/hooks/useDrag" component={ useDrag	}/>
+
+# useDrag
+
+The `useDrag` hook is a very light weight hook that allows you to make an element draggable.
+The hook has the following input:
+ - element: the element that needs to be draggable
+ - direction: optional string that contains 'horizontal' or 'vertical'. If empty both directions are possible.
+
+The hook provides the following output:
+ - isDragging: boolean to indicate is the element is being dragged or not
+ - positionX / positionY: a number providing the moved position of the element
+
+> **Important:** The target must be in a non static position (e.g. relative)
+
+## Usage
+
+```tsx
+const dragRef = React.useRef() as React.MutableRefObject<HTMLDivElement>;
+const [dragElement, setDragElement] = React.useState<HTMLElement>();
+const { isDragging, positionX, positionY } = useDrag(dragElement);
+```
+
+## All directions
+Below an example of the most basic usage.
+<Canvas withToolbar={true}>
+	<Story story={stories.Basic} name="Basic usage" />
+</Canvas>
+
+## Horizontal
+Enforce the drag movement in only one direction (e.g. horizontal).
+<Canvas withToolbar={true}>
+	<Story story={stories.Horizontal} name="Horizontal only" />
+</Canvas>
+
+## End Drag Callback
+Fire a callback when the drag has ended.
+<Canvas withToolbar={true}>
+	<Story story={stories.EndCallback} name="OnDragEnd Event" />
+</Canvas>
+
+## Properties
+<ArgsTable components={{ useDrag }} />
+
