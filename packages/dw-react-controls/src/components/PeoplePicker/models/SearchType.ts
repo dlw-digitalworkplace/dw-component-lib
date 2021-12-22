@@ -1,17 +1,15 @@
+// tslint:disable:no-bitwise
+
 /**
  * Possible object options to search for in the people picker
  */
 export enum SearchType {
 	/**
-	 * Search for users and groups
+	 * Search for users
 	 */
-	UsersAndGroups = "UsersAndGroups",
+	Users = 1 << 0,
 	/**
-	 * Search for users only
+	 * Search for groups
 	 */
-	UsersOnly = "Users",
-	/**
-	 * Search of groups only
-	 */
-	GroupsOnly = "Groups"
+	Groups = 1 << 1,
 }

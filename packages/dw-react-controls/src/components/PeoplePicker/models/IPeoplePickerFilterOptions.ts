@@ -16,5 +16,5 @@ export interface IPeoplePickerFilterOptions {
 	/**
 	 * Define which group types to search for (AAD, M365, SPO)
 	 */
-	groupTypes?: Array<GroupType>;
+	groupTypes?: GroupType;
 }

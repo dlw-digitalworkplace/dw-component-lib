@@ -1,4 +1,6 @@
+// tslint:disable:no-bitwise
 import { SearchType } from "..";
+import { GroupType } from "../models/GroupType";
 import { IGroup } from "../models/IGroup";
 import { IPeoplePickerFilterOptions } from "../models/IPeoplePickerFilterOptions";
 import { IPeoplePickerProvider } from "../models/IPeoplePickerProvider";
@@ -24,7 +26,7 @@ export class MockPeoplePickerProvider implements IPeoplePickerProvider {
 		let filteredGroups: IGroup[] = [];
 
 		// Filter Users
-		if (options.searchFor === SearchType.UsersOnly || options.searchFor === SearchType.UsersAndGroups) {
+		if ((options.searchFor & SearchType.Users) === SearchType.Users) {
 			filteredUsers = this._mockUsers.filter(d => (
 				d.displayName.toLowerCase().indexOf(search.toLowerCase()) > -1 &&
 				!options.idsToIgnore.some(i => i === d.id)
@@ -32,12 +34,25 @@ export class MockPeoplePickerProvider implements IPeoplePickerProvider {
 		}
 
 		// Filter Groups
-		if (options.searchFor === SearchType.GroupsOnly || options.searchFor === SearchType.UsersAndGroups) {
-			filteredGroups = this._mockGroups.filter(d => (
+		if ((options.searchFor & SearchType.Groups) === SearchType.Groups) {
+			const allGroups = this._mockGroups.filter(d => (
 				d.displayName.toLowerCase().indexOf(search.toLowerCase()) > -1 &&
-				(options.groupTypes ? options.groupTypes.some(gt => gt === d.groupType) : true) &&
 				!options.idsToIgnore.some(i => i === d.id)
 			));
+
+			const aadGroups = options?.groupTypes && (options.groupTypes & GroupType.AAD) === GroupType.AAD
+				? allGroups.filter(g => (g.groupType & GroupType.AAD) === GroupType.AAD)
+				: [];
+
+			const spoGroups = options?.groupTypes && (options.groupTypes & GroupType.SPO) === GroupType.SPO
+				? allGroups.filter(g => (g.groupType & GroupType.SPO) === GroupType.SPO)
+				: [];
+
+			const m365Groups = options?.groupTypes && (options.groupTypes & GroupType.M365) === GroupType.M365
+				? allGroups.filter(g => (g.groupType & GroupType.M365) === GroupType.M365)
+				: [];
+
+			filteredGroups = [...aadGroups, ...spoGroups, ...m365Groups]
 		}
 
 		// Return all

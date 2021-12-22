@@ -56,7 +56,7 @@ export interface IPeoplePickerProps {
 	/**
 	 * In case of groups, indicate which group types (AAD, M365, SPO)
 	 */
-	groupTypes?: GroupType[];
+	groupTypes?: GroupType;
 
 	/**
 	 * Call to apply custom styling on the People Picker element

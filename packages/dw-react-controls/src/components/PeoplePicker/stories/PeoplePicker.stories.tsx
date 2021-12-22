@@ -1,3 +1,4 @@
+// tslint:disable:no-bitwise
 import { Story } from "@storybook/react";
 import * as React from "react";
 import { useState } from "react";
@@ -23,7 +24,8 @@ const defaultArgs: Partial<IPeoplePickerProps> = {
 	disabled: false,
 	required: false,
 	errorMessage: undefined,
-	searchFor: SearchType.UsersAndGroups
+	searchFor: SearchType.Groups | SearchType.Users,
+	groupTypes: GroupType.AAD | GroupType.M365 | GroupType.SPO
 };
 
 export const Basic: Story<IPeoplePickerProps> = ({ onChange, ...args }) => {
