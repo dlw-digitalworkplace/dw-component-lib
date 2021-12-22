@@ -3,7 +3,6 @@ import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
 import { IGroup, IUser } from "./models";
 import { IPeoplePickerFilterOptions } from "./models/IPeoplePickerFilterOptions";
-import { SearchType } from "./models/SearchType";
 import { IPeoplePickerProps, IPeoplePickerStyleProps, IPeoplePickerStyles } from "./PeoplePicker.types";
 import { UserOrGroupPicker } from "./UserOrGroupPicker/UserOrGroupPicker";
 
@@ -41,7 +40,7 @@ export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
 
 		const filterOptions: IPeoplePickerFilterOptions = {
 			idsToIgnore: currentSelection.map(i => i.id),
-			searchFor: searchFor ?? SearchType.UsersAndGroups,
+			searchFor: searchFor,
 			groupTypes: groupTypes
 		};
 		return await provider.findUserOrGroup(filter, filterOptions);

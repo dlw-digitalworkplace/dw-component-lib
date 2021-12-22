@@ -19,6 +19,11 @@ export interface IPeoplePickerProps {
 	selectedItems: (IUser | IGroup)[];
 
 	/**
+	 * Required parameter to indicate what types of data will be visible (user, groups, both)
+	 */
+	 searchFor: SearchType;
+
+	/**
 	 * Optional parameter to limit the amount of options that can be slected
 	 */
 	itemLimit?: number;
@@ -47,11 +52,6 @@ export interface IPeoplePickerProps {
 	 * Optional parameter to provide an error message to the component
 	 */
 	errorMessage?: string | JSX.Element;
-
-	/**
-	 * Optional parameter to indicate what types of data will be visible (user, groups, both)
-	 */
-	searchFor?: SearchType;
 
 	/**
 	 * In case of groups, indicate which group types (AAD, M365, SPO)
