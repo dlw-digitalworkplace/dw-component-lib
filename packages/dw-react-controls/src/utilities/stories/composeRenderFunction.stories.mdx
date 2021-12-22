@@ -1,0 +1,52 @@
+import { Meta } from "@storybook/addon-docs";
+
+<Meta title="Components/Utilities/composeRenderFunction" />
+
+# composeRenderFunction
+
+The `composeRenderFunction` function returns a function which allows you to provide overrideable render callbacks.
+
+The function receives a custom render function and the default render function, which in turn can be reused in the custom render function.
+
+## Usage
+
+```tsx
+const doRender = composeRenderFunction(customRenderFunction, defaultRenderFunction);
+const element = doRender(props);
+```
+
+## Example
+
+```tsx
+const MyApp = (props: IMyAppProps) => {
+	const onRenderLabel = (labelProps: ILabelProps, defaultRender: IRenderFunction<ILabelProps) => {
+		return (
+			<div>
+				Custom render: {defaultRender(props)}
+			</div>
+		);
+	};
+
+	return (
+		<MyComponent onRenderLabel={onRenderLabel} />
+	);
+};
+
+const MyComponent = (props: IMyComponentProps) => {
+	const { onRenderLabel } = props;
+
+	// default render function
+	const defaultRenderLabel = (labelProps: ILabelProps) => <span>{labelProps.text}</span>;
+
+	// if a custom render function is provided, use it
+	const finalOnRenderLabel = onRenderLabel
+		? composeRenderFunction(onRenderLabel, defaultRenderLabel)
+		:	defaultRenderLabel;
+
+	return (
+		<div>
+			{finalOnRenderLabel({ text: "My label" })}
+		</div>
+	);
+}
+```

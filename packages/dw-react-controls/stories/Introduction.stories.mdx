@@ -1,0 +1,38 @@
+import { Meta } from "@storybook/addon-docs";
+import LinkTo from "@storybook/addon-links/react";
+
+<Meta title="Components/Introduction" />
+
+# dw-react-controls
+
+![dw-react-controls package version](https://img.shields.io/github/package-json/v/dlw-digitalworkplace/dw-component-lib?filename=packages%2Fdw-react-controls%2Fpackage.json&label=%40dlw-digitalworkplace%2Fdw-react-controls&logo=github)
+
+The `@dlw-digitalworkplace/dw-react-controls` package contains reusable controls which can be used in any `React` application.
+
+The controls are designed using the FluentUI component framework, in order to provide a consistent look and feel with SharePoint/Office 365.
+
+## Installation
+
+```shell
+yarn add @dlw-digitalworkplace/dw-react-controls
+```
+
+## Controls
+
+The package exports the following top-level controls:
+
+- [TaxonomyPicker](?path=/docs/components-taxonomypicker--basic)
+- [TreeView](?path=/docs/components-treeview--basic)
+
+Additionally, the package exports the following supporting controls:
+
+- TermPicker
+- TreeItem
+- WideDialog
+
+## Utilities
+
+The package also exports some utilities which support the usage of `React` controls in a FluentUI context:
+
+- [composeRenderFunction](?path=/docs/components-utilities-composerenderfunction--page)
+- [useTheme](?path=/docs/components-utilities-usetheme--page)

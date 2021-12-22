@@ -1,9 +1,9 @@
 import { Story } from "@storybook/react";
 import * as React from "react";
-import { ITermValue } from "../TermPicker";
-import { MockTaxonomyProvider } from "./providers/MockTaxonomyProvider";
-import { TaxonomyPicker } from "./TaxonomyPicker";
-import { ITaxonomyPickerProps } from "./TaxonomyPicker.types";
+import { ITermValue } from "../../TermPicker";
+import { MockTaxonomyProvider } from "../providers/MockTaxonomyProvider";
+import { TaxonomyPicker } from "../TaxonomyPicker";
+import { ITaxonomyPickerProps } from "../TaxonomyPicker.types";
 
 const defaultArgTypes = {
 	provider: { control: "none" },
