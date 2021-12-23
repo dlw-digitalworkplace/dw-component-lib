@@ -12,4 +12,8 @@ export enum SearchType {
 	 * Search for groups
 	 */
 	Groups = 1 << 1,
+	/**
+	 * Search for any supported type
+	 */
+	Any = Users | Groups
 }

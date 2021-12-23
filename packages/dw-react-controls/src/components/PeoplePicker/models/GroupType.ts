@@ -11,9 +11,9 @@ export enum GroupType {
 	/**
 	 * Microsoft 365 Group
 	 */
-  M365 = 1 << 1,
+	M365 = 1 << 1,
 	/**
 	 * SharePoint Online Security Group
 	 */
-  SPO = 1 << 2
+	SPO = 1 << 2
 }

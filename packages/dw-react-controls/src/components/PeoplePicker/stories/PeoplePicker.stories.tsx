@@ -52,7 +52,7 @@ Basic.argTypes = {
 			labels: {
 					1: "Users",
 					2: "Groups",
-					3: "Users and groups"
+					3: "Any"
 			}
 		}
 	},
