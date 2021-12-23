@@ -49,7 +49,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	const [_errorMessage, setErrorMessage] = React.useState<string | JSX.Element>();
 	const lastValidation = React.useRef(0);
 
-	const creationResultMessageTimeout = React.useRef<NodeJS.Timeout | undefined>(undefined);
+	const creationResultMessageTimeout = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
 	React.useEffect(() => {
 		const result = onGetErrorMessage && onGetErrorMessage(selectedItems);

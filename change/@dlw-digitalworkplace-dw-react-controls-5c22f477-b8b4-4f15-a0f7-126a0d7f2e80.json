@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Add basic testing of taxonomy picker rendering",
+  "packageName": "@dlw-digitalworkplace/dw-react-controls",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "none"
+}
