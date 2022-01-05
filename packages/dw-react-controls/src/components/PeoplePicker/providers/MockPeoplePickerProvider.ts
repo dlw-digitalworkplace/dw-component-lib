@@ -1,62 +1,56 @@
 // tslint:disable:no-bitwise
-import { SearchType } from "..";
-import { GroupType } from "../models/GroupType";
+import * as deepmerge from "deepmerge";
 import { IGroup } from "../models/IGroup";
 import { IPeoplePickerFilterOptions } from "../models/IPeoplePickerFilterOptions";
 import { IPeoplePickerProvider } from "../models/IPeoplePickerProvider";
+import { PeoplePickerValue } from "../models/IPeoplePickerValue";
 import { IUser } from "../models/IUser";
 import { MockGroups } from "./MockGroups";
 import { MockUsers } from "./MockUsers";
+
 export class MockPeoplePickerProvider implements IPeoplePickerProvider {
+	private _mockUsers: IUser[] = MockUsers;
+	private _mockGroups: IGroup[] = MockGroups;
 
-	private _mockUsers: IUser[];
-	private _mockGroups: IGroup[];
+	private _includeUsers: boolean;
+	private _includeGroups: boolean;
 
-	constructor() {
-		this._mockUsers = MockUsers;
-		this._mockGroups = MockGroups;
+	constructor(includeUsers: boolean = true, includeGroups: boolean = true) {
+		this._includeUsers = includeUsers;
+		this._includeGroups = includeGroups;
 	}
 
 	public findUserOrGroup(
 		search: string,
-		options: IPeoplePickerFilterOptions
-	): (IUser | IGroup)[] | Promise<(IUser | IGroup)[]> {
+		options: Partial<IPeoplePickerFilterOptions> = {}
+	): PeoplePickerValue[] | Promise<PeoplePickerValue[]> {
+		const defaultOptions: IPeoplePickerFilterOptions = {
+			idsToIgnore: []
+		};
+
+		options = deepmerge(defaultOptions, options);
 
 		let filteredUsers: IUser[] = [];
 		let filteredGroups: IGroup[] = [];
 
 		// Filter Users
-		if ((options.searchFor & SearchType.Users) === SearchType.Users) {
-			filteredUsers = this._mockUsers.filter(d => (
-				d.displayName.toLowerCase().indexOf(search.toLowerCase()) > -1 &&
-				!options.idsToIgnore.some(i => i === d.id)
-			));
+		if (this._includeUsers) {
+			filteredUsers = this._mockUsers.filter(
+				(it) =>
+					it.displayName.toLowerCase().indexOf(search.toLowerCase()) > -1 && options.idsToIgnore?.indexOf(it.id) === -1
+			);
 		}
 
 		// Filter Groups
-		if ((options.searchFor & SearchType.Groups) === SearchType.Groups) {
-			const allGroups = this._mockGroups.filter(d => (
-				d.displayName.toLowerCase().indexOf(search.toLowerCase()) > -1 &&
-				!options.idsToIgnore.some(i => i === d.id)
-			));
-
-			const aadGroups = options?.groupTypes && (options.groupTypes & GroupType.AAD) === GroupType.AAD
-				? allGroups.filter(g => (g.groupType & GroupType.AAD) === GroupType.AAD)
-				: [];
-
-			const spoGroups = options?.groupTypes && (options.groupTypes & GroupType.SPO) === GroupType.SPO
-				? allGroups.filter(g => (g.groupType & GroupType.SPO) === GroupType.SPO)
-				: [];
-
-			const m365Groups = options?.groupTypes && (options.groupTypes & GroupType.M365) === GroupType.M365
-				? allGroups.filter(g => (g.groupType & GroupType.M365) === GroupType.M365)
-				: [];
-
-			filteredGroups = [...aadGroups, ...spoGroups, ...m365Groups]
+		if (this._includeGroups) {
+			filteredGroups = this._mockGroups.filter(
+				(it) =>
+					it.displayName.toLowerCase().indexOf(search.toLowerCase()) > -1 && options.idsToIgnore?.indexOf(it.id) === -1
+			);
 		}
 
 		// Return all
 		const allData = [...filteredUsers, ...filteredGroups];
-		return new Promise(resolve => setTimeout(() => resolve(allData), 500));
+		return new Promise((resolve) => setTimeout(() => resolve(allData), 500));
 	}
 }

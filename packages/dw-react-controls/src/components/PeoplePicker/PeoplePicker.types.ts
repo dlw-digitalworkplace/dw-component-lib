@@ -1,27 +1,21 @@
 import { ILabelProps } from "office-ui-fabric-react/lib/Label";
 import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
 import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
-import { GroupType } from "./models/GroupType";
+import { PeoplePickerValue } from "./models";
 import { IGroup } from "./models/IGroup";
 import { IPeoplePickerProvider } from "./models/IPeoplePickerProvider";
 import { IUser } from "./models/IUser";
-import { SearchType } from "./models/SearchType";
 
 export interface IPeoplePickerProps {
 	/**
 	 * The people picker provider that should handle the data layer functionalities
 	 */
-	provider: IPeoplePickerProvider
+	provider: IPeoplePickerProvider;
 
 	/**
 	 * An array of selected users or groups
 	 */
-	selectedItems: (IUser | IGroup)[];
-
-	/**
-	 * Required parameter to indicate what types of data will be visible (user, groups, both)
-	 */
-	 searchFor: SearchType;
+	selectedItems: PeoplePickerValue[];
 
 	/**
 	 * Optional parameter to limit the amount of options that can be slected
@@ -54,17 +48,12 @@ export interface IPeoplePickerProps {
 	errorMessage?: string | JSX.Element;
 
 	/**
-	 * In case of groups, indicate which group types (AAD, M365, SPO)
-	 */
-	groupTypes?: GroupType;
-
-	/**
 	 * Call to apply custom styling on the People Picker element
 	 */
 	styles?: IStyleFunctionOrObject<IPeoplePickerStyleProps, IPeoplePickerStyles>;
 	/**
-	* Optional class for the root Peple Picker element
-	*/
+	 * Optional class for the root Peple Picker element
+	 */
 	className?: string;
 	/**
 	 * Optional theme to provide to the people picker
@@ -75,14 +64,14 @@ export interface IPeoplePickerProps {
 	 * onChange event that is triggered when the selection of the people picker changes
 	 * @param items List of the selected users and groups
 	 */
-	onChange(items: (IUser | IGroup)[]): void;
+	onChange(items: PeoplePickerValue[]): void;
 
 	/**
 	 * An optional function to override the rendering of the suggestion items
 	 * @param item The user or group to render
 	 * @returns An element to render
 	 */
-	onRenderSuggestion?(item: (IUser | IGroup)): JSX.Element;
+	onRenderSuggestion?(item: IUser | IGroup): JSX.Element;
 }
 
 export interface IPeoplePickerStyleProps {

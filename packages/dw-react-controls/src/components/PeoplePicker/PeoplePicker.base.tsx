@@ -1,7 +1,7 @@
 import { Label } from "office-ui-fabric-react";
 import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
-import { IGroup, IUser } from "./models";
+import { IGroup, IUser, PeoplePickerValue } from "./models";
 import { IPeoplePickerFilterOptions } from "./models/IPeoplePickerFilterOptions";
 import { IPeoplePickerProps, IPeoplePickerStyleProps, IPeoplePickerStyles } from "./PeoplePicker.types";
 import { UserOrGroupPicker } from "./UserOrGroupPicker/UserOrGroupPicker";
@@ -20,8 +20,6 @@ export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
 	styles,
 	className,
 	theme,
-	searchFor,
-	groupTypes,
 	onChange,
 	onRenderSuggestion
 }: IPeoplePickerProps) => {
@@ -31,20 +29,18 @@ export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
 	// Resolve suggestions
 	const onResolveSuggestions = async (
 		filter: string,
-		currentSelection: (IUser | IGroup)[]
+		currentSelection: PeoplePickerValue[]
 	): Promise<(IUser | IGroup)[]> => {
-
 		if (!filter || filter.length === 0) {
 			return [];
 		}
 
 		const filterOptions: IPeoplePickerFilterOptions = {
-			idsToIgnore: currentSelection.map(i => i.id),
-			searchFor: searchFor,
-			groupTypes: groupTypes
+			idsToIgnore: currentSelection.map((i) => i.id)
 		};
+
 		return await provider.findUserOrGroup(filter, filterOptions);
-	}
+	};
 
 	// Error message
 	const renderErrorMessage = React.useCallback(
@@ -84,4 +80,3 @@ export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
 		</div>
 	);
 };
-

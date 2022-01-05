@@ -1,23 +1,18 @@
-import { GroupType } from "./GroupType";
+import { IGroupValue } from "./IPeoplePickerValue";
 
-export interface IGroup {
-	/**
-	 * Required field to uniquely identify a group
-	 */
-	id: string;
-
-	/**
-	 * Required field containing the display name of the group
-	 */
-	displayName: string;
-
-	/**
-	 * Required field indicating the type of group
-	 */
-	groupType: GroupType;
-
+/**
+ * Group information which is being retrieved from a PeoplePickerProvider
+ */
+export interface IGroup extends IGroupValue {
 	/**
 	 * Optional field conataining a description for the group
 	 */
 	description?: any;
+
+	/**
+	 * Additional information for the group
+	 */
+	additionalProperties?: {
+		[key: string]: any;
+	};
 }

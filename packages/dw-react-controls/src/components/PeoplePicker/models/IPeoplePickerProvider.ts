@@ -5,6 +5,6 @@ import { IUser } from "./IUser";
 export interface IPeoplePickerProvider {
 	findUserOrGroup(
 		search: string,
-		options: IPeoplePickerFilterOptions
-	): (IUser | IGroup)[] | Promise<(IUser | IGroup)[]>
+		options?: Partial<IPeoplePickerFilterOptions>
+	): (IUser | IGroup)[] | Promise<(IUser | IGroup)[]>;
 }

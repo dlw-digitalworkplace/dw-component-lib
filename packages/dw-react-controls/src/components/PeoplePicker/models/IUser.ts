@@ -1,16 +1,13 @@
-export interface IUser {
-	/**
-	 * Required field to uniquely identify the user
-	 */
-	id: string;
+import { IUserValue } from "./IPeoplePickerValue";
 
+/**
+ * User information which is being retrieved from a PeoplePickerProvider
+ */
+export interface IUser extends IUserValue {
 	/**
-	 * Required field containing the display name of the user
+	 * Additional information for the group
 	 */
-	displayName: string;
-
-	/**
-	 * Required field containing a unique UPN
-	 */
-	userPrincipalName: string;
+	additionalProperties?: {
+		[key: string]: any;
+	};
 }

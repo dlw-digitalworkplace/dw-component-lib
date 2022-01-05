@@ -3,10 +3,9 @@ import { Story } from "@storybook/react";
 import * as React from "react";
 import { useState } from "react";
 import { PeoplePickerItemSuggestion } from "..";
-import { GroupType } from "../models/GroupType";
+import { PeoplePickerValue } from "../models";
 import { IGroup } from "../models/IGroup";
 import { IUser } from "../models/IUser";
-import { SearchType } from "../models/SearchType";
 import { PeoplePicker } from "../PeoplePicker";
 import { IPeoplePickerProps } from "../PeoplePicker.types";
 import { MockPeoplePickerProvider } from "../providers/MockPeoplePickerProvider";
@@ -23,102 +22,85 @@ const defaultArgs: Partial<IPeoplePickerProps> = {
 	label: "Basic people picker",
 	disabled: false,
 	required: false,
-	errorMessage: undefined,
-	searchFor: SearchType.Groups | SearchType.Users,
-	groupTypes: GroupType.AAD | GroupType.M365 | GroupType.SPO
+	errorMessage: undefined
 };
 
 export const Basic: Story<IPeoplePickerProps> = ({ onChange, ...args }) => {
-	const [selectedItems, setSelectedItems] = useState<(IUser | IGroup)[]>([]);
+	const [selectedItems, setSelectedItems] = useState<PeoplePickerValue[]>([]);
+	const provider = new MockPeoplePickerProvider();
+
+	const handleChange = (items: PeoplePickerValue[]) => {
+		if (onChange) {
+			onChange(items);
+		}
+
+		setSelectedItems(items);
+	};
 
 	return (
 		<PeoplePicker
 			{...args}
-			errorMessage={(args.required && selectedItems.length === 0) ? "Required" : args.errorMessage}
-			provider={new MockPeoplePickerProvider()}
+			errorMessage={args.required && selectedItems.length === 0 ? "Required" : args.errorMessage}
+			provider={provider}
 			selectedItems={selectedItems}
-			onChange={setSelectedItems}
+			onChange={handleChange}
 			onRenderSuggestion={undefined}
 		/>
 	);
-}
-Basic.storyName = "Basic usage"
+};
+Basic.storyName = "Basic usage";
 Basic.argTypes = {
-	...defaultArgTypes,
-	searchFor: {
-		options: [1, 2, 3],
-		control: {
-			type: "radio",
-			labels: {
-					1: "Users",
-					2: "Groups",
-					3: "Any"
-			}
-		}
-	},
-	groupTypes: {
-		options: [1, 2, 3, 4, 5, 6, 7],
-		control: {
-			type: "radio",
-			labels: {
-					1: "AAD",
-					2: "M365",
-					3: "AAD or M365",
-					4: "SPO",
-					5: "AAD or SPO",
-					6: "M365 or SPO",
-					7: "All"
-			}
-		}
-	}
+	...defaultArgTypes
 };
 Basic.args = { ...defaultArgs };
 Basic.parameters = { docs: { source: { type: "code" } } };
 
 export const CustomSuggestionRender: Story<IPeoplePickerProps> = ({ onChange, ...args }) => {
-	const [selectedItems, setSelectedItems] = useState<(IUser | IGroup)[]>([]);
-	const renderSuggetions = (item: (IUser | IGroup)) => {
+	const [selectedItems, setSelectedItems] = useState<PeoplePickerValue[]>([]);
+	const provider = new MockPeoplePickerProvider();
+
+	const handleChange = (items: PeoplePickerValue[]) => {
+		if (onChange) {
+			onChange(items);
+		}
+
+		setSelectedItems(items);
+	};
+
+	const renderSuggestions = (item: IUser | IGroup) => {
 		const object = item as any;
 		if ("userPrincipalName" in item) {
 			// Example for user: Provide custom properties to the PeoplePickerItemSuggestion
 			return (
 				<PeoplePickerItemSuggestion
-					title={object.displayName} label={object.id} imageUrl={object.imageUrl}
+					title={object.displayName}
+					label={object.id}
+					imageUrl={object.additionalProperties.imageUrl}
 				/>
-			)
+			);
 		} else {
 			// Example for group: Render a fully custom element
-			let groupType: string = "";
-			switch ((item as IGroup).groupType) {
-				case GroupType.AAD:
-					groupType = "AAD"
-					break;
-				case GroupType.M365:
-					groupType = "M365"
-					break;
-				case GroupType.SPO:
-					groupType = "SPO"
-					break;
-			}
-			return (
-				<div style={{ padding: "5px" }}>{groupType} - {item.displayName}</div>
-			)
-		}
+			const groupType: string = (item as IGroup).additionalProperties?.groupType;
 
-	}
+			return (
+				<div style={{ padding: "5px" }}>
+					{groupType} - {item.displayName}
+				</div>
+			);
+		}
+	};
 
 	return (
 		<PeoplePicker
 			{...args}
-			provider={new MockPeoplePickerProvider()}
+			provider={provider}
 			selectedItems={selectedItems}
-			onChange={setSelectedItems}
-			onRenderSuggestion={renderSuggetions}
+			onChange={handleChange}
+			onRenderSuggestion={renderSuggestions}
 		/>
 	);
-}
+};
 CustomSuggestionRender.storyName = "Custom suggestion rendering";
 CustomSuggestionRender.argTypes = { ...defaultArgTypes };
 CustomSuggestionRender.args = { ...defaultArgs, label: "Custom suggestion render" };
-CustomSuggestionRender.parameters = { docs: { source: { type: "code" } }};
-
+CustomSuggestionRender.parameters = { docs: { source: { type: "code" } } };

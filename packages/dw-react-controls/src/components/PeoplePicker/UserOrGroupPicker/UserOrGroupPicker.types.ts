@@ -5,9 +5,9 @@ import {
 } from "office-ui-fabric-react/lib/components/pickers/BasePicker.types";
 import { ITheme } from "office-ui-fabric-react/lib/Styling";
 import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
-import { IGroup, IUser } from "../models";
+import { IGroup, IUser, PeoplePickerValue } from "../models";
 
-export interface IUserOrGroupPickerProps extends IBasePickerProps<IGroup | IUser> {
+export interface IUserOrGroupPickerProps extends IBasePickerProps<PeoplePickerValue> {
 	/**
 	 * Specifies if the picker is in an invalid state.
 	 */
