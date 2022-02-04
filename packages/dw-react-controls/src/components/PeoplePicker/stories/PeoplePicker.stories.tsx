@@ -40,7 +40,6 @@ export const Basic: Story<IPeoplePickerProps> = ({ onChange, ...args }) => {
 	return (
 		<PeoplePicker
 			{...args}
-			errorMessage={args.required && selectedItems.length === 0 ? "Required" : args.errorMessage}
 			provider={provider}
 			selectedItems={selectedItems}
 			onChange={handleChange}
