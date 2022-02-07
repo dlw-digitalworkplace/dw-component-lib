@@ -1,1 +1,3 @@
-export interface IDemoPeoplePickerWebPartProps {}
+export interface IDemoPeoplePickerWebPartProps {
+	providerType: "GraphProvider" | "MockProvider";
+}

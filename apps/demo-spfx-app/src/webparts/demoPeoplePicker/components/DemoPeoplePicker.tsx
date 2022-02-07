@@ -1,21 +1,23 @@
-import { MockPeoplePickerProvider, PeoplePicker, PeoplePickerValue } from "@dlw-digitalworkplace/dw-react-controls";
+import { PeoplePicker, PeoplePickerValue } from "@dlw-digitalworkplace/dw-react-controls";
 import * as React from "react";
 import styles from "./DemoPeoplePicker.module.scss";
 import { IDemoPeoplePickerProps } from "./DemoPeoplePicker.types";
 
 export const DemoPeoplePicker: React.FC<IDemoPeoplePickerProps> = (props) => {
-	const [selectedItems, setSelectedItems] = React.useState<PeoplePickerValue[]>([]);
+	const { provider } = props;
 
-	const provider = new MockPeoplePickerProvider();
+	const [selectedItems, setSelectedItems] = React.useState<PeoplePickerValue[]>([]);
 
 	return (
 		<div className={styles.demoPeoplePicker}>
 			<PeoplePicker
+				disabled={!provider}
 				label={"Demo people picker"}
-				errorMessage={selectedItems.length === 0 && "Please select at least one person"}
+				errorMessage={!provider && "Please configure a provider for this People Picker."}
 				onChange={setSelectedItems}
 				provider={provider}
 				required={true}
+				resolveDelay={200}
 				selectedItems={selectedItems}
 			/>
 		</div>
