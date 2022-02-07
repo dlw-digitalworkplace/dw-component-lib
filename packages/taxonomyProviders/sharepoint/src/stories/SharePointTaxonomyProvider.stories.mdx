@@ -26,9 +26,6 @@ const provider = new SharePointTaxonomyProvider(siteUrl, termSetIdOrName, lcid /
 await provider.initialize(preCacheItems /* optional */);
 ```
 
-> 💡 You can specify an optional TTL for the cached data. If no value is specified, the default of 24hrs will be set.
-> The TTL value can be set to a `Date` or timespan (as number).
-
 ## Documentation
 
 The `SharePointTaxonomyProvider`'s methods are described here:
@@ -37,11 +34,11 @@ The `SharePointTaxonomyProvider`'s methods are described here:
 
 Creates a new `SharePointTaxonomyProvider` object.
 
-| Parameter                                  | Type     | Description                                                          |
-| ------------------------------------------ | -------- | -------------------------------------------------------------------- |
-| siteUrl<span class="req">\*</span>         | `string` | URL of the current SharePoint site.                                  |
-| termSetIdOrName<span class="req">\*</span> | `string` | Name or ID (Guid) of the term set to connect to.                     |
-| lcid                                       | `number` | Language code to use when working with the Term Set. `Default: 1033` |
+| Parameter                                  | Type     | Description                                          | Default value |
+| ------------------------------------------ | -------- | ---------------------------------------------------- | ------------- |
+| siteUrl<span class="req">\*</span>         | `string` | URL of the current SharePoint site.                  |               |
+| termSetIdOrName<span class="req">\*</span> | `string` | Name or ID (Guid) of the term set to connect to.     |               |
+| lcid                                       | `number` | Language code to use when working with the Term Set. | `1033`        |
 
 ### `initialize(preCacheItems?): Promise<void>`
 

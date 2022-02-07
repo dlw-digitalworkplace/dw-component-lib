@@ -17,6 +17,7 @@ export const storiesOrder = {
 		introduction: null,
 		"refresh cache": null
 	},
+	peoplepickerproviders: null,
 	taxonomyproviders: null,
 	utils: {
 		introduction: null
