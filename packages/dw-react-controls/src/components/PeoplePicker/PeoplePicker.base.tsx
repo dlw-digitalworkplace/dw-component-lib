@@ -9,16 +9,17 @@ import { UserOrGroupPicker } from "./UserOrGroupPicker/UserOrGroupPicker";
 const getClassNames = classNamesFunction<IPeoplePickerStyleProps, IPeoplePickerStyles>();
 
 export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
-	provider,
-	selectedItems,
+	className,
+	disabled,
+	errorMessage,
 	itemLimit,
 	label,
-	disabled,
-	required,
 	labelProps,
-	errorMessage,
+	provider,
+	required,
+	resolveDelay,
+	selectedItems,
 	styles,
-	className,
 	theme,
 	onChange,
 	onRenderSuggestion
@@ -68,12 +69,13 @@ export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
 			<div className={classNames.inputWrapper}>
 				<UserOrGroupPicker
 					className={classNames.input}
-					selectedItems={selectedItems}
-					onResolveSuggestions={onResolveSuggestions}
-					onChange={onChange}
 					disabled={disabled}
 					itemLimit={itemLimit}
+					resolveDelay={resolveDelay}
+					selectedItems={selectedItems}
+					onChange={onChange}
 					onRenderSuggestion={onRenderSuggestion}
+					onResolveSuggestions={onResolveSuggestions}
 				/>
 			</div>
 			{!!errorMessage && renderErrorMessage(errorMessage)}

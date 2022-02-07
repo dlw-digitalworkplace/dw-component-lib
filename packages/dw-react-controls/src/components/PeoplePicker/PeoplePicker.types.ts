@@ -8,14 +8,14 @@ import { IUser } from "./models/IUser";
 
 export interface IPeoplePickerProps {
 	/**
-	 * The people picker provider that should handle the data layer functionalities
+	 * Optional parameter to disable the component
 	 */
-	provider: IPeoplePickerProvider;
+	disabled?: boolean;
 
 	/**
-	 * An array of selected users or groups
+	 * Optional parameter to provide an error message to the component
 	 */
-	selectedItems: PeoplePickerValue[];
+	errorMessage?: string | JSX.Element;
 
 	/**
 	 * Optional parameter to limit the amount of options that can be slected
@@ -28,9 +28,14 @@ export interface IPeoplePickerProps {
 	label?: string;
 
 	/**
-	 * Optional parameter to disable the component
+	 * Optional object to set the label props
 	 */
-	disabled?: boolean;
+	labelProps?: Partial<ILabelProps>;
+
+	/**
+	 * The people picker provider that should handle the data layer functionalities
+	 */
+	provider: IPeoplePickerProvider;
 
 	/**
 	 * Optional parameter to indicate that the value is required
@@ -38,23 +43,25 @@ export interface IPeoplePickerProps {
 	required?: boolean;
 
 	/**
-	 * Optional object to set the label props
+	 * The delay time in ms before resolving suggestions, which is kicked off when input has been changed.
+	 * e.g. If a second input change happens within the resolveDelay time, the timer will start over.
+	 * Only until after the timer completes will onResolveSuggestions be called.
 	 */
-	labelProps?: Partial<ILabelProps>;
+	resolveDelay?: number;
 
 	/**
-	 * Optional parameter to provide an error message to the component
+	 * An array of selected users or groups
 	 */
-	errorMessage?: string | JSX.Element;
+	selectedItems: PeoplePickerValue[];
 
-	/**
-	 * Call to apply custom styling on the People Picker element
-	 */
-	styles?: IStyleFunctionOrObject<IPeoplePickerStyleProps, IPeoplePickerStyles>;
 	/**
 	 * Optional class for the root Peple Picker element
 	 */
 	className?: string;
+	/**
+	 * Call to apply custom styling on the People Picker element
+	 */
+	styles?: IStyleFunctionOrObject<IPeoplePickerStyleProps, IPeoplePickerStyles>;
 	/**
 	 * Optional theme to provide to the people picker
 	 */
