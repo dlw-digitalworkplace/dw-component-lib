@@ -41,6 +41,7 @@
 		"packages": [
 			"apps/*",
 			"packages/*",
+			"packages/peoplePickerProviders/*",
 			"packages/taxonomyProviders/*",
 			"scripts"
 		],
