@@ -15,6 +15,7 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 
 	React.useEffect(() => {
 		(async () => {
+			// tslint:disable-next-line:no-unused-expression
 			if (!siteUrl || !termSetIdOrName) {
 				console.warn("No provider info present. Please provide the necessary properties.");
 				return null;

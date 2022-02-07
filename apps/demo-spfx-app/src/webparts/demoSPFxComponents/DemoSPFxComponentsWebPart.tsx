@@ -42,6 +42,7 @@ export default class DemoSPFxComponentsWebPart extends BaseClientSideWebPart<IDe
 	}
 
 	protected onDispose(): void {
+		// tslint:disable-next-line:no-unused-expression
 		if (this._themeProvider) {
 			this._themeProvider.themeChangedEvent.remove(this, this._onThemeChanged);
 		}
