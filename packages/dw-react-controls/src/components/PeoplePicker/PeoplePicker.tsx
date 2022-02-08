@@ -7,4 +7,4 @@ export const PeoplePicker: React.FC<IPeoplePickerProps> = styled<
 	IPeoplePickerProps,
 	IPeoplePickerStyleProps,
 	IPeoplePickerStyles
->(PeoplePickerBase, getStyles)
+>(PeoplePickerBase, getStyles);

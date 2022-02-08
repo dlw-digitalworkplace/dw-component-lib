@@ -5,7 +5,7 @@ import {
 	IPeoplePickerItemSuggestionProps,
 	IPeoplePickerItemSuggestionStyleProps,
 	IPeoplePickerItemSuggestionStyles
-} from "./PickerItemSuggestion.types";
+} from "./PeoplePickerItemSuggestion.types";
 
 export const PeoplePickerItemSuggestion = styled<
 	IPeoplePickerItemSuggestionProps,

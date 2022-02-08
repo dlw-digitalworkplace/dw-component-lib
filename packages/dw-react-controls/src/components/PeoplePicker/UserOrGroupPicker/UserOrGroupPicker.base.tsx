@@ -2,8 +2,8 @@ import { BasePicker } from "office-ui-fabric-react/lib/components/pickers/BasePi
 import { IPickerItemProps } from "office-ui-fabric-react/lib/Pickers";
 import * as React from "react";
 import { IGroup, IUser, PeoplePickerValue } from "../models";
-import { PeoplePickerItem } from "./PeoplePickerItem/PeoplePickerItem";
-import { PeoplePickerItemSuggestion } from "./PeoplePickerItemSuggestion/PeoplePickerItemSuggestion";
+import { PeoplePickerItem } from "./PeoplePickerItem";
+import { PeoplePickerItemSuggestion } from "./PeoplePickerItemSuggestion";
 import { IUserOrGroupPickerProps } from "./UserOrGroupPicker.types";
 
 export const UserOrGroupPickerBase: React.FC<IUserOrGroupPickerProps> = (props: IUserOrGroupPickerProps) => {

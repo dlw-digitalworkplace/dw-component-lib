@@ -1,5 +1,8 @@
 import { getGlobalClassNames } from "office-ui-fabric-react/lib/Styling";
-import { IPeoplePickerItemSuggestionStyleProps, IPeoplePickerItemSuggestionStyles } from "./PickerItemSuggestion.types";
+import {
+	IPeoplePickerItemSuggestionStyleProps,
+	IPeoplePickerItemSuggestionStyles
+} from "./PeoplePickerItemSuggestion.types";
 
 const GlobalClassNames = {
 	root: "dw-PeoplePickerSuggestion"

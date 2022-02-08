@@ -4,7 +4,7 @@ import {
 	IPeoplePickerItemSuggestionProps,
 	IPeoplePickerItemSuggestionStyleProps,
 	IPeoplePickerItemSuggestionStyles
-} from "./PickerItemSuggestion.types";
+} from "./PeoplePickerItemSuggestion.types";
 import { Persona, PersonaSize } from "office-ui-fabric-react/lib/Persona";
 
 const getClassNames = classNamesFunction<IPeoplePickerItemSuggestionStyleProps, IPeoplePickerItemSuggestionStyles>();
@@ -22,12 +22,7 @@ export const PeoplePickerItemSuggestionBase: React.FC<IPeoplePickerItemSuggestio
 
 	return (
 		<div className={classNames.root}>
-			<Persona
-				size={PersonaSize.size40}
-				text={title}
-				secondaryText={label}
-				imageUrl={imageUrl}
-			/>
+			<Persona size={PersonaSize.size40} text={title} secondaryText={label} imageUrl={imageUrl} />
 		</div>
 	);
 };

@@ -4,7 +4,7 @@ import * as React from "react";
 import { IGroup, IUser, PeoplePickerValue } from "./models";
 import { IPeoplePickerFilterOptions } from "./models/IPeoplePickerFilterOptions";
 import { IPeoplePickerProps, IPeoplePickerStyleProps, IPeoplePickerStyles } from "./PeoplePicker.types";
-import { UserOrGroupPicker } from "./UserOrGroupPicker/UserOrGroupPicker";
+import { UserOrGroupPicker } from "./UserOrGroupPicker";
 
 const getClassNames = classNamesFunction<IPeoplePickerStyleProps, IPeoplePickerStyles>();
 
