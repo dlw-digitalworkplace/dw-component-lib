@@ -21,6 +21,7 @@
 		"@dw-component-lib/build": "^1.0.0",
 		"@dw-component-lib/tslint-rules": "^1.0.0",
 		"@microsoft/microsoft-graph-types": "^2.13.0",
+		"@types/jest": "^26.0.14",
 		"@types/node": "^14.11.8",
 		"@types/sharepoint": "^2016.1.9",
 		"@types/webpack-env": "^1.15.3",

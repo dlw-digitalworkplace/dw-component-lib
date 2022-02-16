@@ -93,7 +93,7 @@
 		"no-with-statement": false,
 		"no-var-keyword": true,
 		"object-literal-sort-keys": false,
-		"quotemark": [true, "double", "jsx-double", "avoid-template"],
+		"quotemark": [true, "double", "jsx-double", "avoid-escape", "avoid-template"],
 		"use-named-parameter": true,
 		"ban": [
 			true,

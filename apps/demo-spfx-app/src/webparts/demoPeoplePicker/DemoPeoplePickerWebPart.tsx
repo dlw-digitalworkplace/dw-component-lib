@@ -1,5 +1,9 @@
 import { IPeoplePickerProvider, MockPeoplePickerProvider } from "@dlw-digitalworkplace/dw-react-controls";
-import { GraphPeoplePickerProvider } from "@dlw-digitalworkplace/peoplepickerprovider-graph";
+import {
+	GraphPeoplePickerProvider,
+	IGraphPeoplePickerProviderOptions,
+	ResourceType
+} from "@dlw-digitalworkplace/peoplepickerprovider-graph";
 import { Version } from "@microsoft/sp-core-library";
 import { IPropertyPaneConfiguration, PropertyPaneChoiceGroup } from "@microsoft/sp-property-pane";
 import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
@@ -86,7 +90,11 @@ export default class DemoPeoplePickerWebPart extends BaseClientSideWebPart<IDemo
 				const aadTokenProvider = await this.context.aadTokenProviderFactory.getTokenProvider();
 				const graphToken = await aadTokenProvider.getToken("https://graph.microsoft.com");
 
-				this._provider = new GraphPeoplePickerProvider(graphToken);
+				const providerOptions: IGraphPeoplePickerProviderOptions = {
+					resourceTypes: ResourceType.User | ResourceType.Group
+				};
+
+				this._provider = new GraphPeoplePickerProvider(graphToken, providerOptions);
 				this.render();
 				break;
 			}
