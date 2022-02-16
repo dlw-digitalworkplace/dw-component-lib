@@ -20,6 +20,8 @@ export const DemoPeoplePicker: React.FC<IDemoPeoplePickerProps> = (props) => {
 				resolveDelay={200}
 				selectedItems={selectedItems}
 			/>
+
+			<pre>{JSON.stringify(selectedItems, null, 2)}</pre>
 		</div>
 	);
 };

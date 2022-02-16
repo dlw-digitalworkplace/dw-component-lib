@@ -17,7 +17,7 @@ import { ResourceType } from "./models/ResourceType";
  * Provides PeoplePicker data using the Graph API.
  */
 export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
-	public GraphToken: string;
+	public GraphTokenProvider: string | (() => string | PromiseLike<string>);
 	private _providerOptions: IGraphPeoplePickerProviderOptions;
 
 	private readonly DEFAULTOPTIONS: IGraphPeoplePickerProviderOptions = {
@@ -25,8 +25,11 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 		groupTypes: GroupType.M365 | GroupType.Security | GroupType.Distribution
 	};
 
-	constructor(graphToken: string, options: IGraphPeoplePickerProviderOptions) {
-		this.GraphToken = graphToken;
+	constructor(
+		graphTokenProvider: string | (() => string | PromiseLike<string>),
+		options: IGraphPeoplePickerProviderOptions
+	) {
+		this.GraphTokenProvider = graphTokenProvider;
 
 		this._providerOptions = deepmerge(this.DEFAULTOPTIONS, options);
 	}
@@ -78,13 +81,14 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 			filterClause += "))";
 		}
 
+		const graphToken = await this._getGraphToken();
 		const userResponse = await fetch(
 			`https://graph.microsoft.com/v1.0/users?$search=${searchClause}&$filter=${filterClause}&$count=true`,
 			{
 				headers: {
 					ConsistencyLevel: "Eventual",
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${this.GraphToken}`
+					Authorization: `Bearer ${graphToken}`
 				}
 			}
 		);
@@ -112,13 +116,14 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 
 		const filterClause = this._getGroupFilterString(options.idsToIgnore);
 
+		const graphToken = await this._getGraphToken();
 		const userResponse = await fetch(
 			`https://graph.microsoft.com/v1.0/groups?$search=${searchClause}&$filter=${filterClause}&$count=true`,
 			{
 				headers: {
 					ConsistencyLevel: "Eventual",
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${this.GraphToken}`
+					Authorization: `Bearer ${graphToken}`
 				}
 			}
 		);
@@ -135,6 +140,14 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 			id: graphGroup.id!,
 			displayName: graphGroup.displayName!
 		}));
+	}
+
+	private async _getGraphToken(): Promise<string> {
+		if (typeof this.GraphTokenProvider === "string") {
+			return this.GraphTokenProvider;
+		}
+
+		return await this.GraphTokenProvider();
 	}
 
 	private _getGroupFilterString(idsToIgnore: string[] = []): string {

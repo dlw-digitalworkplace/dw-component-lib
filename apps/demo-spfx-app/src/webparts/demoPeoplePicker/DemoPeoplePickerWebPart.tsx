@@ -88,13 +88,14 @@ export default class DemoPeoplePickerWebPart extends BaseClientSideWebPart<IDemo
 		switch (this.properties.providerType) {
 			case "GraphProvider": {
 				const aadTokenProvider = await this.context.aadTokenProviderFactory.getTokenProvider();
-				const graphToken = await aadTokenProvider.getToken("https://graph.microsoft.com");
-
 				const providerOptions: IGraphPeoplePickerProviderOptions = {
 					resourceTypes: ResourceType.User | ResourceType.Group
 				};
 
-				this._provider = new GraphPeoplePickerProvider(graphToken, providerOptions);
+				this._provider = new GraphPeoplePickerProvider(
+					() => aadTokenProvider.getToken("https://graph.microsoft.com"),
+					providerOptions
+				);
 				this.render();
 				break;
 			}
