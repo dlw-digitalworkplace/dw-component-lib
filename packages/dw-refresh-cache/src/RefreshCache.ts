@@ -1,7 +1,7 @@
 import { ICacheObject } from "./models";
 
 export class RefreshCache {
-	public readonly DEFAULT_EXPIRATION: number = 24 * 60 * 60 * 1000; // 1 day
+	public readonly DEFAULT_EXPIRATION: number = 24 * 60 * 60; // 1 day in seconds
 
 	private _runningPromises = new Map<string, PromiseLike<any>>();
 
@@ -12,7 +12,7 @@ export class RefreshCache {
 	 *
 	 * @param key - Key of the cache entry
 	 * @param valueFunc - Function to retrieve the value if no cached entry exists
-	 * @param timeToLive - Time to live until expiring
+	 * @param timeToLive - Time to live until expiring. Can be a number (in seconds) or a Date object.
 	 */
 	public getOrAdd<T>(key: string, valueFunc: () => T, timeToLive?: number | Date): T {
 		// retrieve cache item
@@ -36,7 +36,7 @@ export class RefreshCache {
 	 *
 	 * @param key - Key of the cache entry
 	 * @param valueFunc - Function to retrieve the value if no cached entry exists
-	 * @param timeToLive - Time to live until expiring
+	 * @param timeToLive - Time to live until expiring. Can be a number (in seconds) or a Date object.
 	 * @param updateCache - Indicates if the cache entry should be updated after returning the current value
 	 * @param updateCallback - Callback for when the new value has been calculated
 	 */
@@ -123,18 +123,18 @@ export class RefreshCache {
 	 *
 	 * @param key - Key of the cache entry
 	 * @param value - Value for the cache entry
-	 * @param timeToLive - Time to live until expiring
+	 * @param timeToLive - Time to live until expiring. Can be a number (in seconds) or a Date object.
 	 */
 	public set<T>(key: string, value: T, timeToLive?: number | Date): void {
 		// set the expiration date to either:
 		// - the passed Date
-		// - current Date + passed number or default number of ticks
+		// - current Date + passed number or default number in seconds
 		const expiresOn =
 			typeof timeToLive === "number"
-				? Date.now() + timeToLive
+				? Date.now() + timeToLive * 1000
 				: timeToLive
 				? timeToLive.getTime()
-				: Date.now() + this.DEFAULT_EXPIRATION;
+				: Date.now() + this.DEFAULT_EXPIRATION * 1000;
 
 		// create a cache object
 		const cacheItem: ICacheObject = {
