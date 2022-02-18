@@ -1,0 +1,7 @@
+{
+  "type": "major",
+  "comment": "BREAKING: change TTL to receive seconds instead of ms",
+  "packageName": "@dlw-digitalworkplace/dw-refresh-cache",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch"
+}
