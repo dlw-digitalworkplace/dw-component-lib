@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-react-controls",
   "entries": [
     {
+      "date": "Tue, 22 Feb 2022 09:46:27 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-controls_v0.3.3",
+      "version": "0.3.3",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add basic testing of taxonomy picker rendering",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "87a5aa5e99fae188ca8934f32847f889087cce24",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 22 Dec 2021 14:53:06 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-controls_v0.3.3",
       "version": "0.3.3",

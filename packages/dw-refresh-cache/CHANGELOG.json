@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-refresh-cache",
   "entries": [
     {
+      "date": "Tue, 22 Feb 2022 09:46:27 GMT",
+      "tag": "@dlw-digitalworkplace/dw-refresh-cache_v1.0.0",
+      "version": "1.0.0",
+      "comments": {
+        "major": [
+          {
+            "comment": "BREAKING: change TTL to receive seconds instead of ms",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "87a5aa5e99fae188ca8934f32847f889087cce24",
+            "package": "@dlw-digitalworkplace/dw-refresh-cache"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 22 Dec 2021 14:53:06 GMT",
       "tag": "@dlw-digitalworkplace/dw-refresh-cache_v0.1.2",
       "version": "0.1.2",
