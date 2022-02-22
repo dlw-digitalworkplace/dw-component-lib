@@ -34,7 +34,7 @@ const myValue = await cache.getOrAddAsync(
 ```
 
 > 💡 You can specify an optional TTL for the cached data. If no value is specified, the default of 24hrs will be set.
-> The TTL value can be set to a `Date` or timespan (as number).
+> The TTL value can be set to a `Date` or timespan (as number in **seconds**).
 
 ## Documentation
 
@@ -52,23 +52,23 @@ Creates a new `RefreshCache` object using the given `Storage`.
 
 Retrieves an item from the cache, or adds it using the `valueFunc` result.
 
-| Parameter                            | Type               | Description                                                                             |
-| ------------------------------------ | ------------------ | --------------------------------------------------------------------------------------- |
-| key<span class="req">\*</span>       | `string`           | Key of the cache entry.                                                                 |
-| valueFunc<span class="req">\*</span> | `() => T`          | Function to retrieve the value when no valid cache entry exists.                        |
-| timeToLive                           | `number` \| `Date` | TTL for the cache entry. If a number is passed, the value is added to the current date. |
+| Parameter                            | Type               | Description                                                                 |
+| ------------------------------------ | ------------------ | --------------------------------------------------------------------------- |
+| key<span class="req">\*</span>       | `string`           | Key of the cache entry.                                                     |
+| valueFunc<span class="req">\*</span> | `() => T`          | Function to retrieve the value when no valid cache entry exists.            |
+| timeToLive                           | `number` \| `Date` | Time to live until expiring. Can be a number (in seconds) or a Date object. |
 
 ### `getOrAddAsync<T>(key, valueFunc, timeToLive?, updateCache?, updateCallback?): Promise<T>`
 
 Retrieves an item from the cache, or adds it using the `valueFunc` result.
 
-| Parameter                            | Type                | Description                                                                             |
-| ------------------------------------ | ------------------- | --------------------------------------------------------------------------------------- |
-| key<span class="req">\*</span>       | `string`            | Key of the cache entry.                                                                 |
-| valueFunc<span class="req">\*</span> | `() => Promise<T>`  | Function to retrieve the value when no valid cache entry exists.                        |
-| timeToLive                           | `number` \| `Date`  | TTL for the cache entry. If a number is passed, the value is added to the current date. |
-| updateCache                          | `boolean`           | Set to `true` to execute the `valueFunc` event when a valid cache entry exists.         |
-| updateCallback                       | `(data: T) => void` | Callback to call after the value update has been completed.                             |
+| Parameter                            | Type                | Description                                                                     |
+| ------------------------------------ | ------------------- | ------------------------------------------------------------------------------- |
+| key<span class="req">\*</span>       | `string`            | Key of the cache entry.                                                         |
+| valueFunc<span class="req">\*</span> | `() => Promise<T>`  | Function to retrieve the value when no valid cache entry exists.                |
+| timeToLive                           | `number` \| `Date`  | Time to live until expiring. Can be a number (in seconds) or a Date object.     |
+| updateCache                          | `boolean`           | Set to `true` to execute the `valueFunc` event when a valid cache entry exists. |
+| updateCallback                       | `(data: T) => void` | Callback to call after the value update has been completed.                     |
 
 ### `get<T>(key): T | undefined`
 
@@ -82,11 +82,11 @@ Retrieves an item from the cache.
 
 Adds or updates an item in the cache.
 
-| Parameter                        | Type               | Description                                                                             |
-| -------------------------------- | ------------------ | --------------------------------------------------------------------------------------- |
-| key<span class="req">\*</span>   | `string`           | Key of the cache entry.                                                                 |
-| value<span class="req">\*</span> | `T`                | Value to set in the cache entry.                                                        |
-| timeToLive                       | `number` \| `Date` | TTL for the cache entry. If a number is passed, the value is added to the current date. |
+| Parameter                        | Type               | Description                                                                 |
+| -------------------------------- | ------------------ | --------------------------------------------------------------------------- |
+| key<span class="req">\*</span>   | `string`           | Key of the cache entry.                                                     |
+| value<span class="req">\*</span> | `T`                | Value to set in the cache entry.                                            |
+| timeToLive                       | `number` \| `Date` | Time to live until expiring. Can be a number (in seconds) or a Date object. |
 
 ### `delete(key): void`
 

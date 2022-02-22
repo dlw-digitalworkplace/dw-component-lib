@@ -91,10 +91,10 @@ describe("refreshCache", () => {
 			// arrange
 			MockStorage.setItem("test", JSON.stringify({ data: "Test value" }));
 			const cache = new RefreshCache(MockStorage);
-			const ttl = Date.now() + 5 * 60 * 1000; // now + 5 minutes
+			const expiresOn = Date.now() + 5 * 60 * 1000; // now + 5 minutes
 
 			// act
-			const value = cache.getOrAdd("another", () => "Another value", new Date(ttl));
+			const value = cache.getOrAdd("another", () => "Another value", new Date(expiresOn));
 
 			// assert
 			expect(value).toBe("Another value");
@@ -103,7 +103,7 @@ describe("refreshCache", () => {
 
 			const testItem = JSON.parse(MockStorage.data.get("another")!);
 			expect(testItem.data).toBe("Another value");
-			expect(testItem.expiresOn).toBe(ttl);
+			expect(testItem.expiresOn).toBe(expiresOn);
 		});
 	});
 
@@ -139,13 +139,13 @@ describe("refreshCache", () => {
 			// arrange
 			MockStorage.setItem("test", JSON.stringify({ data: "Test value" }));
 			const cache = new RefreshCache(MockStorage);
-			const ttl = Date.now() + 5 * 60 * 1000; // now + 5 minutes
+			const expiresOn = Date.now() + 5 * 60 * 1000; // now + 5 minutes
 
 			// act
 			const value = await cache.getOrAddAsync(
 				"another",
 				() => new Promise((res) => res("Another value")),
-				new Date(ttl)
+				new Date(expiresOn)
 			);
 
 			// assert
@@ -155,7 +155,7 @@ describe("refreshCache", () => {
 
 			const testItem = JSON.parse(MockStorage.data.get("another")!);
 			expect(testItem.data).toBe("Another value");
-			expect(testItem.expiresOn).toBe(ttl);
+			expect(testItem.expiresOn).toBe(expiresOn);
 		});
 
 		it("should return current item and update cache with new value", async () => {
@@ -182,13 +182,13 @@ describe("refreshCache", () => {
 			// arrange
 			MockStorage.setItem("test", JSON.stringify({ data: "Test value" }));
 			const cache = new RefreshCache(MockStorage);
-			const ttl = Date.now() + 5 * 60 * 1000; // now + 5 minutes
+			const expiresOn = Date.now() + 5 * 60 * 1000; // now + 5 minutes
 
 			// act
 			const value = await cache.getOrAddAsync(
 				"test",
 				() => new Promise((res) => res("Another value")),
-				new Date(ttl),
+				new Date(expiresOn),
 				true
 			);
 
@@ -202,7 +202,7 @@ describe("refreshCache", () => {
 
 			const testItem = JSON.parse(MockStorage.data.get("test")!);
 			expect(testItem.data).toBe("Another value");
-			expect(testItem.expiresOn).toBe(ttl);
+			expect(testItem.expiresOn).toBe(expiresOn);
 		});
 
 		it("should return current and callback with new value", async () => {
@@ -263,23 +263,23 @@ describe("refreshCache", () => {
 		it("should add a new item with specified TTL as Date", () => {
 			// arrange
 			const cache = new RefreshCache(MockStorage);
-			const ttl = Date.now() + 5 * 60 * 1000; // now + 5 minutes
+			const expiresOn = Date.now() + 5 * 60 * 1000; // now + 5 minutes
 
 			// act
-			cache.set("test", { obj: "Test value" }, new Date(ttl));
+			cache.set("test", { obj: "Test value" }, new Date(expiresOn));
 
 			// assert
 			expect(MockStorage.data.has("test")).toBe(true);
 
 			const testItem = JSON.parse(MockStorage.data.get("test")!);
 			expect(testItem.data).toMatchObject({ obj: "Test value" });
-			expect(testItem.expiresOn).toBe(ttl);
+			expect(testItem.expiresOn).toBe(expiresOn);
 		});
 
 		it("should add a new item with specified TTL as number", () => {
 			// arrange
 			const cache = new RefreshCache(MockStorage);
-			const ttl = 5 * 60 * 1000; // now + 5 minutes
+			const ttl = 5 * 60; // 5 minutes
 
 			const dateBeforeSet = new Date();
 
@@ -293,8 +293,8 @@ describe("refreshCache", () => {
 
 			const testItem = JSON.parse(MockStorage.data.get("test")!);
 			expect(testItem.data).toMatchObject({ obj: "Test value" });
-			expect(testItem.expiresOn).toBeGreaterThanOrEqual(dateBeforeSet.getTime() + ttl);
-			expect(testItem.expiresOn).toBeLessThanOrEqual(dateAfterSet.getTime() + ttl);
+			expect(testItem.expiresOn).toBeGreaterThanOrEqual(dateBeforeSet.getTime() + ttl * 1000);
+			expect(testItem.expiresOn).toBeLessThanOrEqual(dateAfterSet.getTime() + ttl * 1000);
 		});
 
 		it("should overwrite an existing item", () => {
@@ -321,20 +321,20 @@ describe("refreshCache", () => {
 
 		it("should update TTL when overwriting an existing item", () => {
 			// arrange
-			const initialTtl = new Date(Date.now() + 5 * 60 * 1000);
-			const updatedTtl = new Date(Date.now() + 15 * 60 * 1000);
+			const initialExpiry = new Date(Date.now() + 5 * 60 * 1000);
+			const updatedExpiry = new Date(Date.now() + 15 * 60 * 1000);
 
 			MockStorage.setItem(
 				"test",
 				JSON.stringify({
 					data: "Test value",
-					expiresOn: initialTtl
+					expiresOn: initialExpiry
 				})
 			);
 			const cache = new RefreshCache(MockStorage);
 
 			// act
-			cache.set("test", "Updated value", updatedTtl);
+			cache.set("test", "Updated value", updatedExpiry);
 
 			// assert
 			expect(MockStorage.data.size).toBe(1);
@@ -342,7 +342,7 @@ describe("refreshCache", () => {
 
 			const testItem = JSON.parse(MockStorage.data.get("test")!);
 			expect(testItem.data).toBe("Updated value");
-			expect(testItem.expiresOn).toBe(updatedTtl.getTime());
+			expect(testItem.expiresOn).toBe(updatedExpiry.getTime());
 		});
 	});
 
