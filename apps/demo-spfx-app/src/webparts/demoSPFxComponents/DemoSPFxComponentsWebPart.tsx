@@ -1,17 +1,17 @@
 import { WebPartTitle } from "@dlw-digitalworkplace/dw-spfx-controls";
-import { IReadonlyTheme, ThemeChangedEventArgs, ThemeProvider } from "@microsoft/sp-component-base";
+import { ThemeChangedEventArgs, ThemeProvider } from "@microsoft/sp-component-base";
 import { Version } from "@microsoft/sp-core-library";
 import { IPropertyPaneConfiguration, PropertyPaneToggle } from "@microsoft/sp-property-pane";
 import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
 import * as strings from "DemoSPFxComponentsWebPartStrings";
-import { createTheme } from "office-ui-fabric-react";
+import { createTheme, ITheme } from "office-ui-fabric-react/lib/Styling";
 import * as React from "react";
 import * as ReactDom from "react-dom";
 import { IDemoSPFxComponentsWebPartProps } from "./DemoSPFxComponentsWebPart.types";
 
 export default class DemoSPFxComponentsWebPart extends BaseClientSideWebPart<IDemoSPFxComponentsWebPartProps> {
 	private _themeProvider: ThemeProvider;
-	private _themeVariant: IReadonlyTheme;
+	private _themeVariant: ITheme;
 
 	constructor() {
 		super();
@@ -22,7 +22,7 @@ export default class DemoSPFxComponentsWebPart extends BaseClientSideWebPart<IDe
 
 	protected async onInit(): Promise<void> {
 		this._themeProvider = this.context.serviceScope.consume(ThemeProvider.serviceKey);
-		this._themeVariant = this._themeProvider.tryGetTheme();
+		this._themeVariant = createTheme(this._themeProvider.tryGetTheme());
 
 		this._themeProvider.themeChangedEvent.add(this, this._onThemeChanged);
 	}
@@ -33,7 +33,7 @@ export default class DemoSPFxComponentsWebPart extends BaseClientSideWebPart<IDe
 				displayMode={this.displayMode}
 				hidden={this.properties.hideTitle}
 				title={this.properties.title}
-				theme={createTheme(this._themeVariant)}
+				theme={this._themeVariant as any} /** ITheme doens't resolve correctly for some reason */
 				onRenderMoreInfoLink={this.properties.showMoreInfoLink && (() => <a href={""}>All items</a>)}
 				onUpdate={this._updateWebPartTitle}
 			/>,
@@ -42,6 +42,7 @@ export default class DemoSPFxComponentsWebPart extends BaseClientSideWebPart<IDe
 	}
 
 	protected onDispose(): void {
+		// tslint:disable-next-line:no-unused-expression
 		if (this._themeProvider) {
 			this._themeProvider.themeChangedEvent.remove(this, this._onThemeChanged);
 		}
@@ -76,7 +77,7 @@ export default class DemoSPFxComponentsWebPart extends BaseClientSideWebPart<IDe
 	}
 
 	private _onThemeChanged(args: ThemeChangedEventArgs): void {
-		this._themeVariant = args.theme;
+		this._themeVariant = createTheme(this._themeProvider.tryGetTheme());
 		this.render();
 	}
 

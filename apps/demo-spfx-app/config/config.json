@@ -2,11 +2,11 @@
 	"$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
 	"version": "2.0",
 	"bundles": {
-		"demo-taxonomypicker-web-part": {
+		"demo-peoplepicker-web-part": {
 			"components": [
 				{
-					"entrypoint": "./lib/webparts/demoTaxonomyPicker/DemoTaxonomyPickerWebPart.js",
-					"manifest": "./src/webparts/demoTaxonomyPicker/DemoTaxonomyPickerWebPart.manifest.json"
+					"entrypoint": "./lib/webparts/demoPeoplePicker/DemoPeoplePickerWebPart.js",
+					"manifest": "./src/webparts/demoPeoplePicker/DemoPeoplePickerWebPart.manifest.json"
 				}
 			]
 		},
@@ -17,12 +17,21 @@
 					"manifest": "./src/webparts/demoSPFxComponents/DemoSPFxComponentsWebPart.manifest.json"
 				}
 			]
+		},
+		"demo-taxonomypicker-web-part": {
+			"components": [
+				{
+					"entrypoint": "./lib/webparts/demoTaxonomyPicker/DemoTaxonomyPickerWebPart.js",
+					"manifest": "./src/webparts/demoTaxonomyPicker/DemoTaxonomyPickerWebPart.manifest.json"
+				}
+			]
 		}
 	},
 	"externals": {},
 	"localizedResources": {
-		"DemoTaxonomyPickerWebPartStrings": "lib/webparts/demoTaxonomyPicker/loc/{locale}.js",
+		"DemoPeoplePickerWebPartStrings": "lib/webparts/demoPeoplePicker/loc/{locale}.js",
 		"DemoSPFxComponentsWebPartStrings": "lib/webparts/demoSPFxComponents/loc/{locale}.js",
+		"DemoTaxonomyPickerWebPartStrings": "lib/webparts/demoTaxonomyPicker/loc/{locale}.js",
 		"DWControlStrings": "../../node_modules/@dlw-digitalworkplace/dw-spfx-controls/lib/loc/{locale}.js"
 	}
 }

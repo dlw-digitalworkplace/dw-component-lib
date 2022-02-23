@@ -1,5 +1,5 @@
 {
-	"packages": ["apps/*", "packages/*", "packages/taxonomyProviders/*", "scripts"],
+	"packages": ["apps/*", "packages/*", "packages/peoplePickerProviders/*", "packages/taxonomyProviders/*", "scripts"],
 	"npmClient": "yarn",
 	"useWorkspaces": true,
 	"version": "independent"

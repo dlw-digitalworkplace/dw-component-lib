@@ -1,0 +1,41 @@
+{
+	"name": "@dlw-digitalworkplace/peoplepickerprovider-graph",
+	"version": "0.0.0",
+	"main": "lib-commonjs/index.js",
+	"module": "lib/index.js",
+	"typings": "lib/index.d.ts",
+	"author": "Nick Sevens",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dlw-digitalworkplace/dw-component-lib"
+	},
+	"scripts": {
+		"build": "just-scripts build",
+		"clean": "just-scripts clean",
+		"start-test": "just-scripts jest-watch",
+		"test": "just-scripts test"
+	},
+	"devDependencies": {
+		"@dlw-digitalworkplace/dw-react-controls": "^0.3.3",
+		"@dw-component-lib/build": "^1.0.0",
+		"@dw-component-lib/tslint-rules": "^1.0.0",
+		"@microsoft/microsoft-graph-types": "^2.13.0",
+		"@types/jest": "^26.0.14",
+		"@types/node": "^14.11.8",
+		"@types/sharepoint": "^2016.1.9",
+		"@types/webpack-env": "^1.15.3",
+		"ts-node": "^9.0.0",
+		"tslib": "^2.3.0",
+		"tslint": "^6.1.3",
+		"typescript": "^3.9.7"
+	},
+	"dependencies": {
+		"@dlw-digitalworkplace/dw-react-utils": "^0.2.0",
+		"deepmerge": "^4.2.2",
+		"rfdc": "^1.3.0"
+	},
+	"peerDependencies": {
+		"@dlw-digitalworkplace/dw-react-controls": "^0.3.3"
+	}
+}

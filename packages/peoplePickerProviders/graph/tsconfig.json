@@ -1,0 +1,12 @@
+{
+	"extends": "../../../config/tsconfig.base.json",
+	"compilerOptions": {
+		"composite": true,
+		"lib": ["es5", "dom", "es2015.promise"],
+		"outDir": "lib",
+		"rootDir": "./src",
+		"typeRoots": ["../../../node_modules/@types", "../../../typings"],
+		"types": ["jest", "node", "sharepoint", "webpack-env", "custom-global"]
+	},
+	"include": ["src"]
+}

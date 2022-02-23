@@ -1,3 +1,4 @@
+export * from "./PeoplePicker";
 export * from "./TaxonomyPicker";
 export * from "./TermPicker";
 export * from "./TreeItem";

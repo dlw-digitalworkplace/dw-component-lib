@@ -1,0 +1,68 @@
+import { ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs";
+
+<Meta title="PeoplePickerProviders/Graph" />
+
+# Graph PeoplePicker Provider
+
+![peoplepickerprovider-graph package version](https://img.shields.io/github/package-json/v/dlw-digitalworkplace/dw-component-lib?filename=packages%2FpeoplePickerProviders%2Fgraph%2Fpackage.json&label=%40dlw-digitalworkplace%2Fpeoplepickerprovider-graph&logo=github)
+
+The `GraphPeoplePickerProvider` provides user and group data using the **Microsoft Graph API**.
+
+## Installation
+
+```shell
+yarn add @dlw-digitalworkplace/peoplepickerprovider-graph
+```
+
+## Usage
+
+```tsx
+import { GraphPeoplePickerProvider, GroupType, ResourceType } from "@dlw-digitalworkplace/peoplepickerprovider-graph";
+
+const provider = new GraphPeoplePickerProvider(graphToken, {
+	resourceTypes: ResourceType.User | ResourceType.Group,
+	groupTypes: GroupType.M365 | GroupType.Security | GroupType.Distribution /* optional */
+});
+
+// or with a function to retrieve the Graph token
+
+const provider = new GraphPeoplePickerProvider(() => aadTokenProvider.getToken("https://graph.microsoft.com"), {
+	resourceTypes: ResourceType.User | ResourceType.Group,
+	groupTypes: GroupType.M365 | GroupType.Security | GroupType.Distribution /* optional */
+});
+```
+
+## Documentation
+
+The `GraphPeoplePickerProvider`'s methods and supporting types are described here:
+
+### `Constructor`
+
+Creates a new `GraphPeoplePickerProvider` object.
+
+| Parameter                                     | Type                                              | Description                                                                                                          |
+| --------------------------------------------- | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| graphTokenProvider<span class="req">\*</span> | `string \| (() => string \| PromiseLike<string>)` | Authentication token used to send requests to the API. Either a string, or a function returning a string or Promise. |
+| options                                       | `IGraphPeoplePickerProviderOptions`               | Specifies options for the provider.                                                                                  |
+
+### `IGraphPeoplePickerProviderOptions`
+
+| Property                                 | Type           | Description                                                                                                      |
+| ---------------------------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------- |
+| resourceTypes<span class="req">\*</span> | `ResourceType` | The type(s) of resources to search for.                                                                          |
+| groupTypes                               | `GroupType`    | If `Group` is specified in the `resourceTypes`, then this property specifies the type(s) of group to search for. |
+
+### `ResourceType`
+
+| Enum value | Numeric value |
+| ---------- | ------------- |
+| User       | `1`           |
+| Group      | `2`           |
+
+### `GroupType`
+
+| Enum value   | Numeric value |
+| ------------ | ------------- |
+| M365         | `1`           |
+| Security     | `2`           |
+| Distribution | `4`           |

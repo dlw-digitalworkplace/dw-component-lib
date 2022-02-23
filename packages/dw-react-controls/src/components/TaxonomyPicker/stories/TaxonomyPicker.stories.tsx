@@ -23,7 +23,7 @@ const defaultArgs: Partial<ITaxonomyPickerProps> = {
 	dialogProps: {
 		dialogContentProps: {
 			title: "Select one or more terms",
-			subText: 'Doubleclick on a term, or select it and click the "Add" button.'
+			subText: "Doubleclick on a term, or select it and click the \"Add\" button."
 		}
 	}
 };

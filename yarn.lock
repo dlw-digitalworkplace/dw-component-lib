@@ -2122,6 +2122,11 @@
     es6-promise "^4.1.0"
     isomorphic-fetch "^2.2.1"
 
+"@microsoft/microsoft-graph-types@^2.13.0":
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/@microsoft/microsoft-graph-types/-/microsoft-graph-types-2.13.0.tgz#aa584e4897665df5a9c8869a226264cd6ec5882b"
+  integrity sha512-63FfWBLcyNo8tMP4oPcdqHQvk4ehuWpiUMjVLD7zJXPENIowpdwudP969AALkKzlwsjWImamdivGKd2Zc8Z1Uw==
+
 "@microsoft/node-core-library@3.19.3":
   version "3.19.3"
   resolved "https://registry.yarnpkg.com/@microsoft/node-core-library/-/node-core-library-3.19.3.tgz#cf09ddb2905a29b32956d4a88f9d035a00637be9"
