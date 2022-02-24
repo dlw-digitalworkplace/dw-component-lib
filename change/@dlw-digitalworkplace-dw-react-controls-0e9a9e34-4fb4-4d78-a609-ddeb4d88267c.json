@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "New React Component: People Picker",
-  "packageName": "@dlw-digitalworkplace/dw-react-controls",
-  "email": "robin.agten@delaware.pro",
-  "dependentChangeType": "patch"
-}

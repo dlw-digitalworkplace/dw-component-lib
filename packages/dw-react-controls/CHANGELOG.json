@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-react-controls",
   "entries": [
     {
+      "date": "Thu, 24 Feb 2022 12:14:28 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-controls_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "New React Component: People Picker",
+            "author": "robin.agten@delaware.pro",
+            "commit": "c3a7971a94fc2abd02d52db1c24378141a526184",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 22 Feb 2022 09:46:27 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-controls_v0.3.3",
       "version": "0.3.3",

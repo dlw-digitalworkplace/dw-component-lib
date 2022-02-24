@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Initial package release",
-  "packageName": "@dlw-digitalworkplace/peoplepickerprovider-graph",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "none"
-}

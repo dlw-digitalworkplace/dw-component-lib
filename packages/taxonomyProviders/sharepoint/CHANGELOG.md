@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/taxonomyprovider-sharepoint
 
-This log was last generated on Wed, 22 Dec 2021 14:53:06 GMT and should not be manually modified.
+This log was last generated on Thu, 24 Feb 2022 12:14:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.6
+
+Thu, 24 Feb 2022 12:14:28 GMT
+
+### Patches
+
+- Bump @dlw-digitalworkplace/taxonomyprovider-sharepoint to v0.1.6 (robin.agten@delaware.pro)
 
 ## 0.1.5
 
