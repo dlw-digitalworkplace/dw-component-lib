@@ -20,8 +20,7 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 	public GraphTokenProvider: string | (() => string | PromiseLike<string>);
 	private _providerOptions: IGraphPeoplePickerProviderOptions;
 
-	private readonly DEFAULTOPTIONS: IGraphPeoplePickerProviderOptions = {
-		resourceTypes: ResourceType.User | ResourceType.Group,
+	private readonly DEFAULTOPTIONS: Partial<IGraphPeoplePickerProviderOptions> = {
 		groupTypes: GroupType.M365 | GroupType.Security | GroupType.Distribution
 	};
 

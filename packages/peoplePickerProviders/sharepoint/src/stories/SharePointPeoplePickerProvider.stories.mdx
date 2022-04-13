@@ -1,0 +1,55 @@
+import { ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs";
+
+<Meta title="PeoplePickerProviders/SharePoint" />
+
+# SharePoint PeoplePicker Provider
+
+![peoplepickerprovider-sharepoint package version](https://img.shields.io/github/package-json/v/dlw-digitalworkplace/dw-component-lib?filename=packages%2FpeoplePickerProviders%2Fsharepoint%2Fpackage.json&label=%40dlw-digitalworkplace%2Fpeoplepickerprovider-sharepoint&logo=github)
+
+The `SharePointPeoplePickerProvider` provides user and group data using the **SharePoint People Picker API**.
+
+## Installation
+
+```shell
+yarn add @dlw-digitalworkplace/peoplepickerprovider-sharepoint
+```
+
+## Usage
+
+```tsx
+import { SharePointPeoplePickerProvider, PrincipalType } from "@dlw-digitalworkplace/peoplepickerprovider-sharepoint";
+
+const provider = new SharePointPeoplePickerProvider(siteUrl, spHttpClient, {
+	principalTypes:
+		PrincipalType.User | PrincipalType.DistributionList | PrincipalType.SecurityGroup | PrincipalType.SharePointGroup
+});
+```
+
+## Documentation
+
+The `SharePointPeoplePickerProvider`'s methods and supporting types are described here:
+
+### `Constructor`
+
+Creates a new `SharePointPeoplePickerProvider` object.
+
+| Parameter                               | Type                                     | Description                                    |
+| --------------------------------------- | ---------------------------------------- | ---------------------------------------------- |
+| siteUrl<span class="req">\*</span>      | `string`                                 | Url of the site collection.                    |
+| spHttpClient<span class="req">\*</span> | `SPHttpClient`                           | Client to perform calls to the SharePoint API. |
+| options<span class="req">\*</span>      | `ISharePointPeoplePickerProviderOptions` | Specifies options for the provider.            |
+
+### `ISharePointPeoplePickerProviderOptions`
+
+| Property                                  | Type            | Description                             |
+| ----------------------------------------- | --------------- | --------------------------------------- |
+| principalTypes<span class="req">\*</span> | `PrincipalType` | The type(s) of resources to search for. |
+
+### `PrincipalType`
+
+| Enum value       | Numeric value |
+| ---------------- | ------------- |
+| User             | `1`           |
+| DistributionList | `2`           |
+| SecurityGroup    | `4`           |
+| SharePointGroup  | `8`           |
