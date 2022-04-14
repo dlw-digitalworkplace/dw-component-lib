@@ -79,9 +79,9 @@ export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
 
 	// Render items
 	const renderItem: IRenderFunction<IPickerItemProps<PeoplePickerValue>> = (
-		pickerProps: IPickerItemProps<PeoplePickerValue>
+		itemProps: IPickerItemProps<PeoplePickerValue>
 	) => {
-		return <PeoplePickerItem {...pickerProps} />;
+		return <PeoplePickerItem key={itemProps.item.id} {...itemProps} />;
 	};
 
 	const finalOnRenderItem = (pickerProps: IPickerItemProps<PeoplePickerValue>): JSX.Element => {
@@ -160,6 +160,7 @@ export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
 					pickerSuggestionsProps={finalPickerSuggestionsProps}
 					selectedItems={selectedItems}
 					styles={pickerStyles}
+					theme={theme}
 				/>
 			</div>
 			{!!errorMessage && renderErrorMessage(errorMessage)}
