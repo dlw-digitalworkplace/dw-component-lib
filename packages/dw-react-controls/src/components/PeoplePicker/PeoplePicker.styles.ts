@@ -1,5 +1,11 @@
-import { AnimationClassNames } from "office-ui-fabric-react/lib/Styling";
-import { IPeoplePickerStyleProps, IPeoplePickerStyles } from "./PeoplePicker.types";
+import { getStyles as getBasePickerStyles } from "office-ui-fabric-react/lib/components/pickers/BasePicker.styles";
+import { AnimationClassNames, concatStyleSets } from "office-ui-fabric-react/lib/Styling";
+import {
+	IPeoplePickerInputStyleProps,
+	IPeoplePickerInputStyles,
+	IPeoplePickerStyleProps,
+	IPeoplePickerStyles
+} from "./PeoplePicker.types";
 
 const GlobalClassNames = {
 	root: "dw-PeoplePicker",
@@ -41,4 +47,22 @@ export const getStyles = (props: IPeoplePickerStyleProps): IPeoplePickerStyles =
 			}
 		]
 	};
+};
+
+export const getInputStyles = (props: IPeoplePickerInputStyleProps): IPeoplePickerInputStyles => {
+	const { isInvalid, styles: customStyles, theme } = props;
+
+	const basePickerStyles: IPeoplePickerInputStyles = getBasePickerStyles(props);
+	const defaultPickerStyles: Partial<IPeoplePickerInputStyles> = {
+		text: isInvalid && {
+			borderColor: theme!.semanticColors.errorText,
+			selectors: {
+				"&:hover": {
+					borderColor: theme!.semanticColors.errorText
+				}
+			}
+		}
+	};
+
+	return concatStyleSets(basePickerStyles, defaultPickerStyles, customStyles);
 };

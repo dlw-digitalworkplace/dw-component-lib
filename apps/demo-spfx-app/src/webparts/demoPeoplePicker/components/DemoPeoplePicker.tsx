@@ -4,7 +4,7 @@ import styles from "./DemoPeoplePicker.module.scss";
 import { IDemoPeoplePickerProps } from "./DemoPeoplePicker.types";
 
 export const DemoPeoplePicker: React.FC<IDemoPeoplePickerProps> = (props) => {
-	const { provider } = props;
+	const { provider, itemLimit } = props;
 
 	const [selectedItems, setSelectedItems] = React.useState<PeoplePickerValue[]>([]);
 
@@ -14,6 +14,7 @@ export const DemoPeoplePicker: React.FC<IDemoPeoplePickerProps> = (props) => {
 				disabled={!provider}
 				label={"Demo people picker"}
 				errorMessage={!provider && "Please configure a provider for this People Picker."}
+				itemLimit={itemLimit}
 				onChange={setSelectedItems}
 				provider={provider}
 				required={true}

@@ -1,26 +1,21 @@
+import { IBasePickerProps, IBasePickerStyleProps, IBasePickerStyles, IPickerItemProps } from "office-ui-fabric-react";
 import { ILabelProps } from "office-ui-fabric-react/lib/Label";
 import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
-import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
+import { IRenderFunction, IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
 import { PeoplePickerValue } from "./models";
 import { IGroup } from "./models/IGroup";
 import { IPeoplePickerProvider } from "./models/IPeoplePickerProvider";
 import { IUser } from "./models/IUser";
 
-export interface IPeoplePickerProps {
-	/**
-	 * Optional parameter to disable the component
-	 */
-	disabled?: boolean;
-
+export interface IPeoplePickerProps
+	extends Omit<
+		IBasePickerProps<PeoplePickerValue>,
+		"onRenderItem" | "onRenderSuggestionsItem" | "onResolveSuggestions"
+	> {
 	/**
 	 * Optional parameter to provide an error message to the component
 	 */
 	errorMessage?: string | JSX.Element;
-
-	/**
-	 * Optional parameter to limit the amount of options that can be slected
-	 */
-	itemLimit?: number;
 
 	/**
 	 * Optional parameter to render a label
@@ -43,18 +38,6 @@ export interface IPeoplePickerProps {
 	required?: boolean;
 
 	/**
-	 * The delay time in ms before resolving suggestions, which is kicked off when input has been changed.
-	 * e.g. If a second input change happens within the resolveDelay time, the timer will start over.
-	 * Only until after the timer completes will onResolveSuggestions be called.
-	 */
-	resolveDelay?: number;
-
-	/**
-	 * An array of selected users or groups
-	 */
-	selectedItems: PeoplePickerValue[];
-
-	/**
 	 * Optional class for the root Peple Picker element
 	 */
 	className?: string;
@@ -62,23 +45,16 @@ export interface IPeoplePickerProps {
 	 * Call to apply custom styling on the People Picker element
 	 */
 	styles?: IStyleFunctionOrObject<IPeoplePickerStyleProps, IPeoplePickerStyles>;
-	/**
-	 * Optional theme to provide to the people picker
-	 */
-	theme?: ITheme;
 
 	/**
-	 * onChange event that is triggered when the selection of the people picker changes
-	 * @param items List of the selected users and groups
+	 * An optional function to override the rendering of the selected items
 	 */
-	onChange(items: PeoplePickerValue[]): void;
+	onRenderItem?: IRenderFunction<IPickerItemProps<PeoplePickerValue>>;
 
 	/**
 	 * An optional function to override the rendering of the suggestion items
-	 * @param item The user or group to render
-	 * @returns An element to render
 	 */
-	onRenderSuggestion?(item: IUser | IGroup): JSX.Element;
+	onRenderSuggestion?: IRenderFunction<IUser | IGroup>;
 }
 
 export interface IPeoplePickerStyleProps {
@@ -92,3 +68,11 @@ export interface IPeoplePickerStyles {
 	input?: IStyle;
 	errorMessage?: IStyle;
 }
+
+export interface IPeoplePickerInputStyleProps extends IBasePickerStyleProps {
+	isInvalid?: boolean;
+
+	styles?: IStyleFunctionOrObject<IPeoplePickerInputStyleProps, IPeoplePickerInputStyles>;
+}
+
+export interface IPeoplePickerInputStyles extends IBasePickerStyles {}

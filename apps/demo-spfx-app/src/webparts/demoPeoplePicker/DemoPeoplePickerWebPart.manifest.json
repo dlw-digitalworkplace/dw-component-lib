@@ -23,7 +23,8 @@
 			"description": { "default": "Demo webpart showing the PeoplePicker and PeoplePicker providers." },
 			"officeFabricIconFontName": "Page",
 			"properties": {
-				"providerType": "MockProvider"
+				"providerType": "MockProvider",
+				"itemLimit": 3
 			}
 		}
 	]
