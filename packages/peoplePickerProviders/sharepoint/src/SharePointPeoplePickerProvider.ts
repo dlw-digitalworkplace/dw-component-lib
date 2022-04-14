@@ -100,12 +100,14 @@ export class SharePointPeoplePickerProvider implements IPeoplePickerProvider {
 	private _parseSearchResult(result: any): IUser | IGroup | undefined {
 		switch (result.EntityType) {
 			case "User":
+				const userPrincipalName = result.Key.split("|").pop();
 				const user: IUser = {
 					type: "User",
 					id: result.EntityData?.ObjectId || result.Key,
 					displayName: result.DisplayText,
-					userPrincipalName: result.EntityData.Description,
+					userPrincipalName: userPrincipalName,
 					additionalProperties: {
+						key: result.Key,
 						entityType: result.EntityType
 					}
 				};
