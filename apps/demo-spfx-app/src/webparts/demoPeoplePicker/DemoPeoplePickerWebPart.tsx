@@ -5,7 +5,7 @@ import {
 	ResourceType
 } from "@dlw-digitalworkplace/peoplepickerprovider-graph";
 import { Version } from "@microsoft/sp-core-library";
-import { IPropertyPaneConfiguration, PropertyPaneChoiceGroup } from "@microsoft/sp-property-pane";
+import { IPropertyPaneConfiguration, PropertyPaneChoiceGroup, PropertyPaneSlider } from "@microsoft/sp-property-pane";
 import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
 import * as strings from "DemoPeoplePickerWebPartStrings";
 import * as React from "react";
@@ -27,7 +27,10 @@ export default class DemoPeoplePickerWebPart extends BaseClientSideWebPart<IDemo
 	}
 
 	public render(): void {
-		ReactDom.render(<DemoPeoplePicker provider={this._provider} />, this.domElement);
+		ReactDom.render(
+			<DemoPeoplePicker itemLimit={this.properties.itemLimit} provider={this._provider} />,
+			this.domElement
+		);
 	}
 
 	public async onPropertyPaneFieldChanged(propertyPath: string): Promise<void> {
@@ -72,6 +75,11 @@ export default class DemoPeoplePickerWebPart extends BaseClientSideWebPart<IDemo
 											checked: this.properties.providerType === "GraphProvider"
 										}
 									]
+								}),
+								PropertyPaneSlider("itemLimit", {
+									label: "Max. items",
+									min: 1,
+									max: 10
 								})
 							]
 						}
