@@ -17,7 +17,7 @@ import { ResourceType } from "./models/ResourceType";
  * Provides PeoplePicker data using the Graph API.
  */
 export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
-	public GraphTokenProvider: string | (() => string | PromiseLike<string>);
+	public GraphTokenProvider: string | (() => string) | (() => PromiseLike<string>);
 	private _providerOptions: IGraphPeoplePickerProviderOptions;
 
 	private readonly DEFAULTOPTIONS: Partial<IGraphPeoplePickerProviderOptions> = {
@@ -25,7 +25,7 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 	};
 
 	constructor(
-		graphTokenProvider: string | (() => string | PromiseLike<string>),
+		graphTokenProvider: string | (() => string) | (() => PromiseLike<string>),
 		options: IGraphPeoplePickerProviderOptions
 	) {
 		this.GraphTokenProvider = graphTokenProvider;

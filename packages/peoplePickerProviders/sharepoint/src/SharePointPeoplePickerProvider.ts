@@ -42,7 +42,7 @@ export class SharePointPeoplePickerProvider implements IPeoplePickerProvider {
 	}
 
 	public withSearchMoreCapability(
-		graphTokenProvider: string | (() => string | PromiseLike<string>)
+		graphTokenProvider: string | (() => string) | (() => PromiseLike<string>)
 	): SharePointPeoplePickerProvider {
 		let graphResourceTypes: ResourceType = 0x0;
 		let graphGroupType: GroupType = 0x0;

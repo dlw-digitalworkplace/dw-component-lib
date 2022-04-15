@@ -32,6 +32,12 @@ const provider = new GraphPeoplePickerProvider(() => aadTokenProvider.getToken("
 });
 ```
 
+## Capabilities
+
+| Capability              | Enabled? |
+| ----------------------- | -------- |
+| hasSearchMoreCapability | No       |
+
 ## Documentation
 
 The `GraphPeoplePickerProvider`'s methods and supporting types are described here:
@@ -40,10 +46,10 @@ The `GraphPeoplePickerProvider`'s methods and supporting types are described her
 
 Creates a new `GraphPeoplePickerProvider` object.
 
-| Parameter                                     | Type                                              | Description                                                                                                          |
-| --------------------------------------------- | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| graphTokenProvider<span class="req">\*</span> | `string \| (() => string \| PromiseLike<string>)` | Authentication token used to send requests to the API. Either a string, or a function returning a string or Promise. |
-| options<span class="req">\*</span>            | `IGraphPeoplePickerProviderOptions`               | Specifies options for the provider.                                                                                  |
+| Parameter                                     | Type                                                      | Description                                                                                                          |
+| --------------------------------------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| graphTokenProvider<span class="req">\*</span> | `string` \| `() => string` \| `() => PromiseLike<string>` | Authentication token used to send requests to the API. Either a string, or a function returning a string or Promise. |
+| options<span class="req">\*</span>            | `IGraphPeoplePickerProviderOptions`                       | Specifies options for the provider.                                                                                  |
 
 ### `IGraphPeoplePickerProviderOptions`
 
