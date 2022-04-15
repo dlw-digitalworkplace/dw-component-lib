@@ -1,4 +1,4 @@
-import { BaseAutoFill, BasePicker, IInputProps, IPickerItemProps, Label } from "office-ui-fabric-react";
+import { BasePicker, IBasePickerSuggestionsProps, IInputProps, IPickerItemProps, Label } from "office-ui-fabric-react";
 import { classNamesFunction, IRenderFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
 import { composeRenderFunction } from "../../utilities";
@@ -25,6 +25,7 @@ export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
 	styles,
 	theme,
 	onBlur: onBlurProp,
+	onGetMoreResults: onGetMoreResultsProp,
 	onRenderItem,
 	onRenderSuggestion,
 	...rest
@@ -46,7 +47,7 @@ export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
 		setIsFocused(true);
 	};
 
-	const onBlur = (ev: React.FocusEvent<HTMLInputElement | BaseAutoFill>): void => {
+	const onBlur = (ev: React.FocusEvent<HTMLInputElement>): void => {
 		if (onBlurProp) {
 			onBlurProp(ev);
 		}
@@ -75,6 +76,22 @@ export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
 		};
 
 		return await provider.findUsersOrGroups(filter, filterOptions);
+	};
+
+	// Search more results
+	const onGetMoreResults = async (
+		filter: string,
+		currentSelection: PeoplePickerValue[]
+	): Promise<(IUser | IGroup)[]> => {
+		if (!filter || filter.length === 0) {
+			return [];
+		}
+
+		const filterOptions: IPeoplePickerFilterOptions = {
+			idsToIgnore: currentSelection.map((i) => i.id)
+		};
+
+		return await provider.findMoreUsersOrGroups(filter, filterOptions);
 	};
 
 	// Render items
@@ -124,9 +141,10 @@ export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
 		[classNames.errorMessage]
 	);
 
-	const finalPickerSuggestionsProps = {
+	const finalPickerSuggestionsProps: IBasePickerSuggestionsProps<IUser | IGroup> = {
 		loadingText: "Searching...",
 		noResultsFoundText: "No results found.",
+		searchForMoreText: provider.hasSearchMoreCapability ? "Search more results..." : undefined,
 		suggestionsHeaderText: "Suggestions",
 		...pickerSuggestionsProps
 	};
@@ -154,6 +172,7 @@ export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
 					inputProps={inputProps}
 					itemLimit={itemLimit}
 					onBlur={onBlur}
+					onGetMoreResults={onGetMoreResultsProp || onGetMoreResults}
 					onRenderItem={finalOnRenderItem}
 					onRenderSuggestionsItem={finalOnRenderSuggestionsItem}
 					onResolveSuggestions={onResolveSuggestions}

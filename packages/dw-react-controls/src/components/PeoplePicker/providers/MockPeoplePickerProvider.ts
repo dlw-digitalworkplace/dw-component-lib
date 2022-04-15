@@ -3,7 +3,6 @@ import * as deepmerge from "deepmerge";
 import { IGroup } from "../models/IGroup";
 import { IPeoplePickerFilterOptions } from "../models/IPeoplePickerFilterOptions";
 import { IPeoplePickerProvider } from "../models/IPeoplePickerProvider";
-import { PeoplePickerValue } from "../models/IPeoplePickerValue";
 import { IUser } from "../models/IUser";
 import { MockGroups } from "./MockGroups";
 import { MockUsers } from "./MockUsers";
@@ -20,10 +19,29 @@ export class MockPeoplePickerProvider implements IPeoplePickerProvider {
 		this._includeGroups = includeGroups;
 	}
 
+	public get hasSearchMoreCapability(): boolean {
+		return true;
+	}
+
 	public findUsersOrGroups(
 		search: string,
 		options: Partial<IPeoplePickerFilterOptions> = {}
-	): PeoplePickerValue[] | Promise<PeoplePickerValue[]> {
+	): (IUser | IGroup)[] | Promise<(IUser | IGroup)[]> {
+		const allData = this._getData(search, options).filter((it) => it.displayName.match(/^[a-m]/i));
+
+		return new Promise((resolve) => setTimeout(() => resolve(allData), 500));
+	}
+
+	public findMoreUsersOrGroups(
+		search: string,
+		options?: Partial<IPeoplePickerFilterOptions>
+	): (IUser | IGroup)[] | Promise<(IUser | IGroup)[]> {
+		const allData = this._getData(search, options).filter((it) => it.displayName.match(/^[n-z]/i));
+
+		return new Promise((resolve) => setTimeout(() => resolve(allData), 500));
+	}
+
+	private _getData(search: string, options: Partial<IPeoplePickerFilterOptions> = {}): (IUser | IGroup)[] {
 		const defaultOptions: IPeoplePickerFilterOptions = {
 			idsToIgnore: []
 		};
@@ -51,6 +69,7 @@ export class MockPeoplePickerProvider implements IPeoplePickerProvider {
 
 		// Return all
 		const allData = [...filteredUsers, ...filteredGroups];
-		return new Promise((resolve) => setTimeout(() => resolve(allData), 500));
+
+		return allData;
 	}
 }

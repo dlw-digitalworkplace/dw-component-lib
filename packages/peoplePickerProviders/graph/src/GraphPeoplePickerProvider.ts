@@ -33,6 +33,10 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 		this._providerOptions = deepmerge(this.DEFAULTOPTIONS, options);
 	}
 
+	public get hasSearchMoreCapability(): boolean {
+		return false;
+	}
+
 	public async findUsersOrGroups(
 		search: string,
 		options: Partial<IPeoplePickerFilterOptions> = {}
@@ -63,6 +67,13 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 		return result.sort((a, b) => {
 			return a.displayName.localeCompare(b.displayName);
 		});
+	}
+
+	public findMoreUsersOrGroups(
+		search: string,
+		options?: Partial<IPeoplePickerFilterOptions>
+	): (IUser | IGroup)[] | Promise<(IUser | IGroup)[]> {
+		throw new Error("Method not implemented.");
 	}
 
 	private async _findUsers(search: string, options: IPeoplePickerFilterOptions): Promise<IUser[]> {

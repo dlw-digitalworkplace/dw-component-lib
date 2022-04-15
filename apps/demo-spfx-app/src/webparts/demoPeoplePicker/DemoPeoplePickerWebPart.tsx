@@ -125,6 +125,7 @@ export default class DemoPeoplePickerWebPart extends BaseClientSideWebPart<IDemo
 			}
 
 			case "SharePointProvider": {
+				const aadTokenProvider = await this.context.aadTokenProviderFactory.getTokenProvider();
 				const providerOptions: ISharePointPeoplePickerProviderOptions = {
 					principalTypes:
 						PrincipalType.User |
@@ -137,7 +138,7 @@ export default class DemoPeoplePickerWebPart extends BaseClientSideWebPart<IDemo
 					this.context.pageContext.site.absoluteUrl,
 					this.context.spHttpClient,
 					providerOptions
-				);
+				).withSearchMoreCapability(() => aadTokenProvider.getToken("https://graph.microsoft.com"));
 				break;
 			}
 		}
