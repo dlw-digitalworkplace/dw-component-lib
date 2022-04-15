@@ -33,7 +33,7 @@ export class SharePointPeoplePickerProvider implements IPeoplePickerProvider {
 		this._providerOptions = deepmerge(this.DEFAULTOPTIONS, options);
 	}
 
-	public async findUserOrGroup(
+	public async findUsersOrGroups(
 		search: string,
 		options: Partial<IPeoplePickerFilterOptions> = {}
 	): Promise<(IUser | IGroup)[]> {

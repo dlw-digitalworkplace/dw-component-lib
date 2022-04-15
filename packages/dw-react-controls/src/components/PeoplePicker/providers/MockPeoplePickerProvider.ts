@@ -20,7 +20,7 @@ export class MockPeoplePickerProvider implements IPeoplePickerProvider {
 		this._includeGroups = includeGroups;
 	}
 
-	public findUserOrGroup(
+	public findUsersOrGroups(
 		search: string,
 		options: Partial<IPeoplePickerFilterOptions> = {}
 	): PeoplePickerValue[] | Promise<PeoplePickerValue[]> {

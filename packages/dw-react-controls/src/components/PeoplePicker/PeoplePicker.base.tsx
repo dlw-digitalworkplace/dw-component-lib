@@ -74,7 +74,7 @@ export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
 			idsToIgnore: currentSelection.map((i) => i.id)
 		};
 
-		return await provider.findUserOrGroup(filter, filterOptions);
+		return await provider.findUsersOrGroups(filter, filterOptions);
 	};
 
 	// Render items
