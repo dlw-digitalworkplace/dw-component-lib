@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "BREAKING: rename method to reflect array result",
+  "packageName": "@dlw-digitalworkplace/peoplepickerprovider-graph",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch"
+}
