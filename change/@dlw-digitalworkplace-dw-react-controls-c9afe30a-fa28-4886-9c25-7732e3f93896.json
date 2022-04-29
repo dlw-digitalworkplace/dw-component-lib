@@ -1,6 +1,6 @@
 {
   "type": "minor",
-  "comment": "New Component: SplitPane + Update Component: disable option for useDrag hook",
+  "comment": "New Component: SplitPane",
   "packageName": "@dlw-digitalworkplace/dw-react-controls",
   "email": "robin.agten@delaware.pro",
   "dependentChangeType": "patch"
