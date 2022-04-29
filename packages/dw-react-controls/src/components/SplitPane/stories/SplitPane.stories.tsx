@@ -99,7 +99,7 @@ export const CustomStyles: Story<ISplitPaneProps> = () => {
 			],
 			rightPane: {
 				backgroundColor: "#f3f3f3",
-    		borderRadius: "10px"
+    			borderRadius: "10px"
 			}
 		}
 	}
