@@ -15,13 +15,13 @@ export const getStyles = (props: ISplitPaneStyleProps): ISplitPaneStyles => {
 
 	return {
 		container: [
-			className,
 			classNames.container,
 			{
 				display: "flex",
 				width: "100%",
 				overflow: "hidden"
-			}
+			},
+			className
 		],
 		leftPane: [
 			classNames.leftPane,

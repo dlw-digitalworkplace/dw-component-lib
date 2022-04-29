@@ -6,17 +6,17 @@ export interface ISplitPaneProps {
 	 * Required array of the initial pane sizes in %.
 	 * E.g. [50, 50] for two panes of equal size.
 	 */
-  initialSizes: [number, number];
+	initialSizes: [number, number];
 
 	/**
 	 * Optional parameter to indicate the minimum width of the left pane in %.
 	 */
-  minWidthLeftPane?: number;
+	minWidthLeftPane?: number;
 
 	/**
 	 * Optional parameter to indicate the minimum width of the right pane in %.
 	 */
-  minWidthRightPane?: number;
+	minWidthRightPane?: number;
 
 	/**
 	 * Optional parameter to set the SplitPane to be fixed
@@ -42,7 +42,7 @@ export interface ISplitPaneProps {
 	/**
 	 * Required function that renders the content of the right pane
 	 */
-  onRenderRightPane(): JSX.Element;
+	onRenderRightPane(): JSX.Element;
 }
 
 export interface ISplitPaneStyleProps {

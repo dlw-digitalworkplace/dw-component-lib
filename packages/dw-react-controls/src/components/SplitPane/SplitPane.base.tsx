@@ -60,18 +60,16 @@ export const SplitPaneBase: React.FC<ISplitPaneProps> = (props: ISplitPaneProps)
 	const classNames = getClassNames(styles, { className, fixed, isDragging });
 
 	return (
-		<div>
-			<div className={classNames.container}>
-				<div ref={leftPane} className={classNames.leftPane} style={{ width: `${leftPaneInitialWidth}%` }}>
-					{onRenderLeftPane()}
-				</div>
-				<div ref={separator} className={classNames.separator} style={{ width: `${separatorWidth}px` }}>
-					<div className={classNames.separatorLeft} />
-					<div className={classNames.separatorRight} />
-				</div>
-				<div ref={rightPane} className={classNames.rightPane} style={{ width: `${rightPaneInitialWidth}%` }}>
-					{onRenderRightPane()}
-				</div>
+		<div className={classNames.container}>
+			<div ref={leftPane} className={classNames.leftPane} style={{ width: `${leftPaneInitialWidth}%` }}>
+				{onRenderLeftPane()}
+			</div>
+			<div ref={separator} className={classNames.separator} style={{ width: `${separatorWidth}px` }}>
+				<div className={classNames.separatorLeft} />
+				<div className={classNames.separatorRight} />
+			</div>
+			<div ref={rightPane} className={classNames.rightPane} style={{ width: `${rightPaneInitialWidth}%` }}>
+				{onRenderRightPane()}
 			</div>
 		</div>
 	);
