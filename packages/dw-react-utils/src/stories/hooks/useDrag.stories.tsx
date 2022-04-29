@@ -2,6 +2,7 @@ import { Story } from "@storybook/react";
 import * as React from "react";
 import { useDrag } from "../../hooks";
 
+
 const dragItemStyles: React.CSSProperties = {
   width: "50px",
   height: "50px",
@@ -52,6 +53,35 @@ export const Horizontal: Story = () => {
   return (
     <div>
       <div>
+        <div>Is dragging: {`${isDragging ? "Yes" : "No"}`}</div>
+        <div>Position (x, y): {`${positionX}, ${positionY}`}</div>
+      </div>
+      <div ref={dragRef} style={dragItemStyles}>
+        Drag
+      </div>
+    </div>
+  )
+}
+
+export const Disable: Story = () => {
+  const dragRef = React.useRef() as React.MutableRefObject<HTMLDivElement>;
+  const [dragElement, setDragElement] = React.useState<HTMLElement>();
+	const [disabled, setIsDisabled] = React.useState(false);
+  const { isDragging, positionX, positionY } = useDrag(dragElement, "horizontal", undefined, disabled);
+
+	const onChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setIsDisabled(e.currentTarget.checked);
+	}
+
+  React.useEffect(() => {
+    setDragElement(dragRef.current);
+  }, []);
+
+  return (
+    <div>
+			<input id="disableCheckbox" type="checkbox" onChange={onChange} />
+      <label htmlFor="disableCheckbox">Disable drag</label>
+			<div>
         <div>Is dragging: {`${isDragging ? "Yes" : "No"}`}</div>
         <div>Position (x, y): {`${positionX}, ${positionY}`}</div>
       </div>

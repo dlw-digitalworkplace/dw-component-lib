@@ -10,6 +10,7 @@ import { useWindowEvent } from "..";
  * @param element The HTML element you want to target
  * @param direction The direction of the drag. Default is both directions
  * @param onDragEnd Callback that is fired when the drag movement stops
+ * @param disabled Optional boolean to disable the dragging
  * @returns isDragging - Boolean indicating if the dragging is ongoing
  * @returns positionX - The current X position of the drag
  * @returns positionY - The current Y position of the drag
@@ -17,12 +18,14 @@ import { useWindowEvent } from "..";
 export const useDrag = (
   element: HTMLElement | undefined,
   direction?: "vertical" | "horizontal",
-  onDragEnd?:(positionX: number, positionY: number) => void
+  onDragEnd?: (positionX: number, positionY: number) => void,
+	disabled?: boolean
 ): {
   isDragging: boolean,
   positionX: number,
   positionY: number
 } => {
+
   const startXPosition = React.useRef<number>(0);
   const startYPosition = React.useRef<number>(0);
 
@@ -32,7 +35,7 @@ export const useDrag = (
 
   useWindowEvent("mousemove", (event: Event) => {
     const e = event as MouseEvent;
-    if (isDragging) {
+    if (isDragging && !!!disabled) {
       if (direction !== "horizontal") {
         const y = e.pageY - startYPosition.current;
         setPositionY(y);
