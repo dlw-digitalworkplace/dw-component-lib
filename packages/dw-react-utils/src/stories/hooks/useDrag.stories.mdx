@@ -37,6 +37,13 @@ Enforce the drag movement in only one direction (e.g. horizontal).
 	<Story story={stories.Horizontal} name="Horizontal only" />
 </Canvas>
 
+## Disable
+Use the `disable` property to disable the drag event.
+The `isDragging` will still be set, but the element will not move.
+<Canvas withToolbar={true}>
+	<Story story={stories.Disable} name="Disable" />
+</Canvas>
+
 ## End Drag Callback
 Fire a callback when the drag has ended.
 <Canvas withToolbar={true}>

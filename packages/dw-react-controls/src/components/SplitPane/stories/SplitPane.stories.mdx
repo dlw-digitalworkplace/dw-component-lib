@@ -1,0 +1,50 @@
+import { ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs";
+import { SplitPane } from "../SplitPane"
+import * as stories from "./SplitPane.stories";
+
+<Meta title="Components/SplitPane" component={SplitPane} />
+
+# SplitPane
+
+The `SplitPane` can be used to split the screen into two parts.
+The content of the left and right pane can be set using the render functions.
+Use the `initialSizes` prop to set the initial sizes of the panes in percentage.
+You can also provide a minimum width of the panes in percentage.
+
+### Basic usage
+
+Provide the `initialSizes` prop and two render functions to get started.
+
+<Canvas withToolbar={true}>
+	<Story story={stories.Basic} name="Basic usage" />
+</Canvas>
+
+### Minimum width
+
+You can provide a minimum width for the panes in percentage.
+When doing so, the `SplitPane` will not allow the panes to be smaller than the minimum width.
+
+<Canvas withToolbar={true}>
+	<Story story={stories.MinWidth} name="Minimum widths" />
+</Canvas>
+
+### Fixed panes
+
+You can set the `fixed` prop to `true` to make the panes fixed.
+
+<Canvas withToolbar={true}>
+	<Story story={stories.Fixed} name="Fixed panes" />
+</Canvas>
+
+### Custom styles
+
+You can override the `styles` function to provide your own custom styling to the different components of the `SplitPane`.
+E.g. To style the separator
+
+<Canvas withToolbar={true}>
+	<Story story={stories.CustomStyles} name="Custom styles" />
+</Canvas>
+
+## Properties
+
+<ArgsTable components={{ SplitPane }} />
