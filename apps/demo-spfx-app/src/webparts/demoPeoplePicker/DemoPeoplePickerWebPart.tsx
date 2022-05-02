@@ -4,6 +4,11 @@ import {
 	IGraphPeoplePickerProviderOptions,
 	ResourceType
 } from "@dlw-digitalworkplace/peoplepickerprovider-graph";
+import {
+	ISharePointPeoplePickerProviderOptions,
+	PrincipalType,
+	SharePointPeoplePickerProvider
+} from "@dlw-digitalworkplace/peoplepickerprovider-sharepoint";
 import { Version } from "@microsoft/sp-core-library";
 import { IPropertyPaneConfiguration, PropertyPaneChoiceGroup, PropertyPaneSlider } from "@microsoft/sp-property-pane";
 import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
@@ -73,6 +78,14 @@ export default class DemoPeoplePickerWebPart extends BaseClientSideWebPart<IDemo
 												officeFabricIconFontName: "AzureLogo"
 											},
 											checked: this.properties.providerType === "GraphProvider"
+										},
+										{
+											key: "SharePointProvider",
+											text: "SharePoint provider",
+											iconProps: {
+												officeFabricIconFontName: "SharepointLogo"
+											},
+											checked: this.properties.providerType === "SharePointProvider"
 										}
 									]
 								}),
@@ -91,7 +104,6 @@ export default class DemoPeoplePickerWebPart extends BaseClientSideWebPart<IDemo
 
 	private async _initializeProvider(): Promise<void> {
 		this._provider = undefined;
-		this.render();
 
 		switch (this.properties.providerType) {
 			case "GraphProvider": {
@@ -104,15 +116,33 @@ export default class DemoPeoplePickerWebPart extends BaseClientSideWebPart<IDemo
 					() => aadTokenProvider.getToken("https://graph.microsoft.com"),
 					providerOptions
 				);
-				this.render();
 				break;
 			}
 
 			case "MockProvider": {
 				this._provider = new MockPeoplePickerProvider();
-				this.render();
+				break;
+			}
+
+			case "SharePointProvider": {
+				const aadTokenProvider = await this.context.aadTokenProviderFactory.getTokenProvider();
+				const providerOptions: ISharePointPeoplePickerProviderOptions = {
+					principalTypes:
+						PrincipalType.User |
+						PrincipalType.DistributionList |
+						PrincipalType.SecurityGroup |
+						PrincipalType.SharePointGroup
+				};
+
+				this._provider = new SharePointPeoplePickerProvider(
+					this.context.pageContext.site.absoluteUrl,
+					this.context.spHttpClient,
+					providerOptions
+				).withSearchMoreCapability(() => aadTokenProvider.getToken("https://graph.microsoft.com"));
 				break;
 			}
 		}
+
+		this.render();
 	}
 }

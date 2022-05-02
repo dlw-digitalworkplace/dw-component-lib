@@ -82,7 +82,7 @@ describe("GraphPeoplePickerProvider", () => {
 			const fetchMock = jest.spyOn(global, "fetch");
 
 			// act
-			await provider.findUserOrGroup("test");
+			await provider.findUsersOrGroups("test");
 
 			// assert
 			expect(fetchMock).toBeCalledWith(
@@ -99,7 +99,7 @@ describe("GraphPeoplePickerProvider", () => {
 			const fetchMock = jest.spyOn(global, "fetch");
 
 			// act
-			await provider.findUserOrGroup("test");
+			await provider.findUsersOrGroups("test");
 
 			// assert
 			expect(fetchMock).toBeCalledWith(

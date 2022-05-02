@@ -2,10 +2,7 @@ import { ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs";
 import { PeoplePicker } from "../PeoplePicker";
 import * as stories from "./PeoplePicker.stories";
 
-<Meta
-	title="Components/PeoplePicker"
-	component={PeoplePicker}
-/>
+<Meta title="Components/PeoplePicker" component={PeoplePicker} />
 
 # PeoplePicker
 
@@ -18,6 +15,9 @@ The control supports the basic picker functionalities like required, disabled, s
 In order to use the picker you need to feed the control with a `IPeoplePickerProvider` to fetch your data.
 This means that the people picker control itself is unaware of where the data is coming from.
 
+The picker allows the provider to enable "search more" functionality, by creating a provider with `hasSearchMoreCapability` set to `true`.
+This enables the picker to fetch more data when the first search does not include the result you are looking for.
+
 ### Basic usage
 
 <Canvas withToolbar={true}>
@@ -27,15 +27,17 @@ This means that the people picker control itself is unaware of where the data is
 ### Custom suggestions rendering
 
 By default the following properties are shown in the suggestion dropdown:
- - User: displayName, userPrincipalName
- - Group: displayName, description
+
+- User: displayName, userPrincipalName
+- Group: displayName, description
 
 However, it is possible to override the rendering of the suggestions by using the `onRenderSuggestion` method.
 This method takes the item to render (user or group) as a parameter and should return an Element.
 
 The example below overrides the rendering of:
- - User: The id and imageUrl are passed to the provided PeoplePickerItemSuggestion component
- - Group: Fully custom element is rendered with the group type and display name
+
+- User: The id and imageUrl are passed to the provided PeoplePickerItemSuggestion component
+- Group: Fully custom element is rendered with the group type and display name
 
 <Canvas withToolbar={true}>
 	<Story story={stories.CustomSuggestionRender} name="Custom suggestion render" />

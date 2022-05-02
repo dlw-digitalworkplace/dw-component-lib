@@ -17,16 +17,15 @@ import { ResourceType } from "./models/ResourceType";
  * Provides PeoplePicker data using the Graph API.
  */
 export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
-	public GraphTokenProvider: string | (() => string | PromiseLike<string>);
+	public GraphTokenProvider: string | (() => string) | (() => PromiseLike<string>);
 	private _providerOptions: IGraphPeoplePickerProviderOptions;
 
-	private readonly DEFAULTOPTIONS: IGraphPeoplePickerProviderOptions = {
-		resourceTypes: ResourceType.User | ResourceType.Group,
+	private readonly DEFAULTOPTIONS: Partial<IGraphPeoplePickerProviderOptions> = {
 		groupTypes: GroupType.M365 | GroupType.Security | GroupType.Distribution
 	};
 
 	constructor(
-		graphTokenProvider: string | (() => string | PromiseLike<string>),
+		graphTokenProvider: string | (() => string) | (() => PromiseLike<string>),
 		options: IGraphPeoplePickerProviderOptions
 	) {
 		this.GraphTokenProvider = graphTokenProvider;
@@ -34,7 +33,11 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 		this._providerOptions = deepmerge(this.DEFAULTOPTIONS, options);
 	}
 
-	public async findUserOrGroup(
+	public get hasSearchMoreCapability(): boolean {
+		return false;
+	}
+
+	public async findUsersOrGroups(
 		search: string,
 		options: Partial<IPeoplePickerFilterOptions> = {}
 	): Promise<(IUser | IGroup)[]> {
@@ -64,6 +67,13 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 		return result.sort((a, b) => {
 			return a.displayName.localeCompare(b.displayName);
 		});
+	}
+
+	public findMoreUsersOrGroups(
+		search: string,
+		options?: Partial<IPeoplePickerFilterOptions>
+	): (IUser | IGroup)[] | Promise<(IUser | IGroup)[]> {
+		throw new Error("Method not implemented.");
 	}
 
 	private async _findUsers(search: string, options: IPeoplePickerFilterOptions): Promise<IUser[]> {

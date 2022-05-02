@@ -1,0 +1,85 @@
+import { ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs";
+
+<Meta title="PeoplePickerProviders/SharePoint" />
+
+# SharePoint PeoplePicker Provider
+
+![peoplepickerprovider-sharepoint package version](https://img.shields.io/github/package-json/v/dlw-digitalworkplace/dw-component-lib?filename=packages%2FpeoplePickerProviders%2Fsharepoint%2Fpackage.json&label=%40dlw-digitalworkplace%2Fpeoplepickerprovider-sharepoint&logo=github)
+
+By default, the `SharePointPeoplePickerProvider` provides user and group data using the **SharePoint People Picker API**.
+
+> **Optionally** you can enable the "search more" capability which will first fetch data from the **Graph API**,
+> and only when no results are returned, or when the findMoreUsersOrGroups method is called, will it fetch data from the **SharePoint People Picker API**.
+
+## Installation
+
+```shell
+yarn add @dlw-digitalworkplace/peoplepickerprovider-sharepoint
+```
+
+## Usage
+
+```tsx
+import { SharePointPeoplePickerProvider, PrincipalType } from "@dlw-digitalworkplace/peoplepickerprovider-sharepoint";
+
+const provider = new SharePointPeoplePickerProvider(siteUrl, spHttpClient, {
+	principalTypes:
+		PrincipalType.User | PrincipalType.DistributionList | PrincipalType.SecurityGroup | PrincipalType.SharePointGroup
+});
+```
+
+### Enabling "search more" capability
+
+You can enable the "search more" capability by calling `.withSearchMoreCapability` on the provider instance.
+
+```tsx
+import { SharePointPeoplePickerProvider, PrincipalType } from "@dlw-digitalworkplace/peoplepickerprovider-sharepoint";
+
+this._provider = new SharePointPeoplePickerProvider(siteUrl, spHttpClient, {
+	principalTypes:
+		PrincipalType.User | PrincipalType.DistributionList | PrincipalType.SecurityGroup | PrincipalType.SharePointGroup
+}).withSearchMoreCapability(graphToken); // can be string | () => string | () => PromiseLike<string>
+```
+
+## Capabilities
+
+| Capability              | Enabled? |
+| ----------------------- | -------- |
+| hasSearchMoreCapability | Optional |
+
+## Documentation
+
+The `SharePointPeoplePickerProvider`'s methods and supporting types are described here:
+
+### `Constructor`
+
+Creates a new `SharePointPeoplePickerProvider` object.
+
+| Parameter                               | Type                                     | Description                                    |
+| --------------------------------------- | ---------------------------------------- | ---------------------------------------------- |
+| siteUrl<span class="req">\*</span>      | `string`                                 | Url of the site collection.                    |
+| spHttpClient<span class="req">\*</span> | `SPHttpClient`                           | Client to perform calls to the SharePoint API. |
+| options<span class="req">\*</span>      | `ISharePointPeoplePickerProviderOptions` | Specifies options for the provider.            |
+
+### `withSearchMoreCapability`
+
+Enables the "search more" capability for this provider.
+
+| Parameter                                     | Type                                                      | Description                                                                                                                |
+| --------------------------------------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| graphTokenProvider<span class="req">\*</span> | `string` \| `() => string` \| `() => PromiseLike<string>` | Authentication token used to send requests to the Graph API. Either a string, or a function returning a string or Promise. |
+
+### `ISharePointPeoplePickerProviderOptions`
+
+| Property                                  | Type            | Description                             |
+| ----------------------------------------- | --------------- | --------------------------------------- |
+| principalTypes<span class="req">\*</span> | `PrincipalType` | The type(s) of resources to search for. |
+
+### `PrincipalType`
+
+| Enum value       | Numeric value |
+| ---------------- | ------------- |
+| User             | `1`           |
+| DistributionList | `2`           |
+| SecurityGroup    | `4`           |
+| SharePointGroup  | `8`           |

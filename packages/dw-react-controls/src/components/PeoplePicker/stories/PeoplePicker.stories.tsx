@@ -43,6 +43,7 @@ export const Basic: Story<IPeoplePickerProps> = ({ onChange, ...args }) => {
 			provider={provider}
 			selectedItems={selectedItems}
 			onChange={handleChange}
+			onGetMoreResults={undefined}
 			onInputChange={undefined}
 			onItemSelected={undefined}
 			onRenderItem={undefined}
@@ -98,6 +99,7 @@ export const CustomSuggestionRender: Story<IPeoplePickerProps> = ({ onChange, ..
 			provider={provider}
 			selectedItems={selectedItems}
 			onChange={handleChange}
+			onGetMoreResults={undefined}
 			onInputChange={undefined}
 			onItemSelected={undefined}
 			onRenderItem={undefined}
