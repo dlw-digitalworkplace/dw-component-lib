@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "New Component: SplitPane",
-  "packageName": "@dlw-digitalworkplace/dw-react-controls",
-  "email": "robin.agten@delaware.pro",
-  "dependentChangeType": "patch"
-}

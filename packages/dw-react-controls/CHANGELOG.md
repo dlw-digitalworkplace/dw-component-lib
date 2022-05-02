@@ -1,8 +1,19 @@
 # Change Log - @dlw-digitalworkplace/dw-react-controls
 
-This log was last generated on Thu, 24 Feb 2022 12:14:28 GMT and should not be manually modified.
+This log was last generated on Mon, 02 May 2022 08:43:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.0
+
+Mon, 02 May 2022 08:43:21 GMT
+
+### Minor changes
+
+- allow search more in people picker (nick.sevens@delaware.pro)
+- rewrite peoplepicker control so picker props can be accessed by implementing control (nick.sevens@delaware.pro)
+- New Component: SplitPane (robin.agten@delaware.pro)
+- Bump @dlw-digitalworkplace/dw-react-controls to v0.5.0 (robin.agten@delaware.pro)
 
 ## 0.4.0
 

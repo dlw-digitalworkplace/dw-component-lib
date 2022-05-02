@@ -1,4 +1,26 @@
 {
   "name": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint",
-  "entries": []
+  "entries": [
+    {
+      "date": "Mon, 02 May 2022 08:43:21 GMT",
+      "tag": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "create sharepoint people picker provider",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "8bf93e42ff09caab48ffa19934c0e0cf37a0bd00",
+            "package": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint"
+          },
+          {
+            "comment": "Bump @dlw-digitalworkplace/peoplepickerprovider-sharepoint to v0.1.0",
+            "author": "robin.agten@delaware.pro",
+            "commit": "8bf93e42ff09caab48ffa19934c0e0cf37a0bd00",
+            "package": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint"
+          }
+        ]
+      }
+    }
+  ]
 }

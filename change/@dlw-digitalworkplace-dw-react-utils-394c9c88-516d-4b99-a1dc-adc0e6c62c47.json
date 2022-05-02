@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Update Component: Add option to disable drag event in useDrag hook",
-  "packageName": "@dlw-digitalworkplace/dw-react-utils",
-  "email": "robin.agten@delaware.pro",
-  "dependentChangeType": "patch"
-}

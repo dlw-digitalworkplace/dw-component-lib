@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-utils
 
-This log was last generated on Wed, 22 Dec 2021 14:53:06 GMT and should not be manually modified.
+This log was last generated on Mon, 02 May 2022 08:43:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Mon, 02 May 2022 08:43:21 GMT
+
+### Minor changes
+
+- Update Component: Add option to disable drag event in useDrag hook (robin.agten@delaware.pro)
 
 ## 0.2.0
 

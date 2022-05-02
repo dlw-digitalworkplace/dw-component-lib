@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-react-utils",
   "entries": [
     {
+      "date": "Mon, 02 May 2022 08:43:21 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-utils_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update Component: Add option to disable drag event in useDrag hook",
+            "author": "robin.agten@delaware.pro",
+            "commit": "8bf93e42ff09caab48ffa19934c0e0cf37a0bd00",
+            "package": "@dlw-digitalworkplace/dw-react-utils"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 22 Dec 2021 14:53:06 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-utils_v0.2.0",
       "version": "0.2.0",

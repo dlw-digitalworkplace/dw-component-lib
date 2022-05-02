@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "create sharepoint people picker provider",
-  "packageName": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "patch"
-}

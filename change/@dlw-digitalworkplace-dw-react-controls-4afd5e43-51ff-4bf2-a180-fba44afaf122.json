@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "allow search more in people picker",
-  "packageName": "@dlw-digitalworkplace/dw-react-controls",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "patch"
-}

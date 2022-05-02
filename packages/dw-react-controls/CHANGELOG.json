@@ -2,6 +2,39 @@
   "name": "@dlw-digitalworkplace/dw-react-controls",
   "entries": [
     {
+      "date": "Mon, 02 May 2022 08:43:21 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-controls_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "allow search more in people picker",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "8bf93e42ff09caab48ffa19934c0e0cf37a0bd00",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          },
+          {
+            "comment": "rewrite peoplepicker control so picker props can be accessed by implementing control",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "8bf93e42ff09caab48ffa19934c0e0cf37a0bd00",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          },
+          {
+            "comment": "New Component: SplitPane",
+            "author": "robin.agten@delaware.pro",
+            "commit": "8bf93e42ff09caab48ffa19934c0e0cf37a0bd00",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          },
+          {
+            "comment": "Bump @dlw-digitalworkplace/dw-react-controls to v0.5.0",
+            "author": "robin.agten@delaware.pro",
+            "commit": "8bf93e42ff09caab48ffa19934c0e0cf37a0bd00",
+            "package": "@dlw-digitalworkplace/dw-react-controls"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 24 Feb 2022 12:14:28 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-controls_v0.4.0",
       "version": "0.4.0",
