@@ -9,7 +9,7 @@ const defaultArgTypes = {
 	onRenderRigthPane: { control: "none" },
 };
 const defaultArgs: Partial<ISplitPaneProps> = {
-	initialSizes:[30, 70]
+	initialSizes: [30, 70]
 };
 const loremIpsum: string = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 const paneStyle = { padding: "5px" };
@@ -20,7 +20,7 @@ export const Basic: Story<ISplitPaneProps> = ({ ...args }) => {
 		return <div style={paneStyle}>{loremIpsum}</div>;
 	}
 	return (
-		<div style={{position: "relative"}}>
+		<div style={{ position: "relative" }}>
 			<SplitPane
 				{...args}
 				onRenderLeftPane={onRenderPane}
@@ -38,7 +38,7 @@ export const MinWidth: Story<ISplitPaneProps> = () => {
 		return <div style={paneStyle}>{loremIpsum}</div>;
 	}
 	return (
-		<div style={{position: "relative"}}>
+		<div style={{ position: "relative" }}>
 			<SplitPane
 				initialSizes={[70, 30]}
 				minWidthLeftPane={25}
@@ -65,9 +65,9 @@ export const Fixed: Story<ISplitPaneProps> = ({ ...args }) => {
 	return (
 		<div>
 			<Toggle label={"Fixed?"} onChange={onToggleChange} checked={isFixed} />
-			<div style={{position: "relative"}}>
+			<div style={{ position: "relative" }}>
 				<SplitPane
-					{ ...args }
+					{...args}
 					fixed={isFixed}
 					onRenderLeftPane={onRenderPane}
 					onRenderRightPane={onRenderPane}
@@ -99,13 +99,13 @@ export const CustomStyles: Story<ISplitPaneProps> = () => {
 			],
 			rightPane: {
 				backgroundColor: "#f3f3f3",
-    			borderRadius: "10px"
+				borderRadius: "10px"
 			}
 		}
 	}
 
 	return (
-		<div style={{position: "relative"}}>
+		<div style={{ position: "relative" }}>
 			<SplitPane
 				initialSizes={[70, 30]}
 				className="custom-class"
