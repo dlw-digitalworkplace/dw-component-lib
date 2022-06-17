@@ -18,7 +18,7 @@ export const getStyles = (props: IWebPartTitleStyleProps): IWebPartTitleStyles =
 				display: "flex",
 				flexDirection: "row",
 				justifyContent: "flex-end",
-				marginBottom: "18px",
+				marginBottom: theme.spacing.m,
 				marginTop: 0,
 				whiteSpace: "pre-wrap"
 			},
