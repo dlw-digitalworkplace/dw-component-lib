@@ -26,7 +26,6 @@ export const TreeView2Base: React.FC<TreeView2Props> = React.forwardRef<HTMLULis
 			expanded: expandedProp,
 			id: idProp,
 			multiSelect,
-			onKeyDown,
 			onNodeFocus,
 			onNodeSelect,
 			onNodeToggle,
@@ -684,10 +683,6 @@ export const TreeView2Base: React.FC<TreeView2Props> = React.forwardRef<HTMLULis
 			if (flag) {
 				event.preventDefault();
 				event.stopPropagation();
-			}
-
-			if (onKeyDown) {
-				onKeyDown(event);
 			}
 		};
 

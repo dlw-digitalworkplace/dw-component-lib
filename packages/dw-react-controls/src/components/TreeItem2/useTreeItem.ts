@@ -76,6 +76,7 @@ export default function useTreeItem(nodeId: string) {
 
 	return {
 		disabled,
+		expandable,
 		expanded,
 		selected,
 		focused,

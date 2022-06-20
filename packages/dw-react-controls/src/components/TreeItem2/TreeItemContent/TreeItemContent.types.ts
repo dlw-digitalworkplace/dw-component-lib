@@ -1,5 +1,6 @@
 import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
 import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
+import * as React from "react";
 
 export interface ITreeItemContentProps {
 	/**
@@ -11,6 +12,20 @@ export interface ITreeItemContentProps {
 	 * The nodeId of the tree node
 	 */
 	nodeId: string;
+
+	/**
+	 * Callback fired when a the content is clicked
+	 *
+	 * @param {object} event The event source of the callback.
+	 */
+	onClick?: (event: React.SyntheticEvent) => void;
+
+	/**
+	 * Callback fired when the mouse button is pressed down on the content
+	 *
+	 * @param {object} event The event source of the callback.
+	 */
+	onMouseDown?: (event: React.SyntheticEvent) => void;
 
 	/**
 	 * Optional class for the root TreeItemContent element
@@ -37,4 +52,5 @@ export interface ITreeItemContentStyleProps {
 
 export interface ITreeItemContentStyles {
 	root?: IStyle;
+	expandIcon?: IStyle;
 }

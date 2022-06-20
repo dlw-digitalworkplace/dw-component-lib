@@ -50,13 +50,6 @@ interface ITreeView2PropsBase {
 	theme?: ITheme;
 
 	/**
-	 * Callback fired when a keyboard button is pressed.
-	 *
-	 * @param {object} event The event source of the callback.
-	 */
-	onKeyDown?(event: React.SyntheticEvent): void;
-
-	/**
 	 * Callback fired when a tree item is focused.
 	 *
 	 * @param {object} event The event source of the callback.
