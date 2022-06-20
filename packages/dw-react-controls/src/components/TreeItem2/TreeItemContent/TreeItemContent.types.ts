@@ -4,6 +4,11 @@ import * as React from "react";
 
 export interface ITreeItemContentProps {
 	/**
+	 * Optional icon to be shown next to the node.
+	 */
+	iconName?: string;
+
+	/**
 	 * The label to show for the tree node
 	 */
 	label?: string;
@@ -45,6 +50,8 @@ export interface ITreeItemContentProps {
 
 export interface ITreeItemContentStyleProps {
 	className?: string;
+	disabled?: boolean;
+	expandable?: boolean;
 	focused?: boolean;
 	selected?: boolean;
 	theme: ITheme;
@@ -53,4 +60,6 @@ export interface ITreeItemContentStyleProps {
 export interface ITreeItemContentStyles {
 	root?: IStyle;
 	expandIcon?: IStyle;
+	label?: IStyle;
+	labelWrapper?: IStyle;
 }

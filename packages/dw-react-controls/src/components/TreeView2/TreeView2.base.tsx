@@ -321,7 +321,7 @@ export const TreeView2Base: React.FC<TreeView2Props> = React.forwardRef<HTMLULis
 			currentRangeSelection.current = currentRange;
 
 			if (onNodeSelect) {
-				onNodeSelect(event, base);
+				onNodeSelect(event, base as string[] & string);
 			}
 
 			setSelected(base);
@@ -348,7 +348,7 @@ export const TreeView2Base: React.FC<TreeView2Props> = React.forwardRef<HTMLULis
 			newSelected = newSelected.filter((id, ix) => newSelected.indexOf(id) === ix);
 
 			if (onNodeSelect) {
-				onNodeSelect(event, newSelected);
+				onNodeSelect(event, newSelected as string[] & string);
 			}
 
 			setSelected(newSelected);

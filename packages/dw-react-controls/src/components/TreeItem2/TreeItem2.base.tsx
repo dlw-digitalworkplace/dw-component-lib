@@ -17,7 +17,7 @@ const ownerDocument = (element: Node | null | undefined): Document => (element &
 
 export const TreeItem2Base: React.FC<ITreeItem2Props> = React.forwardRef<HTMLLIElement, ITreeItem2Props>(
 	(props, ref) => {
-		const { children, disabled: disabledProp, id: idProp, label, nodeId, className, styles, theme } = props;
+		const { children, disabled: disabledProp, iconName, id: idProp, label, nodeId, className, styles, theme } = props;
 
 		const {
 			focus,
@@ -101,11 +101,13 @@ export const TreeItem2Base: React.FC<ITreeItem2Props> = React.forwardRef<HTMLLIE
 
 		return (
 			<li className={classNames.root} id={id!} onFocus={handleFocus} ref={handleRef} role={"TreeItem2"}>
-				<TreeItemContent label={label} nodeId={nodeId} />
+				<TreeItemContent iconName={iconName} label={label} nodeId={nodeId} />
 
 				{expanded && children && (
 					<DescendantProvider id={nodeId}>
-						<ul role="group">{children}</ul>
+						<ul role="group" className={classNames.children}>
+							{children}
+						</ul>
 					</DescendantProvider>
 				)}
 			</li>

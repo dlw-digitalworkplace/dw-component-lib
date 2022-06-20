@@ -1,7 +1,9 @@
 import { ITreeItem2StyleProps, ITreeItem2Styles } from "./TreeItem2.types";
+import { expandIconWidth } from "./TreeItemContent/TreeItemContent.styles";
 
 const GlobalClassNames = {
-	root: "dw-TreeItem2"
+	root: "dw-TreeItem2",
+	children: "dw-TreeItem2-children"
 };
 
 export const getStyles = (props: ITreeItem2StyleProps): ITreeItem2Styles => {
@@ -19,6 +21,13 @@ export const getStyles = (props: ITreeItem2StyleProps): ITreeItem2Styles => {
 				userSelect: "none"
 			},
 			className
+		],
+
+		children: [
+			classNames.children,
+			{
+				paddingInlineStart: expandIconWidth
+			}
 		]
 	};
 };

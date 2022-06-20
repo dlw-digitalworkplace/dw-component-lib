@@ -4,39 +4,39 @@ import TreeView2Context from "../TreeView2/TreeView2.context";
 export default function useTreeItem(nodeId: string) {
 	const {
 		focus,
-		isExpanded,
-		isExpandable,
-		isFocused,
 		isDisabled,
+		isExpandable,
+		isExpanded,
+		isFocused,
 		isSelected,
 		multiSelect,
 		selectNode,
 		toggleExpansion
 	} = React.useContext(TreeView2Context);
 
+	const disabled = isDisabled ? isDisabled(nodeId) : false;
 	const expandable = isExpandable ? isExpandable(nodeId) : false;
 	const expanded = isExpanded ? isExpanded(nodeId) : false;
 	const focused = isFocused ? isFocused(nodeId) : false;
-	const disabled = isDisabled ? isDisabled(nodeId) : false;
 	const selected = isSelected ? isSelected(nodeId) : false;
 
 	const handleExpansion = (event: React.SyntheticEvent) => {
-		if (!disabled) {
-			if (!focused) {
-				focus(event, nodeId);
-			}
-
-			const keyEvent = event as
-				| React.MouseEvent<HTMLElement>
-				| React.KeyboardEvent<HTMLElement>
-				| React.TouchEvent<HTMLElement>;
-			const multiple = multiSelect && (keyEvent.shiftKey || keyEvent.ctrlKey || keyEvent.metaKey);
-
-			// If already expanded and trying to toggle selection don't close
-			if (expandable && !(multiple && isExpanded(nodeId))) {
-				toggleExpansion(event, nodeId);
-			}
+		// if (!disabled) {
+		if (!focused) {
+			focus(event, nodeId);
 		}
+
+		const keyEvent = event as
+			| React.MouseEvent<HTMLElement>
+			| React.KeyboardEvent<HTMLElement>
+			| React.TouchEvent<HTMLElement>;
+		const multiple = multiSelect && (keyEvent.shiftKey || keyEvent.ctrlKey || keyEvent.metaKey);
+
+		// If already expanded and trying to toggle selection don't close
+		if (expandable && !(multiple && isExpanded(nodeId))) {
+			toggleExpansion(event, nodeId);
+		}
+		// }
 	};
 
 	const handleSelection = (event: React.SyntheticEvent) => {

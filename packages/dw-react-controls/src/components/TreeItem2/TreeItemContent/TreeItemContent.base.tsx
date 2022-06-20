@@ -1,7 +1,6 @@
 import { Icon } from "office-ui-fabric-react";
 import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
-import { TreeItemLabel } from "../TreeItemLabel";
 import useTreeItem from "../useTreeItem";
 import { ITreeItemContentProps, ITreeItemContentStyleProps, ITreeItemContentStyles } from "./TreeItemContent.types";
 
@@ -11,13 +10,20 @@ export const TreeItemContentBase: React.FC<ITreeItemContentProps> = React.forwar
 	HTMLDivElement,
 	ITreeItemContentProps
 >((props, ref) => {
-	const { label, nodeId, onClick, onMouseDown } = props;
-	const { expandable, expanded, focused, handleExpansion, handleSelection, preventSelection, selected } = useTreeItem(
-		nodeId
-	);
+	const { iconName, label, nodeId, onClick, onMouseDown } = props;
+	const {
+		disabled,
+		expandable,
+		expanded,
+		focused,
+		handleExpansion,
+		handleSelection,
+		preventSelection,
+		selected
+	} = useTreeItem(nodeId);
 
 	const { styles, className, theme } = props;
-	const classNames = getClassNames(styles, { className, focused, selected, theme: theme! });
+	const classNames = getClassNames(styles, { className, disabled, expandable, focused, selected, theme: theme! });
 
 	const handleClick = (event: React.SyntheticEvent) => {
 		// handleExpansion(event);
@@ -48,12 +54,20 @@ export const TreeItemContentBase: React.FC<ITreeItemContentProps> = React.forwar
 		}
 	};
 
+	const renderLabel = (): JSX.Element => {
+		return (
+			<div className={classNames.labelWrapper}>
+				{iconName && <Icon iconName={iconName} />}
+				<div className={classNames.label}>{label}</div>
+			</div>
+		);
+	};
+
 	return (
 		<div className={classNames.root} ref={ref} onClick={handleClick} onMouseDown={handleMouseDown}>
 			<div className={classNames.expandIcon}>
 				{expandable && (
 					<Icon
-						className={""}
 						iconName={expanded ? "ChevronDownSmall" : "ChevronRightSmall"}
 						onClick={handleExpandIconClick}
 						onDoubleClick={handleExpandIconDoubleClick}
@@ -61,7 +75,7 @@ export const TreeItemContentBase: React.FC<ITreeItemContentProps> = React.forwar
 				)}
 			</div>
 
-			<TreeItemLabel>{label}</TreeItemLabel>
+			{renderLabel()}
 		</div>
 	);
 });

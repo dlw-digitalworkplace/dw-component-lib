@@ -4,6 +4,8 @@ import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
 export interface ITreeItem2Props {
 	disabled?: boolean;
 
+	iconName?: string;
+
 	id?: string;
 
 	label?: string;
@@ -33,4 +35,5 @@ export interface ITreeItem2StyleProps {
 
 export interface ITreeItem2Styles {
 	root?: IStyle;
+	children?: IStyle;
 }

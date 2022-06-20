@@ -7,12 +7,12 @@ import { TreeView2Props } from "../TreeView2.types";
 const Template: Story<TreeView2Props> = ({ ...args }) => (
 	<TreeView2 {...args}>
 		<TreeItem2 nodeId="1" label={"Test 1"}>
-			<TreeItem2 nodeId="1-1" label={"Test 1-1"} />
+			<TreeItem2 nodeId="1-1" label={"Test 1-1"} iconName={"Tag"} />
 			<TreeItem2 nodeId="1-2" label={"Test 1-2"} />
 			<TreeItem2 nodeId="1-3" label={"Test 1-3"} />
 		</TreeItem2>
 		<TreeItem2 nodeId="2" label={"Test 2"}>
-			<TreeItem2 nodeId="2-1" label={"Test 2-1"}>
+			<TreeItem2 nodeId="2-1" label={"Test 2-1"} disabled={true}>
 				<TreeItem2 nodeId="2-1-1" label={"Test 2-1-1"} />
 				<TreeItem2 nodeId="2-1-2" label={"Test 2-1-2"} />
 				<TreeItem2 nodeId="2-1-3" label={"Test 2-1-3"} />
