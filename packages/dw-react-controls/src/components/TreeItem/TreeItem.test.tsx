@@ -1,6 +1,8 @@
 import { fireEvent, queryByAttribute, render } from "@testing-library/react";
 import { IRenderFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
+import { AccessibleTreeItem } from "../AccessibleTreeItem";
+import { AccessibleTreeView } from "../AccessibleTreeView";
 import { TreeView } from "../TreeView";
 import { ITreeItemContentProps } from "./sections/TreeItemContent.types";
 import { TreeItem } from "./TreeItem";
@@ -9,9 +11,9 @@ describe("<TreeItem />", () => {
 	describe("Rendering", () => {
 		it("should render without crashing", () => {
 			const { getByText } = render(
-				<TreeView>
-					<TreeItem nodeId="test" label="test" />
-				</TreeView>
+				<AccessibleTreeView>
+					<AccessibleTreeItem nodeId="test" label="test" />
+				</AccessibleTreeView>
 			);
 
 			expect(getByText(/test/i)).toBeTruthy();
@@ -83,7 +85,7 @@ describe("<TreeItem />", () => {
 			expect(handleClick).not.toBeCalled();
 		});
 
-		it("should not call onClick when children are doubleClicked", () => {
+		it("should not call onInvoke when children are doubleClicked", () => {
 			const handleDoubleClick = jest.fn();
 
 			const { getByText } = render(

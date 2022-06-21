@@ -1,7 +1,7 @@
 import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
 import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
 
-interface ITreeView2PropsBase {
+interface IAccessibleTreeViewPropsBase {
 	/**
 	 * Expanded node ids (uncontrolled)
 	 */
@@ -40,14 +40,14 @@ interface ITreeView2PropsBase {
 	multiSelect?: boolean;
 
 	/**
-	 * Optional class for the root TreeView2 element
+	 * Optional class for the root AccessibleTreeView element
 	 */
 	className?: string;
 
 	/**
-	 * Call to apply custom styling on the TreeView2 element
+	 * Call to apply custom styling on the AccessibleTreeView element
 	 */
-	styles?: IStyleFunctionOrObject<ITreeView2StyleProps, ITreeView2Styles>;
+	styles?: IStyleFunctionOrObject<IAccessibleTreeViewStyleProps, IAccessibleTreeViewStyles>;
 
 	/**
 	 * The current theme applied to the control
@@ -71,7 +71,7 @@ interface ITreeView2PropsBase {
 	onNodeToggle?(event: React.SyntheticEvent, nodeIds: string[]): void;
 }
 
-export interface IMultiSelectTreeView2Props extends ITreeView2PropsBase {
+export interface IMultiSelectAccessibleTreeViewProps extends IAccessibleTreeViewPropsBase {
 	/**
 	 * Selected node ids. (Uncontrolled)
 	 * When `multiSelect` is true this takes an array of strings; when false (default) a string.
@@ -101,7 +101,7 @@ export interface IMultiSelectTreeView2Props extends ITreeView2PropsBase {
 	onNodeSelect?: (event: React.SyntheticEvent, nodeIds: string[]) => void;
 }
 
-export interface ISingleSelectTreeView2Props extends ITreeView2PropsBase {
+export interface ISingleSelectAccessibleTreeViewProps extends IAccessibleTreeViewPropsBase {
 	/**
 	 * Selected node ids. (Uncontrolled)
 	 * When `multiSelect` is true this takes an array of strings; when false (default) a string.
@@ -131,7 +131,7 @@ export interface ISingleSelectTreeView2Props extends ITreeView2PropsBase {
 	onNodeSelect?: (event: React.SyntheticEvent, nodeIds: string) => void;
 }
 
-export type TreeView2Props = IMultiSelectTreeView2Props | ISingleSelectTreeView2Props;
+export type AccessibleTreeViewProps = IMultiSelectAccessibleTreeViewProps | ISingleSelectAccessibleTreeViewProps;
 
 export interface ITreeViewNode {
 	id: string;
@@ -141,10 +141,10 @@ export interface ITreeViewNode {
 	disabled?: boolean;
 }
 
-export interface ITreeView2StyleProps {
+export interface IAccessibleTreeViewStyleProps {
 	className?: string;
 }
 
-export interface ITreeView2Styles {
-	TreeView2?: IStyle;
+export interface IAccessibleTreeViewStyles {
+	AccessibleTreeView?: IStyle;
 }

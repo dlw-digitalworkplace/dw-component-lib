@@ -2,7 +2,7 @@ import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
 import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
 import { ITreeItemAction } from "../TreeItem";
 
-export interface ITreeItem2Props {
+export interface IAccessibleTreeItemProps {
 	/**
 	 * Actions which are available on the tree item
 	 */
@@ -40,7 +40,7 @@ export interface ITreeItem2Props {
 	/**
 	 * Call to apply custom styling on the TreeItem element
 	 */
-	styles?: IStyleFunctionOrObject<ITreeItem2StyleProps, ITreeItem2Styles>;
+	styles?: IStyleFunctionOrObject<IAccessibleTreeItemStyleProps, IAccessibleTreeItemStyles>;
 
 	/**
 	 * The current theme applied to the control
@@ -48,12 +48,12 @@ export interface ITreeItem2Props {
 	theme?: ITheme;
 }
 
-export interface ITreeItem2StyleProps {
+export interface IAccessibleTreeItemStyleProps {
 	className?: string;
 	theme: ITheme;
 }
 
-export interface ITreeItem2Styles {
+export interface IAccessibleTreeItemStyles {
 	root?: IStyle;
 	children?: IStyle;
 }

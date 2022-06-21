@@ -1,12 +1,12 @@
-import { ITreeItem2StyleProps, ITreeItem2Styles } from "./TreeItem2.types";
+import { IAccessibleTreeItemStyleProps, IAccessibleTreeItemStyles } from "./AccessibleTreeItem.types";
 import { expandIconWidth } from "./TreeItemContent/TreeItemContent.styles";
 
 const GlobalClassNames = {
-	root: "dw-TreeItem2",
-	children: "dw-TreeItem2-children"
+	root: "dw-AccessibleTreeItem",
+	children: "dw-AccessibleTreeItem-children"
 };
 
-export const getStyles = (props: ITreeItem2StyleProps): ITreeItem2Styles => {
+export const getStyles = (props: IAccessibleTreeItemStyleProps): IAccessibleTreeItemStyles => {
 	const { className } = props;
 	const classNames = GlobalClassNames;
 

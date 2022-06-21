@@ -1,11 +1,11 @@
 import { render } from "@testing-library/react";
 import * as React from "react";
-import { TreeView2 } from "./TreeView2";
+import { AccessibleTreeView } from "./AccessibleTreeView";
 
-describe("<TreeView2 />", () => {
+describe("<AccessibleTreeView />", () => {
 	describe("Rendering", () => {
 		it("should render empty control without crashing", () => {
-			const { getByRole } = render(<TreeView2 />);
+			const { getByRole } = render(<AccessibleTreeView />);
 
 			expect(getByRole(/tree/i)).toBeTruthy();
 		});

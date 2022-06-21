@@ -1,7 +1,7 @@
 import * as React from "react";
-import { ITreeViewNode } from "./TreeView2.types";
+import { ITreeViewNode } from "./AccessibleTreeView.types";
 
-export interface ITreeView2Context {
+export interface IAccessibleTreeViewContext {
 	disabledItemsFocusable?: boolean;
 	focus: (event: React.SyntheticEvent, nodeId: string) => void;
 	isDisabled: (nodeId: string) => boolean;
@@ -19,10 +19,10 @@ export interface ITreeView2Context {
 	unregisterNode: (nodeId: string) => void;
 }
 
-const TreeView2Context = React.createContext<ITreeView2Context>({} as ITreeView2Context);
+const AccessibleTreeViewContext = React.createContext<IAccessibleTreeViewContext>({} as IAccessibleTreeViewContext);
 
 if (process.env.NODE_ENV !== "production") {
-	TreeView2Context.displayName = "TreeView2Context";
+	AccessibleTreeViewContext.displayName = "AccessibleTreeViewContext";
 }
 
-export default TreeView2Context;
+export default AccessibleTreeViewContext;
