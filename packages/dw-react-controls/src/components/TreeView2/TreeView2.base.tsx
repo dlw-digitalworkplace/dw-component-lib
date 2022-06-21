@@ -1,6 +1,6 @@
 /**
  * Control very much based on Material UI TreeView control.
- * Source code at https://github.com/mui-org/material-ui/blob/master/packages/material-ui-lab/src/TreeView/TreeView.js
+ * Source code at https://github.com/mui/material-ui/blob/master/packages/mui-lab/src/TreeView/TreeView.js
  */
 
 import { useControlled, useForkRef } from "@dlw-digitalworkplace/dw-react-utils";
@@ -14,6 +14,16 @@ import { ITreeView2StyleProps, ITreeView2Styles, ITreeViewNode, TreeView2Props }
 const getClassNames = classNamesFunction<ITreeView2StyleProps, ITreeView2Styles>();
 
 const ownerDocument = (element: Node | null | undefined): Document => (element && element.ownerDocument) || document;
+const isPrintableCharacter = (key: string): boolean => !!key && key.length === 1 && /\S/.test(key);
+
+const findNextFirstChar = (firstChars: string[], startIndex: number, char: string): number => {
+	for (let i = startIndex; i < firstChars.length; i += 1) {
+		if (char === firstChars[i]) {
+			return i;
+		}
+	}
+	return -1;
+};
 
 export const TreeView2Base: React.FC<TreeView2Props> = React.forwardRef<HTMLUListElement, TreeView2Props>(
 	(props, ref) => {
@@ -21,6 +31,7 @@ export const TreeView2Base: React.FC<TreeView2Props> = React.forwardRef<HTMLULis
 			children,
 			defaultExpanded,
 			defaultSelected,
+			disabledChildrenEnabled = false,
 			disabledItemsFocusable = false,
 			disableSelection = false,
 			expanded: expandedProp,
@@ -63,11 +74,13 @@ export const TreeView2Base: React.FC<TreeView2Props> = React.forwardRef<HTMLULis
 				return true;
 			}
 
-			while (!!node.parentId) {
-				node = nodeMap.current[node.parentId];
+			if (!disabledChildrenEnabled) {
+				while (!!node.parentId) {
+					node = nodeMap.current[node.parentId];
 
-				if (node.disabled) {
-					return true;
+					if (node.disabled) {
+						return true;
+					}
 				}
 			}
 
@@ -504,6 +517,46 @@ export const TreeView2Base: React.FC<TreeView2Props> = React.forwardRef<HTMLULis
 		const focusFirstNode = (event: React.SyntheticEvent) => focus(event, getFirstNode());
 		const focusLastNode = (event: React.SyntheticEvent) => focus(event, getLastNode());
 
+		const focusByFirstCharacter = (event: React.SyntheticEvent, nodeId: string, char: string) => {
+			let start;
+			let index;
+			const lowercaseChar = char.toLowerCase();
+
+			const firstCharIds: string[] = [];
+			const firstChars: string[] = [];
+
+			Object.keys(firstCharMap.current).forEach((mappedNodeId: string) => {
+				const firstChar = firstCharMap.current[mappedNodeId];
+				const map = nodeMap.current[mappedNodeId];
+				const visible = map.parentId ? isExpanded(map.parentId) : true;
+				const shouldBeSkipped = disabledItemsFocusable ? false : isDisabled(mappedNodeId);
+
+				if (visible && !shouldBeSkipped) {
+					firstCharIds.push(mappedNodeId);
+					firstChars.push(firstChar);
+				}
+			});
+
+			// Get start index for search based on position of currentItem
+			start = firstCharIds.indexOf(nodeId) + 1;
+			if (start >= firstCharIds.length) {
+				start = 0;
+			}
+
+			// Check remaining slots in the menu
+			index = findNextFirstChar(firstChars, start, lowercaseChar);
+
+			// If not found in remaining slots, check from beginning
+			if (index === -1) {
+				index = findNextFirstChar(firstChars, 0, lowercaseChar);
+			}
+
+			// If match was found...
+			if (index > -1) {
+				focus(event, firstCharIds[index]);
+			}
+		};
+
 		/* Mapping helpers */
 
 		const registerNode = React.useCallback((node: ITreeViewNode) => {
@@ -526,7 +579,7 @@ export const TreeView2Base: React.FC<TreeView2Props> = React.forwardRef<HTMLULis
 		}, []);
 
 		const mapFirstChar = React.useCallback((nodeId: string, firstChar: string) => {
-			firstCharMap.current[nodeId] = firstChar;
+			firstCharMap.current[nodeId] = firstChar.toLocaleLowerCase();
 		}, []);
 
 		const unmapFirstChar = React.useCallback((nodeId: string) => {
@@ -555,7 +608,7 @@ export const TreeView2Base: React.FC<TreeView2Props> = React.forwardRef<HTMLULis
 			if (isExpandable(focusedNodeId)) {
 				if (isExpanded(focusedNodeId)) {
 					focusNextNode(event, focusedNodeId);
-				} else if (!isDisabled(focusedNodeId)) {
+				} else if (!isDisabled(focusedNodeId) || disabledChildrenEnabled) {
 					toggleExpansion(event);
 				}
 			}
@@ -567,7 +620,7 @@ export const TreeView2Base: React.FC<TreeView2Props> = React.forwardRef<HTMLULis
 				return false;
 			}
 
-			if (isExpanded(focusedNodeId) && !isDisabled(focusedNodeId)) {
+			if (isExpanded(focusedNodeId) && (!isDisabled(focusedNodeId) || disabledChildrenEnabled)) {
 				toggleExpansion(event, focusedNodeId);
 				return true;
 			}
@@ -675,6 +728,9 @@ export const TreeView2Base: React.FC<TreeView2Props> = React.forwardRef<HTMLULis
 				default:
 					if (multiSelect && ctrlPressed && key.toLocaleLowerCase() === "a" && !disableSelection) {
 						selectAllNodes(event);
+						flag = true;
+					} else if (!ctrlPressed && !event.shiftKey && isPrintableCharacter(key)) {
+						focusByFirstCharacter(event, focusedNodeId, key);
 						flag = true;
 					}
 					break;

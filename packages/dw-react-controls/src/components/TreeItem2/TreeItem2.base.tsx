@@ -80,7 +80,7 @@ export const TreeItem2Base: React.FC<ITreeItem2Props> = React.forwardRef<HTMLLIE
 
 		React.useEffect(() => {
 			if (!!label) {
-				mapFirstChar(nodeId, label);
+				mapFirstChar(nodeId, label.substring(0, 1));
 
 				return () => {
 					unmapFirstChar(nodeId);

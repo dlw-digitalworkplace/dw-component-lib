@@ -8,6 +8,11 @@ interface ITreeView2PropsBase {
 	defaultExpanded?: string[];
 
 	/**
+	 * If `true`, will allow children of disabled nodes to be enabled
+	 */
+	disabledChildrenEnabled?: boolean;
+
+	/**
 	 * If `true`, will allow focus on disabled items.
 	 * @default false
 	 */
