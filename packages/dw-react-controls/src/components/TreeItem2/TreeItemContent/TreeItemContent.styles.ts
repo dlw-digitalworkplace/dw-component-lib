@@ -3,6 +3,7 @@ import { ITreeItemContentStyleProps, ITreeItemContentStyles } from "./TreeItemCo
 
 const GlobalClassNames = {
 	root: "dw-TreeItemContent",
+	contextMenuButton: "dw-TreeItemContent-contextMenuButton",
 	expandIcon: "dw-TreeItemContent-expandIcon",
 	labelWrapper: "dw-TreeItemContent-labelWrapper"
 };
@@ -23,6 +24,8 @@ export const getStyles = (props: ITreeItemContentStyleProps): ITreeItemContentSt
 			},
 			disabled && { color: theme.semanticColors.disabledBodyText }
 		],
+
+		contextMenuButton: [classNames.contextMenuButton, {}],
 
 		expandIcon: [
 			classNames.expandIcon,

@@ -1,4 +1,4 @@
-import { Icon } from "office-ui-fabric-react";
+import { ContextualMenu, Icon, IconButton, IContextualMenuItem } from "office-ui-fabric-react";
 import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
 import useTreeItem from "../useTreeItem";
@@ -10,7 +10,7 @@ export const TreeItemContentBase: React.FC<ITreeItemContentProps> = React.forwar
 	HTMLDivElement,
 	ITreeItemContentProps
 >((props, ref) => {
-	const { iconName, label, nodeId, onClick, onMouseDown } = props;
+	const { actions, iconName, label, nodeId, onClick, onInvoke, onMouseDown } = props;
 	const {
 		disabled,
 		expandable,
@@ -25,12 +25,23 @@ export const TreeItemContentBase: React.FC<ITreeItemContentProps> = React.forwar
 	const { styles, className, theme } = props;
 	const classNames = getClassNames(styles, { className, disabled, expandable, focused, selected, theme: theme! });
 
+	const contextMenuIconRef = React.useRef<HTMLDivElement>(null);
+	const [showContextMenu, setShowContextMenu] = React.useState(false);
+
 	const handleClick = (event: React.SyntheticEvent) => {
 		// handleExpansion(event);
 		handleSelection(event);
 
 		if (onClick) {
 			onClick(event);
+		}
+	};
+
+	const handleDoubleClick = (event: React.SyntheticEvent) => {
+		handleSelection(event);
+
+		if (onInvoke) {
+			onInvoke(event);
 		}
 	};
 
@@ -54,6 +65,20 @@ export const TreeItemContentBase: React.FC<ITreeItemContentProps> = React.forwar
 		}
 	};
 
+	const handleContextMenuButtonClick = (_: React.MouseEvent<HTMLDivElement>): void => {
+		setShowContextMenu(true);
+	};
+
+	const handleHideContextMenu = (_?: React.MouseEvent | React.KeyboardEvent): void => {
+		setShowContextMenu(false);
+	};
+
+	const contextMenuActions: IContextualMenuItem[] =
+		actions?.map((action) => ({
+			...action,
+			onClick: () => (typeof action.onClick === "function" ? action.onClick(nodeId) : false)
+		})) || [];
+
 	const renderLabel = (): JSX.Element => {
 		return (
 			<div className={classNames.labelWrapper}>
@@ -64,7 +89,13 @@ export const TreeItemContentBase: React.FC<ITreeItemContentProps> = React.forwar
 	};
 
 	return (
-		<div className={classNames.root} ref={ref} onClick={handleClick} onMouseDown={handleMouseDown}>
+		<div
+			className={classNames.root}
+			ref={ref}
+			onClick={handleClick}
+			onDoubleClick={handleDoubleClick}
+			onMouseDown={handleMouseDown}
+		>
 			<div className={classNames.expandIcon}>
 				{expandable && (
 					<Icon
@@ -76,6 +107,25 @@ export const TreeItemContentBase: React.FC<ITreeItemContentProps> = React.forwar
 			</div>
 
 			{renderLabel()}
+
+			{actions && actions.length > 0 && (
+				<div ref={contextMenuIconRef}>
+					{/* Wrapping element to ensure relative context menu placement */}
+					<IconButton
+						className={classNames.contextMenuButton}
+						onClick={handleContextMenuButtonClick}
+						iconProps={{ iconName: "More" }}
+					/>
+				</div>
+			)}
+
+			{showContextMenu && (
+				<ContextualMenu
+					items={contextMenuActions}
+					onDismiss={handleHideContextMenu}
+					target={contextMenuIconRef.current}
+				/>
+			)}
 		</div>
 	);
 });
