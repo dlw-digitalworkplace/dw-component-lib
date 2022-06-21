@@ -1,6 +1,7 @@
 import { ContextualMenu, Icon, IconButton, IContextualMenuItem } from "office-ui-fabric-react";
-import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
+import { classNamesFunction, IRenderFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
+import { composeRenderFunction } from "../../../utilities";
 import useTreeItem from "../useTreeItem";
 import { ITreeItemContentProps, ITreeItemContentStyleProps, ITreeItemContentStyles } from "./TreeItemContent.types";
 
@@ -10,7 +11,7 @@ export const TreeItemContentBase: React.FC<ITreeItemContentProps> = React.forwar
 	HTMLDivElement,
 	ITreeItemContentProps
 >((props, ref) => {
-	const { actions, iconName, label, nodeId, onClick, onInvoke, onMouseDown } = props;
+	const { actions, iconName, nodeId, onClick, onInvoke, onMouseDown, onRenderLabel } = props;
 	const {
 		disabled,
 		expandable,
@@ -79,7 +80,11 @@ export const TreeItemContentBase: React.FC<ITreeItemContentProps> = React.forwar
 			onClick: () => (typeof action.onClick === "function" ? action.onClick(nodeId) : false)
 		})) || [];
 
-	const renderLabel = (): JSX.Element => {
+	const defaultRenderLabel: IRenderFunction<ITreeItemContentProps> = (
+		contentProps: ITreeItemContentProps
+	): JSX.Element => {
+		const { label } = contentProps;
+
 		return (
 			<div className={classNames.labelWrapper}>
 				{iconName && <Icon iconName={iconName} />}
@@ -87,6 +92,8 @@ export const TreeItemContentBase: React.FC<ITreeItemContentProps> = React.forwar
 			</div>
 		);
 	};
+
+	const renderLabel = onRenderLabel ? composeRenderFunction(onRenderLabel, defaultRenderLabel) : defaultRenderLabel;
 
 	return (
 		<div
@@ -106,7 +113,7 @@ export const TreeItemContentBase: React.FC<ITreeItemContentProps> = React.forwar
 				)}
 			</div>
 
-			{renderLabel()}
+			{renderLabel(props)}
 
 			{actions && actions.length > 0 && (
 				<div ref={contextMenuIconRef}>

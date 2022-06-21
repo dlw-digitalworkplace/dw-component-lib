@@ -1,5 +1,5 @@
 import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
-import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
+import { IRenderFunction, IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
 import { ITreeItemAction } from "../../TreeItem";
 
@@ -44,6 +44,11 @@ export interface ITreeItemContentProps {
 	 * @param {object} event The event source of the callback.
 	 */
 	onMouseDown?: (event: React.SyntheticEvent) => void;
+
+	/**
+	 * When specified it will override the default rendering of the node label
+	 */
+	onRenderLabel?: IRenderFunction<ITreeItemContentProps>;
 
 	/**
 	 * Optional class for the root TreeItemContent element

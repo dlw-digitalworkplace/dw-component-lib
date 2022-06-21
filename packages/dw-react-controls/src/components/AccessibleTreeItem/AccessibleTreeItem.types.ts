@@ -1,6 +1,7 @@
 import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
-import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
+import { IRenderFunction, IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
 import { ITreeItemAction } from "../TreeItem";
+import { ITreeItemContentProps } from "./TreeItemContent";
 
 export interface IAccessibleTreeItemProps {
 	/**
@@ -31,6 +32,16 @@ export interface IAccessibleTreeItemProps {
 	 * @param {object} event The event source of the callback.
 	 */
 	onInvoke?: (event: React.SyntheticEvent) => void;
+
+	/**
+	 * When specified it will override the default rendering of the entire node
+	 */
+	onRenderContent?: IRenderFunction<IAccessibleTreeItemProps>;
+
+	/**
+	 * When specified it will override the default rendering of the node label
+	 */
+	onRenderLabel?: IRenderFunction<ITreeItemContentProps>;
 
 	/**
 	 * Optional class for the root TreeItem element

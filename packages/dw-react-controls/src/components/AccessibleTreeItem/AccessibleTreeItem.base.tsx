@@ -4,8 +4,9 @@
  */
 
 import { useForkRef } from "@dlw-digitalworkplace/dw-react-utils";
-import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
+import { classNamesFunction, IRenderFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
+import { composeRenderFunction } from "../../utilities";
 import { AccessibleTreeViewContext } from "../AccessibleTreeView";
 import { DescendantProvider, IDescendant, useDescendant } from "../AccessibleTreeView/descendants";
 import {
@@ -23,7 +24,19 @@ export const AccessibleTreeItemBase: React.FC<IAccessibleTreeItemProps> = React.
 	HTMLLIElement,
 	IAccessibleTreeItemProps
 >((props, ref) => {
-	const { actions, children, disabled: disabledProp, iconName, id: idProp, label, nodeId, onClick, onInvoke } = props;
+	const {
+		actions,
+		children,
+		disabled: disabledProp,
+		iconName,
+		id: idProp,
+		label,
+		nodeId,
+		onClick,
+		onInvoke,
+		onRenderContent,
+		onRenderLabel
+	} = props;
 	const { className, styles, theme } = props;
 
 	const {
@@ -106,8 +119,8 @@ export const AccessibleTreeItemBase: React.FC<IAccessibleTreeItemProps> = React.
 		}
 	};
 
-	return (
-		<li className={classNames.root} id={id!} onFocus={handleFocus} ref={handleRef} role={"AccessibleTreeItem"}>
+	const defaultRenderContent: IRenderFunction<IAccessibleTreeItemProps> = (contentProps: IAccessibleTreeItemProps) => {
+		return (
 			<TreeItemContent
 				actions={actions}
 				iconName={iconName}
@@ -115,7 +128,18 @@ export const AccessibleTreeItemBase: React.FC<IAccessibleTreeItemProps> = React.
 				nodeId={nodeId}
 				onClick={onClick}
 				onInvoke={onInvoke}
+				onRenderLabel={onRenderLabel}
 			/>
+		);
+	};
+
+	const renderContent = onRenderContent
+		? composeRenderFunction(onRenderContent, defaultRenderContent)
+		: defaultRenderContent;
+
+	return (
+		<li className={classNames.root} id={id!} onFocus={handleFocus} ref={handleRef} role={"AccessibleTreeItem"}>
+			{renderContent(props)}
 
 			{expanded && children && (
 				<DescendantProvider id={nodeId}>
