@@ -27,6 +27,11 @@ export interface ITermPickerProps extends IBasePickerProps<ITermValue> {
 	 * The current theme applied to the control.
 	 */
 	theme?: ITheme;
+
+	/**
+	 * The id of the label that is placed above the control.
+	 */
+	labelId?: string;
 }
 
 export interface ITermPickerStyleProps extends IBasePickerStyleProps {

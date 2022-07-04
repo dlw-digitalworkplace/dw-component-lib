@@ -324,6 +324,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 					onResolveSuggestions={onResolveSuggestions}
 					onValidateInput={onValidateInput}
 					selectedItems={selectedItems}
+					labelId={labelProps?.id}
 				/>
 				{finalOnRenderOpenDialogButton({
 					disabled: !!disabled,

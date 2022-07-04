@@ -18,6 +18,9 @@ const defaultArgs: Partial<ITaxonomyPickerProps> = {
 	allowDisabledTerms: false,
 	itemLimit: 3,
 	label: "Demo taxonomy picker",
+	labelProps: {
+		id: "demo-label"
+	},
 	required: false,
 	selectedItems: [],
 	dialogProps: {

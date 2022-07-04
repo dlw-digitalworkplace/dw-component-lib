@@ -41,7 +41,8 @@ export const TermPicker = ({
 
 	const inputProps: IInputProps = {
 		...inputPropsProp,
-		onFocus: onFocus
+		onFocus: onFocus,
+		"aria-labelledby": props.labelId,
 	};
 
 	const styles = getStyles({
