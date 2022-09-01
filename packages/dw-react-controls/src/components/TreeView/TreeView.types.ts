@@ -1,11 +1,28 @@
-import { IStyle } from "office-ui-fabric-react/lib/Styling";
+import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
 import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
 
-export interface ITreeViewProps {
+interface ITreeViewPropsBase {
 	/**
 	 * Expanded node ids (uncontrolled)
 	 */
 	defaultExpanded?: string[];
+
+	/**
+	 * If `true`, will allow children of disabled nodes to be enabled
+	 */
+	disabledChildrenEnabled?: boolean;
+
+	/**
+	 * If `true`, will allow focus on disabled items.
+	 * @default false
+	 */
+	disabledItemsFocusable?: boolean;
+
+	/**
+	 * If `true` selection is disabled.
+	 * @default false
+	 */
+	disableSelection?: boolean;
 
 	/**
 	 * Expanded node ids (controlled)
@@ -13,14 +30,14 @@ export interface ITreeViewProps {
 	expanded?: string[];
 
 	/**
-	 * Selected node id (uncontrolled)
+	 * Id for the tree element
 	 */
-	defaultSelected?: string;
+	id?: string;
 
 	/**
-	 * Selected node id (controlled)
+	 * Expanded node ids (controlled)
 	 */
-	selected?: string | null;
+	multiSelect?: boolean;
 
 	/**
 	 * Optional class for the root TreeView element
@@ -33,12 +50,17 @@ export interface ITreeViewProps {
 	styles?: IStyleFunctionOrObject<ITreeViewStyleProps, ITreeViewStyles>;
 
 	/**
-	 * Callback fired when a tree item is selected/deselected.
+	 * The current theme applied to the control
+	 */
+	theme?: ITheme;
+
+	/**
+	 * Callback fired when a tree item is focused.
 	 *
 	 * @param {object} event The event source of the callback.
-	 * @param {string} nodeId The id of the selected node.
+	 * @param {string} nodeId The id of the focused node.
 	 */
-	onNodeSelect?(event: React.ChangeEvent<{}>, nodeId?: string): void;
+	onNodeFocus?(event: React.SyntheticEvent, nodeId: string): void;
 
 	/**
 	 * Callback fired when a tree item is expanded/collapsed.
@@ -46,7 +68,77 @@ export interface ITreeViewProps {
 	 * @param {object} event The event source of the callback.
 	 * @param {string[]} nodeIds The id of the expanded node.
 	 */
-	onNodeToggle?(event: React.ChangeEvent<{}>, nodeIds?: string[]): void;
+	onNodeToggle?(event: React.SyntheticEvent, nodeIds: string[]): void;
+}
+
+export interface IMultiSelectTreeViewProps extends ITreeViewPropsBase {
+	/**
+	 * Selected node ids. (Uncontrolled)
+	 * When `multiSelect` is true this takes an array of strings; when false (default) a string.
+	 * @default []
+	 */
+	defaultSelected?: string[];
+
+	/**
+	 * Selected node ids. (Controlled)
+	 * When `multiSelect` is true this takes an array of strings; when false (default) a string.
+	 */
+	selected?: string[];
+
+	/**
+	 * If true `ctrl` and `shift` will trigger multiselect.
+	 * @default false
+	 multiSelect: true;
+	 */
+
+	/**
+	 * Callback fired when tree items are selected/unselected.
+	 *
+	 * @param {React.SyntheticEvent} event The event source of the callback
+	 * @param {string[] | string} nodeIds Ids of the selected nodes. When `multiSelect` is true
+	 * this is an array of strings; when false (default) a string.
+	 */
+	onNodeSelect?: (event: React.SyntheticEvent, nodeIds: string[]) => void;
+}
+
+export interface ISingleSelectTreeViewProps extends ITreeViewPropsBase {
+	/**
+	 * Selected node ids. (Uncontrolled)
+	 * When `multiSelect` is true this takes an array of strings; when false (default) a string.
+	 * @default []
+	 */
+	defaultSelected?: string;
+
+	/**
+	 * Selected node ids. (Controlled)
+	 * When `multiSelect` is true this takes an array of strings; when false (default) a string.
+	 */
+	selected?: string | null;
+
+	/**
+	 * If true `ctrl` and `shift` will trigger multiselect.
+	 * @default false
+	 */
+	multiSelect?: false;
+
+	/**
+	 * Callback fired when tree items are selected/unselected.
+	 *
+	 * @param {React.SyntheticEvent} event The event source of the callback
+	 * @param {string[] | string} nodeIds Ids of the selected nodes. When `multiSelect` is true
+	 * this is an array of strings; when false (default) a string.
+	 */
+	onNodeSelect?: (event: React.SyntheticEvent, nodeIds: string) => void;
+}
+
+export type TreeViewProps = IMultiSelectTreeViewProps | ISingleSelectTreeViewProps;
+
+export interface ITreeViewNode {
+	id: string;
+	index: number;
+	parentId: string | null;
+	expandable?: boolean;
+	disabled?: boolean;
 }
 
 export interface ITreeViewStyleProps {
@@ -54,5 +146,5 @@ export interface ITreeViewStyleProps {
 }
 
 export interface ITreeViewStyles {
-	treeView?: IStyle;
+	TreeView?: IStyle;
 }

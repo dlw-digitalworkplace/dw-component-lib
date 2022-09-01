@@ -4,10 +4,9 @@ import { DialogFooter } from "office-ui-fabric-react/lib/Dialog";
 import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
 import * as rfdc from "rfdc";
-import { AccessibleTreeItem } from "../../AccessibleTreeItem";
-import { AccessibleTreeView } from "../../AccessibleTreeView";
 import { ITermValue, TermPicker } from "../../TermPicker";
-import { ITreeItemAction } from "../../TreeItem";
+import { ITreeItemAction, TreeItem } from "../../TreeItem";
+import { TreeView } from "../../TreeView";
 import { WideDialog } from "../../WideDialog";
 import { ITerm, ITermCreationResult } from "../models";
 import { TermAdder } from "../TermAdder";
@@ -226,14 +225,14 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 		}
 
 		return (
-			<AccessibleTreeView
+			<TreeView
 				expanded={expandedNodes}
 				selected={selectedTreeItem}
 				onNodeSelect={handleTreeSelection}
 				onNodeToggle={handleNodeToggle}
 			>
 				{showRootNode ? (
-					<AccessibleTreeItem
+					<TreeItem
 						nodeId={rootNodeKey}
 						label={rootNodeLabel || ""}
 						disabled={true}
@@ -241,11 +240,11 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 						actions={treeItemActions}
 					>
 						{nodeTree}
-					</AccessibleTreeItem>
+					</TreeItem>
 				) : (
 					<>{nodeTree}</>
 				)}
-			</AccessibleTreeView>
+			</TreeView>
 		);
 	};
 
@@ -281,7 +280,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 		}
 
 		return (
-			<AccessibleTreeItem
+			<TreeItem
 				key={term.key}
 				nodeId={term.key}
 				label={term.name}
@@ -291,7 +290,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 				actions={treeItemActions}
 			>
 				{children}
-			</AccessibleTreeItem>
+			</TreeItem>
 		);
 	};
 

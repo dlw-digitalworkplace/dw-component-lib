@@ -1,5 +1,5 @@
 import * as React from "react";
-import AccessibleTreeViewContext from "../AccessibleTreeView/AccessibleTreeView.context";
+import TreeViewContext from "../TreeView/TreeView.context";
 
 export default function useTreeItem(nodeId: string) {
 	const {
@@ -12,7 +12,7 @@ export default function useTreeItem(nodeId: string) {
 		multiSelect,
 		selectNode,
 		toggleExpansion
-	} = React.useContext(AccessibleTreeViewContext);
+	} = React.useContext(TreeViewContext);
 
 	const disabled = isDisabled ? isDisabled(nodeId) : false;
 	const expandable = isExpandable ? isExpandable(nodeId) : false;

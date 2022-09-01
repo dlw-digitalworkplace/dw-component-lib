@@ -1,7 +1,7 @@
 import { ITreeViewStyleProps, ITreeViewStyles } from "./TreeView.types";
 
 const GlobalClassNames = {
-	treeView: "dw-TreeView"
+	TreeView: "dw-TreeView"
 };
 
 export const getStyles = (props: ITreeViewStyleProps): ITreeViewStyles => {
@@ -9,11 +9,12 @@ export const getStyles = (props: ITreeViewStyleProps): ITreeViewStyles => {
 	const classNames = GlobalClassNames;
 
 	return {
-		treeView: [
-			classNames.treeView,
+		TreeView: [
+			classNames.TreeView,
 			{
 				listStyleType: "none",
 				margin: 0,
+				outline: 0,
 				padding: 0
 			},
 			className
