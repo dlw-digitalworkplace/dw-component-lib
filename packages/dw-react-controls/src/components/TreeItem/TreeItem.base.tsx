@@ -38,7 +38,7 @@ export const TreeItemBase: React.FC<ITreeItemProps> = React.forwardRef<HTMLLIEle
 		isDisabled,
 		isExpanded,
 		isFocused,
-		// isSelected,
+		isSelected,
 		mapFirstChar,
 		registerNode,
 		treeId,
@@ -72,7 +72,7 @@ export const TreeItemBase: React.FC<ITreeItemProps> = React.forwardRef<HTMLLIEle
 	const expandable = Array.isArray(children) ? children.length > 0 : !!children;
 	const expanded = isExpanded ? isExpanded(nodeId) : false;
 	const focused = isFocused ? isFocused(nodeId) : false;
-	// const selected = isSelected ? isSelected(nodeId) : false;
+	const selected = isSelected ? isSelected(nodeId) : false;
 
 	React.useEffect(() => {
 		if (index !== -1) {
@@ -131,7 +131,15 @@ export const TreeItemBase: React.FC<ITreeItemProps> = React.forwardRef<HTMLLIEle
 		: defaultRenderContent;
 
 	return (
-		<li className={classNames.root} id={id!} onFocus={handleFocus} ref={handleRef} role={"TreeItem"}>
+		<li
+			className={classNames.root}
+			id={id!}
+			onFocus={handleFocus}
+			ref={handleRef}
+			role={"TreeItem"}
+			aria-expanded={expandable ? expanded : undefined}
+			aria-selected={selected}
+		>
 			{renderContent(props)}
 
 			{expanded && children && (

@@ -179,7 +179,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 		if (typeof result === "object" && result.success) {
 			// add term
 			if (result.newTerm) {
-				const parentTerm = findInTree(termTreeItems || [], (it) => it.key === termCreatingParentId);
+				const parentTerm = findInTree(termTreeItems || [], (it: ITerm) => it.key === termCreatingParentId);
 
 				if (termCreatingParentId === rootNodeKey) {
 					setTermTreeItems([result.newTerm, ...(termTreeItems || [])]);

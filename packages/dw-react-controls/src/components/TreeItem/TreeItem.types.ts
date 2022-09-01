@@ -1,6 +1,5 @@
 import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
 import { IRenderFunction, IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
-import { ITreeItemAction } from "../TreeItem";
 import { ITreeItemContentProps } from "./TreeItemContent";
 
 export interface ITreeItemProps {
@@ -67,4 +66,10 @@ export interface ITreeItemStyleProps {
 export interface ITreeItemStyles {
 	root?: IStyle;
 	children?: IStyle;
+}
+
+export interface ITreeItemAction {
+	key: string;
+	text: string;
+	onClick?(nodeId: string): void;
 }
