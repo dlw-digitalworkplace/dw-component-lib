@@ -196,7 +196,12 @@ export class SharePointPeoplePickerProvider implements IPeoplePickerProvider {
 
 			case "SecGroup":
 			case "FormsRole":
-				const groupId = result.Key.split("|").pop();
+				// leaves "special" groups as-is.
+				// - c:0(.s|true -- Everyone
+				// - c:0-.f|rolemanager|spo-grid-all-users/<<realm>> -- Everyone except external users
+				const builtinGroupsRegex = /^c:0((\(\.s\|true)|(-\.f\|rolemanager\|spo-grid-all-users\/[a-z0-9\-]*))$/i;
+
+				const groupId = builtinGroupsRegex.test(result.Key) ? result.Key : result.Key.split("|").pop();
 				const secGroup: IGroup = {
 					type: "Group",
 					id: groupId,
@@ -206,6 +211,7 @@ export class SharePointPeoplePickerProvider implements IPeoplePickerProvider {
 						entityType: result.EntityType
 					}
 				};
+
 				return secGroup;
 
 			case "SPGroup": {

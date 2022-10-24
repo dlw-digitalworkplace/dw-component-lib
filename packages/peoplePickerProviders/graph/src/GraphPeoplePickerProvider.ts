@@ -165,6 +165,10 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 			return "";
 		}
 
+		idsToIgnore = idsToIgnore.filter((id) =>
+			id.match(/^[{(]?[0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12}[)}]?$/gi)
+		);
+
 		const m365Clause = "groupTypes/any(g: g eq 'Unified')";
 		const securityClause = "not(groupTypes/any(g: g eq 'Unified')) AND securityEnabled eq true";
 		const distributionClause =
