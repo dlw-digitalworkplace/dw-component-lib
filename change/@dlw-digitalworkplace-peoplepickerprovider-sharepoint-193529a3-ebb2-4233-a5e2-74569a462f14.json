@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "don't trim builting group ids",
-  "packageName": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "patch"
-}

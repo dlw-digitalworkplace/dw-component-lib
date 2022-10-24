@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "don't pass 0 as itemlimit by default",
-  "packageName": "@dlw-digitalworkplace/dw-react-controls",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "patch"
-}

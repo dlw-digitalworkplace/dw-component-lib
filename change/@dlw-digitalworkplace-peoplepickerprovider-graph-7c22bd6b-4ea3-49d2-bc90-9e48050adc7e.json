@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "filter only on valid guids",
-  "packageName": "@dlw-digitalworkplace/peoplepickerprovider-graph",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "patch"
-}

@@ -2,6 +2,27 @@
   "name": "@dlw-digitalworkplace/peoplepickerprovider-graph",
   "entries": [
     {
+      "date": "Mon, 24 Oct 2022 14:28:07 GMT",
+      "tag": "@dlw-digitalworkplace/peoplepickerprovider-graph_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "filter only on valid guids",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "d47706dd10125f35eab85fbb79a8b16291bb05bf",
+            "package": "@dlw-digitalworkplace/peoplepickerprovider-graph"
+          },
+          {
+            "comment": "Bump @dlw-digitalworkplace/peoplepickerprovider-graph to v0.2.1",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "d47706dd10125f35eab85fbb79a8b16291bb05bf",
+            "package": "@dlw-digitalworkplace/peoplepickerprovider-graph"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 02 May 2022 08:43:21 GMT",
       "tag": "@dlw-digitalworkplace/peoplepickerprovider-graph_v0.2.0",
       "version": "0.2.0",
