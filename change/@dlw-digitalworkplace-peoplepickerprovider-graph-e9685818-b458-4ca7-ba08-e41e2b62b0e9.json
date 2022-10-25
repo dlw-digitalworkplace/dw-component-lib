@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix: only filter valid ids",
+  "packageName": "@dlw-digitalworkplace/peoplepickerprovider-graph",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch"
+}
