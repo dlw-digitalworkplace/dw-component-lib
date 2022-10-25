@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/peoplepickerprovider-graph",
   "entries": [
     {
+      "date": "Tue, 25 Oct 2022 07:06:36 GMT",
+      "tag": "@dlw-digitalworkplace/peoplepickerprovider-graph_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix: only filter valid ids",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "8db9cdc0860ebb825a93d7534a54a422cf116fe9",
+            "package": "@dlw-digitalworkplace/peoplepickerprovider-graph"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 24 Oct 2022 14:28:07 GMT",
       "tag": "@dlw-digitalworkplace/peoplepickerprovider-graph_v0.2.1",
       "version": "0.2.1",

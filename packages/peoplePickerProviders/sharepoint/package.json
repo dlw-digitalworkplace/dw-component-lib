@@ -1,6 +1,6 @@
 {
   "name": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@dlw-digitalworkplace/dw-react-utils": "^0.3.0",
-    "@dlw-digitalworkplace/peoplepickerprovider-graph": "^0.2.1",
+    "@dlw-digitalworkplace/peoplepickerprovider-graph": "^0.2.2",
     "deepmerge": "^4.2.2",
     "rfdc": "^1.3.0"
   },
