@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "update react version",
+  "packageName": "@dlw-digitalworkplace/dw-react-utils",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch"
+}
