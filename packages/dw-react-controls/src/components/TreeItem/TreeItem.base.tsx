@@ -5,6 +5,7 @@
 
 import {
 	classNamesFunction,
+	composeRenderFunction,
 	ContextualMenu,
 	Icon,
 	IconButton,
@@ -12,7 +13,6 @@ import {
 	IRenderFunction
 } from "@fluentui/react";
 import * as React from "react";
-import { composeRenderFunction } from "../../utilities";
 import TreeViewContext from "../TreeView/TreeView.context";
 import { TreeItemContent } from "./sections/TreeItemContent";
 import { ITreeItemContentProps } from "./sections/TreeItemContent.types";

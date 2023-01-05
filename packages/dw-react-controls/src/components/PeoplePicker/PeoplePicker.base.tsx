@@ -1,6 +1,7 @@
 import {
 	BasePicker,
 	classNamesFunction,
+	composeRenderFunction,
 	IBasePickerSuggestionsProps,
 	IInputProps,
 	IPickerItemProps,
@@ -8,7 +9,6 @@ import {
 	Label
 } from "@fluentui/react";
 import * as React from "react";
-import { composeRenderFunction } from "../../utilities";
 import { IGroup, IUser, PeoplePickerValue } from "./models";
 import { IPeoplePickerFilterOptions } from "./models/IPeoplePickerFilterOptions";
 import { getInputStyles } from "./PeoplePicker.styles";

@@ -1,7 +1,13 @@
 import { useStateIfMounted } from "@dlw-digitalworkplace/dw-react-utils";
-import { classNamesFunction, IconButton, IRenderFunction, Label, ValidationState } from "@fluentui/react";
+import {
+	classNamesFunction,
+	composeRenderFunction,
+	IconButton,
+	IRenderFunction,
+	Label,
+	ValidationState
+} from "@fluentui/react";
 import * as React from "react";
-import { composeRenderFunction } from "../../utilities";
 import { ITermValue, TermPicker } from "../TermPicker";
 import { ITerm, ITermCreationResult, ITermFilterOptions } from "./models";
 import {
@@ -38,10 +44,11 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	theme
 }) => {
 	const [dialogIsOpen, setDialogIsOpen] = React.useState(false);
-	const [creationResultMessage, setCreationResultMessage] = useStateIfMounted<{
-		isSuccess: boolean;
-		message: string | JSX.Element;
-	}>(undefined);
+	const [creationResultMessage, setCreationResultMessage] =
+		useStateIfMounted<{
+			isSuccess: boolean;
+			message: string | JSX.Element;
+		}>(undefined);
 	const [isCreatingTerm, setIsCreatingTerm] = useStateIfMounted(false);
 	const [_errorMessage, setErrorMessage] = React.useState<string | JSX.Element>();
 	const lastValidation = React.useRef(0);
