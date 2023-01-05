@@ -1,4 +1,4 @@
-const createConfig = require("@dw-component-lib/build/jestV2/jest.preset.v8");
+const { createConfig } = require("@dw-component-lib/build/jest/jest-resources");
 const path = require("path");
 
 const config = createConfig({
