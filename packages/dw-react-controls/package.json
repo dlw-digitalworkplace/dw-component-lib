@@ -20,15 +20,15 @@
 		"@dw-component-lib/build": "^1.0.0",
 		"@dw-component-lib/tslint-rules": "^1.0.0",
 		"@fluentui/react": "8.104.0",
-		"@testing-library/jest-dom": "^5.14.1",
-		"@testing-library/react": "^12.0.0",
-		"@testing-library/user-event": "^13.1.9",
+		"@testing-library/jest-dom": "5.16.5",
+		"@testing-library/react": "12.1.5",
+		"@testing-library/user-event": "12.8.3",
 		"@types/jest": "^26.0.24",
 		"@types/node": "^14.11.8",
-		"@types/react": "^16.9.51",
-		"@types/react-dom": "^16.9.8",
-		"react": "16.13.1",
-		"react-dom": "16.13.1",
+		"@types/react": "^17.0.1",
+		"@types/react-dom": "^17.0.1",
+		"react": "17.0.1",
+		"react-dom": "17.0.1",
 		"ts-node": "^9.0.0",
 		"tslib": "^2.3.0",
 		"typescript": "^3.9.7"
@@ -40,8 +40,8 @@
 	},
 	"peerDependencies": {
 		"@fluentui/react": ">=8.104.0 <9.0.0",
-		"react": ">=16.13.1",
-		"react-dom": ">=16.13.1"
+		"react": "17.0.1",
+		"react-dom": "17.0.1"
 	},
 	"volta": {
 		"extends": "../../package.json"

@@ -23,7 +23,7 @@
 		"@types/jest": "^26.0.14",
 		"@types/node": "^16.0.1",
 		"@types/react": "^16.9.51",
-		"react": "^16.13.1",
+		"react": "17.0.1",
 		"ts-node": "^9.0.0",
 		"tslib": "^2.3.0",
 		"tslint": "^6.1.3",
