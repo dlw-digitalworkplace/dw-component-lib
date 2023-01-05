@@ -18,7 +18,6 @@
 	},
 	"devDependencies": {
 		"@dw-component-lib/build": "^1.0.0",
-		"@dw-component-lib/tslint-rules": "^1.0.0",
 		"@fluentui/react": "8.104.0",
 		"@testing-library/jest-dom": "5.16.5",
 		"@testing-library/react": "12.1.5",
@@ -31,7 +30,7 @@
 		"react-dom": "17.0.1",
 		"ts-node": "^9.0.0",
 		"tslib": "^2.3.0",
-		"typescript": "^3.9.7"
+		"typescript": "^4.3.5"
 	},
 	"dependencies": {
 		"@dlw-digitalworkplace/dw-react-utils": "^0.3.0",
@@ -40,8 +39,8 @@
 	},
 	"peerDependencies": {
 		"@fluentui/react": ">=8.104.0 <9.0.0",
-		"react": "17.0.1",
-		"react-dom": "17.0.1"
+		"react": ">=17.0.0 <18.0.0",
+		"react-dom": ">=17.0.0 <18.0.0"
 	},
 	"volta": {
 		"extends": "../../package.json"

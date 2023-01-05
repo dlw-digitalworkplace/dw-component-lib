@@ -1,7 +1,0 @@
-{
-	"extends": ["@dw-component-lib/tslint-rules"],
-	"rules": {
-		"jsx-ban-props": false,
-		"no-any": false
-	}
-}
