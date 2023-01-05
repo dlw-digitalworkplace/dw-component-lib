@@ -6,6 +6,9 @@ function useForceUpdate() {
 	return React.useCallback(() => setState({}), []);
 }
 
+/**
+ * @deprecated Use `useTheme` from `@fluentui/react` instead.
+ */
 export function useTheme(scope?: string): ITheme {
 	// We need the ability to force a re-render if the global Customizations
 	// pushes a change, as it lives outside of the React life-cycle
