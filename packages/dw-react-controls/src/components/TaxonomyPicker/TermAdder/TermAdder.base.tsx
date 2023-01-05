@@ -9,7 +9,7 @@ export const TermAdderBase: React.FC<ITermAdderProps> = React.forwardRef<HTMLFor
 	(props, ref) => {
 		const { labels: labelsProp, onCancel, onSubmit, styles, className, theme } = props;
 
-		const [inputValue, setInputValue] = React.useState<string | undefined>(undefined);
+		const [inputValue, setInputValue] = React.useState<string | undefined>("");
 		const [errorMessage, setErrorMessage] = useStateIfMounted<string | undefined>(undefined);
 		const [isSaving, setIsSaving] = useStateIfMounted(false);
 
