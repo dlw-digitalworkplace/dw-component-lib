@@ -3,10 +3,14 @@
  * Source code at https://github.com/mui-org/material-ui/blob/master/packages/material-ui-lab/src/TreeItem/TreeItem.js
  */
 
-import { IconButton } from "office-ui-fabric-react/lib/Button";
-import { ContextualMenu, IContextualMenuItem } from "office-ui-fabric-react/lib/ContextualMenu";
-import { Icon } from "office-ui-fabric-react/lib/Icon";
-import { classNamesFunction, IRenderFunction } from "office-ui-fabric-react/lib/Utilities";
+import {
+	classNamesFunction,
+	ContextualMenu,
+	Icon,
+	IconButton,
+	IContextualMenuItem,
+	IRenderFunction
+} from "@fluentui/react";
 import * as React from "react";
 import { composeRenderFunction } from "../../utilities";
 import TreeViewContext from "../TreeView/TreeView.context";

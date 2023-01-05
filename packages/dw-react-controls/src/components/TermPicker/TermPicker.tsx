@@ -1,4 +1,4 @@
-import { BaseAutoFill, IInputProps } from "office-ui-fabric-react";
+import { Autofill, IInputProps } from "@fluentui/react";
 import * as React from "react";
 import { useTheme } from "../../utilities";
 import { TermPickerBase } from "./TermPicker.base";
@@ -32,7 +32,7 @@ export const TermPicker = ({
 		setIsFocused(true);
 	};
 
-	const onBlur = (ev: React.FocusEvent<HTMLInputElement | BaseAutoFill>): void => {
+	const onBlur = (ev: React.FocusEvent<HTMLInputElement | Autofill>): void => {
 		if (onBlurProp) {
 			onBlurProp(ev);
 		}

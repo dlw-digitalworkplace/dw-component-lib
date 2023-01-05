@@ -1,5 +1,12 @@
-import { BasePicker, IBasePickerSuggestionsProps, IInputProps, IPickerItemProps, Label } from "office-ui-fabric-react";
-import { classNamesFunction, IRenderFunction } from "office-ui-fabric-react/lib/Utilities";
+import {
+	BasePicker,
+	classNamesFunction,
+	IBasePickerSuggestionsProps,
+	IInputProps,
+	IPickerItemProps,
+	IRenderFunction,
+	Label
+} from "@fluentui/react";
 import * as React from "react";
 import { composeRenderFunction } from "../../utilities";
 import { IGroup, IUser, PeoplePickerValue } from "./models";

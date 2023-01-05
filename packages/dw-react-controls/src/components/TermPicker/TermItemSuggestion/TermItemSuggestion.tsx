@@ -1,4 +1,4 @@
-import { styled } from "office-ui-fabric-react/lib/Utilities";
+import { styled } from "@fluentui/react";
 import { TermItemSuggestionBase } from "./TermItemSuggestion.base";
 import { getStyles } from "./TermItemSuggestion.styles";
 import {

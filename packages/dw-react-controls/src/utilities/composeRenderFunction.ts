@@ -1,4 +1,4 @@
-import { IRenderFunction } from "office-ui-fabric-react";
+import { IRenderFunction } from "@fluentui/react";
 
 export function composeRenderFunction<T>(outer: IRenderFunction<T>, inner: IRenderFunction<T>): IRenderFunction<T> {
 	return (outerProps?: T, defaultRender?: IRenderFunction<T>) => {

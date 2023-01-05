@@ -1,8 +1,5 @@
 import { useStateIfMounted } from "@dlw-digitalworkplace/dw-react-utils";
-import { IconButton } from "office-ui-fabric-react/lib/Button";
-import { Spinner, SpinnerSize } from "office-ui-fabric-react/lib/Spinner";
-import { TextField } from "office-ui-fabric-react/lib/TextField";
-import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
+import { classNamesFunction, IconButton, Spinner, SpinnerSize, TextField } from "@fluentui/react";
 import * as React from "react";
 import { ITermAdderLabels, ITermAdderProps, ITermAdderStyleProps, ITermAdderStyles } from "./TermAdder.types";
 

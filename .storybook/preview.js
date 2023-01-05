@@ -1,8 +1,7 @@
-import { initializeIcons } from "@uifabric/icons";
-import { Fabric, loadTheme } from "office-ui-fabric-react";
+import { createTheme, initializeIcons, ThemeProvider } from "@fluentui/react";
 import { compareStoryPaths, storiesOrder } from "./previewUtils.js";
 
-const theme = loadTheme({});
+const theme = createTheme({});
 
 export const parameters = {
 	actions: { argTypesRegex: "^on[A-Z].*" },
@@ -25,9 +24,9 @@ export const parameters = {
 
 export const decorators = [
 	(Story) => (
-		<Fabric theme={theme}>
+		<ThemeProvider theme={theme}>
 			<Story />
-		</Fabric>
+		</ThemeProvider>
 	)
 ];
 

@@ -1,10 +1,10 @@
 import { WebPartTitle } from "@dlw-digitalworkplace/dw-spfx-controls";
+import { createTheme, ITheme } from "@fluentui/react/lib/Styling";
 import { ThemeChangedEventArgs, ThemeProvider } from "@microsoft/sp-component-base";
 import { Version } from "@microsoft/sp-core-library";
 import { IPropertyPaneConfiguration, PropertyPaneToggle } from "@microsoft/sp-property-pane";
 import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
 import * as strings from "DemoSPFxComponentsWebPartStrings";
-import { createTheme, ITheme } from "office-ui-fabric-react/lib/Styling";
 import * as React from "react";
 import * as ReactDom from "react-dom";
 import { IDemoSPFxComponentsWebPartProps } from "./DemoSPFxComponentsWebPart.types";

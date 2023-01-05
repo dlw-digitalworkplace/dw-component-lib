@@ -1,4 +1,4 @@
-import { styled } from "office-ui-fabric-react/lib/Utilities";
+import { styled } from "@fluentui/react";
 import { PeoplePickerItemSuggestionBase } from "./PeoplePickerItemSuggestion.base";
 import { getStyles } from "./PeoplePickerItemSuggestion.styles";
 import {

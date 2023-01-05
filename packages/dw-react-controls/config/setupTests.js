@@ -1,5 +1,5 @@
 /** Jest test setup file. */
-const { initializeIcons } = require("@uifabric/icons");
+const { initializeIcons } = require("@fluentui/react");
 
 // Initialize icons.
 initializeIcons("");

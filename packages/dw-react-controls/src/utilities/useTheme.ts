@@ -1,4 +1,4 @@
-import { Customizations, CustomizerContext, ICustomizerContext, ITheme } from "office-ui-fabric-react";
+import { Customizations, CustomizerContext, ICustomizerContext, ITheme } from "@fluentui/react";
 import * as React from "react";
 
 function useForceUpdate() {

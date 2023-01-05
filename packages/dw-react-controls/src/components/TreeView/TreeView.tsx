@@ -1,4 +1,4 @@
-import { styled } from "office-ui-fabric-react/lib/Utilities";
+import { styled } from "@fluentui/react";
 import * as React from "react";
 import { TreeViewBase } from "./TreeView.base";
 import { getStyles } from "./TreeView.styles";

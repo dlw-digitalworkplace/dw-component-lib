@@ -1,6 +1,5 @@
-import { getStyles } from "office-ui-fabric-react/lib/components/Dialog/Dialog.styles";
-import { Dialog as FUIDialog, IDialogProps, IDialogStyleProps, IDialogStyles } from "office-ui-fabric-react/lib/Dialog";
-import { styled } from "office-ui-fabric-react/lib/Utilities";
+import { Dialog as FUIDialog, IDialogProps, IDialogStyleProps, IDialogStyles, styled } from "@fluentui/react";
+import { getStyles } from "@fluentui/react/lib/components/Dialog/Dialog.styles";
 import * as React from "react";
 
 const getStylesCustom = (props: IDialogStyleProps) => getStyles({ ...props, dialogDefaultMaxWidth: "95vw" });

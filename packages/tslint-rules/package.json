@@ -13,5 +13,8 @@
 	},
 	"peerDependencies": {
 		"tslint": "*"
+	},
+	"volta": {
+		"extends": "../../package.json"
 	}
 }

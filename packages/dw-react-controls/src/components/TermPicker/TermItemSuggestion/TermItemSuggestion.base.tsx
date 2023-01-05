@@ -1,4 +1,4 @@
-import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
+import { classNamesFunction } from "@fluentui/react";
 import * as React from "react";
 import {
 	ITermItemSuggestionProps,

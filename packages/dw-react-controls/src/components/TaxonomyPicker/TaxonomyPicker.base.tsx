@@ -1,8 +1,5 @@
 import { useStateIfMounted } from "@dlw-digitalworkplace/dw-react-utils";
-import { IconButton } from "office-ui-fabric-react/lib/Button";
-import { ValidationState } from "office-ui-fabric-react/lib/components/pickers/BasePicker.types";
-import { Label } from "office-ui-fabric-react/lib/Label";
-import { classNamesFunction, IRenderFunction } from "office-ui-fabric-react/lib/Utilities";
+import { classNamesFunction, IconButton, IRenderFunction, Label, ValidationState } from "@fluentui/react";
 import * as React from "react";
 import { composeRenderFunction } from "../../utilities";
 import { ITermValue, TermPicker } from "../TermPicker";

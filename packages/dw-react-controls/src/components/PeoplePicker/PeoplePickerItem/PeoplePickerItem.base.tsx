@@ -1,6 +1,4 @@
-import { IconButton } from "office-ui-fabric-react/lib/Button";
-import { Persona, PersonaSize } from "office-ui-fabric-react/lib/Persona";
-import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
+import { classNamesFunction, IconButton, Persona, PersonaSize } from "@fluentui/react";
 import * as React from "react";
 import { IPeoplePickerItemProps, IPeoplePickerItemStyleProps, IPeoplePickerItemStyles } from "./PeoplePickerItem.types";
 

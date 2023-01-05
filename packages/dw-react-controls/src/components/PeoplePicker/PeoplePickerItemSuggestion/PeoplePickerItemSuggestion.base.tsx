@@ -1,11 +1,10 @@
-import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
+import { classNamesFunction, Persona, PersonaSize } from "@fluentui/react";
 import * as React from "react";
 import {
 	IPeoplePickerItemSuggestionProps,
 	IPeoplePickerItemSuggestionStyleProps,
 	IPeoplePickerItemSuggestionStyles
 } from "./PeoplePickerItemSuggestion.types";
-import { Persona, PersonaSize } from "office-ui-fabric-react/lib/Persona";
 
 const getClassNames = classNamesFunction<IPeoplePickerItemSuggestionStyleProps, IPeoplePickerItemSuggestionStyles>();
 
