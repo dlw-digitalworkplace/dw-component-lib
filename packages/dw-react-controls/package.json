@@ -1,6 +1,6 @@
 {
   "name": "@dlw-digitalworkplace/dw-react-controls",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",

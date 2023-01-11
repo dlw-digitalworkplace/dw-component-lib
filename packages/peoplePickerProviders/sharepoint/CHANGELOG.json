@@ -2,6 +2,42 @@
   "name": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint",
   "entries": [
     {
+      "date": "Tue, 25 Oct 2022 07:06:36 GMT",
+      "tag": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint_v0.1.2",
+      "version": "0.1.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @dlw-digitalworkplace/peoplepickerprovider-sharepoint to v0.1.2",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "8db9cdc0860ebb825a93d7534a54a422cf116fe9",
+            "package": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 24 Oct 2022 14:28:07 GMT",
+      "tag": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "don't trim builting group ids",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "d47706dd10125f35eab85fbb79a8b16291bb05bf",
+            "package": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint"
+          },
+          {
+            "comment": "Bump @dlw-digitalworkplace/peoplepickerprovider-sharepoint to v0.1.1",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "d47706dd10125f35eab85fbb79a8b16291bb05bf",
+            "package": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 02 May 2022 08:43:21 GMT",
       "tag": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint_v0.1.0",
       "version": "0.1.0",

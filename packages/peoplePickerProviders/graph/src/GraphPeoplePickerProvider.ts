@@ -84,10 +84,14 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 		searchClause += ` OR "surname:${search}"`;
 		searchClause += ` OR "mail:${search}"`;
 
+		const idsToIgnore = options.idsToIgnore.filter((id) =>
+			id.match(/^[{(]?[0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12}[)}]?$/gi)
+		);
+
 		let filterClause = "";
-		if (options.idsToIgnore.length > 0) {
+		if (idsToIgnore.length > 0) {
 			filterClause += "not(id in (";
-			filterClause += options.idsToIgnore.map((id) => `"${id}"`).join(",");
+			filterClause += idsToIgnore.map((id) => `"${id}"`).join(",");
 			filterClause += "))";
 		}
 
@@ -164,6 +168,10 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 		if (!this._providerOptions.groupTypes) {
 			return "";
 		}
+
+		idsToIgnore = idsToIgnore.filter((id) =>
+			id.match(/^[{(]?[0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12}[)}]?$/gi)
+		);
 
 		const m365Clause = "groupTypes/any(g: g eq 'Unified')";
 		const securityClause = "not(groupTypes/any(g: g eq 'Unified')) AND securityEnabled eq true";

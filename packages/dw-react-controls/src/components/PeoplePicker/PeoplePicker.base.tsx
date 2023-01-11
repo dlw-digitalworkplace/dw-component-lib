@@ -15,7 +15,7 @@ export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
 	className,
 	errorMessage,
 	inputProps: inputPropsProp,
-	itemLimit = 0,
+	itemLimit,
 	label,
 	labelProps,
 	pickerSuggestionsProps,
@@ -35,7 +35,7 @@ export const PeoplePickerBase: React.FC<IPeoplePickerProps> = ({
 
 	// Check to see if the item limit is not exceeded
 	React.useEffect(() => {
-		setIsInvalid(itemLimit > 0 && itemLimit < selectedItems.length);
+		setIsInvalid(itemLimit !== undefined && itemLimit > -1 && itemLimit < selectedItems.length);
 	}, [itemLimit, selectedItems]);
 
 	// Keep track of focus state
