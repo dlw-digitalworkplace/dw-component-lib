@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "add useDebounce and useDebounceFn hooks",
+  "packageName": "@dlw-digitalworkplace/dw-react-utils",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch"
+}
