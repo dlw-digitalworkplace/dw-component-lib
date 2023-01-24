@@ -1,0 +1,27 @@
+import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import * as stories from "./useDebounce.stories";
+import { useDebounce } from "../../hooks";
+
+<Meta title="Utils/hooks/useDebounce" />
+
+# useDebounce
+
+The `useDebounce` hook returns a debounced value, which is only updated if no new update is triggered within the specified delay.
+
+## Usage
+
+```tsx
+const debouncedValue = useDebounce(value, delay);
+```
+
+## Example
+
+Basic usage
+
+<Canvas withToolbar={true}>
+	<Story story={stories.Basic} name="Basic usage" />
+</Canvas>
+
+## Properties
+
+<ArgsTable components={{ useDebounce }} />
