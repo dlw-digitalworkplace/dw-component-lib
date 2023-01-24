@@ -1,5 +1,5 @@
-import { getStyles as getBasePickerStyles } from "office-ui-fabric-react/lib/components/pickers/BasePicker.styles";
-import { concatStyleSets } from "office-ui-fabric-react/lib/Styling";
+import { concatStyleSets } from "@fluentui/react";
+import { getStyles as getBasePickerStyles } from "@fluentui/react/lib/components/pickers/BasePicker.styles";
 import { ITermPickerStyleProps, ITermPickerStyles } from "./TermPicker.types";
 
 export const getStyles = (props: ITermPickerStyleProps): ITermPickerStyles => {

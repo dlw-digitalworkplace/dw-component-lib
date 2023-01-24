@@ -1,5 +1,5 @@
+import { DefaultButton, IRenderFunction } from "@fluentui/react";
 import { render } from "@testing-library/react";
-import { DefaultButton, IRenderFunction } from "office-ui-fabric-react";
 import * as React from "react";
 import { ITermValue } from "../TermPicker";
 import { MockTaxonomyProvider } from "./providers/MockTaxonomyProvider";

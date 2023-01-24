@@ -1,5 +1,4 @@
-import { Icon } from "office-ui-fabric-react/lib/Icon";
-import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
+import { classNamesFunction, Icon } from "@fluentui/react";
 import * as React from "react";
 import { ITreeItemContentProps, ITreeItemContentStyleProps, ITreeItemContentStyles } from "./TreeItemContent.types";
 

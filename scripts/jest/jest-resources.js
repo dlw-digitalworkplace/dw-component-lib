@@ -57,7 +57,7 @@ module.exports = {
 				],
 				moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json"],
 				moduleNameMapper: {
-					"office-ui-fabric-react/lib/(.*)$": "office-ui-fabric-react/lib-commonjs/$1",
+					"@fluentui/react/lib/(.*)$": "@fluentui/react/lib-commonjs/$1",
 					"ts-jest": resolve.sync("ts-jest"),
 					"\\.(scss)$": path.resolve(__dirname, "jest-style-mock.js"),
 					KeyCodes: path.resolve(__dirname, "jest-mock.js"),

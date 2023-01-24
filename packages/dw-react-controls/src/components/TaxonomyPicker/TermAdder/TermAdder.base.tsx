@@ -1,8 +1,5 @@
 import { useStateIfMounted } from "@dlw-digitalworkplace/dw-react-utils";
-import { IconButton } from "office-ui-fabric-react/lib/Button";
-import { Spinner, SpinnerSize } from "office-ui-fabric-react/lib/Spinner";
-import { TextField } from "office-ui-fabric-react/lib/TextField";
-import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
+import { classNamesFunction, IconButton, Spinner, SpinnerSize, TextField } from "@fluentui/react";
 import * as React from "react";
 import { ITermAdderLabels, ITermAdderProps, ITermAdderStyleProps, ITermAdderStyles } from "./TermAdder.types";
 
@@ -12,7 +9,7 @@ export const TermAdderBase: React.FC<ITermAdderProps> = React.forwardRef<HTMLFor
 	(props, ref) => {
 		const { labels: labelsProp, onCancel, onSubmit, styles, className, theme } = props;
 
-		const [inputValue, setInputValue] = React.useState<string | undefined>(undefined);
+		const [inputValue, setInputValue] = React.useState<string | undefined>("");
 		const [errorMessage, setErrorMessage] = useStateIfMounted<string | undefined>(undefined);
 		const [isSaving, setIsSaving] = useStateIfMounted(false);
 

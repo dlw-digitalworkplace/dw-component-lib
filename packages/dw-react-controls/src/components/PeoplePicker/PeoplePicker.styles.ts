@@ -1,5 +1,5 @@
-import { getStyles as getBasePickerStyles } from "office-ui-fabric-react/lib/components/pickers/BasePicker.styles";
-import { AnimationClassNames, concatStyleSets } from "office-ui-fabric-react/lib/Styling";
+import { AnimationClassNames, concatStyleSets } from "@fluentui/react";
+import { getStyles as getBasePickerStyles } from "@fluentui/react/lib/components/pickers/BasePicker.styles";
 import {
 	IPeoplePickerInputStyleProps,
 	IPeoplePickerInputStyles,

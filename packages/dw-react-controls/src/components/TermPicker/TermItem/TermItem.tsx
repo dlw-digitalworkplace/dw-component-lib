@@ -1,4 +1,4 @@
-import { styled } from "office-ui-fabric-react/lib/Utilities";
+import { styled } from "@fluentui/react";
 import { TermItemBase } from "./TermItem.base";
 import { getStyles } from "./TermItem.styles";
 import { ITermItemProps, ITermItemStyleProps, ITermItemStyles } from "./TermItem.types";

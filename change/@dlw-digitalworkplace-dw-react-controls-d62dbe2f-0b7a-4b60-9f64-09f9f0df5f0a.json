@@ -1,0 +1,7 @@
+{
+  "type": "major",
+  "comment": "move to @fluentui/react",
+  "packageName": "@dlw-digitalworkplace/dw-react-controls",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch"
+}

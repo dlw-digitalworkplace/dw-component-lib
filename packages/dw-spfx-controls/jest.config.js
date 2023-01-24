@@ -20,7 +20,7 @@ const config = createConfig({
 		DWControlStrings: "identity-obj-proxy"
 	},
 	setupFilesAfterEnv: [path.resolve(path.join(__dirname, "config", "setupTests.js"))],
-	transformIgnorePatterns: ["<rootDir>/node_modules/(?!(office-ui-fabric-react/lib)/)"]
+	transformIgnorePatterns: ["<rootDir>/node_modules/(?!(@fluentui/react/lib)/)"]
 });
 
 module.exports = config;

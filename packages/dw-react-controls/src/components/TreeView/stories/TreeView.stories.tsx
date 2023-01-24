@@ -1,5 +1,5 @@
+import { DefaultButton } from "@fluentui/react";
 import { Story, StoryContext } from "@storybook/react";
-import { DefaultButton } from "office-ui-fabric-react/lib/Button";
 import * as React from "react";
 import { TreeItem } from "../../TreeItem";
 import { TreeView } from "../TreeView";

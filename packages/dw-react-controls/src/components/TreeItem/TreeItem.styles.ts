@@ -1,4 +1,4 @@
-import { AnimationClassNames } from "office-ui-fabric-react/lib/Styling";
+import { AnimationClassNames } from "@fluentui/react";
 import { ITreeItemStyleProps, ITreeItemStyles } from "./TreeItem.types";
 
 const GlobalClassNames = {

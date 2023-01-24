@@ -1,4 +1,4 @@
-import { getGlobalClassNames } from "office-ui-fabric-react/lib/Styling";
+import { getGlobalClassNames } from "@fluentui/react";
 import { ITermItemSuggestionStyleProps, ITermItemSuggestionStyles } from "./TermItemSuggestion.types";
 
 const GlobalClassNames = {

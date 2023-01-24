@@ -41,7 +41,7 @@ describe("<TermAdder />", () => {
 			userEvent.paste(input, inputValue);
 			fireEvent.submit(form);
 
-			waitFor(
+			await waitFor(
 				() => {
 					// make sure form submission is complete
 				},

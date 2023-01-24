@@ -1,6 +1,5 @@
-import { BaseAutoFill, IInputProps } from "office-ui-fabric-react";
+import { Autofill, IInputProps, useTheme } from "@fluentui/react";
 import * as React from "react";
-import { useTheme } from "../../utilities";
 import { TermPickerBase } from "./TermPicker.base";
 import { getStyles } from "./TermPicker.styles";
 import { ITermPickerProps } from "./TermPicker.types";
@@ -9,7 +8,7 @@ export const TermPicker = ({
 	inputProps: inputPropsProp,
 	isInvalid: isInvalidProp,
 	onBlur: onBlurProp,
-	onFocus: onFocusProp,
+	onFocus: _,
 	styles: customStyles,
 	...props
 }: ITermPickerProps) => {
@@ -18,7 +17,7 @@ export const TermPicker = ({
 	const [isInvalid, setIsInvalid] = React.useState(false);
 	const [isFocused, setIsFocused] = React.useState(false);
 
-	const theme = useTheme("TermPicker");
+	const theme = useTheme();
 
 	React.useEffect(() => {
 		setIsInvalid(itemLimit > 0 && itemLimit < selectedItems.length);
@@ -32,7 +31,7 @@ export const TermPicker = ({
 		setIsFocused(true);
 	};
 
-	const onBlur = (ev: React.FocusEvent<HTMLInputElement | BaseAutoFill>): void => {
+	const onBlur = (ev: React.FocusEvent<HTMLInputElement | Autofill>): void => {
 		if (onBlurProp) {
 			onBlurProp(ev);
 		}

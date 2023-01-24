@@ -1,10 +1,10 @@
 import {
 	IBasePickerProps,
 	IBasePickerStyleProps,
-	IBasePickerStyles
-} from "office-ui-fabric-react/lib/components/pickers/BasePicker.types";
-import { ITheme } from "office-ui-fabric-react/lib/Styling";
-import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
+	IBasePickerStyles,
+	IStyleFunctionOrObject,
+	ITheme
+} from "@fluentui/react";
 import { ITermValue } from "./models";
 
 export interface ITermPickerProps extends IBasePickerProps<ITermValue> {

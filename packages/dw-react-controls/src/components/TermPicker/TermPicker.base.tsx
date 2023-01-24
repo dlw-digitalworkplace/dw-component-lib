@@ -1,6 +1,4 @@
-import { BasePicker } from "office-ui-fabric-react/lib/components/pickers/BasePicker";
-import { IPickerItemProps } from "office-ui-fabric-react/lib/components/pickers/PickerItem.types";
-import { initializeComponentRef } from "office-ui-fabric-react/lib/Utilities";
+import { BasePicker, initializeComponentRef, IPickerItemProps } from "@fluentui/react";
 import * as React from "react";
 import { ITermValue } from "./models";
 import { TermItem } from "./TermItem";

@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "use spfx 1.16",
+  "packageName": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch"
+}

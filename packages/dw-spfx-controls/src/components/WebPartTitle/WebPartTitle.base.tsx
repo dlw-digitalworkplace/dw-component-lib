@@ -1,6 +1,6 @@
+import { classNamesFunction } from "@fluentui/react";
 import { DisplayMode } from "@microsoft/sp-core-library";
 import * as strings from "DWControlStrings";
-import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { IWebPartTitleProps, IWebPartTitleStyleProps, IWebPartTitleStyles } from "./WebPartTitle.types";

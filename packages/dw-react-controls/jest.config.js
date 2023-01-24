@@ -4,7 +4,7 @@ const path = require("path");
 const config = createConfig({
 	coverageDirectory: "coverage",
 	setupFilesAfterEnv: [path.resolve(path.join(__dirname, "config", "setupTests.js"))],
-	transformIgnorePatterns: ["<rootDir>/node_modules/(?!(office-ui-fabric-react/lib)/)"]
+	transformIgnorePatterns: ["<rootDir>/node_modules/(?!(@fluentui/react/lib)/)"]
 });
 
 module.exports = config;
