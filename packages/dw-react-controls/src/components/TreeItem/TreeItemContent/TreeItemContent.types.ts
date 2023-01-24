@@ -1,5 +1,4 @@
-import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
-import { IRenderFunction, IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
+import { IRenderFunction, IStyle, IStyleFunctionOrObject, ITheme } from "@fluentui/react";
 import * as React from "react";
 import { ITreeItemAction } from "../../TreeItem";
 

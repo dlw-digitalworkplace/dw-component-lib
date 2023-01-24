@@ -1,6 +1,5 @@
+import { IStyle, IStyleFunctionOrObject, ITheme } from "@fluentui/react";
 import { DisplayMode } from "@microsoft/sp-core-library";
-import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
-import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
 
 export interface IWebPartTitleProps {
 	displayMode: DisplayMode;

@@ -1,6 +1,4 @@
-import { ILabelProps } from "office-ui-fabric-react/lib/Label";
-import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
-import { IRenderFunction, IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
+import { ILabelProps, IRenderFunction, IStyle, IStyleFunctionOrObject, ITheme } from "@fluentui/react";
 import { ITermValue } from "../TermPicker";
 import { ITaxonomyProvider } from "./models";
 import { ITaxonomyPickerDialogProps } from "./TaxonomyPickerDialog";

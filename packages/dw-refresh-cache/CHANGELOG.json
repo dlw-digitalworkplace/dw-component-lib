@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-refresh-cache",
   "entries": [
     {
+      "date": "Tue, 24 Jan 2023 10:56:32 GMT",
+      "tag": "@dlw-digitalworkplace/dw-refresh-cache_v1.0.0",
+      "version": "1.0.0",
+      "comments": {
+        "none": [
+          {
+            "author": "nick.sevens@delaware.pro",
+            "package": "@dlw-digitalworkplace/dw-refresh-cache",
+            "commit": "65c43dd0845840460ae8417a6a4da73667038029",
+            "comment": "add volta reference"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 22 Feb 2022 09:46:27 GMT",
       "tag": "@dlw-digitalworkplace/dw-refresh-cache_v1.0.0",
       "version": "1.0.0",

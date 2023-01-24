@@ -1,3 +1,5 @@
+const webpack = require("webpack");
+
 module.exports = {
 	stories: ["../**/*.stories.@(js|jsx|ts|tsx|mdx)"],
 
@@ -25,5 +27,19 @@ module.exports = {
 			esModuleInterop: false,
 			shouldExtractLiteralValuesFromEnum: true
 		}
+	},
+
+	webpackFinal: async (config) => {
+		if (!config.plugins) {
+			config.plugins = [];
+		}
+
+		config.plugins.push(
+			new webpack.ProvidePlugin({
+				React: "react"
+			})
+		);
+
+		return config;
 	}
 };

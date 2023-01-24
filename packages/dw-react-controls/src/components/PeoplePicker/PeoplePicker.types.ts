@@ -1,7 +1,14 @@
-import { IBasePickerProps, IBasePickerStyleProps, IBasePickerStyles, IPickerItemProps } from "office-ui-fabric-react";
-import { ILabelProps } from "office-ui-fabric-react/lib/Label";
-import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
-import { IRenderFunction, IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
+import {
+	IBasePickerProps,
+	IBasePickerStyleProps,
+	IBasePickerStyles,
+	ILabelProps,
+	IPickerItemProps,
+	IRenderFunction,
+	IStyle,
+	IStyleFunctionOrObject,
+	ITheme
+} from "@fluentui/react";
 import { PeoplePickerValue } from "./models";
 import { IGroup } from "./models/IGroup";
 import { IPeoplePickerProvider } from "./models/IPeoplePickerProvider";

@@ -1,4 +1,6 @@
 export * from "./useControlled";
+export * from "./useDebounce";
+export * from "./useDebounceFn";
 export * from "./useDrag";
 export * from "./useForkRef";
 export * from "./useIsMounted";

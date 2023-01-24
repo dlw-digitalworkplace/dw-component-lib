@@ -1,5 +1,4 @@
-import { IconButton } from "office-ui-fabric-react/lib/Button";
-import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
+import { classNamesFunction, IconButton } from "@fluentui/react";
 import * as React from "react";
 import { ITermItemProps, ITermItemStyleProps, ITermItemStyles } from "./TermItem.types";
 

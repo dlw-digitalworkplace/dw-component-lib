@@ -2,6 +2,36 @@
   "name": "@dlw-digitalworkplace/dw-react-utils",
   "entries": [
     {
+      "date": "Tue, 24 Jan 2023 10:56:32 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-utils_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "nick.sevens@delaware.pro",
+            "package": "@dlw-digitalworkplace/dw-react-utils",
+            "commit": "65c43dd0845840460ae8417a6a4da73667038029",
+            "comment": "update react version"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 24 Jan 2023 09:25:34 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-utils_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "add useDebounce and useDebounceFn hooks",
+            "author": "nick.sevens@delaware.pro",
+            "commit": "9bb38b532586b41816ab61551944365b3a9ba769",
+            "package": "@dlw-digitalworkplace/dw-react-utils"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 02 May 2022 08:43:21 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-utils_v0.3.0",
       "version": "0.3.0",

@@ -1,7 +1,5 @@
 import { findInTree, flatten } from "@dlw-digitalworkplace/dw-react-utils";
-import { ActionButton, DefaultButton, PrimaryButton } from "office-ui-fabric-react/lib/Button";
-import { DialogFooter } from "office-ui-fabric-react/lib/Dialog";
-import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
+import { ActionButton, classNamesFunction, DefaultButton, DialogFooter, PrimaryButton } from "@fluentui/react";
 import * as React from "react";
 import * as rfdc from "rfdc";
 import { ITermValue, TermPicker } from "../../TermPicker";

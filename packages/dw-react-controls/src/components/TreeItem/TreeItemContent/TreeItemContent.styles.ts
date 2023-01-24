@@ -1,4 +1,4 @@
-import { IStyle } from "office-ui-fabric-react";
+import { IStyle } from "@fluentui/react";
 import { ITreeItemContentStyleProps, ITreeItemContentStyles } from "./TreeItemContent.types";
 
 const GlobalClassNames = {

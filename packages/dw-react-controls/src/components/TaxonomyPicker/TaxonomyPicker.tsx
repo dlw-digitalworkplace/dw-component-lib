@@ -1,4 +1,4 @@
-import { styled } from "office-ui-fabric-react/lib/Utilities";
+import { styled } from "@fluentui/react";
 import * as React from "react";
 import { TaxonomyPickerBase } from "./TaxonomyPicker.base";
 import { getStyles } from "./TaxonomyPicker.styles";

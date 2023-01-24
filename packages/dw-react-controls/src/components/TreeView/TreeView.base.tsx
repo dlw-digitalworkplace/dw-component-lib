@@ -4,7 +4,7 @@
  */
 
 import { useControlled, useForkRef } from "@dlw-digitalworkplace/dw-react-utils";
-import { classNamesFunction } from "office-ui-fabric-react/lib/Utilities";
+import { classNamesFunction } from "@fluentui/react";
 import * as React from "react";
 import useId from "../../utilities/useId";
 import { DescendantProvider } from "./descendants";

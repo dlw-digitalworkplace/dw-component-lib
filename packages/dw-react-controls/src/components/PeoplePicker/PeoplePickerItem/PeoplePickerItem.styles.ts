@@ -1,4 +1,4 @@
-import { getFocusStyle, getGlobalClassNames } from "office-ui-fabric-react/lib/Styling";
+import { getFocusStyle, getGlobalClassNames } from "@fluentui/react";
 import { IPeoplePickerItemStyleProps, IPeoplePickerItemStyles } from "./PeoplePickerItem.types";
 
 const GlobalClassNames = {

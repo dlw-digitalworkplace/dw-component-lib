@@ -1,7 +1,13 @@
-import { ContextualMenu, Icon, IconButton, IContextualMenuItem } from "office-ui-fabric-react";
-import { classNamesFunction, IRenderFunction } from "office-ui-fabric-react/lib/Utilities";
+import {
+	classNamesFunction,
+	composeRenderFunction,
+	ContextualMenu,
+	Icon,
+	IconButton,
+	IContextualMenuItem,
+	IRenderFunction
+} from "@fluentui/react";
 import * as React from "react";
-import { composeRenderFunction } from "../../../utilities";
 import useTreeItem from "../useTreeItem";
 import { ITreeItemContentProps, ITreeItemContentStyleProps, ITreeItemContentStyles } from "./TreeItemContent.types";
 
@@ -12,16 +18,8 @@ export const TreeItemContentBase: React.FC<ITreeItemContentProps> = React.forwar
 	ITreeItemContentProps
 >((props, ref) => {
 	const { actions, iconName, nodeId, onClick, onInvoke, onMouseDown, onRenderLabel } = props;
-	const {
-		disabled,
-		expandable,
-		expanded,
-		focused,
-		handleExpansion,
-		handleSelection,
-		preventSelection,
-		selected
-	} = useTreeItem(nodeId);
+	const { disabled, expandable, expanded, focused, handleExpansion, handleSelection, preventSelection, selected } =
+		useTreeItem(nodeId);
 
 	const { styles, className, theme } = props;
 	const classNames = getClassNames(styles, { className, disabled, expandable, focused, selected, theme: theme! });

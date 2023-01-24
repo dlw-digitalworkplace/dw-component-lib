@@ -1,6 +1,4 @@
-import { IDialogProps } from "office-ui-fabric-react/lib/Dialog";
-import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
-import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
+import { IDialogProps, IStyle, IStyleFunctionOrObject, ITheme } from "@fluentui/react";
 import { ITermPickerProps, ITermValue } from "../../TermPicker";
 import { ITaxonomyProvider, ITermCreationResult } from "../models";
 import { ITermAdderLabels } from "../TermAdder";

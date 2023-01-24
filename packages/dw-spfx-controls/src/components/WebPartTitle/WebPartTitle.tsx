@@ -1,4 +1,4 @@
-import { styled } from "office-ui-fabric-react/lib/Utilities";
+import { styled } from "@fluentui/react";
 import * as React from "react";
 import { WebPartTitleBase } from "./WebPartTitle.base";
 import { getStyles } from "./WebPartTitle.styles";

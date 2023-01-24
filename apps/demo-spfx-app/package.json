@@ -9,33 +9,33 @@
     "start": "gulp serve"
   },
   "dependencies": {
-    "@dlw-digitalworkplace/dw-react-controls": "0.5.1",
-    "@dlw-digitalworkplace/dw-spfx-controls": "1.1.2",
-    "@dlw-digitalworkplace/peoplepickerprovider-graph": "0.2.2",
-    "@dlw-digitalworkplace/peoplepickerprovider-sharepoint": "0.1.2",
-    "@dlw-digitalworkplace/taxonomyprovider-sharepoint": "0.1.8",
-    "@dw-component-lib/tslint-rules": "^1.0.0",
-    "@microsoft/sp-core-library": "1.12.1",
-    "@microsoft/sp-lodash-subset": "1.12.1",
-    "@microsoft/sp-office-ui-fabric-core": "1.12.1",
-    "@microsoft/sp-property-pane": "1.12.1",
-    "@microsoft/sp-webpart-base": "1.12.1",
-    "office-ui-fabric-react": "7.156.0",
-    "react-dom": "16.9.0",
-    "react": "16.9.0"
+    "@dlw-digitalworkplace/dw-react-controls": "1.0.0",
+    "@dlw-digitalworkplace/dw-spfx-controls": "2.0.0",
+    "@dlw-digitalworkplace/peoplepickerprovider-graph": "0.2.4",
+    "@dlw-digitalworkplace/peoplepickerprovider-sharepoint": "0.2.0",
+    "@dlw-digitalworkplace/taxonomyprovider-sharepoint": "0.1.10",
+    "@fluentui/react": "8.104.0",
+    "@microsoft/sp-core-library": "1.16.0",
+    "@microsoft/sp-lodash-subset": "1.16.0",
+    "@microsoft/sp-office-ui-fabric-core": "1.16.0",
+    "@microsoft/sp-property-pane": "1.16.0",
+    "@microsoft/sp-webpart-base": "1.16.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
   },
   "devDependencies": {
-    "@microsoft/rush-stack-compiler-3.7": "0.2.3",
-    "@microsoft/sp-build-web": "1.12.1",
-    "@microsoft/sp-module-interfaces": "1.12.1",
-    "@microsoft/sp-tslint-rules": "1.12.1",
-    "@microsoft/sp-webpart-workbench": "1.12.1",
+    "@microsoft/rush-stack-compiler-4.5": "0.3.0",
+    "@microsoft/sp-build-web": "1.16.0",
+    "@microsoft/sp-module-interfaces": "1.16.0",
     "@types/node": "^14.11.8",
-    "@types/react-dom": "16.9.8",
-    "@types/react": "16.9.36",
+    "@types/react": "^16.14.34",
+    "@types/react-dom": "^16.9.17",
     "@types/webpack-env": "1.13.1",
-    "ajv": "~5.2.2",
-    "gulp": "~4.0.2",
-    "tslib": "^2.3.0"
+    "ajv": "^6.12.5",
+    "gulp": "4.0.2",
+    "tslib": "2.4.1"
+  },
+  "volta": {
+    "extends": "../../package.json"
   }
 }

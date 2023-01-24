@@ -1,6 +1,10 @@
-import { ButtonGlobalClassNames } from "office-ui-fabric-react/lib/components/Button/BaseButton.classNames";
-import { getFocusStyle, getGlobalClassNames, HighContrastSelector } from "office-ui-fabric-react/lib/Styling";
-import { getRTL } from "office-ui-fabric-react/lib/Utilities";
+import {
+	ButtonGlobalClassNames,
+	getFocusStyle,
+	getGlobalClassNames,
+	getRTL,
+	HighContrastSelector
+} from "@fluentui/react";
 import { ITermItemStyleProps, ITermItemStyles } from "./TermItem.types";
 
 const GlobalClassNames = {

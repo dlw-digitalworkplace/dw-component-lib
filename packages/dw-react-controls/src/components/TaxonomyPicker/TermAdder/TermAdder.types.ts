@@ -1,5 +1,4 @@
-import { IStyle, ITheme } from "office-ui-fabric-react/lib/Styling";
-import { IStyleFunctionOrObject } from "office-ui-fabric-react/lib/Utilities";
+import { IStyle, IStyleFunctionOrObject, ITheme } from "@fluentui/react";
 import { ITermCreationResult } from "../models";
 
 export interface ITermAdderLabels {

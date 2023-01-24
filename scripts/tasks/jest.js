@@ -25,6 +25,6 @@ exports.jestWatch = () => {
 		...((process.env.TF_BUILD || process.env.LAGE_PACKAGE) && { runInBand: true }),
 		...(args.u || args.updateSnapshot ? { updateSnapshot: true } : undefined),
 		watch: true,
-		_: ["-i", ...(args._ || []).filter((arg) => arg !== "jest-watch")]
+		_: ["-i", ...(args._ || []).map((arg) => arg.toString()).filter((arg) => arg !== "jest-watch")]
 	});
 };

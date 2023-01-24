@@ -1,5 +1,5 @@
+import { IRenderFunction } from "@fluentui/react";
 import { fireEvent, queryByAttribute, render } from "@testing-library/react";
-import { IRenderFunction } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
 import { TreeItem } from "../TreeItem";
 import { TreeView } from "../TreeView";

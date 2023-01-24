@@ -4,9 +4,8 @@
  */
 
 import { useForkRef } from "@dlw-digitalworkplace/dw-react-utils";
-import { classNamesFunction, IRenderFunction } from "office-ui-fabric-react/lib/Utilities";
+import { classNamesFunction, composeRenderFunction, IRenderFunction } from "@fluentui/react";
 import * as React from "react";
-import { composeRenderFunction } from "../../utilities";
 import { TreeViewContext } from "../TreeView";
 import { DescendantProvider, IDescendant, useDescendant } from "../TreeView/descendants";
 import { ITreeItemProps, ITreeItemStyleProps, ITreeItemStyles } from "./TreeItem.types";
