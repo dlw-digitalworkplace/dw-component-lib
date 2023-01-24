@@ -2,6 +2,8 @@ export * from "./useControlled";
 export * from "./useDebounce";
 export * from "./useDebounceFn";
 export * from "./useDrag";
+export * from "./useForkRef";
+export * from "./useId";
 export * from "./useIsMounted";
 export * from "./useStateIfMounted";
 export * from "./useWindowEvent";

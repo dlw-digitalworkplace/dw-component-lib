@@ -1,9 +1,9 @@
 import { IRenderFunction } from "@fluentui/react";
 import { fireEvent, queryByAttribute, render } from "@testing-library/react";
 import * as React from "react";
+import { TreeItem } from "../TreeItem";
 import { TreeView } from "../TreeView";
-import { ITreeItemContentProps } from "./sections/TreeItemContent.types";
-import { TreeItem } from "./TreeItem";
+import { ITreeItemContentProps } from "./TreeItemContent";
 
 describe("<TreeItem />", () => {
 	describe("Rendering", () => {
@@ -29,7 +29,7 @@ describe("<TreeItem />", () => {
 
 			const { getByText } = render(
 				<TreeView>
-					<TreeItem nodeId="test" label="TestLabel" onRenderItemContents={onRenderItemContents} />
+					<TreeItem nodeId="test" label="TestLabel" onRenderContent={onRenderItemContents} />
 				</TreeView>
 			);
 
@@ -83,7 +83,7 @@ describe("<TreeItem />", () => {
 			expect(handleClick).not.toBeCalled();
 		});
 
-		it("should not call onClick when children are doubleClicked", () => {
+		it("should not call onInvoke when children are doubleClicked", () => {
 			const handleDoubleClick = jest.fn();
 
 			const { getByText } = render(
@@ -167,9 +167,7 @@ describe("<TreeItem />", () => {
 
 			expect(getByRole(/treeitem/i).getAttribute("aria-selected")).toBe("true");
 		});
-	});
 
-	describe("Selection", () => {
 		it("should not select a disabled node when clicked", () => {
 			const { getByRole, getByText } = render(
 				<TreeView>
