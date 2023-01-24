@@ -1,0 +1,23 @@
+import { Meta } from "@storybook/addon-docs";
+
+<Meta title="Utils/hooks/useId" />
+
+# useId
+
+The `useId` hook allows you to generate a unique id for a component.
+
+## Usage
+
+```tsx
+const id = useId();
+```
+
+## Example
+
+```tsx
+const MyComponent = () => {
+	const id = useId();
+
+	return <div id={id}>Hello world</div>;
+};
+```

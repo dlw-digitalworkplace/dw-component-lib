@@ -3,10 +3,9 @@
  * Source code at https://github.com/mui/material-ui/blob/master/packages/mui-lab/src/TreeView/TreeView.js
  */
 
-import { useControlled, useForkRef } from "@dlw-digitalworkplace/dw-react-utils";
+import { useControlled, useForkRef, useId } from "@dlw-digitalworkplace/dw-react-utils";
 import { classNamesFunction } from "@fluentui/react";
 import * as React from "react";
-import useId from "../../utilities/useId";
 import { DescendantProvider } from "./descendants";
 import TreeViewContext from "./TreeView.context";
 import { ITreeViewNode, ITreeViewStyleProps, ITreeViewStyles, TreeViewProps } from "./TreeView.types";
