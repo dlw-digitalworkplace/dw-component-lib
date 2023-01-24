@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-utils
 
-This log was last generated on Mon, 02 May 2022 08:43:21 GMT and should not be manually modified.
+This log was last generated on Tue, 24 Jan 2023 09:25:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.0
+
+Tue, 24 Jan 2023 09:25:34 GMT
+
+### Minor changes
+
+- add useDebounce and useDebounceFn hooks (nick.sevens@delaware.pro)
 
 ## 0.3.0
 

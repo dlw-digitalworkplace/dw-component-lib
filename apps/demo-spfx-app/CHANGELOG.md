@@ -1,8 +1,16 @@
 # Change Log - @dw-react-apps/demo-spfx-app
 
-This log was last generated on Tue, 25 Oct 2022 07:06:36 GMT and should not be manually modified.
+This log was last generated on Tue, 24 Jan 2023 09:25:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.0
+
+Tue, 24 Jan 2023 09:25:34 GMT
+
+### Patches
+
+- Bump @dw-react-apps/demo-spfx-app to v1.0.0 (nick.sevens@delaware.pro)
 
 ## 1.0.0
 
