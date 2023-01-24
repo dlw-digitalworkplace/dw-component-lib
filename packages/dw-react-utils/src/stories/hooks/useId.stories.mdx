@@ -10,6 +10,11 @@ The `useId` hook allows you to generate a unique id for a component.
 
 ```tsx
 const id = useId();
+
+// or
+
+const { customId } = props;
+const id = useId(customId);
 ```
 
 ## Example
