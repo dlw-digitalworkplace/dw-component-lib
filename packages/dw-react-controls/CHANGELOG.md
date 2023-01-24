@@ -1,8 +1,17 @@
 # Change Log - @dlw-digitalworkplace/dw-react-controls
 
-This log was last generated on Tue, 24 Jan 2023 10:56:32 GMT and should not be manually modified.
+This log was last generated on Tue, 24 Jan 2023 14:06:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.0
+
+Tue, 24 Jan 2023 14:06:56 GMT
+
+### Minor changes
+
+- rework treeview for options and accessibility (nick.sevens@delaware.pro)
+- Bump @dlw-digitalworkplace/dw-react-utils to v0.6.0
 
 ## 1.0.0
 

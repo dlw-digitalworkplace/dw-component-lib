@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-react-utils",
   "entries": [
     {
+      "date": "Tue, 24 Jan 2023 14:06:56 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-utils_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "nick.sevens@delaware.pro",
+            "package": "@dlw-digitalworkplace/dw-react-utils",
+            "commit": "55bc69186c101970234396536b2b77fb499b4e7a",
+            "comment": "add useForkRef hook"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 24 Jan 2023 10:56:32 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-utils_v0.5.0",
       "version": "0.5.0",

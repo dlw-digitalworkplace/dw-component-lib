@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-utils
 
-This log was last generated on Tue, 24 Jan 2023 10:56:32 GMT and should not be manually modified.
+This log was last generated on Tue, 24 Jan 2023 14:06:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.0
+
+Tue, 24 Jan 2023 14:06:56 GMT
+
+### Minor changes
+
+- add useForkRef hook (nick.sevens@delaware.pro)
 
 ## 0.5.0
 

@@ -2,6 +2,27 @@
   "name": "@dlw-digitalworkplace/dw-react-controls",
   "entries": [
     {
+      "date": "Tue, 24 Jan 2023 14:06:56 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-controls_v1.1.0",
+      "version": "1.1.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "nick.sevens@delaware.pro",
+            "package": "@dlw-digitalworkplace/dw-react-controls",
+            "commit": "55bc69186c101970234396536b2b77fb499b4e7a",
+            "comment": "rework treeview for options and accessibility"
+          },
+          {
+            "author": "beachball",
+            "package": "@dlw-digitalworkplace/dw-react-controls",
+            "comment": "Bump @dlw-digitalworkplace/dw-react-utils to v0.6.0",
+            "commit": "55bc69186c101970234396536b2b77fb499b4e7a"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 24 Jan 2023 10:56:32 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-controls_v1.0.0",
       "version": "1.0.0",

@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "rework treeview for options and accessibility",
-  "packageName": "@dlw-digitalworkplace/dw-react-controls",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "patch"
-}
