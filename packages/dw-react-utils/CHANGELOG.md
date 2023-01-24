@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-utils
 
-This log was last generated on Tue, 24 Jan 2023 09:25:34 GMT and should not be manually modified.
+This log was last generated on Tue, 24 Jan 2023 10:56:32 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.0
+
+Tue, 24 Jan 2023 10:56:32 GMT
+
+### Minor changes
+
+- update react version (nick.sevens@delaware.pro)
 
 ## 0.4.0
 

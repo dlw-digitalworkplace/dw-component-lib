@@ -1,8 +1,17 @@
 # Change Log - @dlw-digitalworkplace/dw-react-controls
 
-This log was last generated on Tue, 24 Jan 2023 09:25:34 GMT and should not be manually modified.
+This log was last generated on Tue, 24 Jan 2023 10:56:32 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.0
+
+Tue, 24 Jan 2023 10:56:32 GMT
+
+### Major changes
+
+- move to @fluentui/react (nick.sevens@delaware.pro)
+- Bump @dlw-digitalworkplace/dw-react-utils to v0.5.0
 
 ## 0.5.2
 

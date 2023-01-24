@@ -2,6 +2,35 @@
   "name": "@dlw-digitalworkplace/peoplepickerprovider-graph",
   "entries": [
     {
+      "date": "Tue, 24 Jan 2023 10:56:32 GMT",
+      "tag": "@dlw-digitalworkplace/peoplepickerprovider-graph_v0.2.4",
+      "version": "0.2.4",
+      "comments": {
+        "none": [
+          {
+            "author": "nick.sevens@delaware.pro",
+            "package": "@dlw-digitalworkplace/peoplepickerprovider-graph",
+            "commit": "65c43dd0845840460ae8417a6a4da73667038029",
+            "comment": "add volta reference"
+          }
+        ],
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@dlw-digitalworkplace/peoplepickerprovider-graph",
+            "comment": "Bump @dlw-digitalworkplace/dw-react-utils to v0.5.0",
+            "commit": "65c43dd0845840460ae8417a6a4da73667038029"
+          },
+          {
+            "author": "beachball",
+            "package": "@dlw-digitalworkplace/peoplepickerprovider-graph",
+            "comment": "Bump @dlw-digitalworkplace/dw-react-controls to v1.0.0",
+            "commit": "65c43dd0845840460ae8417a6a4da73667038029"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 24 Jan 2023 09:25:34 GMT",
       "tag": "@dlw-digitalworkplace/peoplepickerprovider-graph_v0.2.3",
       "version": "0.2.3",

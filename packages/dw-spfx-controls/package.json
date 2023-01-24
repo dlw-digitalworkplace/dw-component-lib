@@ -1,59 +1,59 @@
 {
-	"name": "@dlw-digitalworkplace/dw-spfx-controls",
-	"version": "1.1.2",
-	"main": "lib/index.js",
-	"typings": "lib/index.d.ts",
-	"author": "Nick Sevens",
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/dlw-digitalworkplace/dw-component-lib"
-	},
-	"scripts": {
-		"build": "gulp build",
-		"clean": "gulp clean",
-		"start-test": "just-scripts jest-watch",
-		"test": "just-scripts test"
-	},
-	"dependencies": {
-		"react-textarea-autosize": "^8.3.3"
-	},
-	"devDependencies": {
-		"@dw-component-lib/build": "^1.0.0",
-		"@fluentui/react": "8.104.0",
-		"@microsoft/rush-stack-compiler-4.5": "0.3.0",
-		"@microsoft/sp-build-web": "1.16.0",
-		"@microsoft/sp-core-library": "1.16.0",
-		"@microsoft/sp-lodash-subset": "1.16.0",
-		"@microsoft/sp-module-interfaces": "1.16.0",
-		"@microsoft/sp-office-ui-fabric-core": "1.16.0",
-		"@microsoft/sp-property-pane": "1.16.0",
-		"@microsoft/sp-webpart-base": "1.16.0",
-		"@testing-library/jest-dom": "5.16.5",
-		"@testing-library/react": "12.1.5",
-		"@testing-library/user-event": "12.8.3",
-		"@types/jest": "^26.0.24",
-		"@types/react": "^16.14.34",
-		"@types/react-dom": "^16.9.17",
-		"@types/webpack-env": "1.13.1",
-		"ajv": "^6.12.5",
-		"gulp": "4.0.2",
-		"identity-obj-proxy": "^3.0.0",
-		"react": "16.13.1",
-		"react-dom": "16.13.1",
-		"ts-node": "^9.0.0"
-	},
-	"peerDependencies": {
-		"@fluentui/react": ">=8.104.0 <9.0.0",
-		"@microsoft/sp-core-library": ">=1.16.0 <2.0.0",
-		"@microsoft/sp-lodash-subset": ">=1.16.0 <2.0.0",
-		"@microsoft/sp-office-ui-fabric-core": ">=1.16.0 <2.0.0",
-		"@microsoft/sp-property-pane": ">=1.16.0 <2.0.0",
-		"@microsoft/sp-webpart-base": ">=1.16.0 <2.0.0",
-		"react": ">=16.8.0 <18.0.0",
-		"react-dom": ">=16.8.0 <18.0.0"
-	},
-	"volta": {
-		"extends": "../../package.json"
-	}
+  "name": "@dlw-digitalworkplace/dw-spfx-controls",
+  "version": "2.0.0",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "author": "Nick Sevens",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dlw-digitalworkplace/dw-component-lib"
+  },
+  "scripts": {
+    "build": "gulp build",
+    "clean": "gulp clean",
+    "start-test": "just-scripts jest-watch",
+    "test": "just-scripts test"
+  },
+  "dependencies": {
+    "react-textarea-autosize": "^8.3.3"
+  },
+  "devDependencies": {
+    "@dw-component-lib/build": "^1.0.0",
+    "@fluentui/react": "8.104.0",
+    "@microsoft/rush-stack-compiler-4.5": "0.3.0",
+    "@microsoft/sp-build-web": "1.16.0",
+    "@microsoft/sp-core-library": "1.16.0",
+    "@microsoft/sp-lodash-subset": "1.16.0",
+    "@microsoft/sp-module-interfaces": "1.16.0",
+    "@microsoft/sp-office-ui-fabric-core": "1.16.0",
+    "@microsoft/sp-property-pane": "1.16.0",
+    "@microsoft/sp-webpart-base": "1.16.0",
+    "@testing-library/jest-dom": "5.16.5",
+    "@testing-library/react": "12.1.5",
+    "@testing-library/user-event": "12.8.3",
+    "@types/jest": "^26.0.24",
+    "@types/react": "^16.14.34",
+    "@types/react-dom": "^16.9.17",
+    "@types/webpack-env": "1.13.1",
+    "ajv": "^6.12.5",
+    "gulp": "4.0.2",
+    "identity-obj-proxy": "^3.0.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "ts-node": "^9.0.0"
+  },
+  "peerDependencies": {
+    "@fluentui/react": ">=8.104.0 <9.0.0",
+    "@microsoft/sp-core-library": ">=1.16.0 <2.0.0",
+    "@microsoft/sp-lodash-subset": ">=1.16.0 <2.0.0",
+    "@microsoft/sp-office-ui-fabric-core": ">=1.16.0 <2.0.0",
+    "@microsoft/sp-property-pane": ">=1.16.0 <2.0.0",
+    "@microsoft/sp-webpart-base": ">=1.16.0 <2.0.0",
+    "react": ">=16.8.0 <18.0.0",
+    "react-dom": ">=16.8.0 <18.0.0"
+  },
+  "volta": {
+    "extends": "../../package.json"
+  }
 }
