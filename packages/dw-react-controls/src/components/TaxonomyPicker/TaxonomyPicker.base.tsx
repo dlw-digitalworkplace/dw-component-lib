@@ -1,4 +1,4 @@
-import { useStateIfMounted } from "@dlw-digitalworkplace/dw-react-utils";
+import { useId, useStateIfMounted } from "@dlw-digitalworkplace/dw-react-utils";
 import {
 	classNamesFunction,
 	composeRenderFunction,
@@ -52,6 +52,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	const [isCreatingTerm, setIsCreatingTerm] = useStateIfMounted(false);
 	const [_errorMessage, setErrorMessage] = React.useState<string | JSX.Element>();
 	const lastValidation = React.useRef(0);
+	const inputId = useId();
 
 	const creationResultMessageTimeout = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
@@ -312,7 +313,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	return (
 		<div className={classNames.root}>
 			{label && (
-				<Label required={required} {...labelProps}>
+				<Label htmlFor={inputId} required={required} {...labelProps}>
 					{label}
 				</Label>
 			)}
@@ -322,6 +323,9 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 					className={classNames.input}
 					createGenericItem={onCreateGenericItem}
 					disabled={disabled || isCreatingTerm}
+					inputProps={{
+						id: inputId
+					}}
 					isInvalid={!!errorMessage ? true : undefined}
 					itemLimit={itemLimit}
 					onChange={handleSelectionChange}
