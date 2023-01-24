@@ -1,0 +1,28 @@
+import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import * as stories from "./useDebounceFn.stories";
+import { useDebounceFn } from "../../hooks";
+
+<Meta title="Utils/hooks/useDebounceFn" />
+
+# useDebounceFn
+
+The `useDebounceFn` hook returns a new function which is only called after the specified delay.
+If the function is called again before the delay has elapsed, the timer is reset.
+
+## Usage
+
+```tsx
+const debouncedFunc = useDebounceFn(func, delay);
+```
+
+## Example
+
+Basic usage
+
+<Canvas withToolbar={true}>
+	<Story story={stories.Basic} name="Basic usage" />
+</Canvas>
+
+## Properties
+
+<ArgsTable components={{ useDebounceFn }} />
