@@ -46,9 +46,9 @@ export function preset() {
 	task("ts:postprocess:amd", postprocessAmdTask);
 	task("ts:postprocess:commonjs", postprocessCommonjsTask);
 
-	task("ts:commonjs", series(ts.commonjs));
+	task("ts:commonjs", ts.commonjs);
 	task("ts:esm", ts.esm);
-	task("ts:amd", series(ts.amd));
+	task("ts:amd", ts.amd);
 
 	task("ts:compile", () => {
 		return argv().commonjs
