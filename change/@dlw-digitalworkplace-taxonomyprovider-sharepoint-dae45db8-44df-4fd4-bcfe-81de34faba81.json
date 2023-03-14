@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix npmignore files",
+  "packageName": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch"
+}
