@@ -1,8 +1,9 @@
 .storybook
-**/.stories.*
+**/*.stories.*
 config
+!lib
 node_modules
-src/**/*
+src
 temp
 babel.config.js
 jest.config.js

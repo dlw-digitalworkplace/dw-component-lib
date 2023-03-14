@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix npmignore files",
+  "packageName": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch"
+}

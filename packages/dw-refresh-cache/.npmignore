@@ -1,6 +1,12 @@
+.storybook
+**/*.stories.*
+config
+!lib
 node_modules
-src/**/*
+src
 temp
+babel.config.js
+jest.config.js
 just.config.ts
 tsconfig.json
 tsconfig.tsbuildinfo

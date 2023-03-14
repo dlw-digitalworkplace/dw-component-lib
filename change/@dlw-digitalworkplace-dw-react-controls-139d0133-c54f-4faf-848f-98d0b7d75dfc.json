@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "focus first node by default when focusing treeview",
+  "packageName": "@dlw-digitalworkplace/dw-react-controls",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "none"
+}
