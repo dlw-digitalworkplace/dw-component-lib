@@ -20,19 +20,16 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: yarn
       - run: yarn build --verbose
-      - run: |
-          cd ./packages/dw-react-controls
-          ls -R
       - run: yarn test
       - run: |
           git config --global user.email "nick.sevens@delaware.pro"
           git config --global user.name "Nick Sevens"
-      # - run: |
-      #     yarn release:canary -y \
-      #       -r "https://npm.pkg.github.com/" \
-      #       -n $NPM_AUTHTOKEN \
-      #       --canaryName $CI_REF_NAME_SLUG \
-      #       --no-git-tags \
-      #       -t exper
-      #   env:
-      #     NPM_AUTHTOKEN: ${{secrets.GITHUB_TOKEN}}
+      - run: |
+          yarn release:canary -y \
+            -r "https://npm.pkg.github.com/" \
+            -n $NPM_AUTHTOKEN \
+            --canaryName $CI_REF_NAME_SLUG \
+            --no-git-tags \
+            -t exper
+        env:
+          NPM_AUTHTOKEN: ${{secrets.GITHUB_TOKEN}}
