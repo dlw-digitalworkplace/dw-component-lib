@@ -594,6 +594,8 @@ export const TreeViewBase: React.FC<TreeViewProps> = React.forwardRef<HTMLUListE
 
 			if (firstSelected) {
 				focus(event, firstSelected);
+			} else {
+				focusFirstNode(event);
 			}
 		}
 	};
