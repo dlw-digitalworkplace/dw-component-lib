@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-refresh-cache
 
-This log was last generated on Tue, 22 Feb 2022 09:46:27 GMT and should not be manually modified.
+This log was last generated on Tue, 14 Mar 2023 11:34:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.1
+
+Tue, 14 Mar 2023 11:34:14 GMT
+
+### Patches
+
+- fix npmignore files (nick.sevens@delaware.pro)
 
 ## 1.0.0
 

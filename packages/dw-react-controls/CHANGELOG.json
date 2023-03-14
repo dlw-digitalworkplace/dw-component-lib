@@ -2,6 +2,27 @@
   "name": "@dlw-digitalworkplace/dw-react-controls",
   "entries": [
     {
+      "date": "Tue, 14 Mar 2023 11:34:14 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-controls_v1.1.1",
+      "version": "1.1.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "nick.sevens@delaware.pro",
+            "package": "@dlw-digitalworkplace/dw-react-controls",
+            "commit": "9b86c14a19ae764c0b0d6bd39c476b0eca10a4e5",
+            "comment": "focus first node by default when focusing treeview"
+          },
+          {
+            "author": "beachball",
+            "package": "@dlw-digitalworkplace/dw-react-controls",
+            "comment": "Bump @dlw-digitalworkplace/dw-react-utils to v0.6.1",
+            "commit": "9b86c14a19ae764c0b0d6bd39c476b0eca10a4e5"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 24 Jan 2023 14:06:56 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-controls_v1.1.0",
       "version": "1.1.0",

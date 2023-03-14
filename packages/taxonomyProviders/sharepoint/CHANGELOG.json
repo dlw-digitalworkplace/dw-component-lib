@@ -2,6 +2,33 @@
   "name": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
   "entries": [
     {
+      "date": "Tue, 14 Mar 2023 11:34:14 GMT",
+      "tag": "@dlw-digitalworkplace/taxonomyprovider-sharepoint_v0.1.12",
+      "version": "0.1.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "nick.sevens@delaware.pro",
+            "package": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
+            "commit": "9b86c14a19ae764c0b0d6bd39c476b0eca10a4e5",
+            "comment": "fix npmignore files"
+          },
+          {
+            "author": "beachball",
+            "package": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
+            "comment": "Bump @dlw-digitalworkplace/dw-react-utils to v0.6.1",
+            "commit": "9b86c14a19ae764c0b0d6bd39c476b0eca10a4e5"
+          },
+          {
+            "author": "beachball",
+            "package": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
+            "comment": "Bump @dlw-digitalworkplace/dw-react-controls to v1.1.1",
+            "commit": "9b86c14a19ae764c0b0d6bd39c476b0eca10a4e5"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 24 Jan 2023 14:06:56 GMT",
       "tag": "@dlw-digitalworkplace/taxonomyprovider-sharepoint_v0.1.11",
       "version": "0.1.11",

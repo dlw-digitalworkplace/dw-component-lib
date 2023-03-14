@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-utils
 
-This log was last generated on Tue, 24 Jan 2023 14:06:56 GMT and should not be manually modified.
+This log was last generated on Tue, 14 Mar 2023 11:34:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.1
+
+Tue, 14 Mar 2023 11:34:14 GMT
+
+### Patches
+
+- fix npmignore files (nick.sevens@delaware.pro)
 
 ## 0.6.0
 

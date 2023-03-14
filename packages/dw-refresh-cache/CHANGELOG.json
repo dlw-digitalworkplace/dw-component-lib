@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-refresh-cache",
   "entries": [
     {
+      "date": "Tue, 14 Mar 2023 11:34:14 GMT",
+      "tag": "@dlw-digitalworkplace/dw-refresh-cache_v1.0.1",
+      "version": "1.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "nick.sevens@delaware.pro",
+            "package": "@dlw-digitalworkplace/dw-refresh-cache",
+            "commit": "9b86c14a19ae764c0b0d6bd39c476b0eca10a4e5",
+            "comment": "fix npmignore files"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 24 Jan 2023 10:56:32 GMT",
       "tag": "@dlw-digitalworkplace/dw-refresh-cache_v1.0.0",
       "version": "1.0.0",

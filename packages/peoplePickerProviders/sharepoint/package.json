@@ -1,6 +1,6 @@
 {
   "name": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -17,7 +17,7 @@
     "test": "just-scripts test"
   },
   "devDependencies": {
-    "@dlw-digitalworkplace/dw-react-controls": "^1.1.0",
+    "@dlw-digitalworkplace/dw-react-controls": "^1.1.1",
     "@dw-component-lib/build": "^1.0.0",
     "@microsoft/microsoft-graph-types": "^2.13.0",
     "@microsoft/sp-http": "1.16.0",
@@ -31,8 +31,8 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "@dlw-digitalworkplace/dw-react-utils": "^0.6.0",
-    "@dlw-digitalworkplace/peoplepickerprovider-graph": "^0.2.5",
+    "@dlw-digitalworkplace/dw-react-utils": "^0.6.1",
+    "@dlw-digitalworkplace/peoplepickerprovider-graph": "^0.2.6",
     "deepmerge": "^4.2.2",
     "rfdc": "^1.3.0"
   },

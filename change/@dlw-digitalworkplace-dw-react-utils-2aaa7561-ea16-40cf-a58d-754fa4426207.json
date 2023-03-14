@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix npmignore files",
-  "packageName": "@dlw-digitalworkplace/dw-react-utils",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "patch"
-}
