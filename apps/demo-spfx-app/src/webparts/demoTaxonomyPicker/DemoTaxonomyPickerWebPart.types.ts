@@ -2,6 +2,7 @@ import * as React from "react";
 
 export interface IDemoTaxonomyPickerWebPartProps {
 	allowAddingTerms: boolean;
+	allowDeprecatedTerms: boolean;
 	preCacheTerms: boolean;
 	termSetIdOrName: string;
 }

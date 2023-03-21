@@ -1,5 +1,6 @@
 declare interface IDemoTaxonomyPickerWebPartStrings {
 	AllowAddingTermsFieldLabel: string;
+	AllowDeprecatedTerms: string;
 	BasicGroupName: string;
 	PreCacheTermsFieldLabel: string;
 	TermSetIdOrNameFieldLabel: string;

@@ -20,7 +20,12 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 	// todo: consider some better (sliding?) caching mechanism
 	private cachedTerms?: SP.Taxonomy.Term[];
 
-	constructor(siteUrl: string, private termSetIdOrName: string, private lcid: number = 1033) {
+	constructor(
+		siteUrl: string,
+		private termSetIdOrName: string,
+		private lcid: number = 1033,
+		private allowDeprecatedTerms: boolean = false
+	) {
 		this.spContext = new SP.ClientContext(siteUrl);
 
 		this._termSorter = this._termSorter.bind(this);
@@ -231,7 +236,12 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 		await this.executeQueryAsync();
 
 		// save the sorted list of terms
-		this.cachedTerms = allTerms.get_data().sort(this._termSorter);
+		this.cachedTerms = this.allowDeprecatedTerms
+			? allTerms.get_data().sort(this._termSorter)
+			: allTerms
+					.get_data()
+					.filter((t) => !t.get_isDeprecated())
+					.sort(this._termSorter);
 	}
 
 	private _spTermToTerm(input: SP.Taxonomy.Term): ITerm {

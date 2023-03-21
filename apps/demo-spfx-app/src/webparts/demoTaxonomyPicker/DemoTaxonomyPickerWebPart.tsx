@@ -22,6 +22,7 @@ export default class DemoTaxonomyPickerWebPart extends BaseClientSideWebPart<IDe
 			<WebPartContext.Provider value={webPartContext}>
 				<DemoTaxonomyPicker
 					allowAddingTerms={this.properties.allowAddingTerms}
+					allowDeprecatedTerms={this.properties.allowDeprecatedTerms}
 					preCacheTerms={this.properties.preCacheTerms}
 					termSetIdOrName={this.properties.termSetIdOrName}
 				/>
@@ -51,6 +52,9 @@ export default class DemoTaxonomyPickerWebPart extends BaseClientSideWebPart<IDe
 								}),
 								PropertyPaneToggle("allowAddingTerms", {
 									label: strings.AllowAddingTermsFieldLabel
+								}),
+								PropertyPaneToggle("allowDeprecatedTerms", {
+									label: strings.AllowDeprecatedTerms
 								}),
 								PropertyPaneToggle("preCacheTerms", {
 									label: strings.PreCacheTermsFieldLabel

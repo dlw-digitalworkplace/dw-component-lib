@@ -6,7 +6,7 @@ import styles from "./DemoTaxonomyPicker.module.scss";
 import { IDemoTaxonomyPickerProps } from "./DemoTaxonomyPicker.types";
 
 export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) => {
-	const { allowAddingTerms, preCacheTerms, termSetIdOrName } = props;
+	const { allowAddingTerms, allowDeprecatedTerms, preCacheTerms, termSetIdOrName } = props;
 
 	const { siteUrl } = React.useContext(WebPartContext);
 	const [selectedItems, setSelectedItems] = React.useState<ITermValue[]>([]);
@@ -23,7 +23,7 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 
 			console.log("Creating new provider...");
 
-			const spTaxonomyProvider = new SharePointTaxonomyProvider(siteUrl, termSetIdOrName);
+			const spTaxonomyProvider = new SharePointTaxonomyProvider(siteUrl, termSetIdOrName, 1033, allowDeprecatedTerms);
 			await spTaxonomyProvider.initialize(preCacheTerms);
 
 			setProviderAllowsAddingTerms(spTaxonomyProvider.allowAddingTerms);
@@ -32,12 +32,13 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 
 			setProvider(spTaxonomyProvider);
 		})();
-	}, [preCacheTerms, siteUrl, termSetIdOrName]);
+	}, [preCacheTerms, siteUrl, termSetIdOrName, allowDeprecatedTerms]);
 
 	return (
 		<div className={styles.demoTaxonomyPicker}>
 			<TaxonomyPicker
 				allowAddingTerms={allowAddingTerms && providerAllowsAddingTerms}
+				allowDeprecatedTerms={allowDeprecatedTerms}
 				disabled={!provider}
 				onChange={setSelectedItems}
 				provider={provider}
