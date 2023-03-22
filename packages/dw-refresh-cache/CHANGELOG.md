@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-refresh-cache
 
-This log was last generated on Tue, 14 Mar 2023 11:34:14 GMT and should not be manually modified.
+This log was last generated on Wed, 22 Mar 2023 13:46:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.2
+
+Wed, 22 Mar 2023 13:46:42 GMT
+
+### Patches
+
+- fix: add sourcemaps to package (nick.sevens@delaware.pro)
 
 ## 1.0.1
 

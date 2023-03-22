@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-spfx-controls
 
-This log was last generated on Tue, 24 Jan 2023 10:56:32 GMT and should not be manually modified.
+This log was last generated on Wed, 22 Mar 2023 13:46:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.0.1
+
+Wed, 22 Mar 2023 13:46:42 GMT
+
+### Patches
+
+- fix: add sourcemaps to package (nick.sevens@delaware.pro)
 
 ## 2.0.0
 

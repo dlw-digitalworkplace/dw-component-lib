@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-spfx-controls",
   "entries": [
     {
+      "date": "Wed, 22 Mar 2023 13:46:42 GMT",
+      "tag": "@dlw-digitalworkplace/dw-spfx-controls_v2.0.1",
+      "version": "2.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "nick.sevens@delaware.pro",
+            "package": "@dlw-digitalworkplace/dw-spfx-controls",
+            "commit": "364e1e9ad1940dbdd6f2dab33d8316a8b8461fab",
+            "comment": "fix: add sourcemaps to package"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 24 Jan 2023 10:56:32 GMT",
       "tag": "@dlw-digitalworkplace/dw-spfx-controls_v2.0.0",
       "version": "2.0.0",
