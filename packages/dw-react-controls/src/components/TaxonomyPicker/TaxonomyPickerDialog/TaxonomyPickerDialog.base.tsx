@@ -6,7 +6,7 @@ import { ITermValue, TermPicker } from "../../TermPicker";
 import { ITreeItemAction, TreeItem } from "../../TreeItem";
 import { TreeView } from "../../TreeView";
 import { WideDialog } from "../../WideDialog";
-import { ITerm, ITermCreationResult } from "../models";
+import { ITerm, ITermCreationResult, ITermFilterOptions } from "../models";
 import { TermAdder } from "../TermAdder";
 import {
 	ITaxonomyPickerDialogLabels,
@@ -23,6 +23,8 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 	const {
 		labels: labelsProp,
 		allowAddingTerms,
+		allowDisabledTerms,
+		allowDeprecatedTerms,
 		itemLimit,
 		showRootNode,
 		rootNodeLabel,
@@ -75,7 +77,12 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 
 	React.useEffect(() => {
 		(async () => {
-			const terms = rfdc()(await provider.getTermTree());
+			const filterOptions: Partial<ITermFilterOptions> = {
+				trimDeprecated: !allowDeprecatedTerms,
+				trimUnavailable: !allowDisabledTerms
+			};
+
+			const terms = rfdc()(await provider.getTermTree(filterOptions));
 
 			setTermTreeItems(terms);
 			setExpandedNodes(showRootNode ? [rootNodeKey] : terms && terms.length > 0 ? [terms[0].key] : []);

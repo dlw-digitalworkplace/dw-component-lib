@@ -15,6 +15,10 @@ export interface ITaxonomyPickerDialogLabels {
 interface ITaxonomyPickerDialogPropsBase {
 	allowAddingTerms?: boolean;
 
+	allowDisabledTerms?: boolean;
+
+	allowDeprecatedTerms?: boolean;
+
 	provider: ITaxonomyProvider;
 
 	showRootNode?: boolean;

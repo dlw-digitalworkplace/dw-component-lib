@@ -348,6 +348,8 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 					{...dialogProps}
 					provider={provider}
 					allowAddingTerms={allowAddingTerms}
+					allowDisabledTerms={allowDisabledTerms}
+					allowDeprecatedTerms={allowDeprecatedTerms}
 					defaultSelectedItems={selectedItems}
 					hidden={!dialogIsOpen}
 					itemLimit={itemLimit}
