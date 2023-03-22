@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix: add sourcemaps to package",
+  "packageName": "@dlw-digitalworkplace/dw-spfx-controls",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "none"
+}
