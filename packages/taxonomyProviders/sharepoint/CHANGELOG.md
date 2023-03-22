@@ -1,8 +1,17 @@
 # Change Log - @dlw-digitalworkplace/taxonomyprovider-sharepoint
 
-This log was last generated on Tue, 14 Mar 2023 11:34:14 GMT and should not be manually modified.
+This log was last generated on Wed, 22 Mar 2023 13:28:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.13
+
+Wed, 22 Mar 2023 13:28:15 GMT
+
+### Patches
+
+- fix(SharePointTaxonomyProvider): add filter options on getTermTree (debeufk@delawareconsulting.com)
+- Bump @dlw-digitalworkplace/dw-react-controls to v1.1.2
 
 ## 0.1.12
 

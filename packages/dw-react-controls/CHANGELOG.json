@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-react-controls",
   "entries": [
     {
+      "date": "Wed, 22 Mar 2023 13:28:15 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-controls_v1.1.2",
+      "version": "1.1.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "debeufk@delawareconsulting.com",
+            "package": "@dlw-digitalworkplace/dw-react-controls",
+            "commit": "298cee6d170f5a42928f4cec19aa655f4ac68a11",
+            "comment": "fix(SharePointTaxonomyProvider): add filter options on getTermTree"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Mar 2023 11:34:14 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-controls_v1.1.1",
       "version": "1.1.1",

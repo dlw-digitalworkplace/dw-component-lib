@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-controls
 
-This log was last generated on Tue, 14 Mar 2023 11:34:14 GMT and should not be manually modified.
+This log was last generated on Wed, 22 Mar 2023 13:28:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.2
+
+Wed, 22 Mar 2023 13:28:15 GMT
+
+### Patches
+
+- fix(SharePointTaxonomyProvider): add filter options on getTermTree (debeufk@delawareconsulting.com)
 
 ## 1.1.1
 

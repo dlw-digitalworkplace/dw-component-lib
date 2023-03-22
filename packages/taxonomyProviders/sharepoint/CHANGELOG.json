@@ -2,6 +2,27 @@
   "name": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
   "entries": [
     {
+      "date": "Wed, 22 Mar 2023 13:28:15 GMT",
+      "tag": "@dlw-digitalworkplace/taxonomyprovider-sharepoint_v0.1.13",
+      "version": "0.1.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "debeufk@delawareconsulting.com",
+            "package": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
+            "commit": "298cee6d170f5a42928f4cec19aa655f4ac68a11",
+            "comment": "fix(SharePointTaxonomyProvider): add filter options on getTermTree"
+          },
+          {
+            "author": "beachball",
+            "package": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
+            "comment": "Bump @dlw-digitalworkplace/dw-react-controls to v1.1.2",
+            "commit": "298cee6d170f5a42928f4cec19aa655f4ac68a11"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Mar 2023 11:34:14 GMT",
       "tag": "@dlw-digitalworkplace/taxonomyprovider-sharepoint_v0.1.12",
       "version": "0.1.12",

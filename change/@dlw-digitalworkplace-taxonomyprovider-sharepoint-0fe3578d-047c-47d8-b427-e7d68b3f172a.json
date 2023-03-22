@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix(SharePointTaxonomyProvider): add filter options on getTermTree",
-  "packageName": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
-  "email": "debeufk@delawareconsulting.com",
-  "dependentChangeType": "patch"
-}
