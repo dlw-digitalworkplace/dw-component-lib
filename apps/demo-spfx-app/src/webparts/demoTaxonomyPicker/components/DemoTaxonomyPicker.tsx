@@ -6,7 +6,7 @@ import styles from "./DemoTaxonomyPicker.module.scss";
 import { IDemoTaxonomyPickerProps } from "./DemoTaxonomyPicker.types";
 
 export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) => {
-	const { allowAddingTerms, preCacheTerms, termSetIdOrName } = props;
+	const { allowAddingTerms, allowDeprecatedTerms, preCacheTerms, termSetIdOrName } = props;
 
 	const { siteUrl } = React.useContext(WebPartContext);
 	const [selectedItems, setSelectedItems] = React.useState<ITermValue[]>([]);
@@ -38,6 +38,7 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 		<div className={styles.demoTaxonomyPicker}>
 			<TaxonomyPicker
 				allowAddingTerms={allowAddingTerms && providerAllowsAddingTerms}
+				allowDeprecatedTerms={allowDeprecatedTerms}
 				disabled={!provider}
 				onChange={setSelectedItems}
 				provider={provider}
