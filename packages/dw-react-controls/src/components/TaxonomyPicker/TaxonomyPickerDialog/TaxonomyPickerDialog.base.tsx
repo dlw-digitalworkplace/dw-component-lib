@@ -77,10 +77,15 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 
 	React.useEffect(() => {
 		(async () => {
-			const filterOptions: Partial<ITermFilterOptions> = {
-				trimDeprecated: !allowDeprecatedTerms,
-				trimUnavailable: !allowDisabledTerms
-			};
+			const filterOptions: Partial<ITermFilterOptions> = {};
+
+			if (allowDeprecatedTerms !== undefined) {
+				filterOptions.trimDeprecated = !allowDeprecatedTerms;
+			}
+
+			if (allowDisabledTerms !== undefined) {
+				filterOptions.trimUnavailable = !allowDisabledTerms;
+			}
 
 			const terms = rfdc()(await provider.getTermTree(filterOptions));
 
