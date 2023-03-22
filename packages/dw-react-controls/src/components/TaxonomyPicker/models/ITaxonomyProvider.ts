@@ -6,7 +6,7 @@ export interface ITaxonomyProvider {
 
 	findTerms(search?: string | RegExp, options?: Partial<ITermFilterOptions>): ITerm[] | PromiseLike<ITerm[]>;
 
-	getTermTree(): ITerm[] | PromiseLike<ITerm[]>;
+	getTermTree(options?: Partial<ITermFilterOptions>): ITerm[] | PromiseLike<ITerm[]>;
 
 	createTerm(newValue: string, parentId?: string): ITerm | PromiseLike<ITerm>;
 }

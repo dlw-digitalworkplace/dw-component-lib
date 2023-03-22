@@ -20,6 +20,14 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 	// todo: consider some better (sliding?) caching mechanism
 	private cachedTerms?: SP.Taxonomy.Term[];
 
+	private defaultOptions: ITermFilterOptions = {
+		defaultLabelOnly: false,
+		keysToIgnore: [],
+		maxItems: 100,
+		trimDeprecated: true,
+		trimUnavailable: true
+	};
+
 	constructor(siteUrl: string, private termSetIdOrName: string, private lcid: number = 1033) {
 		this.spContext = new SP.ClientContext(siteUrl);
 
@@ -74,16 +82,8 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 			throw new ProviderNotInitializedError();
 		}
 
-		const defaultOptions: ITermFilterOptions = {
-			defaultLabelOnly: false,
-			keysToIgnore: [],
-			maxItems: 100,
-			trimDeprecated: true,
-			trimUnavailable: true
-		};
-
 		// build final options object
-		options = deepmerge(defaultOptions, options);
+		options = deepmerge(this.defaultOptions, options);
 
 		const result: ITerm[] = [];
 
@@ -131,10 +131,13 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 		return result;
 	}
 
-	public async getTermTree(): Promise<ITerm[]> {
+	public async getTermTree(options: Partial<ITermFilterOptions> = {}): Promise<ITerm[]> {
 		if (!this.isInitialized) {
 			throw new ProviderNotInitializedError();
 		}
+
+		// build final options object
+		options = deepmerge(this.defaultOptions, options);
 
 		const result: ITerm[] = [];
 
@@ -143,8 +146,21 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 			await this.loadAndCacheAllTerms();
 		}
 
+		// filter based on defined options
+		let terms = this.cachedTerms;
+
+		// skip deprecated term if requested
+		if (options.trimDeprecated) {
+			terms = terms?.filter((t) => !t.get_isDeprecated());
+		}
+
+		// skip unavailable term if requested
+		if (options.trimUnavailable) {
+			terms = terms?.filter((t) => t.get_isAvailableForTagging());
+		}
+
 		// create a dictionary by term id, containing a tuple with parentid and term
-		const termMap = this.cachedTerms!.reduce<{ [key: string]: [string | null, ITerm] }>((prev, it) => {
+		const termMap = terms!.reduce<{ [key: string]: [string | null, ITerm] }>((prev, it) => {
 			const parent = it.get_parent();
 			const parentId = parent.get_serverObjectIsNull() ? null : parent.get_id().toString();
 
@@ -242,7 +258,7 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 			key: input.get_id().toString(),
 			name: termLabel,
 			path: input.get_pathOfTerm(),
-			disabled: !input.get_isAvailableForTagging(),
+			disabled: !input.get_isAvailableForTagging() || input.get_isDeprecated(),
 			additionalProperties: {
 				deprecated: input.get_isDeprecated()
 			}
