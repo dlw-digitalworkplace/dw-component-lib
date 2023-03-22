@@ -87,7 +87,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 			setTermTreeItems(terms);
 			setExpandedNodes(showRootNode ? [rootNodeKey] : terms && terms.length > 0 ? [terms[0].key] : []);
 		})();
-	}, [provider]);
+	}, [provider, showRootNode, rootNodeKey, allowDeprecatedTerms, allowDisabledTerms]);
 
 	React.useEffect(() => {
 		if (!termTreeItems) {
