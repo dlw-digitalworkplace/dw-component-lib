@@ -13,6 +13,8 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 
 	private isInitialized: boolean = false;
 
+	private options: Partial<ITermFilterOptions> = {};
+
 	private spContext: SP.ClientContext;
 
 	private termSet?: SP.Taxonomy.TermSet;
@@ -20,12 +22,7 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 	// todo: consider some better (sliding?) caching mechanism
 	private cachedTerms?: SP.Taxonomy.Term[];
 
-	constructor(
-		siteUrl: string,
-		private termSetIdOrName: string,
-		private lcid: number = 1033,
-		private allowDeprecatedTerms: boolean = false
-	) {
+	constructor(siteUrl: string, private termSetIdOrName: string, private lcid: number = 1033) {
 		this.spContext = new SP.ClientContext(siteUrl);
 
 		this._termSorter = this._termSorter.bind(this);
@@ -45,7 +42,7 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 	/**
 	 * Initializes the provider. MUST be executed before using the provider's methods.
 	 */
-	public async initialize(preCacheItems?: boolean): Promise<void> {
+	public async initialize(preCacheItems?: boolean, options: Partial<ITermFilterOptions> = {}): Promise<void> {
 		// create a taxonomy session
 		const session = SP.Taxonomy.TaxonomySession.getTaxonomySession(this.spContext);
 		const termStore = session.getDefaultSiteCollectionTermStore();
@@ -66,19 +63,7 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 			this.termSet = termSets.itemAt(0);
 		}
 
-		if (preCacheItems) {
-			// load terms into cache to allow for faster resolving
-			await this.loadAndCacheAllTerms();
-		}
-
-		this.isInitialized = true;
-	}
-
-	public async findTerms(search?: string | RegExp, options: Partial<ITermFilterOptions> = {}): Promise<ITerm[]> {
-		if (!this.isInitialized) {
-			throw new ProviderNotInitializedError();
-		}
-
+		// define filter options
 		const defaultOptions: ITermFilterOptions = {
 			defaultLabelOnly: false,
 			keysToIgnore: [],
@@ -87,8 +72,20 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 			trimUnavailable: true
 		};
 
-		// build final options object
-		options = deepmerge(defaultOptions, options);
+		this.options = deepmerge(defaultOptions, options);
+
+		if (preCacheItems) {
+			// load terms into cache to allow for faster resolving
+			await this.loadAndCacheAllTerms();
+		}
+
+		this.isInitialized = true;
+	}
+
+	public async findTerms(search?: string | RegExp): Promise<ITerm[]> {
+		if (!this.isInitialized) {
+			throw new ProviderNotInitializedError();
+		}
 
 		const result: ITerm[] = [];
 
@@ -98,21 +95,21 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 		}
 
 		// iterate all terms until maximum number of items is reached
-		for (let i = 0; i < this.cachedTerms!.length && result.length < options.maxItems!; i++) {
+		for (let i = 0; i < this.cachedTerms!.length && result.length < this.options.maxItems!; i++) {
 			const term = this.cachedTerms![i];
 
 			// skip item if in ignore list
-			if (options.keysToIgnore && options.keysToIgnore.indexOf(term.get_id().toString()) !== -1) {
+			if (this.options.keysToIgnore && this.options.keysToIgnore.indexOf(term.get_id().toString()) !== -1) {
 				continue;
 			}
 
 			// skip deprecated term if requested
-			if (options.trimDeprecated && term.get_isDeprecated()) {
+			if (this.options.trimDeprecated && term.get_isDeprecated()) {
 				continue;
 			}
 
 			// skip unavailable term if requested
-			if (options.trimUnavailable && !term.get_isAvailableForTagging()) {
+			if (this.options.trimUnavailable && !term.get_isAvailableForTagging()) {
 				continue;
 			}
 
@@ -236,12 +233,12 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 		await this.executeQueryAsync();
 
 		// save the sorted list of terms
-		this.cachedTerms = this.allowDeprecatedTerms
-			? allTerms.get_data().sort(this._termSorter)
-			: allTerms
+		this.cachedTerms = this.options.trimDeprecated
+			? allTerms
 					.get_data()
 					.filter((t) => !t.get_isDeprecated())
-					.sort(this._termSorter);
+					.sort(this._termSorter)
+			: allTerms.get_data().sort(this._termSorter);
 	}
 
 	private _spTermToTerm(input: SP.Taxonomy.Term): ITerm {

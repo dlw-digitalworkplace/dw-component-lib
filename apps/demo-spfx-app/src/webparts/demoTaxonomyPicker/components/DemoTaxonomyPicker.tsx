@@ -23,8 +23,8 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 
 			console.log("Creating new provider...");
 
-			const spTaxonomyProvider = new SharePointTaxonomyProvider(siteUrl, termSetIdOrName, 1033, allowDeprecatedTerms);
-			await spTaxonomyProvider.initialize(preCacheTerms);
+			const spTaxonomyProvider = new SharePointTaxonomyProvider(siteUrl, termSetIdOrName);
+			await spTaxonomyProvider.initialize(preCacheTerms, { trimDeprecated: !allowDeprecatedTerms });
 
 			setProviderAllowsAddingTerms(spTaxonomyProvider.allowAddingTerms);
 
