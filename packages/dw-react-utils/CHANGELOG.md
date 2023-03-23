@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-utils
 
-This log was last generated on Wed, 22 Mar 2023 13:46:42 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Mar 2023 09:05:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.3
+
+Thu, 23 Mar 2023 09:05:56 GMT
+
+### Patches
+
+- fix: release production build (nick.sevens@delaware.pro)
 
 ## 0.6.2
 

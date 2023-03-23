@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix: release production build",
-  "packageName": "@dlw-digitalworkplace/dw-refresh-cache",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "none"
-}
