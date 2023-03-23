@@ -2,6 +2,7 @@
 **/*.stories.*
 config
 !lib
+!lib-*
 node_modules
 src
 temp

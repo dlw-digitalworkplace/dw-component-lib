@@ -12,7 +12,7 @@
 		"release:canary": "beachball canary",
 		"start": "node scripts/start.js",
 		"start-test": "lage start-test",
-		"test": "lage test --verbose"
+		"test": "lage test"
 	},
 	"dependencies": {},
 	"devDependencies": {
