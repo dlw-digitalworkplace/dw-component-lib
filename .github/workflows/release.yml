@@ -19,7 +19,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: yarn
       - run: yarn build --verbose --production
-      - run: yarn test --production # needs same parameters for build cache to hit
+      - run: yarn test --verbose --production # needs same parameters for build cache to hit
       - run: |
           git config --global user.email "nick.sevens@delaware.pro"
           git config --global user.name "Nick Sevens"
