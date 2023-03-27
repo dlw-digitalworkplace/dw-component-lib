@@ -1,0 +1,34 @@
+import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import * as stories from "./useAutoRefresh.stories";
+import { useAutoRefresh } from "../../hooks";
+
+<Meta title="Utils/hooks/useAutoRefresh" />
+
+# useDebounce
+
+The `useAutoRefresh` automatically calls a callback function on a specified interval.
+
+## Usage
+
+```tsx
+const [data, setData] = React.useState();
+
+const getData = () => {
+	const newDate = {}; // retrieve updated data
+	setData(newData);
+};
+
+useAutoRefresh(getData, 5); // refresh every 5 seconds
+```
+
+## Example
+
+Basic usage
+
+<Canvas withToolbar={true}>
+	<Story story={stories.Basic} name="Basic usage" />
+</Canvas>
+
+## Properties
+
+<ArgsTable components={{ useAutoRefresh }} />
