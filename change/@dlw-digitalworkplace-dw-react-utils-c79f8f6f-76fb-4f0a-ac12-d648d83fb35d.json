@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "add useAutoRefresh hook",
-  "packageName": "@dlw-digitalworkplace/dw-react-utils",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "none"
-}

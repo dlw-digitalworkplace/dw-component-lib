@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-utils
 
-This log was last generated on Thu, 23 Mar 2023 09:05:56 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Mar 2023 07:33:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Tue, 28 Mar 2023 07:33:36 GMT
+
+### Minor changes
+
+- add useAutoRefresh hook (nick.sevens@delaware.pro)
 
 ## 0.6.3
 

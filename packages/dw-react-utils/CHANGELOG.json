@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-react-utils",
   "entries": [
     {
+      "date": "Tue, 28 Mar 2023 07:33:36 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-utils_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "nick.sevens@delaware.pro",
+            "package": "@dlw-digitalworkplace/dw-react-utils",
+            "commit": "cca10cd476268569a3dd0ba70d4cdb8ede543063",
+            "comment": "add useAutoRefresh hook"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Mar 2023 09:05:56 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-utils_v0.6.3",
       "version": "0.6.3",
