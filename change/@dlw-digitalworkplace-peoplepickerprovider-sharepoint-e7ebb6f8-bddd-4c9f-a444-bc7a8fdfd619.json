@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Bump version React & SPFx",
+  "packageName": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint",
+  "email": "pieter.vandendriessche@delaware.pro",
+  "dependentChangeType": "patch"
+}

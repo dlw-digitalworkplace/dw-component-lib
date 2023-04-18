@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Bump version React & SPFx",
+  "packageName": "@dlw-digitalworkplace/dw-react-controls",
+  "email": "pieter.vandendriessche@delaware.pro",
+  "dependentChangeType": "patch"
+}
