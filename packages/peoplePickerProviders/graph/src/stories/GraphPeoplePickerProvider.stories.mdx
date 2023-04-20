@@ -21,14 +21,16 @@ import { GraphPeoplePickerProvider, GroupType, ResourceType } from "@dlw-digital
 
 const provider = new GraphPeoplePickerProvider(graphToken, {
 	resourceTypes: ResourceType.User | ResourceType.Group,
-	groupTypes: GroupType.M365 | GroupType.Security | GroupType.Distribution /* optional */
+	groupTypes: GroupType.M365 | GroupType.Security | GroupType.Distribution, /* optional */
+	useMeEndpoint: true | false /* optional */
 });
 
 // or with a function to retrieve the Graph token
 
 const provider = new GraphPeoplePickerProvider(() => aadTokenProvider.getToken("https://graph.microsoft.com"), {
 	resourceTypes: ResourceType.User | ResourceType.Group,
-	groupTypes: GroupType.M365 | GroupType.Security | GroupType.Distribution /* optional */
+	groupTypes: GroupType.M365 | GroupType.Security | GroupType.Distribution, /* optional */
+	useMeEndpoint: true | false /* optional */
 });
 ```
 
@@ -57,6 +59,7 @@ Creates a new `GraphPeoplePickerProvider` object.
 | ---------------------------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------- |
 | resourceTypes<span class="req">\*</span> | `ResourceType` | The type(s) of resources to search for.                                                                          |
 | groupTypes                               | `GroupType`    | If `Group` is specified in the `resourceTypes`, then this property specifies the type(s) of group to search for. |
+| useMeEndpoint                            | `boolean`      | Specifies what endpoint the provider should use, either /me/people or /users                                     |
 
 ### `ResourceType`
 
