@@ -12,4 +12,9 @@ export interface IGraphPeoplePickerProviderOptions {
 	 * @default GroupType.M365 | GroupType.Security | GroupType.Distribution
 	 */
 	groupTypes?: GroupType;
+
+	/**
+	 * Specifies what endpoint nthe provider should use, either /me/people or /users
+	 */
+	useMeEndpoint?: boolean;
 }
