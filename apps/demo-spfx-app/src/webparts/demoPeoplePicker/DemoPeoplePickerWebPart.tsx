@@ -115,7 +115,7 @@ export default class DemoPeoplePickerWebPart extends BaseClientSideWebPart<IDemo
 				const aadTokenProvider = await this.context.aadTokenProviderFactory.getTokenProvider();
 				const providerOptions: IGraphPeoplePickerProviderOptions = {
 					resourceTypes: ResourceType.User | ResourceType.Group,
-					findRelevantUsers: this.properties.useMeEndpoint
+					useMeEndpoint: this.properties.useMeEndpoint
 				};
 
 				this._provider = new GraphPeoplePickerProvider(
