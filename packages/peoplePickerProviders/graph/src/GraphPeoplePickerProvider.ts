@@ -22,7 +22,7 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 
 	private readonly DEFAULTOPTIONS: Partial<IGraphPeoplePickerProviderOptions> = {
 		groupTypes: GroupType.M365 | GroupType.Security | GroupType.Distribution,
-		useMeEndpoint: false
+		endpoint: "users"
 	};
 
 	constructor(
@@ -79,7 +79,7 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 
 	private async _findUsers(search: string, options: IPeoplePickerFilterOptions): Promise<IUser[]> {
 		let searchClause = "";
-		if(!this._providerOptions.useMeEndpoint) {
+		if(this._providerOptions.endpoint === "users") {
 			searchClause += `"displayName:${search}"`;
 			searchClause += ` OR "userPrincipalName:${search}"`;
 			searchClause += ` OR "givenName:${search}"`;
@@ -102,7 +102,7 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 
 		const graphToken = await this._getGraphToken();
 		const userResponse = await fetch(
-			this._providerOptions.useMeEndpoint
+			this._providerOptions.endpoint === "me/people"
 				? `https://graph.microsoft.com/v1.0/me/people?$search=${searchClause}&$filter=${filterClause}&$count=true`
 				:	`https://graph.microsoft.com/v1.0/users?$search=${searchClause}&$filter=${filterClause}&$count=true`,
 			{

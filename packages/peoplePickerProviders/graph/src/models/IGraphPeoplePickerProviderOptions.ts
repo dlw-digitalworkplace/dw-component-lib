@@ -16,5 +16,5 @@ export interface IGraphPeoplePickerProviderOptions {
 	/**
 	 * Specifies what endpoint the provider should use, either /me/people or /users
 	 */
-	useMeEndpoint?: boolean;
+	endpoint?: "users" | "me/people";
 }

@@ -1,5 +1,5 @@
 export interface IDemoPeoplePickerWebPartProps {
 	itemLimit: number;
 	providerType: "GraphProvider" | "MockProvider" | "SharePointProvider";
-	useMeEndpoint: boolean;
+	endpoint: "users" | "me/people";
 }
