@@ -10,7 +10,7 @@ import {
 	SharePointPeoplePickerProvider
 } from "@dlw-digitalworkplace/peoplepickerprovider-sharepoint";
 import { Version } from "@microsoft/sp-core-library";
-import { IPropertyPaneConfiguration, PropertyPaneChoiceGroup, PropertyPaneDropdown, PropertyPaneSlider, PropertyPaneToggle } from "@microsoft/sp-property-pane";
+import { IPropertyPaneConfiguration, PropertyPaneChoiceGroup, PropertyPaneDropdown, PropertyPaneSlider } from "@microsoft/sp-property-pane";
 import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
 import * as strings from "DemoPeoplePickerWebPartStrings";
 import * as React from "react";
