@@ -1,6 +1,6 @@
 {
   "name": "@dlw-digitalworkplace/peoplepickerprovider-graph",
-  "version": "0.2.8",
+  "version": "0.3.0",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",

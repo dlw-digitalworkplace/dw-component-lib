@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/peoplepickerprovider-graph",
   "entries": [
     {
+      "date": "Thu, 04 May 2023 07:56:10 GMT",
+      "tag": "@dlw-digitalworkplace/peoplepickerprovider-graph_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "torremansw@delawareconsulting.com",
+            "package": "@dlw-digitalworkplace/peoplepickerprovider-graph",
+            "commit": "a641417aef74d72e76c0ad7884992d2ded494c16",
+            "comment": "Add possibility to search via me/people"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 28 Mar 2023 07:33:36 GMT",
       "tag": "@dlw-digitalworkplace/peoplepickerprovider-graph_v0.2.8",
       "version": "0.2.8",

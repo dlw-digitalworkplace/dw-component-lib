@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/peoplepickerprovider-graph
 
-This log was last generated on Thu, 23 Mar 2023 09:05:56 GMT and should not be manually modified.
+This log was last generated on Thu, 04 May 2023 07:56:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Thu, 04 May 2023 07:56:10 GMT
+
+### Minor changes
+
+- Add possibility to search via me/people (torremansw@delawareconsulting.com)
 
 ## 0.2.8
 
