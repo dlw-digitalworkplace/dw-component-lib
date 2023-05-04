@@ -25,7 +25,7 @@
 			"properties": {
 				"providerType": "MockProvider",
 				"itemLimit": 3,
-				"useMeEndpoint": false
+				"usersEndpoint": "users"
 			}
 		}
 	]

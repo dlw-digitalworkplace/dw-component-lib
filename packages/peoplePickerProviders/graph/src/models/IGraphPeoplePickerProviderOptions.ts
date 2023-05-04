@@ -14,7 +14,7 @@ export interface IGraphPeoplePickerProviderOptions {
 	groupTypes?: GroupType;
 
 	/**
-	 * Specifies what endpoint the provider should use, either /me/people or /users
+	 * Specifies what endpoint the provider should use to retrieve users, either /me/people or /users
 	 */
-	endpoint?: "users" | "me/people";
+	usersEndpoint?: "users" | "me/people";
 }

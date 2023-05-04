@@ -94,8 +94,8 @@ export default class DemoPeoplePickerWebPart extends BaseClientSideWebPart<IDemo
 									min: 1,
 									max: 10
 								}),
-								PropertyPaneDropdown("endpoint", {
-									label: "Which endpoint to use",
+								PropertyPaneDropdown("usersEndpoint", {
+									label: "Which endpoint to use to retrieve users",
 									options: [
 										{
 											key: "users",
@@ -106,7 +106,7 @@ export default class DemoPeoplePickerWebPart extends BaseClientSideWebPart<IDemo
 											text: "me/people"
 										}
 									],
-									selectedKey: this.properties.endpoint,
+									selectedKey: this.properties.usersEndpoint,
 									disabled: this.properties.providerType !== "GraphProvider"
 								})
 							]
@@ -125,7 +125,7 @@ export default class DemoPeoplePickerWebPart extends BaseClientSideWebPart<IDemo
 				const aadTokenProvider = await this.context.aadTokenProviderFactory.getTokenProvider();
 				const providerOptions: IGraphPeoplePickerProviderOptions = {
 					resourceTypes: ResourceType.User | ResourceType.Group,
-					endpoint: this.properties.endpoint
+					usersEndpoint: this.properties.usersEndpoint
 				};
 
 				this._provider = new GraphPeoplePickerProvider(
