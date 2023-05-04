@@ -10,7 +10,7 @@ import {
 	SharePointPeoplePickerProvider
 } from "@dlw-digitalworkplace/peoplepickerprovider-sharepoint";
 import { Version } from "@microsoft/sp-core-library";
-import { IPropertyPaneConfiguration, PropertyPaneChoiceGroup, PropertyPaneSlider } from "@microsoft/sp-property-pane";
+import { IPropertyPaneConfiguration, PropertyPaneChoiceGroup, PropertyPaneDropdown, PropertyPaneSlider } from "@microsoft/sp-property-pane";
 import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
 import * as strings from "DemoPeoplePickerWebPartStrings";
 import * as React from "react";
@@ -93,6 +93,21 @@ export default class DemoPeoplePickerWebPart extends BaseClientSideWebPart<IDemo
 									label: "Max. items",
 									min: 1,
 									max: 10
+								}),
+								PropertyPaneDropdown("usersEndpoint", {
+									label: "Which endpoint to use to retrieve users",
+									options: [
+										{
+											key: "users",
+											text: "users"
+										},
+										{
+											key: "me/people",
+											text: "me/people"
+										}
+									],
+									selectedKey: this.properties.usersEndpoint,
+									disabled: this.properties.providerType !== "GraphProvider"
 								})
 							]
 						}
@@ -109,7 +124,8 @@ export default class DemoPeoplePickerWebPart extends BaseClientSideWebPart<IDemo
 			case "GraphProvider": {
 				const aadTokenProvider = await this.context.aadTokenProviderFactory.getTokenProvider();
 				const providerOptions: IGraphPeoplePickerProviderOptions = {
-					resourceTypes: ResourceType.User | ResourceType.Group
+					resourceTypes: ResourceType.User | ResourceType.Group,
+					usersEndpoint: this.properties.usersEndpoint
 				};
 
 				this._provider = new GraphPeoplePickerProvider(

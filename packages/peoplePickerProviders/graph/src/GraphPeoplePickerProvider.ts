@@ -21,7 +21,8 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 	private _providerOptions: IGraphPeoplePickerProviderOptions;
 
 	private readonly DEFAULTOPTIONS: Partial<IGraphPeoplePickerProviderOptions> = {
-		groupTypes: GroupType.M365 | GroupType.Security | GroupType.Distribution
+		groupTypes: GroupType.M365 | GroupType.Security | GroupType.Distribution,
+		usersEndpoint: "users"
 	};
 
 	constructor(
@@ -78,11 +79,15 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 
 	private async _findUsers(search: string, options: IPeoplePickerFilterOptions): Promise<IUser[]> {
 		let searchClause = "";
-		searchClause += `"displayName:${search}"`;
-		searchClause += ` OR "userPrincipalName:${search}"`;
-		searchClause += ` OR "givenName:${search}"`;
-		searchClause += ` OR "surname:${search}"`;
-		searchClause += ` OR "mail:${search}"`;
+		if(this._providerOptions.usersEndpoint === "users") {
+			searchClause += `"displayName:${search}"`;
+			searchClause += ` OR "userPrincipalName:${search}"`;
+			searchClause += ` OR "givenName:${search}"`;
+			searchClause += ` OR "surname:${search}"`;
+			searchClause += ` OR "mail:${search}"`;
+		} else {
+			searchClause += search;
+		}
 
 		const idsToIgnore = options.idsToIgnore.filter((id) =>
 			id.match(/^[{(]?[0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12}[)}]?$/gi)
@@ -97,7 +102,9 @@ export class GraphPeoplePickerProvider implements IPeoplePickerProvider {
 
 		const graphToken = await this._getGraphToken();
 		const userResponse = await fetch(
-			`https://graph.microsoft.com/v1.0/users?$search=${searchClause}&$filter=${filterClause}&$count=true`,
+			this._providerOptions.usersEndpoint === "me/people"
+				? `https://graph.microsoft.com/v1.0/me/people?$search=${searchClause}&$filter=${filterClause}&$count=true`
+				:	`https://graph.microsoft.com/v1.0/users?$search=${searchClause}&$filter=${filterClause}&$count=true`,
 			{
 				headers: {
 					ConsistencyLevel: "Eventual",

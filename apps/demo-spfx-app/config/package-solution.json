@@ -21,6 +21,10 @@
 			{
 				"resource": "Microsoft Graph",
 				"scope": "Group.Read.All"
+			},
+			{
+				"resource": "Microsoft Graph",
+				"scope": "People.Read.All"
 			}
 		]
 	},

@@ -24,7 +24,8 @@
 			"officeFabricIconFontName": "Page",
 			"properties": {
 				"providerType": "MockProvider",
-				"itemLimit": 3
+				"itemLimit": 3,
+				"usersEndpoint": "users"
 			}
 		}
 	]
