@@ -22,7 +22,7 @@ import { GraphPeoplePickerProvider, GroupType, ResourceType } from "@dlw-digital
 const provider = new GraphPeoplePickerProvider(graphToken, {
 	resourceTypes: ResourceType.User | ResourceType.Group,
 	groupTypes: GroupType.M365 | GroupType.Security | GroupType.Distribution, /* optional */
-	endpoint: "users" | "me/people" /* optional */
+	endpoint: "users" // or: "me/people" /* optional */
 });
 
 // or with a function to retrieve the Graph token
@@ -30,7 +30,7 @@ const provider = new GraphPeoplePickerProvider(graphToken, {
 const provider = new GraphPeoplePickerProvider(() => aadTokenProvider.getToken("https://graph.microsoft.com"), {
 	resourceTypes: ResourceType.User | ResourceType.Group,
 	groupTypes: GroupType.M365 | GroupType.Security | GroupType.Distribution, /* optional */
-	endpoint: "users" | "me/people" /* optional */
+	endpoint: "users" // or: "me/people" /* optional */
 });
 ```
 
