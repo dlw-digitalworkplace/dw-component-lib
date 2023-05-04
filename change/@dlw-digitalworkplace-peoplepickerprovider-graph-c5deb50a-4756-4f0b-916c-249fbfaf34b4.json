@@ -1,7 +1,7 @@
 {
-  "type": "patch",
+  "type": "minor",
   "comment": "Add possibility to search via me/people",
   "packageName": "@dlw-digitalworkplace/peoplepickerprovider-graph",
   "email": "torremansw@delawareconsulting.com",
-  "dependentChangeType": "patch"
+  "dependentChangeType": "minor"
 }
