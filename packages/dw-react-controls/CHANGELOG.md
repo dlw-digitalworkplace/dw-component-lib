@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-controls
 
-This log was last generated on Thu, 23 Mar 2023 09:05:56 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Jun 2023 08:35:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.4
+
+Fri, 30 Jun 2023 08:35:21 GMT
+
+### Patches
+
+- Added explicit children prop for TreeView and TreeItem (robin.agten@gmail.com)
 
 ## 1.1.3
 
