@@ -2,6 +2,11 @@ import { IStyle, IStyleFunctionOrObject, ITheme } from "@fluentui/react";
 
 interface ITreeViewPropsBase {
 	/**
+	 * Optional react node children to render
+	 */
+	children?: React.ReactNode;
+
+	/**
 	 * Expanded node ids (uncontrolled)
 	 */
 	defaultExpanded?: string[];
