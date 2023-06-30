@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Added explicit children prop for TreeView and TreeItem",
+  "packageName": "@dlw-digitalworkplace/dw-react-controls",
+  "email": "robin.agten@gmail.com",
+  "dependentChangeType": "patch"
+}

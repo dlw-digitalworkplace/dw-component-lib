@@ -3,6 +3,11 @@ import { ITreeItemContentProps } from "./TreeItemContent";
 
 export interface ITreeItemProps {
 	/**
+	 * Optional react node children to render
+	 */
+	children?: React.ReactNode;
+
+	/**
 	 * Actions which are available on the tree item
 	 */
 	actions?: ITreeItemAction[];
