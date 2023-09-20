@@ -1,7 +1,7 @@
 import { ILabelProps, IRenderFunction, IStyle, IStyleFunctionOrObject, ITheme } from "@fluentui/react";
-import { ITermValue } from "../TermPicker";
-import { ITaxonomyProvider } from "./models";
+import { ITermPickerProps, ITermValue } from "../TermPicker";
 import { ITaxonomyPickerDialogProps } from "./TaxonomyPickerDialog";
+import { ITaxonomyProvider } from "./models";
 
 export interface ITaxonomyPickerProps {
 	allowAddingTerms?: boolean;
@@ -10,38 +10,40 @@ export interface ITaxonomyPickerProps {
 
 	allowDisabledTerms?: boolean;
 
-	provider: ITaxonomyProvider;
+	/**
+	 * Optional class for the root TaxonomyPicker element
+	 */
+	className?: string;
 
-	itemLimit?: number;
-
-	disabled?: boolean;
-
-	label?: string;
-
-	labelProps?: Partial<ILabelProps>;
+	errorMessage?: string | JSX.Element;
 
 	dialogProps?: Pick<
 		ITaxonomyPickerDialogProps,
 		"labels" | "showRootNode" | "rootNodeLabel" | "styles" | "className" | "dialogContentProps"
 	>;
 
+	disabled?: boolean;
+
+	itemLimit?: number;
+
+	label?: string;
+
+	labelProps?: Partial<ILabelProps>;
+
+	provider: ITaxonomyProvider;
+
 	required?: boolean;
 
 	selectedItems: ITermValue[];
-
-	/**
-	 * Optional class for the root TaxonomyPicker element
-	 */
-	className?: string;
 
 	/**
 	 * Call to apply custom styling on the TaxonomyPicker element
 	 */
 	styles?: IStyleFunctionOrObject<ITaxonomyPickerStyleProps, ITaxonomyPickerStyles>;
 
-	theme?: ITheme;
+	termPickerProps?: Pick<ITermPickerProps, "onRenderSuggestionsItem">;
 
-	errorMessage?: string | JSX.Element;
+	theme?: ITheme;
 
 	onRenderOpenDialogButton?: IRenderFunction<ITaxonomyPickerDialogButtonProps>;
 

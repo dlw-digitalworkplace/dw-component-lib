@@ -1,15 +1,14 @@
 import { useId, useStateIfMounted } from "@dlw-digitalworkplace/dw-react-utils";
 import {
-	classNamesFunction,
-	composeRenderFunction,
-	IconButton,
 	IRenderFunction,
+	IconButton,
 	Label,
-	ValidationState
+	ValidationState,
+	classNamesFunction,
+	composeRenderFunction
 } from "@fluentui/react";
 import * as React from "react";
 import { ITermValue, TermPicker } from "../TermPicker";
-import { ITerm, ITermCreationResult, ITermFilterOptions } from "./models";
 import {
 	ITaxonomyPickerDialogButtonProps,
 	ITaxonomyPickerProps,
@@ -17,6 +16,7 @@ import {
 	ITaxonomyPickerStyles
 } from "./TaxonomyPicker.types";
 import { TaxonomyPickerDialog } from "./TaxonomyPickerDialog";
+import { ITerm, ITermCreationResult, ITermFilterOptions } from "./models";
 
 const getClassNames = classNamesFunction<ITaxonomyPickerStyleProps, ITaxonomyPickerStyles>();
 const tempItemKey = "__TEMP__ITEM__";
@@ -41,6 +41,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	onRenderOpenDialogButton,
 	required,
 	styles,
+	termPickerProps,
 	theme
 }) => {
 	const [dialogIsOpen, setDialogIsOpen] = React.useState(false);
@@ -332,6 +333,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 					onResolveSuggestions={onResolveSuggestions}
 					onValidateInput={onValidateInput}
 					selectedItems={selectedItems}
+					{...termPickerProps}
 				/>
 				{finalOnRenderOpenDialogButton({
 					disabled: !!disabled,
@@ -356,7 +358,10 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 					onCreateNewTerm={handleCreateTermInDialog}
 					onConfirm={handleDialogConfirm}
 					onDismiss={handleDialogDismiss}
-					pickerProps={{ onResolveSuggestions: doResolveSuggestions }}
+					pickerProps={{
+						onResolveSuggestions: doResolveSuggestions,
+						...termPickerProps
+					}}
 				/>
 			)}
 		</div>

@@ -1,4 +1,9 @@
-import { ITaxonomyProvider, ITermValue, TaxonomyPicker } from "@dlw-digitalworkplace/dw-react-controls";
+import {
+	ITaxonomyProvider,
+	ITermValue,
+	TaxonomyPicker,
+	TermItemSuggestion
+} from "@dlw-digitalworkplace/dw-react-controls";
 import { SharePointTaxonomyProvider } from "@dlw-digitalworkplace/taxonomyprovider-sharepoint";
 import * as React from "react";
 import { WebPartContext } from "../DemoTaxonomyPickerWebPart.types";
@@ -50,6 +55,32 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 					},
 					rootNodeLabel: "Terms",
 					showRootNode: true
+				}}
+				termPickerProps={{
+					onRenderSuggestionsItem: (props) => (
+						<TermItemSuggestion
+							term={props}
+							onRenderLabel={(props) => {
+								return <div>{props.term.name}!</div>;
+							}}
+							onRenderSubText={(props) => {
+								const synonyms: { value: string }[] = props.term?.additionalProperties?.synonyms || [];
+
+								return (
+									synonyms.length > 0 && (
+										<div>
+											<small>
+												{synonyms
+													.filter((it) => it.value !== props.term.name)
+													.map((it) => it.value)
+													.join(", ")}
+											</small>
+										</div>
+									)
+								);
+							}}
+						/>
+					)
 				}}
 			/>
 		</div>
