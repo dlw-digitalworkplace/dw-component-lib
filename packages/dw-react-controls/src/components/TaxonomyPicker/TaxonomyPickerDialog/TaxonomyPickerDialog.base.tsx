@@ -1,13 +1,13 @@
 import { findInTree, flatten } from "@dlw-digitalworkplace/dw-react-utils";
-import { ActionButton, classNamesFunction, DefaultButton, DialogFooter, PrimaryButton } from "@fluentui/react";
+import { ActionButton, DefaultButton, DialogFooter, PrimaryButton, classNamesFunction } from "@fluentui/react";
 import * as React from "react";
 import * as rfdc from "rfdc";
 import { ITermValue, TermPicker } from "../../TermPicker";
 import { ITreeItemAction, TreeItem } from "../../TreeItem";
 import { TreeView } from "../../TreeView";
 import { WideDialog } from "../../WideDialog";
-import { ITerm, ITermCreationResult, ITermFilterOptions } from "../models";
 import { TermAdder } from "../TermAdder";
+import { ITerm, ITermCreationResult, ITermFilterOptions } from "../models";
 import {
 	ITaxonomyPickerDialogLabels,
 	ITaxonomyPickerDialogProps,
@@ -236,6 +236,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 
 		return (
 			<TreeView
+				disabledChildrenEnabled={true}
 				expanded={expandedNodes}
 				selected={selectedTreeItem}
 				onNodeSelect={handleTreeSelection}
