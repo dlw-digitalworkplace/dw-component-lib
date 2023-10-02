@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "add synonyms to term output",
+  "packageName": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch"
+}

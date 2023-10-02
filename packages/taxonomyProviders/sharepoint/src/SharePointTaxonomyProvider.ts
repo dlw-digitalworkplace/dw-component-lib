@@ -260,7 +260,14 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 			path: input.get_pathOfTerm(),
 			disabled: !input.get_isAvailableForTagging() || input.get_isDeprecated(),
 			additionalProperties: {
-				deprecated: input.get_isDeprecated()
+				deprecated: input.get_isDeprecated(),
+				synonyms: input
+					.get_labels()
+					.get_data()
+					.map((it) => ({
+						language: it.get_language(),
+						value: it.get_value()
+					}))
 			}
 		};
 

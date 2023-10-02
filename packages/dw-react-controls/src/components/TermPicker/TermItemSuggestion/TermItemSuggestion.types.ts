@@ -1,8 +1,12 @@
-import { IStyle, IStyleFunctionOrObject, ITheme } from "@fluentui/react";
-import { ITermValue } from "../models";
+import { IRenderFunction, IStyle, IStyleFunctionOrObject, ITheme } from "@fluentui/react";
+import { ITermInfo } from "../models";
 
 export interface ITermItemSuggestionProps extends React.AllHTMLAttributes<HTMLElement> {
-	term?: ITermValue;
+	onRenderLabel?: IRenderFunction<ITermItemSuggestionProps>;
+
+	onRenderSubText?: IRenderFunction<ITermItemSuggestionProps>;
+
+	term?: ITermInfo;
 
 	/**
 	 * Optional class for the root TaxonomyPicker element

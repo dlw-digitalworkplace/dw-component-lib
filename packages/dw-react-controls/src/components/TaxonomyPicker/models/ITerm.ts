@@ -1,9 +1,6 @@
-import { ITermValue } from "../../TermPicker";
+import { ITermInfo } from "../../TermPicker";
 
-export interface ITerm extends ITermValue {
+export interface ITerm extends ITermInfo {
 	children?: ITerm[];
 	disabled?: boolean;
-	additionalProperties?: {
-		[key: string]: any;
-	};
 }
