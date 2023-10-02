@@ -2,6 +2,27 @@
   "name": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
   "entries": [
     {
+      "date": "Mon, 02 Oct 2023 09:28:22 GMT",
+      "tag": "@dlw-digitalworkplace/taxonomyprovider-sharepoint_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "nick.sevens@delaware.pro",
+            "package": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
+            "commit": "383cdd19e7a06565ebc55763ab232f669d65814b",
+            "comment": "add synonyms to term output"
+          },
+          {
+            "author": "beachball",
+            "package": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
+            "comment": "Bump @dlw-digitalworkplace/dw-react-controls to v1.2.0",
+            "commit": "383cdd19e7a06565ebc55763ab232f669d65814b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Jun 2023 08:35:21 GMT",
       "tag": "@dlw-digitalworkplace/taxonomyprovider-sharepoint_v0.1.15",
       "version": "0.1.15",

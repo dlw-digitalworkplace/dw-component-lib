@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "allow alternative suggestion item rendering",
-  "packageName": "@dlw-digitalworkplace/dw-react-controls",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "patch"
-}
