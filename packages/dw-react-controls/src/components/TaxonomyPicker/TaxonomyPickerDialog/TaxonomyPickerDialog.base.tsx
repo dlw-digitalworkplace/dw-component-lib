@@ -299,16 +299,20 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 			);
 		}
 
-		return renderTreeItem({
-			actions: treeItemActions,
-			children: children,
-			disabled: term.disabled,
-			iconName: term.disabled ? "TagSolid" : "Tag",
-			label: term.name,
-			nodeId: term.key,
-			onInvoke: handleNodeInvoke,
-			term: term
-		});
+		return (
+			<React.Fragment key={term.key}>
+				{renderTreeItem({
+					actions: treeItemActions,
+					children: children,
+					disabled: term.disabled,
+					iconName: term.disabled ? "TagSolid" : "Tag",
+					label: term.name,
+					nodeId: term.key,
+					onInvoke: handleNodeInvoke,
+					term: term
+				})}
+			</React.Fragment>
+		);
 	};
 
 	const defaultRenderTreeItem: IRenderFunction<ITreeItemProps & { term?: ITerm }> = (
