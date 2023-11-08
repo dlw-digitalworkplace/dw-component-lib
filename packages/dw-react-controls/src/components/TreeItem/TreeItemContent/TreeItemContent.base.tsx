@@ -17,7 +17,7 @@ export const TreeItemContentBase: React.FC<ITreeItemContentProps> = React.forwar
 	HTMLDivElement,
 	ITreeItemContentProps
 >((props, ref) => {
-	const { actions, iconName, nodeId, onClick, onInvoke, onMouseDown, onRenderLabel } = props;
+	const { actions, nodeId, onClick, onInvoke, onMouseDown, onRenderLabel, onRenderLabelContent } = props;
 	const { disabled, expandable, expanded, focused, handleExpansion, handleSelection, preventSelection, selected } =
 		useTreeItem(nodeId);
 
@@ -81,17 +81,27 @@ export const TreeItemContentBase: React.FC<ITreeItemContentProps> = React.forwar
 	const defaultRenderLabel: IRenderFunction<ITreeItemContentProps> = (
 		contentProps: ITreeItemContentProps
 	): JSX.Element => {
-		const { label } = contentProps;
-
-		return (
-			<div className={classNames.labelWrapper}>
-				{iconName && <Icon iconName={iconName} />}
-				<div className={classNames.label}>{label}</div>
-			</div>
-		);
+		return <div className={classNames.labelWrapper}>{renderLabelContent(contentProps)}</div>;
 	};
 
 	const renderLabel = onRenderLabel ? composeRenderFunction(onRenderLabel, defaultRenderLabel) : defaultRenderLabel;
+
+	const defaultRenderLabelContent: IRenderFunction<ITreeItemContentProps> = (
+		contentProps: ITreeItemContentProps
+	): JSX.Element => {
+		const { label, iconName } = contentProps;
+
+		return (
+			<>
+				{iconName && <Icon iconName={iconName} />}
+				<div className={classNames.label}>{label}</div>
+			</>
+		);
+	};
+
+	const renderLabelContent = onRenderLabelContent
+		? composeRenderFunction(onRenderLabelContent, defaultRenderLabelContent)
+		: defaultRenderLabelContent;
 
 	return (
 		<div

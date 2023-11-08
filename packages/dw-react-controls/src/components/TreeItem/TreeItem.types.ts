@@ -47,6 +47,11 @@ export interface ITreeItemProps {
 	onRenderLabel?: IRenderFunction<ITreeItemContentProps>;
 
 	/**
+	 * When specified it will override the default rendering of the node label content
+	 */
+	onRenderLabelContent?: IRenderFunction<ITreeItemContentProps>;
+
+	/**
 	 * Optional class for the root TreeItem element
 	 */
 	className?: string;

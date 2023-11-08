@@ -1,9 +1,17 @@
 import { findInTree, flatten } from "@dlw-digitalworkplace/dw-react-utils";
-import { ActionButton, DefaultButton, DialogFooter, PrimaryButton, classNamesFunction } from "@fluentui/react";
+import {
+	ActionButton,
+	DefaultButton,
+	DialogFooter,
+	IRenderFunction,
+	PrimaryButton,
+	classNamesFunction,
+	composeRenderFunction
+} from "@fluentui/react";
 import * as React from "react";
 import * as rfdc from "rfdc";
 import { ITermValue, TermPicker } from "../../TermPicker";
-import { ITreeItemAction, TreeItem } from "../../TreeItem";
+import { ITreeItemAction, ITreeItemProps, TreeItem } from "../../TreeItem";
 import { TreeView } from "../../TreeView";
 import { WideDialog } from "../../WideDialog";
 import { TermAdder } from "../TermAdder";
@@ -35,6 +43,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 		onCreateNewTerm,
 		onConfirm,
 		onDismiss,
+		onRenderTreeItem,
 		provider,
 		styles,
 		theme,
@@ -259,7 +268,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 		);
 	};
 
-	const renderTreeNode = (term: ITerm): JSX.Element => {
+	const renderTreeNode = (term: ITerm): JSX.Element | null => {
 		const handleNodeInvoke = (event: React.MouseEvent<HTMLElement>) => {
 			event.stopPropagation();
 
@@ -290,20 +299,29 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 			);
 		}
 
-		return (
-			<TreeItem
-				key={term.key}
-				nodeId={term.key}
-				label={term.name}
-				disabled={term.disabled}
-				iconName={term.disabled ? "TagSolid" : "Tag"}
-				onInvoke={handleNodeInvoke}
-				actions={treeItemActions}
-			>
-				{children}
-			</TreeItem>
-		);
+		return renderTreeItem({
+			actions: treeItemActions,
+			children: children,
+			disabled: term.disabled,
+			iconName: term.disabled ? "TagSolid" : "Tag",
+			label: term.name,
+			nodeId: term.key,
+			onInvoke: handleNodeInvoke,
+			term: term
+		});
 	};
+
+	const defaultRenderTreeItem: IRenderFunction<ITreeItemProps & { term?: ITerm }> = (
+		treeItemProps: ITreeItemProps & { term: ITerm }
+	) => {
+		const { term, ...treeItemRest } = treeItemProps;
+
+		return <TreeItem {...treeItemRest} />;
+	};
+
+	const renderTreeItem = onRenderTreeItem
+		? composeRenderFunction(onRenderTreeItem, defaultRenderTreeItem)
+		: defaultRenderTreeItem;
 
 	return (
 		<WideDialog

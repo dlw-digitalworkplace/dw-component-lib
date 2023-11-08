@@ -19,7 +19,7 @@ export interface ITaxonomyPickerProps {
 
 	dialogProps?: Pick<
 		ITaxonomyPickerDialogProps,
-		"labels" | "showRootNode" | "rootNodeLabel" | "styles" | "className" | "dialogContentProps"
+		"className" | "dialogContentProps" | "labels" | "onRenderTreeItem" | "rootNodeLabel" | "showRootNode" | "styles"
 	>;
 
 	disabled?: boolean;
