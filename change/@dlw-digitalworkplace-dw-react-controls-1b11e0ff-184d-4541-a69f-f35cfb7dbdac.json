@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "add ability to override TreeItem rendering in TaxonomyPicker dialog",
-  "packageName": "@dlw-digitalworkplace/dw-react-controls",
-  "email": "nick.sevens@delaware.pro",
-  "dependentChangeType": "patch"
-}

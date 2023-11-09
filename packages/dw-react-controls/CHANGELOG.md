@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-controls
 
-This log was last generated on Mon, 02 Oct 2023 09:28:22 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Nov 2023 09:06:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.3.0
+
+Thu, 09 Nov 2023 09:06:59 GMT
+
+### Minor changes
+
+- add ability to override TreeItem rendering in TaxonomyPicker dialog (nick.sevens@delaware.pro)
 
 ## 1.2.0
 
