@@ -16,19 +16,7 @@ const getClassNames = classNamesFunction<ITreeItemStyleProps, ITreeItemStyles>()
 const ownerDocument = (element: Node | null | undefined): Document => (element && element.ownerDocument) || document;
 
 export const TreeItemBase: React.FC<ITreeItemProps> = React.forwardRef<HTMLLIElement, ITreeItemProps>((props, ref) => {
-	const {
-		actions,
-		children,
-		disabled: disabledProp,
-		iconName,
-		id: idProp,
-		label,
-		nodeId,
-		onClick,
-		onInvoke,
-		onRenderContent,
-		onRenderLabel
-	} = props;
+	const { children, disabled: disabledProp, id: idProp, label, nodeId, onRenderContent } = props;
 	const { className, styles, theme } = props;
 
 	const {
@@ -112,6 +100,8 @@ export const TreeItemBase: React.FC<ITreeItemProps> = React.forwardRef<HTMLLIEle
 	};
 
 	const defaultRenderContent: IRenderFunction<ITreeItemProps> = (contentProps: ITreeItemProps) => {
+		const { actions, iconName, label, nodeId, onClick, onInvoke, onRenderLabel, onRenderLabelContent } = contentProps;
+
 		return (
 			<TreeItemContent
 				actions={actions}
@@ -121,6 +111,7 @@ export const TreeItemBase: React.FC<ITreeItemProps> = React.forwardRef<HTMLLIEle
 				onClick={onClick}
 				onInvoke={onInvoke}
 				onRenderLabel={onRenderLabel}
+				onRenderLabelContent={onRenderLabelContent}
 			/>
 		);
 	};

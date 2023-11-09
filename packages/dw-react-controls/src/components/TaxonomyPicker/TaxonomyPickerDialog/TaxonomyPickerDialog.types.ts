@@ -1,7 +1,8 @@
-import { IDialogProps, IStyle, IStyleFunctionOrObject, ITheme } from "@fluentui/react";
+import { IDialogProps, IRenderFunction, IStyle, IStyleFunctionOrObject, ITheme } from "@fluentui/react";
 import { ITermPickerProps, ITermValue } from "../../TermPicker";
-import { ITaxonomyProvider, ITermCreationResult } from "../models";
+import { ITreeItemProps } from "../../TreeItem";
 import { ITermAdderLabels } from "../TermAdder";
+import { ITaxonomyProvider, ITerm, ITermCreationResult } from "../models";
 
 export interface ITaxonomyPickerDialogLabels {
 	okButton?: string;
@@ -32,6 +33,11 @@ interface ITaxonomyPickerDialogPropsBase {
 	itemLimit?: number;
 
 	labels?: ITaxonomyPickerDialogLabels;
+
+	/**
+	 * When specified it will override the default rendering of the tree items
+	 */
+	onRenderTreeItem?: IRenderFunction<ITreeItemProps & { term?: ITerm }>;
 
 	/**
 	 * Call to apply custom styling on the TaxonomyPicker element

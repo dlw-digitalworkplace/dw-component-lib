@@ -1,5 +1,6 @@
 import {
 	ITaxonomyProvider,
+	ITermInfo,
 	ITermValue,
 	TaxonomyPicker,
 	TermItemSuggestion
@@ -39,6 +40,14 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 		})();
 	}, [preCacheTerms, siteUrl, termSetIdOrName]);
 
+	const getTermSynonyms: (term: ITermInfo) => string[] = (term) => {
+		const synonyms: { value: string }[] = (term?.additionalProperties?.synonyms || []).filter(
+			(it) => it.value !== term.name
+		);
+
+		return synonyms.map((it) => it.value);
+	};
+
 	return (
 		<div className={styles.demoTaxonomyPicker}>
 			<TaxonomyPicker
@@ -54,27 +63,37 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 						subText: "Browse the list of terms in the termset."
 					},
 					rootNodeLabel: "Terms",
-					showRootNode: true
+					showRootNode: true,
+					onRenderTreeItem: (props, defaultRender) => {
+						return defaultRender({
+							...props,
+							onRenderLabelContent: (labelProps, defaultLabelRender) => {
+								const synonyms = getTermSynonyms(props.term);
+
+								return (
+									<>
+										{defaultLabelRender(labelProps)}
+										{synonyms.length > 0 && <small>({synonyms.join(", ")})</small>}
+									</>
+								);
+							}
+						});
+					}
 				}}
 				termPickerProps={{
 					onRenderSuggestionsItem: (props) => (
 						<TermItemSuggestion
 							term={props}
 							onRenderLabel={(props) => {
-								return <div>{props.term.name}!</div>;
+								return <div>{props.term.name}</div>;
 							}}
 							onRenderSubText={(props) => {
-								const synonyms: { value: string }[] = props.term?.additionalProperties?.synonyms || [];
+								const synonyms = getTermSynonyms(props.term);
 
 								return (
 									synonyms.length > 0 && (
 										<div>
-											<small>
-												{synonyms
-													.filter((it) => it.value !== props.term.name)
-													.map((it) => it.value)
-													.join(", ")}
-											</small>
+											<small>{synonyms.join(", ")}</small>
 										</div>
 									)
 								);
