@@ -2,6 +2,7 @@ import { IAutocompleteSearchBoxStyleProps, IAutocompleteSearchBoxStyles } from "
 
 const GlobalClassNames = {
 	root: "dw-AutocompleteSearchBox-root",
+	container: "dw-AutocompleteSearchBox-container",
 	confirmation: "dw-AutocompleteSearchBox-confirmation",
 	calloutProgressIndicatorPlaceholder: "dw-AutocompleteSearchBox-calloutProgressIndicatorPlaceholder",
 	calloutTitle: "dw-AutocompleteSearchBox-calloutTitle",
@@ -22,6 +23,7 @@ export const getStyles = (props: IAutocompleteSearchBoxStyleProps): IAutocomplet
 			},
 			className
 		],
+		container: [classNames.container, {}],
 		confirmation: [
 			classNames.confirmation,
 			{
@@ -98,25 +100,25 @@ export const getStyles = (props: IAutocompleteSearchBoxStyleProps): IAutocomplet
 			},
 			suggestionLink: {
 				root: {
-					color: "unset",
+					color: theme?.semanticColors?.bodyText,
 					width: "100%",
 					padding: "2px 5px",
 					"&:focus": {
 						backgroundColor: theme?.semanticColors?.listItemBackgroundHovered,
-						color: "unset",
+						color: theme?.semanticColors?.bodyText,
 						outline: "none !important",
 						boxShadow: "none !important"
 					},
 					"&:active": {
-						color: "unset",
+						color: theme?.semanticColors?.bodyText,
 						textDecoration: "none"
 					},
 					"&:hover": {
-						color: "unset",
+						color: theme?.semanticColors?.bodyText,
 						textDecoration: "none"
 					},
 					"&:active:hover": {
-						color: "unset",
+						color: theme?.semanticColors?.bodyText,
 						textDecoration: "none"
 					}
 				}

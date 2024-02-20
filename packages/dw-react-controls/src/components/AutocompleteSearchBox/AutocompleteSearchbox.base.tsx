@@ -197,7 +197,7 @@ export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = 
 
 	return (
 		<>
-			<div ref={searchBoxWrapper} >
+			<div ref={searchBoxWrapper} className={classNames.container}>
 				<SearchBox
 					{...props}
 					className={classNames.root}

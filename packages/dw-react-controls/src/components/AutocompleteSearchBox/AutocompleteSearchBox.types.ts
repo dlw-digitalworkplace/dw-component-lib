@@ -59,6 +59,7 @@ export interface IAutocompleteSearchBoxStyleProps {
 
 export interface IAutocompleteSearchBoxStyles {
 	root?: IStyle;
+	container?: IStyle;
 	confirmation?: IStyle;
 	calloutProgressIndicatorPlaceholder?: IStyle;
 	calloutTitle?: IStyle;
