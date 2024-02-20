@@ -18,9 +18,10 @@ export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = 
 	const { className, styles, theme, value, calloutTitle, showIcon, onResolveSuggestions } = props;
 
 	// Compute values
-	const hasSearchBoxValue = React.useMemo(() => (value?.length ?? 0) > 0 && value !== "*", [value]);
-	const hideIcon = React.useMemo(() => showIcon === true && hasSearchBoxValue, [showIcon, hasSearchBoxValue]);
 	const withHighlighting = React.useMemo(() => props.withSuggestionHighlighting ?? true, [props.withSuggestionHighlighting]);
+	const withConfirmationButton = React.useMemo(() => props.withAccessibleConfirmationButton ?? true, [props.withAccessibleConfirmationButton]);
+	const hasSearchBoxValue = React.useMemo(() => (value?.length ?? 0) > 0 && value !== "*", [value]);
+	const hideIcon = React.useMemo(() => showIcon === true && withConfirmationButton && hasSearchBoxValue, [showIcon, hasSearchBoxValue]);
 
 	const classNames = getClassNames(styles, {
 		className,
@@ -69,14 +70,18 @@ export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = 
 	const [searchBoxConfirmationElement, setSearchBoxConfirmationElement] = React.useState<HTMLElement>();
 
 	React.useEffect(() => {
-		const searchBoxElementValue = searchBoxElement.current?.getElementsByTagName("input")?.item(0);
-		if (searchBoxElementValue) {
-			setSearchBoxInputElement(searchBoxElementValue);
+		if (withConfirmationButton) {
+			const searchBoxElementValue = searchBoxElement.current?.getElementsByTagName("input")?.item(0);
+			if (searchBoxElementValue) {
+				setSearchBoxInputElement(searchBoxElementValue);
+			}
 		}
 	}, [searchBoxElement]);
 	React.useEffect(() => {
-		if (searchBoxInputElement && hasSearchBoxValue) {
-			renderSearchBoxConfirmationElement();
+		if (withConfirmationButton) {
+			if (searchBoxInputElement && hasSearchBoxValue) {
+				renderSearchBoxConfirmationElement();
+			}
 		}
 	}, [searchBoxInputElement]);
 	const handleSearchBoxConfirmation = () => {
@@ -123,14 +128,25 @@ export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = 
 		props.onClear && props.onClear(ev);
 	};
 	const onChange = (ev: React.ChangeEvent<HTMLInputElement>, newValue: string) => {
-		newValue === "" ? removeSearchBoxConfirmationElement() : renderSearchBoxConfirmationElement();
+		// Render the confirmation button
+		if (withConfirmationButton) {
+			newValue === "" ? removeSearchBoxConfirmationElement() : renderSearchBoxConfirmationElement();
+		}
+
+		// Call the onChange event
 		if (props.onChange) {
 			props.onChange(ev, newValue);
 		} else {
 			setSearchboxValue(newValue);
 		}
+
+		// Keep track of the original value
 		setSearchboxOriginalValue(newValue || "");
+
+		// Open the callout
 		setIsCalloutVisible(true);
+
+		// Resolve the suggestions
 		if (!!newValue) {
 			onResolveSuggestionsDebounced(newValue);
 		} else {

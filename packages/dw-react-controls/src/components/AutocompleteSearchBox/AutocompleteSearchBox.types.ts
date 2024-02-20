@@ -34,15 +34,21 @@ export interface IAutocompleteSearchBoxProps extends ISearchBoxProps {
 	calloutTitle?: string;
 
 	/**
-	 * The aria description for the confirmation button.
-	 */
-	confirmationButtonAriaDescription?: string;
-
-	/**
 	 * Optional flag to enable the autocomplete suggestions highlighting.
 	 * @default true
 	 */
 	withSuggestionHighlighting?: boolean;
+
+	/**
+	 * Optional flag to render the accessible confirmation button.
+	 * @default true
+	 */
+	withAccessibleConfirmationButton?: boolean;
+
+	/**
+	 * The aria description for the confirmation button.
+	 */
+	confirmationButtonAriaDescription?: string;
 }
 
 export interface IAutocompleteSearchBoxStyleProps {
