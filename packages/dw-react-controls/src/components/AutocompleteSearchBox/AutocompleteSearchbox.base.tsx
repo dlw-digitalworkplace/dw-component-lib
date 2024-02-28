@@ -168,7 +168,7 @@ export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = 
 				setIsResolving(false);
 			});
 		}
-	}, props.debounceTime ?? 0);
+	}, props.resolveDelay ?? 0);
 	//#endregion
 
 	//#region Render functions

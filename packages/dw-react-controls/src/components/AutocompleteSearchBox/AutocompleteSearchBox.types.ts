@@ -30,7 +30,7 @@ export interface IAutocompleteSearchBoxProps extends ISearchBoxProps {
 	 * The debounce time in milliseconds for the search box to start resolving the suggestions.
 	 * @default 0
 	 */
-	debounceTime?: number;
+	resolveDelay?: number;
 
 	/**
 	 * The title to display in the callout.
