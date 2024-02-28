@@ -37,6 +37,9 @@ export interface IAutocompleteSearchBoxProps extends ISearchBoxProps {
 	 */
 	calloutTitle?: string;
 
+	/**
+	 * The callout properties to pass to the callout component.
+	 */
 	calloutProps?: ICalloutProps;
 
 	/**
