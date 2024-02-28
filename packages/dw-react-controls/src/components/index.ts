@@ -1,3 +1,4 @@
+export * from "./AutocompleteSearchBox";
 export * from "./PeoplePicker";
 export * from "./TaxonomyPicker";
 export * from "./TermPicker";

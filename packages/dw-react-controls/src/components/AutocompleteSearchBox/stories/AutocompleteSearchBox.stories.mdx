@@ -1,0 +1,39 @@
+import { ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs";
+import { AutocompleteSearchBox } from "../AutocompleteSearchBox";
+import * as stories from "./AutocompleteSearchBox.stories";
+
+<Meta title="Components/AutocompleteSearchBox" component={AutocompleteSearchBox} />
+
+# AutocompleteSearchBox
+
+The autocomplete searchbox is a component that expands on the Fluent UI React Searchox with an autocomplete dropdown.
+The component is inspired and built upon the Microsoft example: [https://github.com/microsoft/autocomplete-search-box]()
+When typing in the searchbox, autocomplete suggestions are dynamically fetched and displayed in a dropdown below the searchbox.
+
+### Basic usage
+
+This example shows the basic usage of the AutocompleteSearchBox component.
+The only required property is an `onResolveSuggestions` function that returns a promise with the suggestions.
+
+<Canvas withToolbar={true}>
+	<Story story={stories.Basic} name="Basic usage" />
+</Canvas>
+
+### Advance usage
+
+This example shows the advanced usage of the AutocompleteSearchBox component.
+It is possible to control the value outside of the component by using the `value` and `onChange` properties.
+It also shows some examples of the debounce functionality and how to use the `onSearch` event.
+There is also an option to disable the suggestion highlighting.
+
+<Canvas withToolbar={true}>
+	<Story story={stories.Advanced} name="Advanced usage" />
+</Canvas>
+
+### Basic Custom Styles
+
+The example below show custom styling options
+
+<Canvas withToolbar={true}>
+	<Story story={stories.CustomStyling} name="Custom Styling" />
+</Canvas>
