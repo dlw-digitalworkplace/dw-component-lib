@@ -19,8 +19,7 @@ export const HighlightedSuggestionBase: React.FC<IHighlightedSuggestionProps> = 
 		const parts = React.useMemo(() => text.split(new RegExp(`^(${filter})`, "gi")), [text, filter]);
 
 		return (
-			<span>
-				{" "}
+			<>
 				{parts.map((part, i) => {
 					const className = part.toLowerCase() !== filter.toLowerCase()
 						? classNames.rootHighlighted
@@ -31,8 +30,8 @@ export const HighlightedSuggestionBase: React.FC<IHighlightedSuggestionProps> = 
 							{part}
 						</span>
 					);
-				})}{" "}
-			</span>
+				})}
+			</>
 		);
 	} catch (error) {
 		// Return the suggestion if an error occured during the highlighting

@@ -31,7 +31,7 @@ const words = [
 	"snow",
 	"wind",
 	"thunder",
-	"mountain",
+	"mountain thunder valley island",
 	"valley",
 	"river",
 	"ocean",
