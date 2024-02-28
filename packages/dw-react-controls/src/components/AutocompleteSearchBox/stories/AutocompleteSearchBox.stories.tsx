@@ -41,7 +41,7 @@ export const Advanced: Story<IAutocompleteSearchBoxProps> = ({ onChange, ...args
 				onResolveSuggestions={onResolveSuggestions}
 				value={value}
 				withSuggestionHighlighting={false}
-				debounceTime={500}
+				resolveDelay={500}
 			/>
 		</div>
 	);
