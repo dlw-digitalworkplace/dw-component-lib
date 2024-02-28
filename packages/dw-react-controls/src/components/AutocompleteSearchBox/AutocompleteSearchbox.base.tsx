@@ -15,7 +15,7 @@ import { HighlightedSuggestion } from "./HighlightedSuggestion/HighlightedSugges
 const getClassNames = classNamesFunction<IAutocompleteSearchBoxStyleProps, IAutocompleteSearchBoxStyles>();
 
 export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = (props) => {
-	const { className, styles, theme, value, calloutTitle, showIcon, onResolveSuggestions } = props;
+	const { className, styles, theme, value, calloutTitle, calloutProps, showIcon, onResolveSuggestions } = props;
 
 	// Compute values
 	const withHighlighting = React.useMemo(() => props.withSuggestionHighlighting ?? true, [props.withSuggestionHighlighting]);
@@ -214,6 +214,7 @@ export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = 
 			</div>
 			{(isResolving || (suggestions?.length ?? 0) > 0) && isCalloutVisible && (
 				<Callout
+					{...calloutProps}
 					styles={(classNames.subComponentStyles as any).callout as ICalloutContentStyles}
 					target={searchBoxWrapper.current}
 					isBeakVisible={false}

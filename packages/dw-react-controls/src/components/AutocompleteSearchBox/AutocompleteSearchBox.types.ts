@@ -1,5 +1,9 @@
 import { ILinkStyleProps, ILinkStyles } from "@fluentui/react";
-import { ICalloutContentStyleProps, ICalloutContentStyles } from "@fluentui/react/lib/components/Callout";
+import {
+	ICalloutContentStyleProps,
+	ICalloutContentStyles,
+	ICalloutProps
+} from "@fluentui/react/lib/components/Callout";
 import { ISearchBoxProps, ISearchBoxStyleProps, ISearchBoxStyles } from "@fluentui/react/lib/components/SearchBox";
 import { IStyle, ITheme } from "@fluentui/react/lib/Styling";
 import { IStyleFunctionOrObject } from "@fluentui/react/lib/Utilities";
@@ -32,6 +36,8 @@ export interface IAutocompleteSearchBoxProps extends ISearchBoxProps {
 	 * The title to display in the callout.
 	 */
 	calloutTitle?: string;
+
+	calloutProps?: ICalloutProps;
 
 	/**
 	 * Optional flag to enable the autocomplete suggestions highlighting.
