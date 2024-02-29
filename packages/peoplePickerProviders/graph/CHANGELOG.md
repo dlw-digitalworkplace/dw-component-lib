@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/peoplepickerprovider-graph
 
-This log was last generated on Thu, 09 Nov 2023 09:06:59 GMT and should not be manually modified.
+This log was last generated on Thu, 29 Feb 2024 07:33:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.4
+
+Thu, 29 Feb 2024 07:33:13 GMT
+
+### Patches
+
+- Bump @dlw-digitalworkplace/dw-react-controls to v1.4.0
 
 ## 0.3.3
 
