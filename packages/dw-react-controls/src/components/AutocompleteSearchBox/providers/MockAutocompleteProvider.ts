@@ -102,8 +102,45 @@ const words = [
 	"hot"
 ];
 export class MockAutocompleteProvider {
-	getSuggestions(search: string): Promise<string[]> {
-		const filteredData = words.filter((item) => item.startsWith(search));
-		return new Promise((resolve) => setTimeout(() => resolve(filteredData), 200));
+	getSuggestions(search: string, signal?: AbortSignal): Promise<string[]> {
+		// Check if the signal is aborted
+		if (signal?.aborted) {
+			return Promise.reject(new DOMException("Aborted", "AbortError"));
+		}
+
+		// Filter the data based on the search string
+		const filteredData = search.length > 0 ? words.filter((item) => item.startsWith(search)) : [];
+
+		return new Promise((resolve, reject) => {
+			// Create a abort handler
+			let timeout: NodeJS.Timeout;
+			const abortHandler = () => {
+				clearTimeout(timeout);
+				reject(new DOMException("Aborted", "AbortError"));
+			};
+			timeout = setTimeout(() => {
+				resolve(filteredData);
+				signal?.removeEventListener("abort", abortHandler);
+			}, 200);
+			signal?.addEventListener("abort", abortHandler);
+		});
+	}
+	getOnFocusSuggestions(signal?: AbortSignal): Promise<string[]> {
+		if (signal?.aborted) {
+			return Promise.reject(new DOMException("Aborted", "AbortError"));
+		}
+
+		return new Promise((resolve, reject) => {
+			let timeout: NodeJS.Timeout;
+			const abortHandler = () => {
+				clearTimeout(timeout);
+				reject(new DOMException("Aborted", "AbortError"));
+			};
+			timeout = setTimeout(() => {
+				resolve(["apple", "banana", "orange", "grape", "kiwi"]);
+				signal?.removeEventListener("abort", abortHandler);
+			}, 1000);
+			signal?.addEventListener("abort", abortHandler);
+		});
 	}
 }

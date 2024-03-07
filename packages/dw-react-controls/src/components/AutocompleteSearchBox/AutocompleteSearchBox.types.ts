@@ -23,8 +23,15 @@ export interface IAutocompleteSearchBoxProps extends ISearchBoxProps {
 	/**
 	 * The callback method to resolve the suggestions for the autocomplete search box.
 	 * @param searchValue The search value to resolve the suggestions for.
+	 * @param signal The optional abort signal to cancel the request.
 	 */
-	onResolveSuggestions: (searchValue: string) => Promise<string[]>;
+	onResolveSuggestions: (searchValue: string, signal?: AbortSignal) => Promise<string[]>;
+
+	/**
+	 * The callback method to resolve the suggestions when the search box is focussed.
+	 * @param signal The optional abort signal to cancel the request.
+	 */
+	onFocusResolveSuggestions?: (signal?: AbortSignal) => Promise<string[]>;
 
 	/**
 	 * The debounce time in milliseconds for the search box to start resolving the suggestions.

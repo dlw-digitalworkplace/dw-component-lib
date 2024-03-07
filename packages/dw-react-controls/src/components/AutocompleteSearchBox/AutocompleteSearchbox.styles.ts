@@ -79,7 +79,6 @@ export const getStyles = (props: IAutocompleteSearchBoxStyleProps): IAutocomplet
 			callout: {
 				root: {
 					marginTop: 0,
-					overflow: "hidden",
 					width: "100%"
 				},
 				container: {

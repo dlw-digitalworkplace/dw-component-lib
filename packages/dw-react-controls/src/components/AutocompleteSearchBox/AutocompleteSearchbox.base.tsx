@@ -4,7 +4,7 @@ import { ISearchBoxStyles, SearchBox } from "@fluentui/react/lib/components/Sear
 import { IAutocompleteSearchBoxProps, IAutocompleteSearchBoxStyleProps, IAutocompleteSearchBoxStyles } from "./AutocompleteSearchBox.types";
 import { classNamesFunction } from "@fluentui/react/lib/Utilities";
 import { IconButton } from "@fluentui/react/lib/components/Button";
-import { Callout, DirectionalHint, ICalloutContentStyles } from "@fluentui/react/lib/Callout";
+import { Callout, ICalloutContentStyles } from "@fluentui/react/lib/Callout";
 import { IProgressIndicatorStyles, ProgressIndicator } from "@fluentui/react/lib/components/ProgressIndicator";
 import { useDebounceFn } from "@dlw-digitalworkplace/dw-react-utils";
 import { FocusZone, FocusZoneDirection, IFocusZone } from "@fluentui/react/lib/FocusZone";
@@ -15,7 +15,11 @@ import { HighlightedSuggestion } from "./HighlightedSuggestion/HighlightedSugges
 const getClassNames = classNamesFunction<IAutocompleteSearchBoxStyleProps, IAutocompleteSearchBoxStyles>();
 
 export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = (props) => {
-	const { className, styles, theme, value, calloutTitle, calloutProps, showIcon, onResolveSuggestions } = props;
+	const { className, styles, theme, value, calloutTitle, calloutProps, showIcon } = props;
+	const { onResolveSuggestions, onFocusResolveSuggestions } = props;
+
+	// Controller
+	const onResolveController = React.useRef<AbortController>();
 
 	// Compute values
 	const withHighlighting = React.useMemo(() => props.withSuggestionHighlighting ?? true, [props.withSuggestionHighlighting]);
@@ -23,6 +27,7 @@ export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = 
 	const hasSearchBoxValue = React.useMemo(() => (value?.length ?? 0) > 0 && value !== "*", [value]);
 	const hideIcon = React.useMemo(() => showIcon === true && withConfirmationButton && hasSearchBoxValue, [showIcon, hasSearchBoxValue]);
 
+	// Get the classnames
 	const classNames = getClassNames(styles, {
 		className,
 		theme: theme,
@@ -42,6 +47,7 @@ export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = 
 	React.useEffect(() => {
 		setSearchboxValue(props.value ?? "");
 	}, [value]);
+
 	const onSearchBoxKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === "ArrowDown") {
 			setIsCalloutFocussed(true);
@@ -143,16 +149,61 @@ export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = 
 		// Keep track of the original value
 		setSearchboxOriginalValue(newValue || "");
 
-		// Open the callout
-		setIsCalloutVisible(true);
+		// Set state
+		setIsResolving(!!newValue);
+		setIsCalloutVisible(!!newValue);
+		setSuggestions(!!newValue ? suggestions : []);
+
+		// Abort the previous onResolve call
+		if (onResolveController.current) {
+			onResolveController.current.abort();
+		}
+
+		// Create new controller
+		onResolveController.current = new AbortController();
 
 		// Resolve the suggestions
-		if (!!newValue) {
-			onResolveSuggestionsDebounced(newValue);
+		onResolveSuggestionsDebounced(newValue);
+	};
+	const onFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+		// Execute the onFocusResolveSuggestions if available
+		if (event.target.value?.length === 0 && !!onFocusResolveSuggestions) {
+			// Set state
+			setIsResolving(true);
+			setIsCalloutVisible(true);
+			setSuggestions([]);
+
+			// Abort the previous call
+			if (onResolveController.current) {
+				onResolveController.current.abort();
+			}
+
+			// Create new controller
+			onResolveController.current = new AbortController();
+
+			onFocusResolveSuggestions(onResolveController.current.signal)
+				.then((suggestions) => {
+					// Set state
+					setSuggestions(suggestions);
+					setIsResolving(false);
+
+					// Clear the controller
+					onResolveController.current = undefined;
+				})
+				.catch((err) => {
+					// Swallow the abort error
+					if (err.name !== "AbortError") {
+						console.error(err);
+					}
+				});
 		} else {
-			setIsCalloutVisible(false);
+			props.onFocus && props.onFocus(event);
 		}
 	};
+	const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+		setSuggestions([]);
+		props.onBlur && props.onBlur(event);
+	}
 	const onSearch = (newValue: string) => {
 		setIsCalloutVisible(false);
 		setIsCalloutFocussed(false);
@@ -160,14 +211,22 @@ export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = 
 		props.onSearch && props.onSearch(newValue);
 	};
 	const onResolveSuggestionsDebounced = useDebounceFn((value: string) => {
-		if (onResolveSuggestions) {
-			setIsResolving(true);
-			setIsCalloutVisible(true);
-			onResolveSuggestions(value).then((suggestions) => {
+		// Resolve the suggestions
+		onResolveSuggestions(value, onResolveController?.current?.signal)
+			.then((suggestions) => {
+				// Set state
 				setSuggestions(suggestions);
 				setIsResolving(false);
+
+				// Clear the controller
+				onResolveController.current = undefined;
+			})
+			.catch((err) => {
+				// Swallow the abort error
+				if (err.name !== "AbortError") {
+					console.error(err);
+				}
 			});
-		}
 	}, props.resolveDelay ?? 0);
 	//#endregion
 
@@ -207,6 +266,8 @@ export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = 
 					defaultValue={hasSearchBoxValue ? value : ""}
 					onChange={onChange}
 					onClear={onClear}
+					onFocus={onFocus}
+					onBlur={onBlur}
 					onSearch={onSearch}
 					onKeyDown={onSearchBoxKeyDown}
 					value={searchboxValue}
@@ -217,12 +278,10 @@ export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = 
 					{...calloutProps}
 					styles={(classNames.subComponentStyles as any).callout as ICalloutContentStyles}
 					target={searchBoxWrapper.current}
-					isBeakVisible={false}
-					directionalHint={DirectionalHint.bottomLeftEdge}
-					directionalHintForRTL={DirectionalHint.bottomRightEdge}
-					doNotLayer={true}
-					onDismiss={() => setIsCalloutVisible(false)}
 					setInitialFocus={isCalloutFocussed}
+					doNotLayer={true}
+					isBeakVisible={calloutProps?.isBeakVisible ?? false}
+					onDismiss={() => setIsCalloutVisible(false)}
 				>
 					{/* Title */}
 					{!!calloutTitle && (

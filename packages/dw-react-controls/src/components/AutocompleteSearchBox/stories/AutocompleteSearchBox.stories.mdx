@@ -19,18 +19,53 @@ The only required property is an `onResolveSuggestions` function that returns a 
 	<Story story={stories.Basic} name="Basic usage" />
 </Canvas>
 
-### Advance usage
+### With delay
 
-This example shows the advanced usage of the AutocompleteSearchBox component.
-It is possible to control the value outside of the component by using the `value` and `onChange` properties.
-It also shows some examples of the debounce functionality and how to use the `onSearch` event.
-There is also an option to disable the suggestion highlighting.
+An option is available to add a delay on the suggestion resolving.
+This can be useful if the suggestions are fetched from a remote server and you want to avoid making too many requests.
+When the `resolveDelay` property is set, the suggestions will only be resolved after the specified delay when typing stopped.
 
 <Canvas withToolbar={true}>
-	<Story story={stories.Advanced} name="Advanced usage" />
+	<Story story={stories.WithDelay} name="With delay" />
 </Canvas>
 
-### Basic Custom Styles
+### With callout properties
+
+It is possible to override the callout properties by using the `calloutProps` property and the `calloutTitle` properties.
+This can be useful if you want to customize the callout appearance or add a title to the callout.
+
+<Canvas withToolbar={true}>
+	<Story story={stories.WithCalloutProperties} name="With callout properties" />
+</Canvas>
+
+### Suggestion highlighting
+
+By default, the suggestions are highlighted in the dropdown based on the search text.
+This can be disabled by setting the `withSuggestionHighlighting` property to `false`.
+
+<Canvas withToolbar={true}>
+	<Story story={stories.SuggestionHighlighting} name="Suggestion highlighting" />
+</Canvas>
+
+### Focus resolve suggestions
+
+Suggestion are resolved when typing in the searchbox.
+However, it is also possible to resolve suggestions when the searchbox is focused using the `onFocusResolveSuggestions` property.
+
+<Canvas withToolbar={true}>
+	<Story story={stories.FocusResolveSuggestions} name="Focus resolve suggestions" />
+</Canvas>
+
+### Aborting resolve suggestions
+
+Internally, the component uses a `AbortController` to abort the resolve suggestions when typing in the searchbox.
+For this, the `AbortSignal` is passed to the `onResolveSuggestions` function so that it can be passed to a fetch request.
+
+<Canvas withToolbar={true}>
+	<Story story={stories.Aborting} name="Aborting resolve suggestions" />
+</Canvas>
+
+### Custom Styles
 
 The example below show custom styling options
 
