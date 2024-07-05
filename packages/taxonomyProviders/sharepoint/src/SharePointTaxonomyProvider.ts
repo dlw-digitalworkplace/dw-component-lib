@@ -20,14 +20,6 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 	// todo: consider some better (sliding?) caching mechanism
 	private cachedTerms?: SP.Taxonomy.Term[];
 
-	private defaultOptions: ITermFilterOptions = {
-		defaultLabelOnly: false,
-		keysToIgnore: [],
-		maxItems: 100,
-		trimDeprecated: true,
-		trimUnavailable: true
-	};
-
 	constructor(siteUrl: string, private termSetIdOrName: string, private lcid: number = 1033) {
 		this.spContext = new SP.ClientContext(siteUrl);
 
@@ -83,7 +75,16 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 		}
 
 		// build final options object
-		options = deepmerge(this.defaultOptions, options);
+		options = deepmerge(
+			{
+				defaultLabelOnly: false,
+				keysToIgnore: [],
+				maxItems: 100,
+				trimDeprecated: true,
+				trimUnavailable: true
+			},
+			options
+		);
 
 		const result: ITerm[] = [];
 
@@ -113,8 +114,14 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 
 			// check if the search string matches any of the term's labels
 			const allLabels = term.get_labels().get_data();
+			const defaultLabel = this._getDefaultTermLabel(term);
+
 			const matcher = typeof search === "string" ? new RegExp(escapeRegExp(search), "i") : search;
-			const hasMatchingLabel = !matcher || allLabels.some((it) => it.get_value().match(matcher));
+			const hasMatchingLabel =
+				!matcher ||
+				(options.defaultLabelOnly
+					? defaultLabel.match(matcher)
+					: allLabels.some((it) => it.get_value().match(matcher)));
 
 			if (!hasMatchingLabel) {
 				// skip term when search string isn't a match
@@ -137,7 +144,13 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 		}
 
 		// build final options object
-		options = deepmerge(this.defaultOptions, options);
+		options = deepmerge(
+			{
+				trimDeprecated: true,
+				trimUnavailable: false
+			},
+			options
+		);
 
 		const result: ITerm[] = [];
 
@@ -147,20 +160,20 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 		}
 
 		// filter based on defined options
-		let terms = this.cachedTerms;
+		let terms = this.cachedTerms || [];
 
 		// skip deprecated term if requested
 		if (options.trimDeprecated) {
-			terms = terms?.filter((t) => !t.get_isDeprecated());
+			terms = terms.filter((t) => !t.get_isDeprecated());
 		}
 
-		// skip unavailable term if requested
+		// skip deprecated term if requested
 		if (options.trimUnavailable) {
-			terms = terms?.filter((t) => t.get_isAvailableForTagging());
+			terms = terms.filter((t) => t.get_isAvailableForTagging());
 		}
 
 		// create a dictionary by term id, containing a tuple with parentid and term
-		const termMap = terms!.reduce<{ [key: string]: [string | null, ITerm] }>((prev, it) => {
+		const termMap = terms.reduce<{ [key: string]: [string | null, ITerm] }>((prev, it) => {
 			const parent = it.get_parent();
 			const parentId = parent.get_serverObjectIsNull() ? null : parent.get_id().toString();
 
@@ -176,8 +189,8 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 			if (!parentId) {
 				// if there is no parent, add it to the root level
 				result.push(term);
-			} else {
-				// if there is a parent, add it as child
+			} else if (termMap[parentId]) {
+				// if there is a parent, and it's not trimmed, add it as child
 				termMap[parentId][1].children!.push(term);
 			}
 		});
@@ -260,6 +273,7 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 			path: input.get_pathOfTerm(),
 			disabled: !input.get_isAvailableForTagging() || input.get_isDeprecated(),
 			additionalProperties: {
+				availableForTagging: input.get_isAvailableForTagging(),
 				deprecated: input.get_isDeprecated(),
 				synonyms: input
 					.get_labels()

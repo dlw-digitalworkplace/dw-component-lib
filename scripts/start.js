@@ -8,14 +8,15 @@ const allPackages = getAllPackageInfo();
 const extraArgs = process.argv.slice(2);
 
 const defaults = [];
+const initProjectName = extraArgs.length > 0 && !extraArgs[0].startsWith("-") ? extraArgs.shift() : null;
 
 const projectsWithStartCommand = Object.entries(allPackages)
 	.reduce((acc, [pkg, info]) => {
-		if (info.packageJson.scripts && info.packageJson.scripts.start) {
+		if (info.packageJson.scripts?.start) {
 			acc.push({ title: pkg, value: { pkg, isWorkspace: true, command: "start" } });
 		}
 
-		if (info.packageJson.scripts && info.packageJson.scripts["start:profile"]) {
+		if (info.packageJson.scripts?.["start:profile"]) {
 			acc.push({ title: `${pkg} (profile)`, value: { pkg, isWorkspace: true, command: "start:profile" } });
 		}
 
@@ -27,28 +28,45 @@ const projectsWithStartCommand = Object.entries(allPackages)
 const suggest = (input, choices) => Promise.resolve(choices.filter((i) => i.title.includes(input)));
 
 (async () => {
-	const response = await prompts({
-		type: "autocomplete",
-		name: "project",
+	let project;
+	const projectChoices = [
+		{
+			title: "@dlw-digitalworkplace/dw-component-lib",
+			value: {
+				pkg: "@dlw-digitalworkplace/dw-component-lib",
+				isWorkspace: false,
+				command: "storybook"
+			}
+		},
+		...defaults.map((p) => ({ title: p, value: { pkg: p, isWorkspace: true, command: "start" } })),
+		...projectsWithStartCommand
+	];
 
-		message: "Which project to start (select or type partial name)?",
-		suggest,
-		choices: [
-			{
-				title: "@dlw-digitalworkplace/dw-component-lib",
-				value: {
-					pkg: "@dlw-digitalworkplace/dw-component-lib",
-					isWorkspace: false,
-					command: "storybook"
-				}
-			},
-			...defaults.map((p) => ({ title: p, value: { pkg: p, isWorkspace: true, command: "start" } })),
-			...projectsWithStartCommand
-		]
-	});
+	if (!initProjectName) {
+		const response = await prompts({
+			type: "autocomplete",
+			name: "project",
 
-	const spawnArgs = response.project.isWorkspace ? ["workspace", response.project.pkg] : [];
-	spawnArgs.push(...[response.project.command, ...(extraArgs.length > 0 ? [extraArgs] : [])]);
+			message: "Which project to start (select or type partial name)?",
+			suggest,
+			choices: projectChoices
+		});
+
+		project = response.project;
+	} else {
+		const matchingProject = projectChoices.filter((it) => it.title === initProjectName)[0];
+
+		if (!!matchingProject) {
+			project = matchingProject.value;
+		} else {
+			throw new Error(
+				`Project ${initProjectName} does not exist in the repository, or doesn't support the start command.`
+			);
+		}
+	}
+
+	const spawnArgs = project.isWorkspace ? ["workspace", project.pkg] : [];
+	spawnArgs.push(...[project.command, ...(extraArgs.length > 0 ? [extraArgs] : [])]);
 
 	spawnSync("yarn", spawnArgs, {
 		shell: true,

@@ -31,22 +31,22 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 	const {
 		labels: labelsProp,
 		allowAddingTerms,
-		allowDisabledTerms,
-		allowDeprecatedTerms,
-		itemLimit,
-		showRootNode,
-		rootNodeLabel,
-		pickerProps,
-		modalProps,
-		dialogContentProps,
 		defaultSelectedItems,
-		onCreateNewTerm,
+		dialogContentProps,
+		itemLimit,
+		modalProps,
 		onConfirm,
+		onCreateNewTerm,
 		onDismiss,
 		onRenderTreeItem,
+		pickerProps,
 		provider,
+		rootNodeLabel,
+		showRootNode,
 		styles,
 		theme,
+		trimDeprecatedTerms,
+		trimUnavailableTerms,
 		...rest
 	} = props;
 	const { className: modalClassName } = modalProps || {};
@@ -88,12 +88,12 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 		(async () => {
 			const filterOptions: Partial<ITermFilterOptions> = {};
 
-			if (allowDeprecatedTerms !== undefined) {
-				filterOptions.trimDeprecated = !allowDeprecatedTerms;
+			if (trimDeprecatedTerms !== undefined) {
+				filterOptions.trimDeprecated = trimDeprecatedTerms;
 			}
 
-			if (allowDisabledTerms !== undefined) {
-				filterOptions.trimUnavailable = !allowDisabledTerms;
+			if (trimUnavailableTerms !== undefined) {
+				filterOptions.trimUnavailable = trimUnavailableTerms;
 			}
 
 			const terms = rfdc()(await provider.getTermTree(filterOptions));
@@ -101,7 +101,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 			setTermTreeItems(terms);
 			setExpandedNodes(showRootNode ? [rootNodeKey] : terms && terms.length > 0 ? [terms[0].key] : []);
 		})();
-	}, [provider, showRootNode, rootNodeKey, allowDeprecatedTerms, allowDisabledTerms]);
+	}, [provider, showRootNode, rootNodeKey, trimDeprecatedTerms, trimUnavailableTerms]);
 
 	React.useEffect(() => {
 		if (!termTreeItems) {

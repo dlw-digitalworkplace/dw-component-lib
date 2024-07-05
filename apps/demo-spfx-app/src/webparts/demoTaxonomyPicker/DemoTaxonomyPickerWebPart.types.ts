@@ -3,7 +3,10 @@ import * as React from "react";
 export interface IDemoTaxonomyPickerWebPartProps {
 	allowAddingTerms: boolean;
 	allowDeprecatedTerms: boolean;
+	allowDisabledTerms: boolean;
 	preCacheTerms: boolean;
+	showDeprecatedTerms: boolean;
+	showDisabledTerms: boolean;
 	termSetIdOrName: string;
 }
 
