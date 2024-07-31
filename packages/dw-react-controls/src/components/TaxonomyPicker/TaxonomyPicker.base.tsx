@@ -25,6 +25,8 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	allowAddingTerms,
 	allowDeprecatedTerms,
 	allowDisabledTerms,
+	allowDeprecatedTermSelection = allowDeprecatedTerms,
+	allowDisabledTermSelection = allowDisabledTerms,
 	className,
 	disabled,
 	errorMessage: errorMessageProp,
@@ -139,8 +141,8 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 
 		const findOptions: Partial<ITermFilterOptions> = {
 			keysToIgnore: currentSelection?.map((it) => it.key),
-			trimDeprecated: !allowDeprecatedTerms,
-			trimUnavailable: !allowDisabledTerms
+			trimDeprecated: !allowDeprecatedTermSelection,
+			trimUnavailable: !allowDisabledTermSelection
 		};
 
 		// retrieve the available terms
@@ -350,8 +352,6 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 					{...dialogProps}
 					provider={provider}
 					allowAddingTerms={allowAddingTerms}
-					allowDisabledTerms={allowDisabledTerms}
-					allowDeprecatedTerms={allowDeprecatedTerms}
 					defaultSelectedItems={selectedItems}
 					hidden={!dialogIsOpen}
 					itemLimit={itemLimit}

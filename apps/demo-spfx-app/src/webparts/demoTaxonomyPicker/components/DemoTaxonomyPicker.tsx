@@ -12,7 +12,15 @@ import styles from "./DemoTaxonomyPicker.module.scss";
 import { IDemoTaxonomyPickerProps } from "./DemoTaxonomyPicker.types";
 
 export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) => {
-	const { allowAddingTerms, allowDeprecatedTerms, preCacheTerms, termSetIdOrName } = props;
+	const {
+		allowAddingTerms,
+		allowDeprecatedTerms,
+		allowDisabledTerms,
+		preCacheTerms,
+		showDeprecatedTerms,
+		showDisabledTerms,
+		termSetIdOrName
+	} = props;
 
 	const { siteUrl } = React.useContext(WebPartContext);
 	const [selectedItems, setSelectedItems] = React.useState<ITermValue[]>([]);
@@ -52,7 +60,8 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 		<div className={styles.demoTaxonomyPicker}>
 			<TaxonomyPicker
 				allowAddingTerms={allowAddingTerms && providerAllowsAddingTerms}
-				allowDeprecatedTerms={allowDeprecatedTerms}
+				allowDeprecatedTermSelection={allowDeprecatedTerms}
+				allowDisabledTermSelection={allowDisabledTerms}
 				disabled={!provider}
 				onChange={setSelectedItems}
 				provider={provider}
@@ -64,6 +73,8 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 					},
 					rootNodeLabel: "Terms",
 					showRootNode: true,
+					trimDeprecatedTerms: !showDeprecatedTerms,
+					trimUnavailableTerms: !showDisabledTerms,
 					onRenderTreeItem: (props, defaultRender) => {
 						return defaultRender({
 							...props,

@@ -5,34 +5,38 @@ import { ITermAdderLabels } from "../TermAdder";
 import { ITaxonomyProvider, ITerm, ITermCreationResult } from "../models";
 
 export interface ITaxonomyPickerDialogLabels {
-	okButton?: string;
-	cancelButton?: string;
 	addButton?: string;
-	replaceButton?: string;
 	addNewTermAction?: string;
+	cancelButton?: string;
+	okButton?: string;
+	replaceButton?: string;
 	termAdderLabels?: ITermAdderLabels;
 }
 
 interface ITaxonomyPickerDialogPropsBase {
 	allowAddingTerms?: boolean;
 
-	allowDisabledTerms?: boolean;
-
-	allowDeprecatedTerms?: boolean;
-
-	provider: ITaxonomyProvider;
-
-	showRootNode?: boolean;
-
-	rootNodeLabel?: string;
-
 	defaultSelectedItems?: ITermValue[];
-
-	pickerProps: ITermPickerProps;
 
 	itemLimit?: number;
 
 	labels?: ITaxonomyPickerDialogLabels;
+
+	pickerProps: ITermPickerProps;
+
+	provider: ITaxonomyProvider;
+
+	rootNodeLabel?: string;
+
+	showRootNode?: boolean;
+
+	trimDeprecatedTerms?: boolean;
+
+	trimUnavailableTerms?: boolean;
+
+	onConfirm?(terms?: ITermValue[]): void;
+
+	onCreateNewTerm?(newValue: string, parentId?: string): PromiseLike<void | ITermCreationResult>;
 
 	/**
 	 * When specified it will override the default rendering of the tree items
@@ -48,10 +52,6 @@ interface ITaxonomyPickerDialogPropsBase {
 	 * The current theme applied to the control
 	 */
 	theme?: ITheme;
-
-	onConfirm?(terms?: ITermValue[]): void;
-
-	onCreateNewTerm?(newValue: string, parentId?: string): PromiseLike<void | ITermCreationResult>;
 }
 
 export type ITaxonomyPickerDialogProps = ITaxonomyPickerDialogPropsBase & IDialogProps;
@@ -64,10 +64,10 @@ export interface ITaxonomyPickerDialogStyleProps {
 
 export interface ITaxonomyPickerDialogStyles {
 	dialog?: IStyle;
-	content?: IStyle;
-	treeContainer?: IStyle;
-	inputsContainer?: IStyle;
-	addButton?: IStyle;
-	picker?: IStyle;
 	actions?: IStyle;
+	addButton?: IStyle;
+	content?: IStyle;
+	inputsContainer?: IStyle;
+	picker?: IStyle;
+	treeContainer?: IStyle;
 }

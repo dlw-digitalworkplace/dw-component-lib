@@ -1,12 +1,12 @@
 import { Version } from "@microsoft/sp-core-library";
-import { SPComponentLoader } from "@microsoft/sp-loader";
+import { ILoadScriptOptions, SPComponentLoader } from "@microsoft/sp-loader";
 import { IPropertyPaneConfiguration, PropertyPaneTextField, PropertyPaneToggle } from "@microsoft/sp-property-pane";
 import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
 import * as strings from "DemoTaxonomyPickerWebPartStrings";
 import * as React from "react";
 import * as ReactDom from "react-dom";
-import { DemoTaxonomyPicker } from "./components/DemoTaxonomyPicker";
 import { IDemoTaxonomyPickerWebPartProps, IWebPartContext, WebPartContext } from "./DemoTaxonomyPickerWebPart.types";
+import { DemoTaxonomyPicker } from "./components/DemoTaxonomyPicker";
 
 export default class DemoTaxonomyPickerWebPart extends BaseClientSideWebPart<IDemoTaxonomyPickerWebPartProps> {
 	protected async onInit(): Promise<void> {
@@ -23,6 +23,9 @@ export default class DemoTaxonomyPickerWebPart extends BaseClientSideWebPart<IDe
 				<DemoTaxonomyPicker
 					allowAddingTerms={this.properties.allowAddingTerms}
 					allowDeprecatedTerms={this.properties.allowDeprecatedTerms}
+					allowDisabledTerms={this.properties.allowDisabledTerms}
+					showDeprecatedTerms={this.properties.showDeprecatedTerms}
+					showDisabledTerms={this.properties.showDisabledTerms}
 					preCacheTerms={this.properties.preCacheTerms}
 					termSetIdOrName={this.properties.termSetIdOrName}
 				/>
@@ -56,6 +59,15 @@ export default class DemoTaxonomyPickerWebPart extends BaseClientSideWebPart<IDe
 								PropertyPaneToggle("allowDeprecatedTerms", {
 									label: strings.AllowDeprecatedTermsLabel
 								}),
+								PropertyPaneToggle("allowDisabledTerms", {
+									label: strings.AllowDisabledTermsLabel
+								}),
+								PropertyPaneToggle("showDeprecatedTerms", {
+									label: strings.ShowDeprecatedTermsLabel
+								}),
+								PropertyPaneToggle("showDisabledTerms", {
+									label: strings.ShowDisabledTermsLabel
+								}),
 								PropertyPaneToggle("preCacheTerms", {
 									label: strings.PreCacheTermsFieldLabel
 								})
@@ -68,12 +80,19 @@ export default class DemoTaxonomyPickerWebPart extends BaseClientSideWebPart<IDe
 	}
 
 	private async _loadSPDependencies(): Promise<void> {
-		const siteUrl = this.context.pageContext.site.serverRelativeUrl;
+		const loadScript = (url: string, options?: ILoadScriptOptions): Promise<unknown> => {
+			let siteUrl = this.context.pageContext.site.serverRelativeUrl;
+			siteUrl = siteUrl.endsWith("/") ? siteUrl.substring(0, siteUrl.length - 1) : siteUrl;
 
-		await SPComponentLoader.loadScript(`${siteUrl}/_layouts/15/init.js`, { globalExportsName: "$_global_init" });
-		await SPComponentLoader.loadScript(`${siteUrl}/_layouts/15/MicrosoftAjax.js`, { globalExportsName: "Sys" });
-		await SPComponentLoader.loadScript(`${siteUrl}/_layouts/15/SP.Runtime.js`, { globalExportsName: "SP" });
-		await SPComponentLoader.loadScript(`${siteUrl}/_layouts/15/SP.js`, { globalExportsName: "SP" });
-		await SPComponentLoader.loadScript(`${siteUrl}/_layouts/15/SP.Taxonomy.js`, { globalExportsName: "SP" });
+			url = url.startsWith("/") ? url.substring(1) : url;
+
+			return SPComponentLoader.loadScript(`${siteUrl}/${url}`, options);
+		};
+
+		await loadScript("/_layouts/15/init.js", { globalExportsName: "$_global_init" });
+		await loadScript("/_layouts/15/MicrosoftAjax.js", { globalExportsName: "Sys" });
+		await loadScript("/_layouts/15/SP.Runtime.js", { globalExportsName: "SP" });
+		await loadScript("/_layouts/15/SP.js", { globalExportsName: "SP" });
+		await loadScript("/_layouts/15/SP.Taxonomy.js", { globalExportsName: "SP" });
 	}
 }

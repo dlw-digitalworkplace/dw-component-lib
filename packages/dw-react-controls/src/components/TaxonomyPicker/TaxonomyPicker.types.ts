@@ -6,9 +6,18 @@ import { ITaxonomyProvider } from "./models";
 export interface ITaxonomyPickerProps {
 	allowAddingTerms?: boolean;
 
+	/**
+	 * @deprecated Use allowDeprecatedTermSelection instead
+	 */
 	allowDeprecatedTerms?: boolean;
-
+	/**
+	 * @deprecated Use allowDisabledTermSelection instead
+	 */
 	allowDisabledTerms?: boolean;
+
+	allowDeprecatedTermSelection?: boolean;
+
+	allowDisabledTermSelection?: boolean;
 
 	/**
 	 * Optional class for the root TaxonomyPicker element
@@ -19,7 +28,15 @@ export interface ITaxonomyPickerProps {
 
 	dialogProps?: Pick<
 		ITaxonomyPickerDialogProps,
-		"className" | "dialogContentProps" | "labels" | "onRenderTreeItem" | "rootNodeLabel" | "showRootNode" | "styles"
+		| "className"
+		| "dialogContentProps"
+		| "labels"
+		| "onRenderTreeItem"
+		| "rootNodeLabel"
+		| "showRootNode"
+		| "styles"
+		| "trimDeprecatedTerms"
+		| "trimUnavailableTerms"
 	>;
 
 	disabled?: boolean;
@@ -45,9 +62,9 @@ export interface ITaxonomyPickerProps {
 
 	theme?: ITheme;
 
-	onRenderOpenDialogButton?: IRenderFunction<ITaxonomyPickerDialogButtonProps>;
-
 	onChange(items: ITermValue[]): void;
+
+	onGetErrorMessage?(selectedItems: ITermValue[]): string | JSX.Element | PromiseLike<string | JSX.Element> | undefined;
 
 	/**
 	 * When specified, allows to override the error message that is being set when creating a new term fails.
@@ -65,7 +82,7 @@ export interface ITaxonomyPickerProps {
 	 */
 	onReceiveTermCreationSuccessMessage?(newValue: string, message: string): string | JSX.Element;
 
-	onGetErrorMessage?(selectedItems: ITermValue[]): string | JSX.Element | PromiseLike<string | JSX.Element> | undefined;
+	onRenderOpenDialogButton?: IRenderFunction<ITaxonomyPickerDialogButtonProps>;
 }
 
 export interface ITaxonomyPickerStyleProps {
@@ -75,9 +92,9 @@ export interface ITaxonomyPickerStyleProps {
 
 export interface ITaxonomyPickerStyles {
 	root?: IStyle;
+	errorMessage?: IStyle;
 	inputWrapper?: IStyle;
 	input?: IStyle;
-	errorMessage?: IStyle;
 	successMessage?: IStyle;
 }
 

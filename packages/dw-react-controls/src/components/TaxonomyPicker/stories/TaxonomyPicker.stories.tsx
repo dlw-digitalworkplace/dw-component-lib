@@ -14,8 +14,8 @@ const defaultArgTypes = {
 
 const defaultArgs: Partial<ITaxonomyPickerProps> = {
 	allowAddingTerms: false,
-	allowDeprecatedTerms: false,
-	allowDisabledTerms: false,
+	allowDeprecatedTermSelection: false,
+	allowDisabledTermSelection: false,
 	itemLimit: 3,
 	label: "Demo taxonomy picker",
 	required: false,

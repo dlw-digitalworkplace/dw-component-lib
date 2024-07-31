@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "improve handling disabled terms in term tree (BREAKING!)",
+  "packageName": "@dlw-digitalworkplace/dw-react-controls",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch"
+}
