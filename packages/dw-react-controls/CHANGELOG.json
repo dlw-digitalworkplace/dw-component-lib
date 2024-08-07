@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-react-controls",
   "entries": [
     {
+      "date": "Wed, 07 Aug 2024 11:55:07 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-controls_v1.5.0",
+      "version": "1.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "nick.sevens@delaware.pro",
+            "package": "@dlw-digitalworkplace/dw-react-controls",
+            "commit": "84894fa15e9fcb0958ef9b6582c6e94f160b920b",
+            "comment": "improve handling disabled terms in term tree (BREAKING!)"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 29 Feb 2024 07:33:13 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-controls_v1.4.0",
       "version": "1.4.0",

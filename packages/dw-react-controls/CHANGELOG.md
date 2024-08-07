@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-controls
 
-This log was last generated on Thu, 29 Feb 2024 07:33:13 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Aug 2024 11:55:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.5.0
+
+Wed, 07 Aug 2024 11:55:07 GMT
+
+### Minor changes
+
+- improve handling disabled terms in term tree (BREAKING!) (nick.sevens@delaware.pro)
 
 ## 1.4.0
 

@@ -9,11 +9,11 @@
     "start": "gulp serve"
   },
   "dependencies": {
-    "@dlw-digitalworkplace/dw-react-controls": "1.4.0",
+    "@dlw-digitalworkplace/dw-react-controls": "1.5.0",
     "@dlw-digitalworkplace/dw-spfx-controls": "2.0.2",
-    "@dlw-digitalworkplace/peoplepickerprovider-graph": "0.3.4",
-    "@dlw-digitalworkplace/peoplepickerprovider-sharepoint": "0.2.9",
-    "@dlw-digitalworkplace/taxonomyprovider-sharepoint": "0.2.2",
+    "@dlw-digitalworkplace/peoplepickerprovider-graph": "0.3.5",
+    "@dlw-digitalworkplace/peoplepickerprovider-sharepoint": "0.2.10",
+    "@dlw-digitalworkplace/taxonomyprovider-sharepoint": "0.2.3",
     "@fluentui/react": "8.104.0",
     "@microsoft/sp-core-library": "1.16.0",
     "@microsoft/sp-lodash-subset": "1.16.0",
