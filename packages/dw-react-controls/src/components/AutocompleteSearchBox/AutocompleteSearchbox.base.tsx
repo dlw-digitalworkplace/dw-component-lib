@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { ISearchBoxStyles, SearchBox } from "@fluentui/react/lib/components/SearchBox";
 import { IAutocompleteSearchBoxProps, IAutocompleteSearchBoxStyleProps, IAutocompleteSearchBoxStyles } from "./AutocompleteSearchBox.types";
-import { classNamesFunction } from "@fluentui/react/lib/Utilities";
+import { classNamesFunction, composeRenderFunction } from "@fluentui/react/lib/Utilities";
 import { IconButton } from "@fluentui/react/lib/components/Button";
 import { Callout, ICalloutContentStyles } from "@fluentui/react/lib/Callout";
 import { IProgressIndicatorStyles, ProgressIndicator } from "@fluentui/react/lib/components/ProgressIndicator";
@@ -11,12 +11,13 @@ import { FocusZone, FocusZoneDirection, IFocusZone } from "@fluentui/react/lib/F
 import { ILinkStyles, Link } from "@fluentui/react/lib/Link";
 import { IHighlightedSuggestionStyles } from "./HighlightedSuggestion/HighlightedSuggestion.types";
 import { HighlightedSuggestion } from "./HighlightedSuggestion/HighlightedSuggestion";
+import { ISuggestion } from "./models/ISuggestion";
 
 const getClassNames = classNamesFunction<IAutocompleteSearchBoxStyleProps, IAutocompleteSearchBoxStyles>();
 
-export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = (props) => {
+export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps<string | ISuggestion>> = (props) => {
 	const { className, styles, theme, value, calloutTitle, calloutProps, showIcon } = props;
-	const { onResolveSuggestions, onFocusResolveSuggestions } = props;
+	const { onResolveSuggestions, onFocusResolveSuggestions, onRenderSuggestion } = props;
 
 	// Controller
 	const onResolveController = React.useRef<AbortController>();
@@ -39,7 +40,7 @@ export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = 
 	const calloutZone = React.useRef<IFocusZone>(null);
 	const [searchboxValue, setSearchboxValue] = React.useState<string>("");
 	const [searbhboxOriginalValue, setSearchboxOriginalValue] = React.useState<string>("");
-	const [suggestions, setSuggestions] = React.useState<string[]>([]);
+	const [suggestions, setSuggestions] = React.useState<(string | ISuggestion)[]>([]);
 	const [isResolving, setIsResolving] = React.useState(false);
 	const [isCalloutVisible, setIsCalloutVisible] = React.useState(false);
 	const [isCalloutFocussed, setIsCalloutFocussed] = React.useState(false)
@@ -200,11 +201,7 @@ export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = 
 			props.onFocus && props.onFocus(event);
 		}
 	};
-	const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-		setSuggestions([]);
-		props.onBlur && props.onBlur(event);
-	}
-	const onSearch = (newValue: string) => {
+	const onSearch = (newValue: string | ISuggestion) => {
 		setIsCalloutVisible(false);
 		setIsCalloutFocussed(false);
 		setSuggestions([]);
@@ -231,27 +228,25 @@ export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = 
 	//#endregion
 
 	//#region Render functions
-	const renderSuggestion = (suggestion: string, index: number) => {
+	const defaultRenderSuggestion = (suggestion: string | ISuggestion) => {
+		const text = typeof suggestion === "string" ? suggestion : suggestion.suggestion;
 		return (
-			<div className={classNames.suggestion} role="listitem" key={index}>
-				<Link
-					className={classNames.suggestionLink}
-					styles={(classNames.subComponentStyles as any).suggestionLink as ILinkStyles}
-					onClick={onSearch ? () => onSearch(suggestion) : undefined}
-				>
-					{withHighlighting ? (
-						<HighlightedSuggestion
-							text={suggestion}
-							filter={searbhboxOriginalValue}
-							styles={(classNames.subComponentStyles as any).highlightedSuggestion as IHighlightedSuggestionStyles}
-						/>
-					) : (
-						<>{suggestion}</>
-					)}
-				</Link>
-			</div>
+			<>
+				{withHighlighting ? (
+					<HighlightedSuggestion
+						text={text}
+						filter={searbhboxOriginalValue}
+						styles={(classNames.subComponentStyles as any).highlightedSuggestion as IHighlightedSuggestionStyles}
+					/>
+				) : (
+					<>{text}</>
+				)}
+			</>
 		);
 	};
+	const renderSuggestion = onRenderSuggestion
+		? composeRenderFunction(onRenderSuggestion, defaultRenderSuggestion)
+		: defaultRenderSuggestion;
 	//#endregion
 
 	return (
@@ -267,7 +262,6 @@ export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = 
 					onChange={onChange}
 					onClear={onClear}
 					onFocus={onFocus}
-					onBlur={onBlur}
 					onSearch={onSearch}
 					onKeyDown={onSearchBoxKeyDown}
 					value={searchboxValue}
@@ -303,7 +297,17 @@ export const AutocompleteSearchBoxBase: React.FC<IAutocompleteSearchBoxProps> = 
 						onKeyDown={onFocusZoneKeyDown}
 					>
 						<div className={classNames.calloutContent}>
-							{suggestions?.map(renderSuggestion)}
+							{suggestions?.map((suggestion, index) => (
+								<Link
+									className={classNames.suggestionLink}
+									styles={(classNames.subComponentStyles as any).suggestionLink as ILinkStyles}
+									onClick={onSearch ? () => onSearch(suggestion) : undefined}
+								>
+									<div className={classNames.suggestion} role="listitem" key={index}>
+										{renderSuggestion(suggestion)}
+									</div>
+								</Link>
+							))}
 						</div>
 					</FocusZone>
 				</Callout>

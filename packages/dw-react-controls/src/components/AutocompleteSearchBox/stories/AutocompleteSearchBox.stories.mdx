@@ -65,6 +65,23 @@ For this, the `AbortSignal` is passed to the `onResolveSuggestions` function so 
 	<Story story={stories.Aborting} name="Aborting resolve suggestions" />
 </Canvas>
 
+### Custom suggestion render
+
+There is an option to customize the suggestion rendering by using the `onRenderSuggestion` property.
+The `onRenderSuggestion` function receives the suggestion and a default render function as arguments and should return a React element.
+
+<Canvas withToolbar={true}>
+	<Story story={stories.CustomSuggestionRender} name="Custom suggestion render" />
+</Canvas>
+
+### Custom suggestion object
+
+TODO
+
+<Canvas withToolbar={true}>
+	<Story story={stories.CustomSuggestionObject} name="Custom suggestion object" />
+</Canvas>
+
 ### Custom Styles
 
 The example below show custom styling options
