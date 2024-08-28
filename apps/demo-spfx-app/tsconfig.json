@@ -18,7 +18,10 @@
 		"strictNullChecks": false,
 		"target": "es5",
 		"typeRoots": ["./node_modules/@types", "./node_modules/@microsoft"],
-		"types": ["node", "webpack-env"]
+		"types": ["node", "webpack-env"],
+		"paths": {
+			"react": ["../../node_modules/@types/react"]
+		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.tsx"]
 }
