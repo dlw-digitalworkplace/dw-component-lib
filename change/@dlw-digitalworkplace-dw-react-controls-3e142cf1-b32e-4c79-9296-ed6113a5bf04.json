@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "feat: React v18 support for react-components",
+  "packageName": "@dlw-digitalworkplace/dw-react-controls",
+  "email": "robin.agten@gmail.com",
+  "dependentChangeType": "patch"
+}

@@ -17,7 +17,7 @@ import { IUser } from "./models/IUser";
 export interface IPeoplePickerProps
 	extends Omit<
 		IBasePickerProps<PeoplePickerValue>,
-		"onRenderItem" | "onRenderSuggestionsItem" | "onResolveSuggestions"
+		"styles" | "onRenderItem" | "onRenderSuggestionsItem" | "onResolveSuggestions"
 	> {
 	/**
 	 * Optional parameter to provide an error message to the component
