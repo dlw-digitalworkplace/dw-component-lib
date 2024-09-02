@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-react-controls",
   "entries": [
     {
+      "date": "Mon, 02 Sep 2024 07:53:23 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-controls_v1.6.0",
+      "version": "1.6.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "robin.agten@gmail.com",
+            "package": "@dlw-digitalworkplace/dw-react-controls",
+            "commit": "8418eec80908ca28336a9214e56c07dec8caf8c4",
+            "comment": "feat: React v18 support for react-components"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 07 Aug 2024 11:55:07 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-controls_v1.5.0",
       "version": "1.5.0",

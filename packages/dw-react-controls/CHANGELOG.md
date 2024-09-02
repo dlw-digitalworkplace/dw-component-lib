@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-controls
 
-This log was last generated on Wed, 07 Aug 2024 11:55:07 GMT and should not be manually modified.
+This log was last generated on Mon, 02 Sep 2024 07:53:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.6.0
+
+Mon, 02 Sep 2024 07:53:23 GMT
+
+### Minor changes
+
+- feat: React v18 support for react-components (robin.agten@gmail.com)
 
 ## 1.5.0
 

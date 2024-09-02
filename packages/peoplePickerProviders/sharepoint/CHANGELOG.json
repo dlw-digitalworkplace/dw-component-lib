@@ -2,6 +2,27 @@
   "name": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint",
   "entries": [
     {
+      "date": "Mon, 02 Sep 2024 07:53:23 GMT",
+      "tag": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint_v0.2.11",
+      "version": "0.2.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint",
+            "comment": "Bump @dlw-digitalworkplace/peoplepickerprovider-graph to v0.3.6",
+            "commit": "8418eec80908ca28336a9214e56c07dec8caf8c4"
+          },
+          {
+            "author": "beachball",
+            "package": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint",
+            "comment": "Bump @dlw-digitalworkplace/dw-react-controls to v1.6.0",
+            "commit": "8418eec80908ca28336a9214e56c07dec8caf8c4"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 07 Aug 2024 11:55:07 GMT",
       "tag": "@dlw-digitalworkplace/peoplepickerprovider-sharepoint_v0.2.10",
       "version": "0.2.10",
