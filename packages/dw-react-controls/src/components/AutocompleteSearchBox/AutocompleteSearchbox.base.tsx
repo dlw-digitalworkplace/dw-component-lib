@@ -1,11 +1,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { ISearchBoxStyles, SearchBox } from "@fluentui/react/lib/components/SearchBox";
+import { ISearchBoxStyles, SearchBox } from "@fluentui/react/lib/SearchBox";
 import { IAutocompleteSearchBoxProps, IAutocompleteSearchBoxStyleProps, IAutocompleteSearchBoxStyles } from "./AutocompleteSearchBox.types";
 import { classNamesFunction } from "@fluentui/react/lib/Utilities";
-import { IconButton } from "@fluentui/react/lib/components/Button";
+import { IconButton } from "@fluentui/react/lib/Button";
 import { Callout, DirectionalHint, ICalloutContentStyles } from "@fluentui/react/lib/Callout";
-import { IProgressIndicatorStyles, ProgressIndicator } from "@fluentui/react/lib/components/ProgressIndicator";
+import { IProgressIndicatorStyles, ProgressIndicator } from "@fluentui/react/lib/ProgressIndicator";
 import { useDebounceFn } from "@dlw-digitalworkplace/dw-react-utils";
 import { FocusZone, FocusZoneDirection, IFocusZone } from "@fluentui/react/lib/FocusZone";
 import { ILinkStyles, Link } from "@fluentui/react/lib/Link";
