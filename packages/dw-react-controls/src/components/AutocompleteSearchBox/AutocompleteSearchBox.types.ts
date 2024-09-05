@@ -1,20 +1,13 @@
 import { ILinkStyleProps, ILinkStyles } from "@fluentui/react";
-import {
-	ICalloutContentStyleProps,
-	ICalloutContentStyles,
-	ICalloutProps
-} from "@fluentui/react/lib/components/Callout";
-import { ISearchBoxProps, ISearchBoxStyleProps, ISearchBoxStyles } from "@fluentui/react/lib/components/SearchBox";
+import { ICalloutContentStyleProps, ICalloutContentStyles, ICalloutProps } from "@fluentui/react/lib/Callout";
+import { ISearchBoxProps, ISearchBoxStyleProps, ISearchBoxStyles } from "@fluentui/react/lib/SearchBox";
 import { IStyle, ITheme } from "@fluentui/react/lib/Styling";
 import { IStyleFunctionOrObject } from "@fluentui/react/lib/Utilities";
 import {
 	IHighlightedSuggestionStyleProps,
 	IHighlightedSuggestionStyles
 } from "./HighlightedSuggestion/HighlightedSuggestion.types";
-import {
-	IProgressIndicatorStyleProps,
-	IProgressIndicatorStyles
-} from "@fluentui/react/lib/components/ProgressIndicator";
+import { IProgressIndicatorStyleProps, IProgressIndicatorStyles } from "@fluentui/react/lib/ProgressIndicator";
 
 export interface IAutocompleteSearchBoxProps extends ISearchBoxProps {
 	styles?: IStyleFunctionOrObject<IAutocompleteSearchBoxStyleProps, IAutocompleteSearchBoxStyles>;
