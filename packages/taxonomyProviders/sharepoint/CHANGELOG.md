@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/taxonomyprovider-sharepoint
 
-This log was last generated on Mon, 02 Sep 2024 07:53:23 GMT and should not be manually modified.
+This log was last generated on Thu, 05 Sep 2024 05:34:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.5
+
+Thu, 05 Sep 2024 05:34:10 GMT
+
+### Patches
+
+- Bump @dlw-digitalworkplace/dw-react-controls to v1.6.1
 
 ## 0.2.4
 

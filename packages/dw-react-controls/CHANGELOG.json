@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-react-controls",
   "entries": [
     {
+      "date": "Thu, 05 Sep 2024 05:34:10 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-controls_v1.6.1",
+      "version": "1.6.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "robin.agten@gmail.com",
+            "package": "@dlw-digitalworkplace/dw-react-controls",
+            "commit": "d5cf7d889c9b560b8db4a30cb7bbf8941130f1a3",
+            "comment": "fix: Fluent UI Component imports"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 02 Sep 2024 07:53:23 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-controls_v1.6.0",
       "version": "1.6.0",

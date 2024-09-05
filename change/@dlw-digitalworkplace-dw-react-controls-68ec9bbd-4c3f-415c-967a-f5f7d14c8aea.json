@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix: Fluent UI Component imports",
-  "packageName": "@dlw-digitalworkplace/dw-react-controls",
-  "email": "robin.agten@gmail.com",
-  "dependentChangeType": "patch"
-}

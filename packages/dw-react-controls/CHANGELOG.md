@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-controls
 
-This log was last generated on Mon, 02 Sep 2024 07:53:23 GMT and should not be manually modified.
+This log was last generated on Thu, 05 Sep 2024 05:34:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.6.1
+
+Thu, 05 Sep 2024 05:34:10 GMT
+
+### Patches
+
+- fix: Fluent UI Component imports (robin.agten@gmail.com)
 
 ## 1.6.0
 
