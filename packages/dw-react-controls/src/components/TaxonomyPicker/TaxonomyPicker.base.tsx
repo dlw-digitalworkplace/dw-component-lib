@@ -30,6 +30,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	className,
 	disabled,
 	errorMessage: errorMessageProp,
+	inputProps,
 	itemLimit,
 	label,
 	labelProps,
@@ -327,7 +328,8 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 					createGenericItem={onCreateGenericItem}
 					disabled={disabled || isCreatingTerm}
 					inputProps={{
-						id: inputId
+						id: inputId,
+						...inputProps
 					}}
 					isInvalid={!!errorMessage ? true : undefined}
 					itemLimit={itemLimit}

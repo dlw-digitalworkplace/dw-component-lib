@@ -1,4 +1,4 @@
-import { ILabelProps, IRenderFunction, IStyle, IStyleFunctionOrObject, ITheme } from "@fluentui/react";
+import { IInputProps, ILabelProps, IRenderFunction, IStyle, IStyleFunctionOrObject, ITheme } from "@fluentui/react";
 import { ITermPickerProps, ITermValue } from "../TermPicker";
 import { ITaxonomyPickerDialogProps } from "./TaxonomyPickerDialog";
 import { ITaxonomyProvider } from "./models";
@@ -40,6 +40,8 @@ export interface ITaxonomyPickerProps {
 	>;
 
 	disabled?: boolean;
+
+	inputProps?: IInputProps;
 
 	itemLimit?: number;
 
