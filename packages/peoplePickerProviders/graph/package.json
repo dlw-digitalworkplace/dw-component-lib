@@ -1,6 +1,6 @@
 {
   "name": "@dlw-digitalworkplace/peoplepickerprovider-graph",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -17,7 +17,7 @@
     "test": "just-scripts test"
   },
   "devDependencies": {
-    "@dlw-digitalworkplace/dw-react-controls": "^1.6.1",
+    "@dlw-digitalworkplace/dw-react-controls": "^1.7.0",
     "@dw-component-lib/build": "^1.0.0",
     "@microsoft/microsoft-graph-types": "^2.13.0",
     "@types/jest": "^26.0.14",

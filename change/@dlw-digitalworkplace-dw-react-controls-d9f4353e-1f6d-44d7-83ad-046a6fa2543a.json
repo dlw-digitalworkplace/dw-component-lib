@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add inputprops to taxonomypicker",
-  "packageName": "@dlw-digitalworkplace/dw-react-controls",
-  "email": "stef.santens@delaware.pro",
-  "dependentChangeType": "patch"
-}

@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
   "entries": [
     {
+      "date": "Fri, 27 Sep 2024 13:04:22 GMT",
+      "tag": "@dlw-digitalworkplace/taxonomyprovider-sharepoint_v0.2.6",
+      "version": "0.2.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
+            "comment": "Bump @dlw-digitalworkplace/dw-react-controls to v1.7.0",
+            "commit": "5c55a235729dd6dc4931c8295ad683eaf1de6bb6"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 05 Sep 2024 05:34:10 GMT",
       "tag": "@dlw-digitalworkplace/taxonomyprovider-sharepoint_v0.2.5",
       "version": "0.2.5",

@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-controls
 
-This log was last generated on Thu, 05 Sep 2024 05:34:10 GMT and should not be manually modified.
+This log was last generated on Fri, 27 Sep 2024 13:04:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.7.0
+
+Fri, 27 Sep 2024 13:04:22 GMT
+
+### Minor changes
+
+- Add inputprops to taxonomypicker (stef.santens@delaware.pro)
 
 ## 1.6.1
 
