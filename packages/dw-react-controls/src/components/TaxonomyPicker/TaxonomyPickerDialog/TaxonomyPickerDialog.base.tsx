@@ -347,7 +347,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 					onChange={handlePickerChange}
 					styles={{
 						text: {
-							maxHeight: "125px",
+							maxHeight: "122px",
 							overflowY: "auto"
 						}
 					}}
