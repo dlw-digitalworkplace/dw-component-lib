@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix(TaxPicker): prevent hidden OK button below fold",
+  "packageName": "@dlw-digitalworkplace/dw-react-controls",
+  "email": "pieter.heemeryck@delaware.pro",
+  "dependentChangeType": "patch"
+}
