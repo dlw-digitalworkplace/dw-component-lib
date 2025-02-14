@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-react-controls",
   "entries": [
     {
+      "date": "Fri, 14 Feb 2025 15:22:29 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-controls_v1.7.1",
+      "version": "1.7.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "pieter.heemeryck@delaware.pro",
+            "package": "@dlw-digitalworkplace/dw-react-controls",
+            "commit": "131df8bf6a6df935c12cdb090878e36b7eb5b34c",
+            "comment": "fix(TaxPicker): prevent hidden OK button below fold"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 27 Sep 2024 13:04:22 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-controls_v1.7.0",
       "version": "1.7.0",

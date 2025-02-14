@@ -1,8 +1,17 @@
 # Change Log - @dlw-digitalworkplace/peoplepickerprovider-sharepoint
 
-This log was last generated on Fri, 27 Sep 2024 13:04:22 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Feb 2025 15:22:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.14
+
+Fri, 14 Feb 2025 15:22:29 GMT
+
+### Patches
+
+- Bump @dlw-digitalworkplace/peoplepickerprovider-graph to v0.3.9
+- Bump @dlw-digitalworkplace/dw-react-controls to v1.7.1
 
 ## 0.2.13
 

@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-controls
 
-This log was last generated on Fri, 27 Sep 2024 13:04:22 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Feb 2025 15:22:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.7.1
+
+Fri, 14 Feb 2025 15:22:29 GMT
+
+### Patches
+
+- fix(TaxPicker): prevent hidden OK button below fold (pieter.heemeryck@delaware.pro)
 
 ## 1.7.0
 
