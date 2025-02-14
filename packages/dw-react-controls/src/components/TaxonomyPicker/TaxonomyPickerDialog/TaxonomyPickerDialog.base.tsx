@@ -345,6 +345,12 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 					itemLimit={itemLimit}
 					selectedItems={selectedItems}
 					onChange={handlePickerChange}
+					styles={{
+						text: {
+							maxHeight: "125px",
+							overflowY: "auto"
+						}
+					}}
 				/>
 			</div>
 
