@@ -348,7 +348,11 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 					styles={{
 						text: {
 							maxHeight: "122px",
-							overflowY: "auto"
+							overflowY: "auto",
+							"::after": {
+								inset: "0px",
+								border: "none"
+							}
 						}
 					}}
 				/>
