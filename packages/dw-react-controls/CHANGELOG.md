@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-controls
 
-This log was last generated on Fri, 14 Feb 2025 15:22:29 GMT and should not be manually modified.
+This log was last generated on Mon, 17 Feb 2025 12:58:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.7.2
+
+Mon, 17 Feb 2025 12:58:43 GMT
+
+### Patches
+
+- fix(TaxonomyPicker): fix visual when focused (pieter.heemeryck@delaware.pro)
 
 ## 1.7.1
 
