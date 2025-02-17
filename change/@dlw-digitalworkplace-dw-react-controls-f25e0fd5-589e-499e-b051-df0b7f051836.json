@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix(TaxonomyPicker): fix visual when focused",
+  "packageName": "@dlw-digitalworkplace/dw-react-controls",
+  "email": "pieter.heemeryck@delaware.pro",
+  "dependentChangeType": "patch"
+}
