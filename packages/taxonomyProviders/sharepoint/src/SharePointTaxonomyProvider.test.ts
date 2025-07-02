@@ -38,7 +38,7 @@ describe("SharePointTaxonomyProvider", () => {
 	let provider: SharePointTaxonomyProvider;
 
 	beforeEach(() => {
-		provider = new SharePointTaxonomyProvider();
+		provider = new SharePointTaxonomyProvider("https://dummy.sharepoint.com", "TestTermSet", 1033);
 		// Mark as initialized to bypass the initialization check
 		(provider as any).isInitialized = true;
 	});
