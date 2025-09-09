@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Added extra documentation on installation process of dw-spfx-controls",
+  "packageName": "@dlw-digitalworkplace/dw-spfx-controls",
+  "email": "robin.agten@delaware.pro",
+  "dependentChangeType": "patch"
+}
