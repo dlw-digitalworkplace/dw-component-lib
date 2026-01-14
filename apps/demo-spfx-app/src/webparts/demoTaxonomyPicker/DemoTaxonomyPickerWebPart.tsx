@@ -23,8 +23,7 @@ export default class DemoTaxonomyPickerWebPart extends BaseClientSideWebPart<IDe
 				<DemoTaxonomyPicker
 					allowAddingTerms={this.properties.allowAddingTerms}
 					allowDeprecatedTerms={this.properties.allowDeprecatedTerms}
-					allowDisabledTerms={this.properties.allowDisabledTerms}
-					showDeprecatedTerms={this.properties.showDeprecatedTerms}
+					allowDisabledTerms={this.properties.allowDisabledTerms}				anchorId={this.properties.anchorId}					showDeprecatedTerms={this.properties.showDeprecatedTerms}
 					showDisabledTerms={this.properties.showDisabledTerms}
 					preCacheTerms={this.properties.preCacheTerms}
 					termSetIdOrName={this.properties.termSetIdOrName}
@@ -52,6 +51,9 @@ export default class DemoTaxonomyPickerWebPart extends BaseClientSideWebPart<IDe
 							groupFields: [
 								PropertyPaneTextField("termSetIdOrName", {
 									label: strings.TermSetIdOrNameFieldLabel
+								}),
+								PropertyPaneTextField("anchorId", {
+									label: "Anchor Term ID (optional)"
 								}),
 								PropertyPaneToggle("allowAddingTerms", {
 									label: strings.AllowAddingTermsFieldLabel

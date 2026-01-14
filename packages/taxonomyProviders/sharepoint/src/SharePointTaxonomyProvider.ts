@@ -93,9 +93,15 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 			await this.loadAndCacheAllTerms();
 		}
 
+		// filter terms by anchorId if provided
+		let termsToSearch = this.cachedTerms!;
+		if (options.anchorId) {
+			termsToSearch = this._getTermDescendants(options.anchorId, this.cachedTerms!);
+		}
+
 		// iterate all terms until maximum number of items is reached
-		for (let i = 0; i < this.cachedTerms!.length && result.length < options.maxItems!; i++) {
-			const term = this.cachedTerms![i];
+		for (let i = 0; i < termsToSearch.length && result.length < options.maxItems!; i++) {
+			const term = termsToSearch[i];
 
 			// skip item if in ignore list
 			if (options.keysToIgnore && options.keysToIgnore.indexOf(term.get_id().toString()) !== -1) {
@@ -161,6 +167,17 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 
 		// filter based on defined options
 		let terms = this.cachedTerms || [];
+
+		// filter by anchorId if provided (include anchor term and all descendants)
+		if (options.anchorId) {
+			const anchorTerm = terms.find((t) => t.get_id().toString() === options.anchorId);
+			if (anchorTerm) {
+				terms = [anchorTerm, ...this._getTermDescendants(options.anchorId, terms)];
+			} else {
+				// if anchor term not found, return empty array
+				terms = [];
+			}
+		}
 
 		// skip deprecated term if requested
 		if (options.trimDeprecated) {
@@ -311,6 +328,28 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 		const termLabelEN = this._getDefaultLanguageLabel(term, 1033);
 
 		return !!termLabelByLcid ? termLabelByLcid.get_value() : !!termLabelEN ? termLabelEN.get_value() : term.get_name();
+	}
+
+	/**
+	 * Gets all descendant terms of a given term ID.
+	 *
+	 * @param termId - The ID of the parent term
+	 * @param allTerms - All available terms
+	 */
+	private _getTermDescendants(termId: string, allTerms: SP.Taxonomy.Term[]): SP.Taxonomy.Term[] {
+		const descendants: SP.Taxonomy.Term[] = [];
+		const directChildren = allTerms.filter((t) => {
+			const parent = t.get_parent();
+			return !parent.get_serverObjectIsNull() && parent.get_id().toString() === termId;
+		});
+
+		// Add direct children and recursively get their descendants
+		for (const child of directChildren) {
+			descendants.push(child);
+			descendants.push(...this._getTermDescendants(child.get_id().toString(), allTerms));
+		}
+
+		return descendants;
 	}
 
 	/**

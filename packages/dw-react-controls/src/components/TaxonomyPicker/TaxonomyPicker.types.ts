@@ -20,6 +20,11 @@ export interface ITaxonomyPickerProps {
 	allowDisabledTermSelection?: boolean;
 
 	/**
+	 * Optional anchor ID to filter only specific subterms of a term in the termset.
+	 */
+	anchorId?: string;
+
+	/**
 	 * Optional class for the root TaxonomyPicker element
 	 */
 	className?: string;

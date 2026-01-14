@@ -16,6 +16,7 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 		allowAddingTerms,
 		allowDeprecatedTerms,
 		allowDisabledTerms,
+		anchorId,
 		preCacheTerms,
 		showDeprecatedTerms,
 		showDisabledTerms,
@@ -62,6 +63,7 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 				allowAddingTerms={allowAddingTerms && providerAllowsAddingTerms}
 				allowDeprecatedTermSelection={allowDeprecatedTerms}
 				allowDisabledTermSelection={allowDisabledTerms}
+				anchorId={anchorId}
 				disabled={!provider}
 				inputProps={{ placeholder: "Add Terms" }}
 				onChange={setSelectedItems}

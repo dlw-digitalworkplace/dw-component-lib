@@ -4,6 +4,7 @@ export interface IDemoTaxonomyPickerWebPartProps {
 	allowAddingTerms: boolean;
 	allowDeprecatedTerms: boolean;
 	allowDisabledTerms: boolean;
+	anchorId?: string;
 	preCacheTerms: boolean;
 	showDeprecatedTerms: boolean;
 	showDisabledTerms: boolean;
