@@ -31,7 +31,6 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 	const {
 		labels: labelsProp,
 		allowAddingTerms,
-		anchorId,
 		defaultSelectedItems,
 		dialogContentProps,
 		itemLimit,
@@ -89,10 +88,6 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 		(async () => {
 			const filterOptions: Partial<ITermFilterOptions> = {};
 
-			if (anchorId !== undefined) {
-				filterOptions.anchorId = anchorId;
-			}
-
 			if (trimDeprecatedTerms !== undefined) {
 				filterOptions.trimDeprecated = trimDeprecatedTerms;
 			}
@@ -106,7 +101,7 @@ export const TaxonomyPickerDialogBase: React.FC<ITaxonomyPickerDialogProps> = (p
 			setTermTreeItems(terms);
 			setExpandedNodes(showRootNode ? [rootNodeKey] : terms && terms.length > 0 ? [terms[0].key] : []);
 		})();
-	}, [provider, showRootNode, rootNodeKey, trimDeprecatedTerms, trimUnavailableTerms, anchorId]);
+	}, [provider, showRootNode, rootNodeKey, trimDeprecatedTerms, trimUnavailableTerms]);
 
 	React.useEffect(() => {
 		if (!termTreeItems) {

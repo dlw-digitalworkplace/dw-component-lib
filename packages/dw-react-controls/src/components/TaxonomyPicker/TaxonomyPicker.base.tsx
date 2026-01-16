@@ -21,13 +21,12 @@ import { ITerm, ITermCreationResult, ITermFilterOptions } from "./models";
 const getClassNames = classNamesFunction<ITaxonomyPickerStyleProps, ITaxonomyPickerStyles>();
 const tempItemKey = "__TEMP__ITEM__";
 
-export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
+export const TaxonomyPickerBase = ({
 	allowAddingTerms,
 	allowDeprecatedTerms,
 	allowDisabledTerms,
 	allowDeprecatedTermSelection = allowDeprecatedTerms,
 	allowDisabledTermSelection = allowDisabledTerms,
-	anchorId,
 	className,
 	disabled,
 	errorMessage: errorMessageProp,
@@ -47,7 +46,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	styles,
 	termPickerProps,
 	theme
-}) => {
+}: ITaxonomyPickerProps) => {
 	const [dialogIsOpen, setDialogIsOpen] = React.useState(false);
 	const [creationResultMessage, setCreationResultMessage] =
 		useStateIfMounted<{
@@ -146,10 +145,6 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 			trimDeprecated: !allowDeprecatedTermSelection,
 			trimUnavailable: !allowDisabledTermSelection
 		};
-
-		if (anchorId !== undefined) {
-			findOptions.anchorId = anchorId;
-		}
 
 		// retrieve the available terms
 		const suggestions = await provider.findTerms(filter, findOptions);
@@ -359,7 +354,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 					{...dialogProps}
 					provider={provider}
 					allowAddingTerms={allowAddingTerms}
-					anchorId={anchorId}
+
 					defaultSelectedItems={selectedItems}
 					hidden={!dialogIsOpen}
 					itemLimit={itemLimit}

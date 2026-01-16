@@ -16,11 +16,6 @@ export interface ITaxonomyPickerDialogLabels {
 interface ITaxonomyPickerDialogPropsBase {
 	allowAddingTerms?: boolean;
 
-	/**
-	 * Optional anchor ID to filter only specific subterms of a term in the termset.
-	 */
-	anchorId?: string;
-
 	defaultSelectedItems?: ITermValue[];
 
 	itemLimit?: number;

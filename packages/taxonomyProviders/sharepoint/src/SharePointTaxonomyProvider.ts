@@ -20,8 +20,11 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 	// todo: consider some better (sliding?) caching mechanism
 	private cachedTerms?: SP.Taxonomy.Term[];
 
-	constructor(siteUrl: string, private termSetIdOrName: string, private lcid: number = 1033) {
+	private anchorId?: string;
+
+	constructor(siteUrl: string, private termSetIdOrName: string, private lcid: number = 1033, anchorId?: string) {
 		this.spContext = new SP.ClientContext(siteUrl);
+		this.anchorId = anchorId;
 
 		this._termSorter = this._termSorter.bind(this);
 	}
@@ -95,8 +98,8 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 
 		// filter terms by anchorId if provided
 		let termsToSearch = this.cachedTerms!;
-		if (options.anchorId) {
-			termsToSearch = this._getTermDescendants(options.anchorId, this.cachedTerms!);
+		if (this.anchorId) {
+			termsToSearch = this._getTermDescendants(this.anchorId, this.cachedTerms!);
 		}
 
 		// iterate all terms until maximum number of items is reached
@@ -169,10 +172,10 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 		let terms = this.cachedTerms || [];
 
 		// filter by anchorId if provided (include anchor term and all descendants)
-		if (options.anchorId) {
-			const anchorTerm = terms.find((t) => t.get_id().toString() === options.anchorId);
+		if (this.anchorId) {
+			const anchorTerm = terms.find((t) => t.get_id().toString() === this.anchorId);
 			if (anchorTerm) {
-				terms = [anchorTerm, ...this._getTermDescendants(options.anchorId, terms)];
+				terms = [anchorTerm, ...this._getTermDescendants(this.anchorId, terms)];
 			} else {
 				// if anchor term not found, return empty array
 				terms = [];

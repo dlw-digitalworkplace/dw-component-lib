@@ -38,7 +38,7 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 
 			console.log("Creating new provider...");
 
-			const spTaxonomyProvider = new SharePointTaxonomyProvider(siteUrl, termSetIdOrName);
+			const spTaxonomyProvider = new SharePointTaxonomyProvider(siteUrl, termSetIdOrName, 1033, anchorId);
 			await spTaxonomyProvider.initialize(preCacheTerms);
 
 			setProviderAllowsAddingTerms(spTaxonomyProvider.allowAddingTerms);
@@ -47,7 +47,7 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 
 			setProvider(spTaxonomyProvider);
 		})();
-	}, [preCacheTerms, siteUrl, termSetIdOrName]);
+	}, [preCacheTerms, siteUrl, termSetIdOrName, anchorId]);
 
 	const getTermSynonyms: (term: ITermInfo) => string[] = (term) => {
 		const synonyms: { value: string }[] = (term?.additionalProperties?.synonyms || []).filter(
@@ -63,7 +63,6 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 				allowAddingTerms={allowAddingTerms && providerAllowsAddingTerms}
 				allowDeprecatedTermSelection={allowDeprecatedTerms}
 				allowDisabledTermSelection={allowDisabledTerms}
-				anchorId={anchorId}
 				disabled={!provider}
 				inputProps={{ placeholder: "Add Terms" }}
 				onChange={setSelectedItems}
