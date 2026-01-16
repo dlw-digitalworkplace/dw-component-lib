@@ -23,7 +23,9 @@ export default class DemoTaxonomyPickerWebPart extends BaseClientSideWebPart<IDe
 				<DemoTaxonomyPicker
 					allowAddingTerms={this.properties.allowAddingTerms}
 					allowDeprecatedTerms={this.properties.allowDeprecatedTerms}
-					allowDisabledTerms={this.properties.allowDisabledTerms}				anchorId={this.properties.anchorId}					showDeprecatedTerms={this.properties.showDeprecatedTerms}
+					allowDisabledTerms={this.properties.allowDisabledTerms}
+					anchorId={this.properties.anchorId}
+					showDeprecatedTerms={this.properties.showDeprecatedTerms}
 					showDisabledTerms={this.properties.showDisabledTerms}
 					preCacheTerms={this.properties.preCacheTerms}
 					termSetIdOrName={this.properties.termSetIdOrName}
