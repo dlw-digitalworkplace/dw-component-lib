@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix(AnhorId): add anchor id in base taxonomy picker",
+  "packageName": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
+  "email": "VantieghemM@delawareconsulting.com",
+  "dependentChangeType": "patch"
+}
