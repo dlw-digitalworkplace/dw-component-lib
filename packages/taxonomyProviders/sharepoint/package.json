@@ -1,6 +1,6 @@
 {
   "name": "@dlw-digitalworkplace/taxonomyprovider-sharepoint",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
