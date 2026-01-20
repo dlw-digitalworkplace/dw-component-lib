@@ -354,7 +354,6 @@ export const TaxonomyPickerBase = ({
 					{...dialogProps}
 					provider={provider}
 					allowAddingTerms={allowAddingTerms}
-
 					defaultSelectedItems={selectedItems}
 					hidden={!dialogIsOpen}
 					itemLimit={itemLimit}
