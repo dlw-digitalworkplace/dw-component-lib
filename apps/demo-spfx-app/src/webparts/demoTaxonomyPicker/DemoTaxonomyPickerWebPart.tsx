@@ -1,6 +1,6 @@
 import { Version } from "@microsoft/sp-core-library";
 import { ILoadScriptOptions, SPComponentLoader } from "@microsoft/sp-loader";
-import { IPropertyPaneConfiguration, PropertyPaneTextField, PropertyPaneToggle } from "@microsoft/sp-property-pane";
+import { IPropertyPaneConfiguration, PropertyPaneDropdown, PropertyPaneTextField, PropertyPaneToggle } from "@microsoft/sp-property-pane";
 import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
 import * as strings from "DemoTaxonomyPickerWebPartStrings";
 import * as React from "react";
@@ -25,6 +25,7 @@ export default class DemoTaxonomyPickerWebPart extends BaseClientSideWebPart<IDe
 					allowDeprecatedTerms={this.properties.allowDeprecatedTerms}
 					allowDisabledTerms={this.properties.allowDisabledTerms}
 					anchorId={this.properties.anchorId}
+					fetchMode={this.properties.fetchMode}
 					showDeprecatedTerms={this.properties.showDeprecatedTerms}
 					showDisabledTerms={this.properties.showDisabledTerms}
 					preCacheTerms={this.properties.preCacheTerms}
@@ -56,8 +57,14 @@ export default class DemoTaxonomyPickerWebPart extends BaseClientSideWebPart<IDe
 								}),
 								PropertyPaneTextField("anchorId", {
 									label: "Anchor Term ID (optional)"
-								}),
-								PropertyPaneToggle("allowAddingTerms", {
+								}),							PropertyPaneDropdown("fetchMode", {
+								label: "Fetch Mode",
+								options: [
+									{ key: "Full", text: "Full (getAllTerms - default)" },
+									{ key: "Recursive", text: "Recursive (level by level)" }
+								],
+								selectedKey: this.properties.fetchMode || "Full"
+							}),								PropertyPaneToggle("allowAddingTerms", {
 									label: strings.AllowAddingTermsFieldLabel
 								}),
 								PropertyPaneToggle("allowDeprecatedTerms", {
