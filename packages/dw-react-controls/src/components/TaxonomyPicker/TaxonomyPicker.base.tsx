@@ -21,7 +21,7 @@ import { ITerm, ITermCreationResult, ITermFilterOptions } from "./models";
 const getClassNames = classNamesFunction<ITaxonomyPickerStyleProps, ITaxonomyPickerStyles>();
 const tempItemKey = "__TEMP__ITEM__";
 
-export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
+export const TaxonomyPickerBase = ({
 	allowAddingTerms,
 	allowDeprecatedTerms,
 	allowDisabledTerms,
@@ -46,7 +46,7 @@ export const TaxonomyPickerBase: React.FC<ITaxonomyPickerProps> = ({
 	styles,
 	termPickerProps,
 	theme
-}) => {
+}: ITaxonomyPickerProps) => {
 	const [dialogIsOpen, setDialogIsOpen] = React.useState(false);
 	const [creationResultMessage, setCreationResultMessage] =
 		useStateIfMounted<{

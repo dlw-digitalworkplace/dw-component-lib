@@ -5,7 +5,7 @@ import {
 	TaxonomyPicker,
 	TermItemSuggestion
 } from "@dlw-digitalworkplace/dw-react-controls";
-import { SharePointTaxonomyProvider } from "@dlw-digitalworkplace/taxonomyprovider-sharepoint";
+import { SharePointTaxonomyProvider, FetchMode } from "@dlw-digitalworkplace/taxonomyprovider-sharepoint";
 import * as React from "react";
 import { WebPartContext } from "../DemoTaxonomyPickerWebPart.types";
 import styles from "./DemoTaxonomyPicker.module.scss";
@@ -16,6 +16,8 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 		allowAddingTerms,
 		allowDeprecatedTerms,
 		allowDisabledTerms,
+		anchorId,
+		fetchMode,
 		preCacheTerms,
 		showDeprecatedTerms,
 		showDisabledTerms,
@@ -37,7 +39,8 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 
 			console.log("Creating new provider...");
 
-			const spTaxonomyProvider = new SharePointTaxonomyProvider(siteUrl, termSetIdOrName);
+			const mode = fetchMode === "Recursive" ? FetchMode.Recursive : FetchMode.Full;
+			const spTaxonomyProvider = new SharePointTaxonomyProvider(siteUrl, termSetIdOrName, 1033, anchorId, mode);
 			await spTaxonomyProvider.initialize(preCacheTerms);
 
 			setProviderAllowsAddingTerms(spTaxonomyProvider.allowAddingTerms);
@@ -46,7 +49,7 @@ export const DemoTaxonomyPicker: React.FC<IDemoTaxonomyPickerProps> = (props) =>
 
 			setProvider(spTaxonomyProvider);
 		})();
-	}, [preCacheTerms, siteUrl, termSetIdOrName]);
+	}, [preCacheTerms, siteUrl, termSetIdOrName, anchorId, fetchMode]);
 
 	const getTermSynonyms: (term: ITermInfo) => string[] = (term) => {
 		const synonyms: { value: string }[] = (term?.additionalProperties?.synonyms || []).filter(

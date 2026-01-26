@@ -5,6 +5,22 @@ import { InvalidOperationError } from "./InvalidOperationError";
 import { ProviderNotInitializedError } from "./ProviderNotInitializedError";
 
 /**
+ * Fetch mode for loading terms from SharePoint when using an anchor term.
+ */
+export enum FetchMode {
+	/**
+	 * Load all terms using getAllTerms(), then filter in memory to show only anchor term and descendants.
+	 * Faster initial load, but loads unnecessary data when using anchorId.
+	 */
+	Full = "Full",
+	/**
+	 * Load only the anchor term and its descendants recursively from SharePoint.
+	 * More API calls, but only loads necessary data. Best when using anchorId.
+	 */
+	Recursive = "Recursive"
+}
+
+/**
  * Provides Taxonomy data using SharePoint's SP.Taxonomy.js library.
  * To use it, make sure to call the `initialize()` method.
  */
@@ -20,8 +36,20 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 	// todo: consider some better (sliding?) caching mechanism
 	private cachedTerms?: SP.Taxonomy.Term[];
 
-	constructor(siteUrl: string, private termSetIdOrName: string, private lcid: number = 1033) {
+	private anchorId?: string;
+
+	private fetchMode: FetchMode;
+
+	constructor(
+		siteUrl: string,
+		private termSetIdOrName: string,
+		private lcid: number = 1033,
+		anchorId?: string,
+		fetchMode: FetchMode = FetchMode.Full
+	) {
 		this.spContext = new SP.ClientContext(siteUrl);
+		this.anchorId = anchorId;
+		this.fetchMode = fetchMode;
 
 		this._termSorter = this._termSorter.bind(this);
 	}
@@ -88,7 +116,7 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 
 		const result: ITerm[] = [];
 
-		// retrieve all terms
+		// retrieve all terms (already filtered by anchorId if specified)
 		if (!this.cachedTerms) {
 			await this.loadAndCacheAllTerms();
 		}
@@ -154,7 +182,7 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 
 		const result: ITerm[] = [];
 
-		// retrieve all terms
+		// retrieve all terms (already filtered by anchorId if specified)
 		if (!this.cachedTerms) {
 			await this.loadAndCacheAllTerms();
 		}
@@ -252,15 +280,109 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 	}
 
 	protected async loadAndCacheAllTerms(): Promise<void> {
-		// retrieve all items from the termset
-		const allTerms = this.termSet!.getAllTerms();
-		this.spContext.load(allTerms);
-		this.spContext.load(allTerms, "Include(Labels, Parent, Parent.Id, CustomSortOrder)");
+		if (this.anchorId && this.fetchMode === FetchMode.Recursive) {
+			// Recursive mode: Only load the anchor term and its descendants from SharePoint
+			const anchorTerm = this.termSet!.getTerm(new SP.Guid(this.anchorId));
+			this.spContext.load(anchorTerm);
+			await this.executeQueryAsync();
+
+			// Load Parent.Id for the anchor term
+			const anchorParent = anchorTerm.get_parent();
+			if (!anchorParent.get_serverObjectIsNull()) {
+				this.spContext.load(anchorParent, "Id");
+				await this.executeQueryAsync();
+			}
+
+			// Now recursively load all descendants
+			const allDescendants: SP.Taxonomy.Term[] = [];
+			await this._loadTermDescendantsBatched(anchorTerm, allDescendants);
+
+			// Include the anchor term itself in the cache - terms already have all properties loaded
+			this.cachedTerms = [anchorTerm, ...allDescendants].sort(this._termSorter);
+		} else {
+			// Full mode: Load all terms from the termset
+			const allTerms = this.termSet!.getAllTerms();
+			this.spContext.load(allTerms);
+			this.spContext.load(allTerms, "Include(Labels, Parent, Parent.Id, CustomSortOrder)");
+
+			await this.executeQueryAsync();
+
+			let terms = allTerms.get_data();
+
+			// If anchorId is specified in Full mode, filter to only include anchor term and descendants
+			if (this.anchorId) {
+				terms = this._filterTermsByAnchor(terms, this.anchorId);
+			}
+
+			// save the sorted list of terms
+			this.cachedTerms = terms.sort(this._termSorter);
+		}
+	}
+
+	/**
+	 * Recursively loads all descendant terms of a given term from SharePoint in batches.
+	 * This method loads children level by level to minimize round trips.
+	 *
+	 * @param term - The parent term
+	 * @param allDescendants - Array to collect all descendants
+	 */
+	private async _loadTermDescendantsBatched(term: SP.Taxonomy.Term, allDescendants: SP.Taxonomy.Term[]): Promise<void> {
+		// Load direct children of this term with their properties
+		const children = term.get_terms();
+		this.spContext.load(children, "Include(Id, Name, Labels, CustomSortOrder, IsDeprecated, IsAvailableForTagging, PathOfTerm, Parent)");
 
 		await this.executeQueryAsync();
 
-		// save the sorted list of terms
-		this.cachedTerms = allTerms.get_data().sort(this._termSorter);
+		const childTerms = children.get_data();
+
+		if (childTerms && childTerms.length > 0) {
+			// Load the parent IDs separately
+			childTerms.forEach(child => {
+				const parent = child.get_parent();
+				if (!parent.get_serverObjectIsNull()) {
+					this.spContext.load(parent, "Id");
+				}
+			});
+
+			await this.executeQueryAsync();
+
+			// Add all children to the descendants array
+			allDescendants.push(...childTerms);
+
+			// Recursively load descendants of each child
+			for (const child of childTerms) {
+				await this._loadTermDescendantsBatched(child, allDescendants);
+			}
+		}
+	}
+
+	/**
+	 * Filters a list of terms to only include the anchor term and its descendants.
+	 *
+	 * @param allTerms - All terms from the term set
+	 * @param anchorId - The anchor term ID to filter by
+	 * @returns Filtered array containing only anchor term and descendants
+	 */
+	private _filterTermsByAnchor(allTerms: SP.Taxonomy.Term[], anchorId: string): SP.Taxonomy.Term[] {
+		const anchorTerm = allTerms.find(t => t.get_id().toString() === anchorId);
+		if (!anchorTerm) {
+			return [];
+		}
+
+		// Build a set of all descendant IDs by traversing the path
+		const includedIds = new Set<string>([anchorId]);
+		const anchorPath = anchorTerm.get_pathOfTerm();
+
+		// Find all terms that are descendants of the anchor term
+		allTerms.forEach(term => {
+			const termPath = term.get_pathOfTerm();
+			// A term is a descendant if its path starts with the anchor's path
+			if (termPath.startsWith(anchorPath + ";") || term.get_id().toString() === anchorId) {
+				includedIds.add(term.get_id().toString());
+			}
+		});
+
+		return allTerms.filter(t => includedIds.has(t.get_id().toString()));
 	}
 
 	private _spTermToTerm(input: SP.Taxonomy.Term): ITerm {
@@ -312,6 +434,8 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 
 		return !!termLabelByLcid ? termLabelByLcid.get_value() : !!termLabelEN ? termLabelEN.get_value() : term.get_name();
 	}
+
+
 
 	/**
 	 * Sorts terms alphabetically, or custom sortorder if specified.

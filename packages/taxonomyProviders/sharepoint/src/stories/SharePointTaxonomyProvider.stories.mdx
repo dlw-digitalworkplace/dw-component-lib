@@ -20,10 +20,53 @@ yarn add @dlw-digitalworkplace/taxonomyprovider-sharepoint
 ## Usage
 
 ```tsx
-import { SharePointTaxonomyProvider } from "@dlw-digitalworkplace/taxonomyprovider-sharepoint";
+import { SharePointTaxonomyProvider, FetchMode } from "@dlw-digitalworkplace/taxonomyprovider-sharepoint";
 
-const provider = new SharePointTaxonomyProvider(siteUrl, termSetIdOrName, lcid /* optional */);
+const provider = new SharePointTaxonomyProvider(
+  siteUrl,
+  termSetIdOrName,
+  lcid /* optional */,
+  anchorId /* optional */,
+  fetchMode /* optional */
+);
 await provider.initialize(preCacheItems /* optional */);
+```
+
+### Filtering by Anchor Term
+
+To filter the term set to only show terms under a specific anchor term, pass the anchor term ID to the constructor:
+
+```tsx
+const provider = new SharePointTaxonomyProvider(
+  siteUrl,
+  termSetIdOrName,
+  1033,
+  "anchor-term-guid" // Only terms under this term will be accessible
+);
+await provider.initialize();
+```
+
+### Fetch Modes
+
+When using an `anchorId`, you can control how terms are loaded from SharePoint using the `FetchMode` enum:
+
+- **`FetchMode.Full`** (default): Loads ALL terms using `getAllTerms()`, then filters in memory to show only the anchor term and its descendants. Faster if you might need other terms later, but loads unnecessary data.
+- **`FetchMode.Recursive`**: Loads ONLY the anchor term and its descendants recursively from SharePoint. More API calls, but only loads what's needed. Best performance when you only need filtered data.
+
+**Note:** FetchMode only applies when using `anchorId`. Without an anchor, all terms are always loaded.
+
+```tsx
+import { SharePointTaxonomyProvider, FetchMode } from "@dlw-digitalworkplace/taxonomyprovider-sharepoint";
+
+// Use recursive loading - only loads anchor term and descendants
+const provider = new SharePointTaxonomyProvider(
+  siteUrl,
+  termSetIdOrName,
+  1033,
+  "anchor-term-guid",
+  FetchMode.Recursive // Optimal for filtered scenarios
+);
+await provider.initialize();
 ```
 
 ## Documentation
@@ -34,11 +77,13 @@ The `SharePointTaxonomyProvider`'s methods are described here:
 
 Creates a new `SharePointTaxonomyProvider` object.
 
-| Parameter                                  | Type     | Description                                          | Default value |
-| ------------------------------------------ | -------- | ---------------------------------------------------- | ------------- |
-| siteUrl<span class="req">\*</span>         | `string` | URL of the current SharePoint site.                  |               |
-| termSetIdOrName<span class="req">\*</span> | `string` | Name or ID (Guid) of the term set to connect to.     |               |
-| lcid                                       | `number` | Language code to use when working with the Term Set. | `1033`        |
+| Parameter                                  | Type        | Description                                                                  | Default value      |
+| ------------------------------------------ | ----------- | ---------------------------------------------------------------------------- | ------------------ |
+| siteUrl<span class="req">\*</span>         | `string`    | URL of the current SharePoint site.                                          |                    |
+| termSetIdOrName<span class="req">\*</span> | `string`    | Name or ID (Guid) of the term set to connect to.                             |                    |
+| lcid                                       | `number`    | Language code to use when working with the Term Set.                         | `1033`             |
+| anchorId                                   | `string`    | Optional anchor term ID to filter terms to only descendants of that term.    |                    |
+| fetchMode                                  | `FetchMode` | How to load terms: `FetchMode.Full` or `FetchMode.Recursive`.                | `FetchMode.Full`   |
 
 ### `initialize(preCacheItems?): Promise<void>`
 
