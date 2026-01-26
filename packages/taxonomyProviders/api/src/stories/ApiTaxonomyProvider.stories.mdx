@@ -1,0 +1,119 @@
+import { Meta } from "@storybook/addon-docs";
+
+<Meta title="TaxonomyProviders/Api" />
+
+# API Taxonomy Provider
+
+![taxonomyprovider-api package version](https://img.shields.io/github/package-json/v/dlw-digitalworkplace/dw-component-lib?filename=packages%2FtaxonomyProviders%2Fapi%2Fpackage.json&label=%40dlw-digitalworkplace%2Ftaxonomyprovider-api&logo=github)
+
+The `ApiTaxonomyProvider` provides TermSet data using a custom API implementation.
+
+> 💡 The `ApiTaxonomyProvider` requires an **API** to be implemented and pointed at. This API is not part of this package and should be implemented by the consumer.
+
+> 💡 You **MUST** call the `initialize()` method before using the provider's Taxonomy methods.
+
+## Installation
+
+```shell
+yarn add @dlw-digitalworkplace/taxonomyprovider-api
+```
+
+## Usage
+
+```tsx
+import { ApiTaxonomyProvider } from "@dlw-digitalworkplace/taxonomyprovider-api";
+
+const provider = new ApiTaxonomyProvider(apiToken, apiBaseUrl, termSetIdOrName, lcid /* optional */);
+await provider.initialize(preCacheItems /* optional */);
+
+// or with a function to retrieve the API token
+
+const provider = new ApiTaxonomyProvider(
+	() => myTokenProvider.getApiToken(),
+	apiBaseUrl,
+	termSetIdOrName,
+	lcid /* optional */
+);
+await provider.initialize(preCacheItems /* optional */);
+```
+
+## API prerequisites
+
+> 💡 The `ApiTaxonomyProvider` requires an API to be implemented and pointed at. This API is not part of this package and should be implemented by the consumer.
+
+The referenced API should provide the following endpoints:
+
+- `GET {apiBaseUrl}/termset/{termSetIdOrName}`
+- `GET {apiBaseUrl}/termset/{termSetIdOrName}/terms`
+- `POST {apiBaseUrl}/termset/{termSetIdOrName}/terms`
+
+### `GET {apiBaseUrl}/termset/{termSetIdOrName}`
+
+This endpoint should return an object with the term set information. The object has the following signature:
+
+```ts
+type TermSetInfo = {
+	name: string;
+	termSetId: string;
+	isOpenForTermCreation?: boolean;
+};
+```
+
+### `GET {apiBaseUrl}/termset/{termSetIdOrName}/terms`
+
+This endpoint should return an array with the term set information. The array's items have the following signature:
+
+```ts
+type TermInfo = {
+	termId: string;
+	isDeprecated: boolean;
+	isAvailableForTagging: boolean;
+	labels: TermLabel[];
+	name: string;
+	parentId?: string;
+	pathOfTerm: string;
+	customSortOrder: number;
+};
+
+type TermLabel = {
+	value: string;
+	language: number;
+	isDefaultForLanguage: boolean;
+};
+```
+
+### `POST {apiBaseUrl}/termset/{termSetIdOrName}/terms`
+
+This endpoint receives an object with the information needed to create the term.
+
+```ts
+type TermCreationInfo = {
+	label: string;
+	parentId?: string;
+};
+```
+
+The endpoint should return the created `TermInfo` object.
+
+## Documentation
+
+The `ApiTaxonomyProvider`'s methods are described here:
+
+### `Constructor`
+
+Creates a new `ApiTaxonomyProvider` object.
+
+| Parameter                                   | Type                                                      | Description                                                                                                          | Default value |
+| ------------------------------------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------- |
+| apiTokenProvider<span class="req">\*</span> | `string` \| `() => string` \| `() => PromiseLike<string>` | Authentication token used to send requests to the API. Either a string, or a function returning a string or Promise. |
+| apiBaseUrl<span class="req">\*</span>       | `string`                                                  | Base URL of the provider API. E.g. "https://myapi.com/api/taxonomy"                                                  |               |
+| termSetIdOrName<span class="req">\*</span>  | `string`                                                  | Name or ID (Guid) of the term set to connect to.                                                                     |               |
+| lcid                                        | `number`                                                  | Language code to use when working with the Term Set.                                                                 | `1033`        |
+
+### `initialize(preCacheItems?): Promise<void>`
+
+Initializes the provider, ensuring a connection to the referenced TermSet.
+
+| Parameter     | Type      | Description                                                                                        |
+| ------------- | --------- | -------------------------------------------------------------------------------------------------- |
+| preCacheItems | `boolean` | If set, the TermSet's terms are cached immediately, which ensures faster responses when searching. |

@@ -1,0 +1,7 @@
+{
+  "type": "major",
+  "comment": "implement API taxonomy provider",
+  "packageName": "@dlw-digitalworkplace/taxonomyprovider-api",
+  "email": "nick.sevens@delaware.pro",
+  "dependentChangeType": "patch"
+}
