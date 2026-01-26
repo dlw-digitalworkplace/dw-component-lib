@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/dw-react-controls",
   "entries": [
     {
+      "date": "Mon, 26 Jan 2026 10:12:56 GMT",
+      "tag": "@dlw-digitalworkplace/dw-react-controls_v1.7.4",
+      "version": "1.7.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "VantieghemM@delawareconsulting.com",
+            "package": "@dlw-digitalworkplace/dw-react-controls",
+            "commit": "8c1dbb30f3f59b502b208b9a12fb98bbe1690396",
+            "comment": "fix(AnhorId): add anchor id in base taxonomy picker"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 17 Feb 2025 12:58:43 GMT",
       "tag": "@dlw-digitalworkplace/dw-react-controls_v1.7.2",
       "version": "1.7.2",

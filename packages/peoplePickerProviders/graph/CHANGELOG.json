@@ -2,6 +2,21 @@
   "name": "@dlw-digitalworkplace/peoplepickerprovider-graph",
   "entries": [
     {
+      "date": "Mon, 26 Jan 2026 10:12:56 GMT",
+      "tag": "@dlw-digitalworkplace/peoplepickerprovider-graph_v0.3.11",
+      "version": "0.3.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@dlw-digitalworkplace/peoplepickerprovider-graph",
+            "comment": "Bump @dlw-digitalworkplace/dw-react-controls to v1.7.4",
+            "commit": "8c1dbb30f3f59b502b208b9a12fb98bbe1690396"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 17 Feb 2025 12:58:43 GMT",
       "tag": "@dlw-digitalworkplace/peoplepickerprovider-graph_v0.3.10",
       "version": "0.3.10",

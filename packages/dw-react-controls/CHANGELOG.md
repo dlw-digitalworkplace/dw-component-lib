@@ -1,8 +1,16 @@
 # Change Log - @dlw-digitalworkplace/dw-react-controls
 
-This log was last generated on Mon, 17 Feb 2025 12:58:43 GMT and should not be manually modified.
+This log was last generated on Mon, 26 Jan 2026 10:12:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.7.4
+
+Mon, 26 Jan 2026 10:12:56 GMT
+
+### Patches
+
+- fix(AnhorId): add anchor id in base taxonomy picker (VantieghemM@delawareconsulting.com)
 
 ## 1.7.2
 

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix(AnhorId): add anchor id in base taxonomy picker",
-  "packageName": "@dlw-digitalworkplace/dw-react-controls",
-  "email": "VantieghemM@delawareconsulting.com",
-  "dependentChangeType": "patch"
-}
