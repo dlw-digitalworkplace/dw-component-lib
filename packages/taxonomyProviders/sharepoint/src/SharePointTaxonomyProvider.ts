@@ -212,14 +212,25 @@ export class SharePointTaxonomyProvider implements ITaxonomyProvider {
 		}, {});
 
 		Object.keys(termMap).forEach((it) => {
-			const [parentId, term] = termMap[it];
+			const termEntry = termMap[it];
+			if (!termEntry) {
+				// Safety check: ensure the term entry exists
+				return;
+			}
+			
+			const [parentId, term] = termEntry;
 
 			if (!parentId) {
 				// if there is no parent, add it to the root level
 				result.push(term);
-			} else if (termMap[parentId]) {
-				// if there is a parent, and it's not trimmed, add it as child
-				termMap[parentId][1].children!.push(term);
+			} else {
+				const parentEntry = termMap[parentId];
+				if (parentEntry && parentEntry[1]) {
+					// if there is a parent, and it's not trimmed, add it as child
+					parentEntry[1].children!.push(term);
+				}
+				// If parent doesn't exist in termMap (filtered out), the term becomes orphaned
+				// and is not added to the tree, which is the correct behavior
 			}
 		});
 
